@@ -1,6 +1,9 @@
-.Rproj.user
+/.quarto/
+/_site/
+/.Rproj.user
+*.Rproj
 .Rhistory
 .RData
 .Ruserdata
-
-/.quarto/
+.DS_Store
+Thumbs.db

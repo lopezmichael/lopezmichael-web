@@ -1,8 +1,84 @@
 ---
 title: "Resume"
+format:
+  html:
+    toc: false
 ---
 
-Some introductory text here.
+```{=html}
+<div class="resume-content">
 
-<iframe src="www/content/Michael Lopez - Resume - 2024.pdf" width="100%" height="1125px">
-</iframe>
+  <div class="resume-download">
+    <a href="files/Michael_Lopez_Resume.pdf" download>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Download PDF
+    </a>
+  </div>
+
+  <h2>Michael Lopez</h2>
+  <p style="text-align: center; color: #8B4D3B; margin-bottom: 2rem;">
+    Data Scientist | Place-Based Impact | Community Development
+  </p>
+
+  <hr style="border: none; border-top: 2px solid #E8C496; margin: 2rem 0;">
+
+  <h3>Experience</h3>
+
+  <div style="margin-bottom: 2rem;">
+    <h4 style="margin-bottom: 0.25rem; color: #5C4D45;">Data Scientist</h4>
+    <p style="color: #8B4D3B; font-weight: 500; margin-bottom: 0.5rem;">Organization Name · 20XX - Present</p>
+    <ul>
+      <li>Built interactive dashboards and mapping tools serving [X] community organizations</li>
+      <li>Developed automated data pipelines processing [X] records annually</li>
+      <li>Led data visualization projects reaching [X] stakeholders</li>
+      <li>Created Shiny applications for neighborhood-level analysis</li>
+    </ul>
+  </div>
+
+  <div style="margin-bottom: 2rem;">
+    <h4 style="margin-bottom: 0.25rem; color: #5C4D45;">Previous Role</h4>
+    <p style="color: #8B4D3B; font-weight: 500; margin-bottom: 0.5rem;">Organization Name · 20XX - 20XX</p>
+    <ul>
+      <li>Conducted geospatial analysis for community planning initiatives</li>
+      <li>Produced reports and visualizations for policy advocacy</li>
+      <li>Collaborated with community partners on data-driven projects</li>
+    </ul>
+  </div>
+
+  <hr style="border: none; border-top: 2px solid #E8C496; margin: 2rem 0;">
+
+  <h3>Education</h3>
+
+  <div style="margin-bottom: 2rem;">
+    <h4 style="margin-bottom: 0.25rem; color: #5C4D45;">Degree Name</h4>
+    <p style="color: #8B4D3B; font-weight: 500;">University Name · 20XX</p>
+  </div>
+
+  <hr style="border: none; border-top: 2px solid #E8C496; margin: 2rem 0;">
+
+  <h3>Technical Skills</h3>
+
+  <p>
+    <strong>Languages:</strong> R, Python, SQL, JavaScript<br>
+    <strong>Frameworks:</strong> Shiny, Quarto, Tidyverse, sf<br>
+    <strong>Visualization:</strong> ggplot2, Leaflet, Mapbox, D3.js<br>
+    <strong>Tools:</strong> Git, GitHub, PostgreSQL, QGIS<br>
+    <strong>Data:</strong> Census/ACS, Administrative Records, Geospatial Data
+  </p>
+
+  <hr style="border: none; border-top: 2px solid #E8C496; margin: 2rem 0;">
+
+  <h3>Selected Projects</h3>
+
+  <ul>
+    <li><strong>Community Resource Explorer</strong> - Interactive map for finding local services</li>
+    <li><strong>Neighborhood Safety Dashboard</strong> - Real-time safety metrics visualization</li>
+    <li><strong>Housing Market Analysis Tool</strong> - Affordability and change tracking</li>
+  </ul>
+
+</div>
+```

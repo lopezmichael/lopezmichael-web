@@ -1,38 +1,147 @@
 ---
-title: "About Me"
+pagetitle: "Michael Lopez | Data & Place"
+format:
+  html:
+    toc: false
+    page-layout: full
 ---
 
 ```{=html}
-<div style="display: flex; flex-wrap: wrap; align-items: flex-start;">
-    <div style="flex: 1 1 200px; min-width: 150px; margin-right: 20px;">
-        <img src="www/images/headshot.jpg" style="width: 100%; height: auto;">
-    </div>
-    <div style="flex: 3 1 70%;">
-        <p>
-            Hey there! I'm Michael Lopez, a Data Analyst with a foundation in both the non-profit sector and data analysis, with over four years of dedicated analysis experience alongside nearly a decade of  involvement in non-profit initiatives. A Miami native, I obtained my bachelor's degree at Florida International University, in Psychology and Anthropology. Before moving to Dallas, TX, where I to joined a research lab at the University of Texas at Dallas before subsequently enrolling in their Masters of Public Policy program.
-        </p>
-    </div>
+<!-- Hero Section with 3D Terrain -->
+<div class="hero-container">
+  <div id="terrain-canvas"></div>
+  <div class="hero-content">
+    <h1 class="hero-name">Michael Lopez</h1>
+    <p class="hero-title">Data Scientist & Place-Based Impact Specialist</p>
+  </div>
+  <div class="scroll-indicator">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M19 12l-7 7-7-7"/>
+    </svg>
+  </div>
 </div>
+<script src="js/terrain.js"></script>
+
+<!-- Introduction Section -->
+<section class="intro-section">
+  <h2>Mapping Impact, One Community at a Time</h2>
+  <p>
+    I build data tools and visualizations that help communities understand and transform themselves.
+    With a background in nonprofit work and a passion for place-based social impact, I create
+    interactive maps, dashboards, and reports that turn complex data into actionable insights.
+  </p>
+</section>
+
+<!-- Projects Section -->
+<section class="projects-section">
+  <h2>Featured Work</h2>
+  <div class="project-grid">
+
+    <!-- Project Card Template - Duplicate and customize for each project -->
+    <article class="project-card">
+      <a href="#" target="_blank">
+        <img src="images/projects/placeholder.jpg" alt="Project thumbnail" class="project-image" onerror="this.style.background='linear-gradient(135deg, #8B4D3B 0%, #C4724D 100%)'; this.style.display='block';">
+        <div class="project-content">
+          <h3 class="project-title">Community Resource Explorer</h3>
+          <p class="project-description">
+            Interactive map helping residents find local services and resources across the county.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Shiny</span>
+            <span class="project-tag">Maps</span>
+            <span class="project-tag">R</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <article class="project-card">
+      <a href="#" target="_blank">
+        <img src="images/projects/placeholder.jpg" alt="Project thumbnail" class="project-image" onerror="this.style.background='linear-gradient(135deg, #5A7D6B 0%, #8B4D3B 100%)'; this.style.display='block';">
+        <div class="project-content">
+          <h3 class="project-title">Neighborhood Safety Dashboard</h3>
+          <p class="project-description">
+            Real-time data visualization tracking safety metrics and trends across neighborhoods.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Dashboard</span>
+            <span class="project-tag">Shiny</span>
+            <span class="project-tag">Analysis</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <article class="project-card">
+      <a href="#" target="_blank">
+        <img src="images/projects/placeholder.jpg" alt="Project thumbnail" class="project-image" onerror="this.style.background='linear-gradient(135deg, #C4724D 0%, #E8C496 100%)'; this.style.display='block';">
+        <div class="project-content">
+          <h3 class="project-title">Child Poverty Analysis</h3>
+          <p class="project-description">
+            Comprehensive report exploring childhood poverty patterns and intervention opportunities.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Report</span>
+            <span class="project-tag">Quarto</span>
+            <span class="project-tag">Research</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <article class="project-card">
+      <a href="#" target="_blank">
+        <img src="images/projects/placeholder.jpg" alt="Project thumbnail" class="project-image" onerror="this.style.background='linear-gradient(135deg, #5C4D45 0%, #5A7D6B 100%)'; this.style.display='block';">
+        <div class="project-content">
+          <h3 class="project-title">Housing Market Explorer</h3>
+          <p class="project-description">
+            Tool for analyzing housing trends, affordability, and neighborhood change over time.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Maps</span>
+            <span class="project-tag">Shiny</span>
+            <span class="project-tag">Housing</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <article class="project-card">
+      <a href="#" target="_blank">
+        <img src="images/projects/placeholder.jpg" alt="Project thumbnail" class="project-image" onerror="this.style.background='linear-gradient(135deg, #8B4D3B 0%, #C4724D 100%)'; this.style.display='block';">
+        <div class="project-content">
+          <h3 class="project-title">Community Resource Explorer</h3>
+          <p class="project-description">
+            Interactive map helping residents find local services and resources across the county.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Shiny</span>
+            <span class="project-tag">Maps</span>
+            <span class="project-tag">R</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <article class="project-card">
+      <a href="#" target="_blank">
+        <img src="images/projects/placeholder.jpg" alt="Project thumbnail" class="project-image" onerror="this.style.background='linear-gradient(135deg, #8B4D3B 0%, #C4724D 100%)'; this.style.display='block';">
+        <div class="project-content">
+          <h3 class="project-title">Community Resource Explorer</h3>
+          <p class="project-description">
+            Interactive map helping residents find local services and resources across the county.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Shiny</span>
+            <span class="project-tag">Maps</span>
+            <span class="project-tag">R</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- Add more project cards as needed -->
+
+  </div>
+</section>
 ```
-My time in Dallas has allowed me to partner with non-profit organizations dedicated to impactful place-based initiatives. My role at the Child Poverty Action Lab has allowed me to leverage data in transformative ways, enhancing program capabilities within Dallas County and the City of Dallas through actionable insights and meaningful conversations with stakeholders. Through my proficiency in R, alongside a strong ability to create engaging tools and reports with Shiny and Quarto. Additionally, my grasp of SQL and various other analytical tools complements my skill set. What truly sets me apart is my adaptability, curiosity, and ability to simplify complex data for a diverse audience. These attributes have been instrumental in not just meeting the dynamic needs of projects, but also in fostering a culture of innovation and collaboration within my teams.
-
-I dive into every project with an eye for analytical depth and imaginative solutions, motivated by a  commitment to contribute to social good through the power of data. I'm keen to continue exploring how my unique blend of skills, experience, and personal interests can drive meaningful change and create lasting impacts.
-
-# Portfolio
-
-Throughout this portfolio, you will find a collection of projects that were either created solely by myself or where I served as the lead analyst. The analyses were conducted primarily in R, leveraging a diverse range of data visualization and analysis techniques. The final products were generated using R Shiny or Quarto, ensuring a strong emphasis on reproducibility. Notably, projects labeled with the "External Developer" tag denote collaborations with external developers, where I spearheaded the data ETL (Extract, Transform, Load) processes and led the analysis efforts. These projects highlight my expertise in combining analytical skills with a keen focus on reproducible workflows to deliver impactful insights.
-
----
-listing:
-    filter-ui: [categories, title]
-    contents: directory-content.yml
-    type: grid
-    sort: "date desc"
-    categories: numbered
-    date-format: medium
-    grid-columns: 3
-    image-height: "175px"
-    max-description-length: 250
-    exclude: 
-      categories: ["Exclude"]
----

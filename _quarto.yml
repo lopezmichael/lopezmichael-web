@@ -1,52 +1,37 @@
 project:
   type: website
-  output-dir: "docs"
+  output-dir: docs
+
+website:
   title: "Michael Lopez"
+  navbar:
+    background: light
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+      - href: resume.qmd
+        text: Resume
+    right:
+      - icon: github
+        href: https://github.com/yourusername
+      - icon: linkedin
+        href: https://linkedin.com/in/yourusername
+  page-footer:
+    center: |
+      Built with [Quarto](https://quarto.org) and [Three.js](https://threejs.org)
+
 format:
   html:
-    theme: www/web_report.scss
-    toc-title: Contents
+    theme:
+      light: [cosmo, styles.scss]
+    css: styles.css
     toc: false
-    toc-depth: 2
-    toc-location: right
-    anchor-sections: false
-    code-summary: "Reveal Code"
-    code-copy: hover
-    code-fold: true
-    smooth-scroll: true
-    grid:
-      sidebar-width: 250px
-      body-width: 850px
-      margin-width: 300px
-    code-block-bg: true
-    code-block-border-left: "#008097"
-    fig-width: 7
-    fig-height: 5
-    fig-dpi: 300
-    warning: FALSE
-    error: TRUE
-    echo: FALSE
-    message: FALSE
-website:
-  search: FALSE
-#    location: navbar
-#    type: textbox
-#  favicon: www/images/CPAL_favicon.ico
-  navbar:
-      pinned: TRUE
-      search: FALSE
-#      logo: www/images/logo-square.png
-#      logo-href: "https://childpovertyactionlab.github.io/cpaldirectory/"
-      collapse: FALSE
-      right:
-        - icon: house-door-fill
-          text: "Home"
-          href: index.html
-        - icon: card-list
-          text: "Resume"
-          href: resume.html
-        - icon: github
-          text: "Github"
-          href: "https://github.com/lopezmichael/"
-  page-footer:
-    background: "#1e1e1e"
+    page-layout: full
+    include-in-header:
+      - text: |
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    include-after-body:
+      - text: |
+          <script src="js/theme-toggle.js"></script>

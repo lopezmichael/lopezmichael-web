@@ -1,0 +1,94 @@
+---
+title: "About"
+format:
+  html:
+    toc: false
+---
+
+```{=html}
+<div class="about-content">
+  <img src="images/headshot.jpg" alt="Michael Lopez" class="headshot" onerror="this.style.background='linear-gradient(135deg, #8B4D3B 0%, #C4724D 100%)'; this.style.display='block';">
+
+  <h2>Hi, I'm Michael</h2>
+
+  <p>
+    I'm a data scientist with a deep commitment to place-based social impact work.
+    For over [X] years, I've worked in the nonprofit sector, using data to help
+    communities understand themselves and drive meaningful change.
+  </p>
+
+  <p>
+    My work sits at the intersection of data science, geography, and social justice.
+    I believe that good data work isn't just about technical skills—it's about
+    understanding community context, centering equity, and building tools that
+    genuinely serve the people who use them.
+  </p>
+
+  <h3>What I Do</h3>
+
+  <p>
+    I specialize in building interactive maps, dashboards, and data products that
+    make complex information accessible and actionable. Whether it's helping a
+    community organization understand neighborhood change, or building a tool for
+    residents to find local resources, I focus on creating solutions that meet
+    real needs.
+  </p>
+
+  <h3>Technical Skills</h3>
+
+  <div class="skills-grid">
+    <div class="skill-category">
+      <h4>Languages & Tools</h4>
+      <ul>
+        <li>R (tidyverse, sf, ggplot2)</li>
+        <li>Python</li>
+        <li>SQL</li>
+        <li>Git/GitHub</li>
+      </ul>
+    </div>
+
+    <div class="skill-category">
+      <h4>Web & Visualization</h4>
+      <ul>
+        <li>Shiny</li>
+        <li>Quarto</li>
+        <li>Leaflet</li>
+        <li>Mapbox</li>
+      </ul>
+    </div>
+
+    <div class="skill-category">
+      <h4>Data & Analysis</h4>
+      <ul>
+        <li>Geospatial Analysis</li>
+        <li>Statistical Modeling</li>
+        <li>Data Visualization</li>
+        <li>Census/ACS Data</li>
+      </ul>
+    </div>
+
+    <div class="skill-category">
+      <h4>Domain Expertise</h4>
+      <ul>
+        <li>Community Development</li>
+        <li>Housing & Neighborhoods</li>
+        <li>Education & Youth</li>
+        <li>Health Equity</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Let's Connect</h3>
+
+  <p>
+    I'm always interested in connecting with others doing place-based data work,
+    exploring new projects, or just chatting about maps and community impact.
+  </p>
+
+  <p>
+    <a href="mailto:your.email@example.com">your.email@example.com</a><br>
+    <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a> ·
+    <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+  </p>
+</div>
+```
