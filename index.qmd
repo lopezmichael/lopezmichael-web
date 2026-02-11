@@ -12,7 +12,7 @@ format:
   <div id="terrain-canvas"></div>
   <div class="hero-content">
     <h1 class="hero-name">Michael Lopez</h1>
-    <p class="hero-title">Data Scientist & Place-Based Impact Specialist</p>
+    <p class="hero-title">Data Strategist | Civic Tech & Social Impact</p>
   </div>
   <div class="scroll-indicator">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -24,11 +24,12 @@ format:
 
 <!-- Introduction Section -->
 <section class="intro-section">
-  <h2>Mapping Impact, One Community at a Time</h2>
+  <h2>Building Data Systems That Help Communities</h2>
   <p>
-    I build data tools and visualizations that help communities understand and transform themselves.
-    With a background in nonprofit work and a passion for place-based social impact, I create
-    interactive maps, dashboards, and reports that turn complex data into actionable insights.
+    I design data infrastructure that turns administrative records into community action.
+    With nearly six years in the nonprofit sector, I specialize in translating between
+    technical teams and community stakeholders—building pipelines, dashboards, and tools
+    that drive real-world impact in housing, public safety, and social policy.
   </p>
 </section>
 
@@ -37,110 +38,107 @@ format:
   <h2>Featured Work</h2>
   <div class="project-grid">
 
-    <!-- Project Card Template - Duplicate and customize for each project -->
     <article class="project-card">
-      <a href="#" target="_blank">
-        <img src="images/projects/placeholder.jpg" alt="Project thumbnail" class="project-image" onerror="this.style.background='linear-gradient(135deg, #8B4D3B 0%, #C4724D 100%)'; this.style.display='block';">
+      <a href="https://northtexasevictions.org" target="_blank">
+        <img src="images/projects/placeholder.jpg" alt="North Texas Evictions" class="project-image" onerror="this.style.background='linear-gradient(135deg, #8B4D3B 0%, #C4724D 100%)'; this.style.display='block';">
         <div class="project-content">
-          <h3 class="project-title">Community Resource Explorer</h3>
+          <h3 class="project-title">North Texas Evictions</h3>
           <p class="project-description">
-            Interactive map helping residents find local services and resources across the county.
+            Public-facing data transparency tool tracking eviction filings across Dallas County, helping residents and advocates understand displacement patterns.
           </p>
           <div class="project-tags">
-            <span class="project-tag">Shiny</span>
-            <span class="project-tag">Maps</span>
-            <span class="project-tag">R</span>
-          </div>
-        </div>
-      </a>
-    </article>
-
-    <article class="project-card">
-      <a href="#" target="_blank">
-        <img src="images/projects/placeholder.jpg" alt="Project thumbnail" class="project-image" onerror="this.style.background='linear-gradient(135deg, #5A7D6B 0%, #8B4D3B 100%)'; this.style.display='block';">
-        <div class="project-content">
-          <h3 class="project-title">Neighborhood Safety Dashboard</h3>
-          <p class="project-description">
-            Real-time data visualization tracking safety metrics and trends across neighborhoods.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">Dashboard</span>
-            <span class="project-tag">Shiny</span>
-            <span class="project-tag">Analysis</span>
-          </div>
-        </div>
-      </a>
-    </article>
-
-    <article class="project-card">
-      <a href="#" target="_blank">
-        <img src="images/projects/placeholder.jpg" alt="Project thumbnail" class="project-image" onerror="this.style.background='linear-gradient(135deg, #C4724D 0%, #E8C496 100%)'; this.style.display='block';">
-        <div class="project-content">
-          <h3 class="project-title">Child Poverty Analysis</h3>
-          <p class="project-description">
-            Comprehensive report exploring childhood poverty patterns and intervention opportunities.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">Report</span>
-            <span class="project-tag">Quarto</span>
-            <span class="project-tag">Research</span>
-          </div>
-        </div>
-      </a>
-    </article>
-
-    <article class="project-card">
-      <a href="#" target="_blank">
-        <img src="images/projects/placeholder.jpg" alt="Project thumbnail" class="project-image" onerror="this.style.background='linear-gradient(135deg, #5C4D45 0%, #5A7D6B 100%)'; this.style.display='block';">
-        <div class="project-content">
-          <h3 class="project-title">Housing Market Explorer</h3>
-          <p class="project-description">
-            Tool for analyzing housing trends, affordability, and neighborhood change over time.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">Maps</span>
             <span class="project-tag">Shiny</span>
             <span class="project-tag">Housing</span>
+            <span class="project-tag">Public Data</span>
           </div>
         </div>
       </a>
     </article>
 
     <article class="project-card">
-      <a href="#" target="_blank">
-        <img src="images/projects/placeholder.jpg" alt="Project thumbnail" class="project-image" onerror="this.style.background='linear-gradient(135deg, #8B4D3B 0%, #C4724D 100%)'; this.style.display='block';">
+      <a href="https://digilab.cards" target="_blank">
+        <img src="images/projects/placeholder.jpg" alt="DigiLab TCG Standings" class="project-image" onerror="this.style.background='linear-gradient(135deg, #5A7D6B 0%, #8B4D3B 100%)'; this.style.display='block';">
         <div class="project-content">
-          <h3 class="project-title">Community Resource Explorer</h3>
+          <h3 class="project-title">DigiLab TCG Standings</h3>
           <p class="project-description">
-            Interactive map helping residents find local services and resources across the county.
+            Shiny dashboard tracking Digimon card game tournament events in North Texas. Built a community around collaborative data collection.
           </p>
           <div class="project-tags">
             <span class="project-tag">Shiny</span>
-            <span class="project-tag">Maps</span>
-            <span class="project-tag">R</span>
+            <span class="project-tag">Community</span>
+            <span class="project-tag">Personal</span>
           </div>
         </div>
       </a>
     </article>
 
     <article class="project-card">
-      <a href="#" target="_blank">
-        <img src="images/projects/placeholder.jpg" alt="Project thumbnail" class="project-image" onerror="this.style.background='linear-gradient(135deg, #8B4D3B 0%, #C4724D 100%)'; this.style.display='block';">
+      <a href="https://github.com/lopezmichael/atomtemplates" target="_blank">
+        <img src="images/projects/placeholder.jpg" alt="atomtemplates R Package" class="project-image" onerror="this.style.background='linear-gradient(135deg, #C4724D 0%, #E8C496 100%)'; this.style.display='block';">
         <div class="project-content">
-          <h3 class="project-title">Community Resource Explorer</h3>
+          <h3 class="project-title">atomtemplates</h3>
           <p class="project-description">
-            Interactive map helping residents find local services and resources across the county.
+            R package for standardized project creation and handling. Streamlines setup of new data projects with consistent structure and tooling.
           </p>
           <div class="project-tags">
-            <span class="project-tag">Shiny</span>
-            <span class="project-tag">Maps</span>
-            <span class="project-tag">R</span>
+            <span class="project-tag">R Package</span>
+            <span class="project-tag">Open Source</span>
+            <span class="project-tag">DevTools</span>
           </div>
         </div>
       </a>
     </article>
 
-    <!-- Add more project cards as needed -->
+    <article class="project-card">
+      <a href="https://github.com/lopezmichael/digimon-tcg-standings" target="_blank">
+        <img src="images/projects/placeholder.jpg" alt="Digimon TCG Standings Repo" class="project-image" onerror="this.style.background='linear-gradient(135deg, #5C4D45 0%, #5A7D6B 100%)'; this.style.display='block';">
+        <div class="project-content">
+          <h3 class="project-title">Digimon TCG Standings (Source)</h3>
+          <p class="project-description">
+            Open source repository for the DigiLab standings tracker. Demonstrates Shiny app architecture and community-driven data pipelines.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">GitHub</span>
+            <span class="project-tag">Shiny</span>
+            <span class="project-tag">Open Source</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <article class="project-card">
+      <a href="resume.html">
+        <img src="images/projects/placeholder.jpg" alt="Dallas County Eviction Pipeline" class="project-image" onerror="this.style.background='linear-gradient(135deg, #8B4D3B 0%, #C4724D 100%)'; this.style.display='block';">
+        <div class="project-content">
+          <h3 class="project-title">Dallas County Eviction Pipeline</h3>
+          <p class="project-description">
+            Production data pipeline processing 40,000+ eviction records annually, serving 12+ partners including Dallas Eviction Advocacy Center and Eviction Lab.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Data Pipeline</span>
+            <span class="project-tag">CPAL</span>
+            <span class="project-tag">Impact</span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <article class="project-card">
+      <a href="resume.html">
+        <img src="images/projects/placeholder.jpg" alt="30+ R Shiny Dashboards" class="project-image" onerror="this.style.background='linear-gradient(135deg, #5A7D6B 0%, #C4724D 100%)'; this.style.display='block';">
+        <div class="project-content">
+          <h3 class="project-title">30+ R Shiny Dashboards</h3>
+          <p class="project-description">
+            Suite of interactive dashboards at CPAL informing decisions on housing stability, public safety, resource allocation, and funding strategies.
+          </p>
+          <div class="project-tags">
+            <span class="project-tag">Shiny</span>
+            <span class="project-tag">CPAL</span>
+            <span class="project-tag">Dashboards</span>
+          </div>
+        </div>
+      </a>
+    </article>
 
   </div>
 </section>

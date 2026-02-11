@@ -21,7 +21,7 @@ format:
 
   <h2>Michael Lopez</h2>
   <p style="text-align: center; color: #8B4D3B; margin-bottom: 2rem;">
-    Data Scientist | Place-Based Impact | Community Development
+    Data Strategist | Translating Complex Data into Community Action | Civic Tech & Nonprofit
   </p>
 
   <hr style="border: none; border-top: 2px solid #E8C496; margin: 2rem 0;">
@@ -29,23 +29,84 @@ format:
   <h3>Experience</h3>
 
   <div style="margin-bottom: 2rem;">
-    <h4 style="margin-bottom: 0.25rem; color: #5C4D45;">Data Scientist</h4>
-    <p style="color: #8B4D3B; font-weight: 500; margin-bottom: 0.5rem;">Organization Name · 20XX - Present</p>
+    <h4 style="margin-bottom: 0.25rem; color: #5C4D45;">Director, Data</h4>
+    <p style="color: #8B4D3B; font-weight: 500; margin-bottom: 0.5rem;">Child Poverty Action Lab · May 2023 - Present</p>
+    <p style="margin-bottom: 0.75rem; font-style: italic;">Leading data strategy, infrastructure, and team operations for a nonprofit focused on reducing child poverty in Dallas.</p>
     <ul>
-      <li>Built interactive dashboards and mapping tools serving [X] community organizations</li>
-      <li>Developed automated data pipelines processing [X] records annually</li>
-      <li>Led data visualization projects reaching [X] stakeholders</li>
-      <li>Created Shiny applications for neighborhood-level analysis</li>
+      <li>Assumed data team management, vendor relationships, and stakeholder management responsibilities following CDO departure (Dec 2024 - Dec 2025), reporting to CTO</li>
+      <li>Built project management system in Notion adopted org-wide by multiple departments</li>
+      <li>Architecting migration to Databricks, systematizing 35-40 data pipelines to transition from file-based storage to scalable infrastructure</li>
+      <li>Built eviction data pipeline processing 40,000+ Dallas County records annually, used by 12+ partners including Dallas Eviction Advocacy Center, Eviction Lab, and Dallas HHS</li>
+      <li>Designed parcel-level housing tool with 20 active users identifying residents eligible for assistance programs</li>
+      <li>Built data function from the ground up; led hiring for all data roles including organization's first data engineer</li>
+      <li>Managed team of up to 4 (3 analysts + 1 engineer); created onboarding documentation and mentored team in R, SQL, and data visualization</li>
+      <li>Evaluated and selected enterprise tools including Databricks, Claude Enterprise, Lucidchart, and data vendors (MySidewalk, DataAxle)</li>
+      <li>Oversaw development of 30+ R Shiny dashboards informing decisions on housing stability, public safety, and resource allocation</li>
     </ul>
   </div>
 
   <div style="margin-bottom: 2rem;">
-    <h4 style="margin-bottom: 0.25rem; color: #5C4D45;">Previous Role</h4>
-    <p style="color: #8B4D3B; font-weight: 500; margin-bottom: 0.5rem;">Organization Name · 20XX - 20XX</p>
+    <h4 style="margin-bottom: 0.25rem; color: #5C4D45;">Manager, Data Analytics</h4>
+    <p style="color: #8B4D3B; font-weight: 500; margin-bottom: 0.5rem;">Child Poverty Action Lab · May 2022 - May 2023</p>
+    <p style="margin-bottom: 0.75rem; font-style: italic;">Transitioned from individual contributor to project leadership, managing cross-functional data initiatives and mentoring junior team members.</p>
     <ul>
-      <li>Conducted geospatial analysis for community planning initiatives</li>
-      <li>Produced reports and visualizations for policy advocacy</li>
-      <li>Collaborated with community partners on data-driven projects</li>
+      <li>Led development of R Shiny applications, shifting organization toward interactive data products</li>
+      <li>Contributed to development of northtexasevictions.org, a public-facing eviction data transparency tool</li>
+      <li>Mentored analytics interns; one intern subsequently hired as full-time analyst</li>
+      <li>Managed projects spanning afterschool programming, child care accessibility, and housing stability</li>
+      <li>Established data collection and sharing procedures that became organizational standards</li>
+    </ul>
+  </div>
+
+  <div style="margin-bottom: 2rem;">
+    <h4 style="margin-bottom: 0.25rem; color: #5C4D45;">Associate, Analytics</h4>
+    <p style="color: #8B4D3B; font-weight: 500; margin-bottom: 0.5rem;">Child Poverty Action Lab · June 2020 - April 2022</p>
+    <p style="margin-bottom: 0.75rem; font-style: italic;">Early analytics team member who built foundational data infrastructure and reporting systems.</p>
+    <ul>
+      <li>Created initial eviction data pipeline in R, laying groundwork for system now processing 40K+ records annually</li>
+      <li>Developed dashboards and reports in R, QGIS, Tableau, and ArcGIS for internal teams and community partners</li>
+      <li>Automated routine data processes, establishing repeatable frameworks used across the organization</li>
+      <li>Presented findings on housing instability, afterschool programming, and public safety to partner organizations</li>
+    </ul>
+  </div>
+
+  <div style="margin-bottom: 2rem;">
+    <h4 style="margin-bottom: 0.25rem; color: #5C4D45;">Research Project Assistant</h4>
+    <p style="color: #8B4D3B; font-weight: 500; margin-bottom: 0.5rem;">UT Southwestern Medical Center · Dec 2019 - May 2020</p>
+    <ul>
+      <li>Conducted participant interviews and assessments for biomedical research projects</li>
+      <li>Analyzed data and produced reports for internal research findings</li>
+      <li>Performed literature and policy reviews; coordinated project logistics across departments</li>
+    </ul>
+  </div>
+
+  <div style="margin-bottom: 2rem;">
+    <h4 style="margin-bottom: 0.25rem; color: #5C4D45;">Health and Social Policy Intern</h4>
+    <p style="color: #8B4D3B; font-weight: 500; margin-bottom: 0.5rem;">Children at Risk · June 2019 - August 2019</p>
+    <ul>
+      <li>Led policy research on early childhood development and school performance</li>
+      <li>Developed policy briefs on Texas education best practices for senior leadership and state stakeholders</li>
+    </ul>
+  </div>
+
+  <div style="margin-bottom: 2rem;">
+    <h4 style="margin-bottom: 0.25rem; color: #5C4D45;">Research Coordinator</h4>
+    <p style="color: #8B4D3B; font-weight: 500; margin-bottom: 0.5rem;">University of Texas at Dallas · Aug 2016 - Dec 2018</p>
+    <ul>
+      <li>Managed research operations for the Developmental Neurolinguistics Lab</li>
+      <li>Recruited, trained, and supervised 10-15 research assistants each semester</li>
+      <li>Recruited 300+ participants from local schools and youth programs</li>
+      <li>Conducted community outreach, presenting findings to families and local organizations</li>
+    </ul>
+  </div>
+
+  <div style="margin-bottom: 2rem;">
+    <h4 style="margin-bottom: 0.25rem; color: #5C4D45;">Research Assistant</h4>
+    <p style="color: #8B4D3B; font-weight: 500; margin-bottom: 0.5rem;">Florida International University · May 2013 - May 2015</p>
+    <ul>
+      <li>Assessed pre-kindergarten children's spatial abilities and verbal intelligence</li>
+      <li>Trained research assistants on assessment protocols and transcription procedures</li>
+      <li>Recruited participants across Miami-Dade County schools</li>
     </ul>
   </div>
 
@@ -53,9 +114,14 @@ format:
 
   <h3>Education</h3>
 
+  <div style="margin-bottom: 1rem;">
+    <h4 style="margin-bottom: 0.25rem; color: #5C4D45;">Master of Public Policy</h4>
+    <p style="color: #8B4D3B; font-weight: 500;">University of Texas at Dallas · 2021</p>
+  </div>
+
   <div style="margin-bottom: 2rem;">
-    <h4 style="margin-bottom: 0.25rem; color: #5C4D45;">Degree Name</h4>
-    <p style="color: #8B4D3B; font-weight: 500;">University Name · 20XX</p>
+    <h4 style="margin-bottom: 0.25rem; color: #5C4D45;">Bachelor of Arts, Psychology & Anthropology</h4>
+    <p style="color: #8B4D3B; font-weight: 500;">Florida International University · 2015</p>
   </div>
 
   <hr style="border: none; border-top: 2px solid #E8C496; margin: 2rem 0;">
@@ -63,11 +129,12 @@ format:
   <h3>Technical Skills</h3>
 
   <p>
-    <strong>Languages:</strong> R, Python, SQL, JavaScript<br>
-    <strong>Frameworks:</strong> Shiny, Quarto, Tidyverse, sf<br>
-    <strong>Visualization:</strong> ggplot2, Leaflet, Mapbox, D3.js<br>
-    <strong>Tools:</strong> Git, GitHub, PostgreSQL, QGIS<br>
-    <strong>Data:</strong> Census/ACS, Administrative Records, Geospatial Data
+    <strong>Languages & Analytics:</strong> R, SQL, Python, Statistical Modeling, ETL<br>
+    <strong>Data Infrastructure:</strong> Databricks, CKAN, Jenkins, Git, CI/CD<br>
+    <strong>Visualization & Apps:</strong> R Shiny, Tableau, ggplot2, Quarto<br>
+    <strong>Geospatial:</strong> QGIS, ArcGIS, Leaflet, sf<br>
+    <strong>Platforms & Tools:</strong> Notion, Lucidchart, Claude Enterprise, PostgreSQL<br>
+    <strong>Domains:</strong> Housing, Public Safety, Social Policy, Community Development
   </p>
 
   <hr style="border: none; border-top: 2px solid #E8C496; margin: 2rem 0;">
@@ -75,9 +142,12 @@ format:
   <h3>Selected Projects</h3>
 
   <ul>
-    <li><strong>Community Resource Explorer</strong> - Interactive map for finding local services</li>
-    <li><strong>Neighborhood Safety Dashboard</strong> - Real-time safety metrics visualization</li>
-    <li><strong>Housing Market Analysis Tool</strong> - Affordability and change tracking</li>
+    <li><strong>Dallas County Eviction Pipeline</strong> - Processing 40,000+ records annually, used by 12+ partners for outreach and intervention</li>
+    <li><strong>North Texas Evictions</strong> - Public-facing data transparency tool at northtexasevictions.org</li>
+    <li><strong>Parcel Block Walking Tool</strong> - Housing assistance eligibility identifier with 20 active users</li>
+    <li><strong>30+ R Shiny Dashboards</strong> - Interactive tools for housing stability, public safety, and resource allocation</li>
+    <li><strong>DigiLab TCG Standings</strong> - Shiny dashboard tracking Digimon TCG events in North Texas; built community for collaborative data collection (<a href="https://digilab.cards" target="_blank">digilab.cards</a>)</li>
+    <li><strong>atomtemplates</strong> - R package for standardized project creation and handling (<a href="https://github.com/lopezmichael/atomtemplates" target="_blank">GitHub</a>)</li>
   </ul>
 
 </div>
