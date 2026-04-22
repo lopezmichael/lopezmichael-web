@@ -1,0 +1,77 @@
+---
+const year = new Date().getFullYear();
+
+const quickLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about/' },
+  { label: 'Projects', href: '/projects/' },
+  { label: 'Resume', href: '/resume/' },
+];
+
+const socialLinks = [
+  { label: 'GitHub', href: 'https://github.com/lopezmichael' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/michael-d-lopez' },
+  { label: 'Email', href: 'mailto:lopezmikeok@gmail.com' },
+];
+---
+
+<footer class="border-t border-accent/20 dark:border-dark-surface">
+  <!-- CTA banner -->
+  <div class="bg-accent/10 dark:bg-accent/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+      <p class="font-medium mb-1">Interested in working together?</p>
+      <a href="mailto:lopezmikeok@gmail.com" class="text-sm font-medium">
+        lopezmikeok@gmail.com
+      </a>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+      <!-- Brand -->
+      <div>
+        <a href="/" class="text-primary dark:text-secondary font-heading text-lg font-semibold no-underline">Michael Lopez</a>
+        <p class="text-sm opacity-60 mt-2 leading-relaxed">
+          Data Strategist | Civic Tech & Social Impact
+        </p>
+        <p class="text-xs opacity-40 mt-2">
+          Currently: Leading Databricks migration at CPAL
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-primary dark:text-secondary mb-4">Pages</h3>
+        <ul class="space-y-2">
+          {quickLinks.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm opacity-70 hover:opacity-100 transition-opacity no-underline">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Connect -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-primary dark:text-secondary mb-4">Connect</h3>
+        <ul class="space-y-2">
+          {socialLinks.map((link) => (
+            <li>
+              <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined} class="text-sm opacity-70 hover:opacity-100 transition-opacity no-underline">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-10 pt-6 border-t border-accent/15 dark:border-dark-surface">
+      <p class="text-xs opacity-40 text-center">
+        &copy; {year} Michael Lopez. Built with Astro and Three.js.
+      </p>
+    </div>
+  </div>
+</footer>

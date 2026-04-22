@@ -1,9 +1,7 @@
-/.quarto/
-/_site/
-/.Rproj.user
-*.Rproj
-.Rhistory
-.RData
-.Ruserdata
+dist/
+node_modules/
+.astro/
 .DS_Store
-Thumbs.db
+.claude/
+.env
+.env.*

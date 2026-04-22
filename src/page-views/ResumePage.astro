@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ResumeEntry from '../components/ResumeEntry.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+import { experience, education, skills, selectedProjects } from '../data/resume';
+
+// Split experience: first 3 (CPAL roles) are primary, rest are collapsible
+const primaryExperience = experience.slice(0, 3);
+const earlierExperience = experience.slice(3);
+---
+
+<BaseLayout
+  title="Resume"
+  description="Michael Lopez — Resume. Data Strategist with experience in civic tech, housing policy, and nonprofit data infrastructure."
+>
+  <!-- Page header with accent -->
+  <div class="border-t-4 border-secondary">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 py-16">
+      <!-- Download button -->
+      <ScrollReveal>
+        <div class="text-center mb-8">
+          <a
+            href="/files/Michael_Lopez_Resume.pdf"
+            download
+            class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-lg font-medium text-sm hover:bg-secondary transition-colors no-underline"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+            </svg>
+            Download PDF
+          </a>
+        </div>
+      </ScrollReveal>
+
+      <!-- Header -->
+      <ScrollReveal>
+        <div class="text-center mb-8">
+          <h1 class="text-3xl font-bold">Michael Lopez</h1>
+          <p class="text-primary dark:text-secondary font-medium mt-2">
+            Data Strategist | Translating Complex Data into Community Action | Civic Tech & Nonprofit
+          </p>
+        </div>
+      </ScrollReveal>
+
+      <hr class="border-accent border-t-2 my-8" />
+
+      <!-- Experience -->
+      <ScrollReveal>
+        <h2 class="text-xl font-semibold mb-6">Experience</h2>
+      </ScrollReveal>
+
+      {primaryExperience.map((entry) => (
+        <ScrollReveal>
+          <ResumeEntry
+            title={entry.title}
+            company={entry.company}
+            dates={entry.dates}
+            summary={entry.summary}
+            bullets={entry.bullets}
+          />
+        </ScrollReveal>
+      ))}
+
+      <!-- Earlier experience (collapsible) -->
+      {earlierExperience.length > 0 && (
+        <details class="group mb-8">
+          <summary class="cursor-pointer select-none list-none flex items-center gap-2 text-sm font-medium text-primary hover:text-secondary transition-colors py-3">
+            <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+            Earlier experience ({earlierExperience.length} roles)
+          </summary>
+          <div class="mt-4 pl-6 border-l-2 border-accent/40">
+            {earlierExperience.map((entry) => (
+              <ResumeEntry
+                title={entry.title}
+                company={entry.company}
+                dates={entry.dates}
+                summary={entry.summary}
+                bullets={entry.bullets}
+              />
+            ))}
+          </div>
+        </details>
+      )}
+
+      <hr class="border-accent border-t-2 my-8" />
+
+      <!-- Education -->
+      <ScrollReveal>
+        <h2 class="text-xl font-semibold mb-6">Education</h2>
+        {education.map((edu) => (
+          <div class="mb-4">
+            <h4 class="text-base font-semibold dark:text-dark-text">{edu.degree}</h4>
+            <p class="text-primary dark:text-secondary font-medium text-sm">{edu.school} &middot; {edu.year}</p>
+          </div>
+        ))}
+      </ScrollReveal>
+
+      <hr class="border-accent border-t-2 my-8" />
+
+      <!-- Technical Skills -->
+      <ScrollReveal>
+        <h2 class="text-xl font-semibold mb-4">Technical Skills</h2>
+        <div class="text-sm space-y-1">
+          {skills.map((cat) => (
+            <p>
+              <strong>{cat.label}:</strong>{' '}{cat.items.join(', ')}
+            </p>
+          ))}
+        </div>
+      </ScrollReveal>
+
+      <hr class="border-accent border-t-2 my-8" />
+
+      <!-- Selected Projects -->
+      <ScrollReveal>
+        <h2 class="text-xl font-semibold mb-4">Selected Projects</h2>
+        <ul class="space-y-2 list-disc list-outside ml-5 text-sm">
+          {selectedProjects.map((proj) => (
+            <li>
+              <strong>{proj.name}</strong> —{' '}
+              {proj.href ? (
+                <a href={proj.href} target="_blank" rel="noopener noreferrer">{proj.description}</a>
+              ) : (
+                proj.description
+              )}
+            </li>
+          ))}
+        </ul>
+      </ScrollReveal>
+    </div>
+  </div>
+</BaseLayout>

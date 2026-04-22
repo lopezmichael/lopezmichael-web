@@ -1,0 +1,73 @@
+@import "tailwindcss";
+@import "@fontsource/inter/latin-300.css";
+@import "@fontsource/inter/latin-400.css";
+@import "@fontsource/inter/latin-500.css";
+@import "@fontsource/inter/latin-600.css";
+@import "@fontsource/inter/latin-700.css";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --color-primary: #8B4D3B;
+  --color-secondary: #C4724D;
+  --color-accent: #E8C496;
+  --color-cool: #5A7D6B;
+  --color-neutral: #5C4D45;
+  --color-light: #FAF7F4;
+  --color-surface: #FFFFFF;
+  --color-dark-bg: #1a1614;
+  --color-dark-surface: #2a2420;
+  --color-dark-text: #E8E0D8;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-heading: "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-light);
+    color: var(--color-neutral);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  [data-theme="dark"] body {
+    background-color: var(--color-dark-bg);
+    color: var(--color-dark-text);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-neutral);
+  }
+
+  [data-theme="dark"] :is(h1, h2, h3, h4, h5, h6) {
+    color: var(--color-dark-text);
+  }
+
+  a {
+    color: var(--color-primary);
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--color-secondary);
+  }
+
+  [data-theme="dark"] a {
+    color: var(--color-secondary);
+  }
+
+  [data-theme="dark"] a:hover {
+    color: var(--color-accent);
+  }
+}

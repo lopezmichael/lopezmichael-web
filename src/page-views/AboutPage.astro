@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SkillsGrid from '../components/SkillsGrid.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+---
+
+<BaseLayout
+  title="About"
+  description="Michael Lopez — Director of Data at Child Poverty Action Lab. Building data infrastructure that turns administrative data into community action."
+>
+  <!-- Page header with accent -->
+  <div class="border-t-4 border-cool">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 py-16">
+      <!-- Headshot + Bio -->
+      <ScrollReveal>
+        <div class="text-center mb-12">
+          <div class="w-48 h-48 mx-auto rounded-full bg-gradient-to-br from-primary to-secondary mb-6 border-4 border-accent"></div>
+          <h1 class="text-3xl font-bold mb-4">Hi, I'm Michael</h1>
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <div class="space-y-4 text-base leading-relaxed">
+          <p>
+            I build data systems that help communities. As Director of Data at Child Poverty Action Lab,
+            I've spent nearly six years designing infrastructure that turns administrative data into
+            action—from eviction records that connect families to legal aid, to tools that help
+            organizations identify residents eligible for housing assistance.
+          </p>
+          <p>
+            My background in psychology, anthropology, and public policy shaped how I approach this work.
+            I'm most effective at the intersection of technical and programmatic—translating between
+            technical teams and community stakeholders, ensuring analytical rigor while keeping the
+            focus on real-world impact.
+          </p>
+        </div>
+      </ScrollReveal>
+
+      <!-- What I've Built -->
+      <ScrollReveal>
+        <div class="mt-12 p-6 rounded-xl bg-surface dark:bg-dark-surface shadow-sm">
+          <h2 class="text-xl font-semibold text-primary mb-4">What I've Built</h2>
+          <p class="mb-4 text-sm">
+            At CPAL, I've led the development of data infrastructure that serves real community needs:
+          </p>
+          <ul class="space-y-2 list-disc list-outside ml-5 text-sm leading-relaxed">
+            <li>Data pipelines processing 40,000+ eviction records annually, used by partners including Dallas Eviction Advocacy Center and Eviction Lab</li>
+            <li>30+ interactive dashboards (R Shiny) informing decisions on housing stability, public safety, and resource allocation</li>
+            <li>Project management systems and operational processes now used org-wide</li>
+            <li>Currently leading migration to Databricks, systematizing 35-40 data pipelines for long-term scale</li>
+          </ul>
+        </div>
+      </ScrollReveal>
+
+      <!-- Skills Grid -->
+      <ScrollReveal>
+        <h2 class="text-xl font-semibold text-primary mt-12 mb-6">Technical Skills</h2>
+        <SkillsGrid />
+      </ScrollReveal>
+
+      <!-- Contact -->
+      <ScrollReveal>
+        <div class="mt-12 text-center p-8 rounded-xl bg-accent/10 dark:bg-accent/5">
+          <h2 class="text-xl font-semibold text-primary mb-3">Let's Connect</h2>
+          <p class="mb-4 text-sm">
+            I'm always interested in connecting with others working at the intersection of data,
+            technology, and social impact.
+          </p>
+          <div class="flex items-center justify-center gap-4 text-sm">
+            <a href="mailto:lopezmikeok@gmail.com" class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-white rounded-lg hover:bg-secondary transition-colors no-underline text-sm font-medium">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              Email
+            </a>
+            <a href="https://linkedin.com/in/michael-d-lopez" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 border-2 border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors no-underline text-sm font-medium">
+              LinkedIn
+            </a>
+            <a href="https://github.com/lopezmichael" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 border-2 border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors no-underline text-sm font-medium">
+              GitHub
+            </a>
+          </div>
+        </div>
+      </ScrollReveal>
+    </div>
+  </div>
+</BaseLayout>

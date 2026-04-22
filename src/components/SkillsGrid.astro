@@ -1,0 +1,38 @@
+---
+const categories = [
+  {
+    label: 'Languages & Analytics',
+    items: ['R (tidyverse, sf, ggplot2)', 'SQL', 'Python', 'Statistical Modeling'],
+  },
+  {
+    label: 'Data Infrastructure',
+    items: ['Databricks', 'ETL / Data Pipelines', 'Git / CI/CD', 'CKAN / Jenkins'],
+  },
+  {
+    label: 'Visualization & Apps',
+    items: ['R Shiny', 'Tableau', 'Quarto', 'Leaflet / Mapbox'],
+  },
+  {
+    label: 'Domain Expertise',
+    items: ['Housing & Eviction', 'Public Safety', 'Social Policy', 'Community Development'],
+  },
+];
+---
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+  {categories.map((cat) => (
+    <div>
+      <h4 class="text-sm font-semibold text-primary dark:text-secondary mb-3 pb-2 border-b-2 border-accent">
+        {cat.label}
+      </h4>
+      <ul class="space-y-1.5">
+        {cat.items.map((item) => (
+          <li class="text-sm flex items-center gap-2">
+            <span class="text-cool font-bold text-xs">&gt;</span>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+</div>

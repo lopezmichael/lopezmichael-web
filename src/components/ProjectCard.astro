@@ -1,0 +1,47 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const isExternal = project.href.startsWith('http');
+
+// Map gradient keys to explicit classes so Tailwind can scan them
+const gradientMap: Record<string, string> = {
+  'from-primary to-secondary': 'from-primary to-secondary',
+  'from-cool to-primary': 'from-cool to-primary',
+  'from-secondary to-accent': 'from-secondary to-accent',
+  'from-cool to-secondary': 'from-cool to-secondary',
+  'from-neutral to-cool': 'from-neutral to-cool',
+};
+const gradientClasses = gradientMap[project.gradient] ?? 'from-primary to-secondary';
+---
+
+<article class="group rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-surface dark:bg-dark-surface">
+  <a
+    href={project.href}
+    target={isExternal ? '_blank' : undefined}
+    rel={isExternal ? 'noopener noreferrer' : undefined}
+    class="block no-underline"
+  >
+    <!-- Gradient header -->
+    <div class={`h-40 bg-gradient-to-br ${gradientClasses} opacity-80 group-hover:opacity-100 transition-opacity`}></div>
+
+    <!-- Content -->
+    <div class="p-5">
+      <h3 class="text-lg font-semibold mb-2 dark:text-dark-text">{project.title}</h3>
+      <p class="text-sm opacity-75 leading-relaxed mb-3 dark:text-dark-text">
+        {project.description}
+      </p>
+      <div class="flex flex-wrap gap-2">
+        {project.tags.map((tag) => (
+          <span class="text-xs px-2.5 py-1 rounded-full bg-accent/20 text-primary dark:bg-accent/15 dark:text-accent font-medium">
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  </a>
+</article>

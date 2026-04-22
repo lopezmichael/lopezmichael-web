@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCardWide from '../components/ProjectCardWide.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+import { projects } from '../data/projects';
+
+const civicProjects = projects.filter((p) => p.category === 'civic');
+const openSourceProjects = projects.filter((p) => p.category === 'open-source');
+const personalProjects = projects.filter((p) => p.category === 'personal');
+---
+
+<BaseLayout
+  title="Projects"
+  description="Selected projects by Michael Lopez — data pipelines, dashboards, open source tools, and community-driven data products."
+>
+  <!-- Page header with accent -->
+  <div class="border-t-4 border-primary">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+      <ScrollReveal>
+        <h1 class="text-3xl font-bold mb-4">Projects</h1>
+        <p class="text-base leading-relaxed opacity-80 max-w-2xl">
+          A selection of data systems, tools, and products I've built — from production pipelines
+          serving community partners to open-source packages and personal projects.
+        </p>
+      </ScrollReveal>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 pb-20">
+    <!-- Civic Data & Infrastructure -->
+    <ScrollReveal>
+      <h2 class="text-lg font-semibold text-primary mb-6 flex items-center gap-2">
+        <span class="w-8 h-0.5 bg-primary"></span>
+        Civic Data & Infrastructure
+      </h2>
+    </ScrollReveal>
+    <div class="space-y-5 mb-16">
+      {civicProjects.map((project, i) => (
+        <ScrollReveal delay={i * 100}>
+          <ProjectCardWide project={project} />
+        </ScrollReveal>
+      ))}
+    </div>
+
+    <!-- Personal Projects -->
+    {personalProjects.length > 0 && (
+      <>
+        <ScrollReveal>
+          <h2 class="text-lg font-semibold text-primary mb-6 flex items-center gap-2">
+            <span class="w-8 h-0.5 bg-primary"></span>
+            Personal & Community
+          </h2>
+        </ScrollReveal>
+        <div class="space-y-5 mb-16">
+          {personalProjects.map((project, i) => (
+            <ScrollReveal delay={i * 100}>
+              <ProjectCardWide project={project} />
+            </ScrollReveal>
+          ))}
+        </div>
+      </>
+    )}
+
+    <!-- Open Source -->
+    <ScrollReveal>
+      <h2 class="text-lg font-semibold text-primary mb-6 flex items-center gap-2">
+        <span class="w-8 h-0.5 bg-primary"></span>
+        Open Source
+      </h2>
+    </ScrollReveal>
+    <div class="space-y-5">
+      {openSourceProjects.map((project, i) => (
+        <ScrollReveal delay={i * 100}>
+          <ProjectCardWide project={project} />
+        </ScrollReveal>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

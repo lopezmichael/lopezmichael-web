@@ -1,0 +1,52 @@
+<section class="relative w-full h-screen overflow-hidden">
+  <!-- Terrain canvas container -->
+  <div id="terrain-canvas" class="absolute inset-0 bg-dark-bg"></div>
+
+  <!-- Overlay content -->
+  <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+    <div class="text-center">
+      <h1 class="text-white text-[clamp(2.5rem,8vw,5rem)] font-bold leading-tight tracking-tight drop-shadow-lg">
+        Michael Lopez
+      </h1>
+      <p class="text-white/90 text-[clamp(1rem,3vw,1.5rem)] font-light mt-2 drop-shadow-md">
+        Data Strategist | Civic Tech & Social Impact
+      </p>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-white/70 animate-bounce">
+    <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M19 12l-7 7-7-7" />
+    </svg>
+  </div>
+</section>
+
+<script>
+  import { initTerrain } from '../lib/terrain/index';
+
+  let cleanup: (() => void) | null = null;
+
+  function startTerrain() {
+    // Dispose previous instance if any
+    if (cleanup) {
+      cleanup();
+      cleanup = null;
+    }
+
+    const container = document.getElementById('terrain-canvas');
+    if (container) {
+      cleanup = initTerrain(container) ?? null;
+    }
+  }
+
+  startTerrain();
+
+  // Clean up on page swap (if View Transitions are ever added)
+  document.addEventListener('astro:before-swap', () => {
+    if (cleanup) {
+      cleanup();
+      cleanup = null;
+    }
+  });
+</script>
