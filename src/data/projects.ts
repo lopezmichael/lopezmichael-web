@@ -59,6 +59,38 @@ export const projects: Project[] = [
     ],
   },
   {
+    title: 'Dallas Homestead Exemption Map',
+    description:
+      'Interactive map visualizing homestead exemption take-up rates across Dallas.',
+    longDescription:
+      'Interactive R Shiny application mapping homestead exemption take-up rates across Dallas by census tract, zip code, and neighborhood. Filters by race/ethnicity and income level to surface disparities in who is claiming property tax savings. Built with Mapbox GL, sourcing data from the Dallas Central Appraisal District and American Community Survey.',
+    tags: ['R Shiny', 'Mapbox', 'Housing', 'GIS'],
+    href: 'https://dallashomesteads.tools.cpal.org',
+    gradient: 'from-primary to-cool',
+    category: 'civic',
+    highlights: [
+      'Choropleth mapping by tract, zip, and neighborhood',
+      'Equity-focused filters by race/ethnicity and income',
+      'Downloadable report and open data',
+    ],
+  },
+  {
+    title: 'Dallas Block Walking Tool',
+    description:
+      'Internal parcel lookup and canvassing tool for community outreach teams.',
+    longDescription:
+      'Map-based parcel lookup tool for door-to-door outreach workers in Dallas. Lets canvassers search or GPS-locate addresses, view nearby parcels on an interactive map, filter by outreach status, and export target lists. Built with R Shiny and Mapbox GL, sourcing property data from the Dallas Central Appraisal District. Access restricted to authorized outreach teams.',
+    tags: ['R Shiny', 'Mapbox', 'Internal Tool', 'GIS'],
+    href: 'https://blockwalking.tools.cpal.org',
+    gradient: 'from-cool to-secondary',
+    category: 'civic',
+    highlights: [
+      'GPS-enabled address lookup for field canvassers',
+      'Tracks outreach status per parcel',
+      'Export to Excel, CSV, or PDF',
+    ],
+  },
+  {
     title: 'DigiLab TCG Standings (R Shiny)',
     description:
       'Original community-driven Shiny dashboard that became the foundation for DigiLab.',
@@ -125,4 +157,4 @@ export const projects: Project[] = [
 ];
 
 // Featured projects shown on homepage
-export const featuredProjects = [projects[0], projects[4], projects[5]];
+export const featuredProjects = [projects[0], projects[6], projects[7]];
