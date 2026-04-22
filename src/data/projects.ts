@@ -59,19 +59,51 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: 'DigiLab TCG Standings',
+    title: 'DigiLab TCG Standings (R Shiny)',
     description:
-      'Community-driven Shiny dashboard tracking Digimon TCG tournaments in North Texas.',
+      'Original community-driven Shiny dashboard that became the foundation for DigiLab.',
     longDescription:
-      'Shiny dashboard tracking Digimon card game tournament events in North Texas. What started as a personal project became a community hub — players contribute match data collaboratively, making it both a data product and a community-building tool.',
+      'The original R Shiny dashboard tracking Digimon card game tournaments in North Texas. What started as a personal project became a community hub — players contribute match data collaboratively. This project evolved into the full DigiLab platform built with Astro.',
     tags: ['R Shiny', 'Community', 'Personal'],
-    href: 'https://digilab.cards',
+    href: 'https://github.com/lopezmichael/digimon-tcg-standings',
     gradient: 'from-cool to-primary',
     category: 'personal',
     highlights: [
       'Community-driven data collection',
-      'Tracks events across multiple venues',
-      'Live at digilab.cards',
+      'Evolved into the full DigiLab platform',
+      'Open source on GitHub',
+    ],
+  },
+  {
+    title: 'Rodriguez Wellbeing & Counseling',
+    description:
+      'Bilingual therapy practice website built with Astro and Tailwind CSS.',
+    longDescription:
+      'Professional practice website for a licensed counselor and professor, offering counseling, clinical supervision, trauma-informed yoga, and speaking services. Fully bilingual (English/Spanish) with i18n routing, JSON-LD structured data, scroll-reveal animations, and a warm earthy design system.',
+    tags: ['Astro', 'Tailwind CSS', 'i18n', 'Web Development'],
+    href: 'https://www.rodriguezwellbeing.com',
+    gradient: 'from-secondary to-accent',
+    category: 'personal',
+    highlights: [
+      'Full English/Spanish bilingual support',
+      'JSON-LD structured data and strong SEO',
+      'Accessibility-first design with skip links and ARIA',
+    ],
+  },
+  {
+    title: 'DigiLab',
+    description:
+      'Tournament tracking and competitive rating platform for the Digimon TCG community.',
+    longDescription:
+      'Full-featured tournament tracking platform for the Digimon TCG community. Includes player ratings with competitive tiers, deck meta analysis, decklists database, tournament history, and store/organizer management. Built as a PWA with Astro for on-the-go use at events.',
+    tags: ['Astro', 'PWA', 'Community', 'Web Development'],
+    href: 'https://digilab.cards',
+    gradient: 'from-cool to-primary',
+    category: 'personal',
+    highlights: [
+      'Player rating system with competitive leaderboards',
+      'Deck meta analysis and decklists database',
+      'PWA for mobile use at tournaments',
     ],
   },
   {
@@ -90,23 +122,7 @@ export const projects: Project[] = [
       'Open source on GitHub',
     ],
   },
-  {
-    title: 'Digimon TCG Standings (Source)',
-    description:
-      'Open source repository for the DigiLab standings tracker.',
-    longDescription:
-      'Open source repository for the DigiLab standings tracker. Demonstrates Shiny app architecture patterns including modular UI components, community-driven data pipelines, and reactive data processing for live tournament tracking.',
-    tags: ['GitHub', 'R Shiny', 'Open Source'],
-    href: 'https://github.com/lopezmichael/digimon-tcg-standings',
-    gradient: 'from-neutral to-cool',
-    category: 'open-source',
-    highlights: [
-      'Modular Shiny architecture',
-      'Reactive data processing',
-      'Community contribution workflows',
-    ],
-  },
 ];
 
-// Featured projects shown on homepage (indices into projects array)
-export const featuredProjects = [projects[0], projects[1], projects[3]];
+// Featured projects shown on homepage
+export const featuredProjects = [projects[0], projects[4], projects[5]];
