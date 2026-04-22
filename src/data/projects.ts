@@ -7,6 +7,7 @@ export interface Project {
   gradient: string;
   category: 'civic' | 'open-source' | 'personal';
   highlights?: string[];
+  image?: string;
 }
 
 export const projects: Project[] = [
@@ -36,6 +37,7 @@ export const projects: Project[] = [
     href: 'https://northtexasevictions.org',
     gradient: 'from-primary to-secondary',
     category: 'civic',
+    image: '/images/projects/north-texas-evictions.png',
     highlights: [
       'Used by advocates, journalists, and researchers',
       'Interactive mapping of filing hotspots',
@@ -68,6 +70,7 @@ export const projects: Project[] = [
     href: 'https://dallashomesteads.tools.cpal.org',
     gradient: 'from-primary to-cool',
     category: 'civic',
+    image: '/images/projects/dallas-homesteads.png',
     highlights: [
       'Choropleth mapping by tract, zip, and neighborhood',
       'Equity-focused filters by race/ethnicity and income',
@@ -84,6 +87,7 @@ export const projects: Project[] = [
     href: 'https://blockwalking.tools.cpal.org',
     gradient: 'from-cool to-secondary',
     category: 'civic',
+    image: '/images/projects/blockwalking.png',
     highlights: [
       'GPS-enabled address lookup for field canvassers',
       'Tracks outreach status per parcel',
@@ -100,6 +104,7 @@ export const projects: Project[] = [
     href: 'https://github.com/lopezmichael/digimon-tcg-standings',
     gradient: 'from-cool to-primary',
     category: 'personal',
+    image: '/images/projects/digilab-shiny.png',
     highlights: [
       'Community-driven data collection',
       'Evolved into the full DigiLab platform',
@@ -116,6 +121,7 @@ export const projects: Project[] = [
     href: 'https://www.rodriguezwellbeing.com',
     gradient: 'from-secondary to-accent',
     category: 'personal',
+    image: '/images/projects/rodriguez-wellbeing.png',
     highlights: [
       'Full English/Spanish bilingual support',
       'JSON-LD structured data and strong SEO',
@@ -132,6 +138,7 @@ export const projects: Project[] = [
     href: 'https://digilab.cards',
     gradient: 'from-cool to-primary',
     category: 'personal',
+    image: '/images/projects/digilab.png',
     highlights: [
       'Player rating system with competitive leaderboards',
       'Deck meta analysis and decklists database',
@@ -148,6 +155,7 @@ export const projects: Project[] = [
     href: 'https://github.com/lopezmichael/atomtemplates',
     gradient: 'from-secondary to-accent',
     category: 'open-source',
+    image: '/images/projects/atomtemplates.png',
     highlights: [
       'Consistent project scaffolding',
       'Used across CPAL data team',

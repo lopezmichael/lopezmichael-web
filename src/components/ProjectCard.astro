@@ -26,8 +26,19 @@ const gradientClasses = gradientMap[project.gradient] ?? 'from-primary to-second
     rel={isExternal ? 'noopener noreferrer' : undefined}
     class="block no-underline"
   >
-    <!-- Gradient header -->
-    <div class={`h-40 bg-gradient-to-br ${gradientClasses} opacity-80 group-hover:opacity-100 transition-opacity`}></div>
+    <!-- Screenshot or gradient header -->
+    {project.image ? (
+      <div class="h-40 overflow-hidden">
+        <img
+          src={project.image}
+          alt={`Screenshot of ${project.title}`}
+          class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+          loading="lazy"
+        />
+      </div>
+    ) : (
+      <div class={`h-40 bg-gradient-to-br ${gradientClasses} opacity-80 group-hover:opacity-100 transition-opacity`}></div>
+    )}
 
     <!-- Content -->
     <div class="p-5">

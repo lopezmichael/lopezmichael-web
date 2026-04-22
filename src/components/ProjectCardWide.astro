@@ -14,14 +14,26 @@ const gradientMap: Record<string, string> = {
   'from-secondary to-accent': 'from-secondary to-accent',
   'from-cool to-secondary': 'from-cool to-secondary',
   'from-neutral to-cool': 'from-neutral to-cool',
+  'from-primary to-cool': 'from-primary to-cool',
 };
 const gradientClasses = gradientMap[project.gradient] ?? 'from-primary to-secondary';
 ---
 
 <article class="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-surface dark:bg-dark-surface">
   <div class="md:flex">
-    <!-- Gradient side -->
-    <div class={`md:w-56 md:shrink-0 h-32 md:h-auto bg-gradient-to-br ${gradientClasses}`}></div>
+    <!-- Screenshot or gradient side -->
+    {project.image ? (
+      <div class="md:w-72 md:shrink-0 h-44 md:h-auto overflow-hidden">
+        <img
+          src={project.image}
+          alt={`Screenshot of ${project.title}`}
+          class="w-full h-full object-cover object-top"
+          loading="lazy"
+        />
+      </div>
+    ) : (
+      <div class={`md:w-56 md:shrink-0 h-32 md:h-auto bg-gradient-to-br ${gradientClasses}`}></div>
+    )}
 
     <!-- Content -->
     <div class="p-6 flex-1">
