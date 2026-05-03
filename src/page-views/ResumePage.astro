@@ -4,39 +4,44 @@ import ResumeEntry from '../components/ResumeEntry.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
 import { experience, education, skills, selectedProjects } from '../data/resume';
 
-// Split experience: first 3 (CPAL roles) are primary, rest are collapsible
-const primaryExperience = experience.slice(0, 3);
-const earlierExperience = experience.slice(3);
+// Split experience: first 4 (CPAL roles) are primary, rest are collapsible
+const primaryExperience = experience.slice(0, 4);
+const earlierExperience = experience.slice(4);
+
+// Set to true once public/files/Michael_Lopez_Resume.pdf is added.
+const hasResumePdf = false;
 ---
 
 <BaseLayout
   title="Resume"
-  description="Michael Lopez — Resume. Data Strategist with experience in civic tech, housing policy, and nonprofit data infrastructure."
+  description="Michael Lopez resume. Data leader with experience in civic tech, housing policy, and nonprofit data infrastructure."
 >
   <!-- Page header with accent -->
   <div class="border-t-4 border-secondary">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 py-16">
-      <!-- Download button -->
-      <ScrollReveal>
-        <div class="text-center mb-8">
-          <a
-            href="/files/Michael_Lopez_Resume.pdf"
-            download
-            class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-lg font-medium text-sm hover:bg-secondary transition-colors no-underline"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
-            </svg>
-            Download PDF
-          </a>
-        </div>
-      </ScrollReveal>
+      <!-- Download button (hidden until PDF lands in public/files/) -->
+      {hasResumePdf && (
+        <ScrollReveal>
+          <div class="text-center mb-8">
+            <a
+              href="/files/Michael_Lopez_Resume.pdf"
+              download
+              class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary dark:bg-secondary text-white rounded-lg font-medium text-sm hover:bg-secondary dark:hover:bg-canyon transition-colors no-underline"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+              </svg>
+              Download PDF
+            </a>
+          </div>
+        </ScrollReveal>
+      )}
 
       <!-- Header -->
       <ScrollReveal>
         <div class="text-center mb-8">
           <h1 class="text-3xl font-bold">Michael Lopez</h1>
-          <p class="text-primary dark:text-secondary font-medium mt-2">
+          <p class="text-cool dark:text-secondary font-medium mt-2">
             Data Strategist | Translating Complex Data into Community Action | Civic Tech & Nonprofit
           </p>
         </div>
@@ -64,7 +69,7 @@ const earlierExperience = experience.slice(3);
       <!-- Earlier experience (collapsible) -->
       {earlierExperience.length > 0 && (
         <details class="group mb-8">
-          <summary class="cursor-pointer select-none list-none flex items-center gap-2 text-sm font-medium text-primary hover:text-secondary transition-colors py-3">
+          <summary class="cursor-pointer select-none list-none flex items-center gap-2 text-sm font-medium text-cool dark:text-secondary hover:text-secondary transition-colors py-3">
             <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
             </svg>
@@ -92,7 +97,7 @@ const earlierExperience = experience.slice(3);
         {education.map((edu) => (
           <div class="mb-4">
             <h4 class="text-base font-semibold dark:text-dark-text">{edu.degree}</h4>
-            <p class="text-primary dark:text-secondary font-medium text-sm">{edu.school} &middot; {edu.year}</p>
+            <p class="text-cool dark:text-secondary font-medium text-sm">{edu.school} &middot; {edu.year}</p>
           </div>
         ))}
       </ScrollReveal>
@@ -119,7 +124,7 @@ const earlierExperience = experience.slice(3);
         <ul class="space-y-2 list-disc list-outside ml-5 text-sm">
           {selectedProjects.map((proj) => (
             <li>
-              <strong>{proj.name}</strong> —{' '}
+              <strong>{proj.name}</strong>:{' '}
               {proj.href ? (
                 <a href={proj.href} target="_blank" rel="noopener noreferrer">{proj.description}</a>
               ) : (

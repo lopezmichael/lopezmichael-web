@@ -8,14 +8,16 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
-  --color-primary: #8B4D3B;
-  --color-secondary: #C4724D;
-  --color-accent: #E8C496;
-  --color-cool: #5A7D6B;
-  --color-neutral: #5C4D45;
-  --color-light: #FAF7F4;
+  --color-primary: #2A2520;
+  --color-secondary: #D86B3A;
+  --color-accent: #F2C685;
+  /* Despite the legacy "cool" name, this token is the warm interactive accent (links, nav active, inline emphasis). */
+  --color-cool: #8B2D3D;
+  --color-canyon: #A04428;
+  --color-neutral: #2A2520;
+  --color-light: #FBF6EE;
   --color-surface: #FFFFFF;
-  --color-dark-bg: #1a1614;
+  --color-dark-bg: #1d1411;
   --color-dark-surface: #2a2420;
   --color-dark-text: #E8E0D8;
   --font-body: "Inter", system-ui, sans-serif;
@@ -55,7 +57,7 @@
   }
 
   a {
-    color: var(--color-primary);
+    color: var(--color-cool);
     transition: color 0.2s ease;
   }
 

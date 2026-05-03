@@ -1,4 +1,5 @@
 export interface Project {
+  slug: string;
   title: string;
   description: string;
   longDescription: string;
@@ -12,6 +13,7 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: 'eviction-pipeline',
     title: 'Dallas County Eviction Pipeline',
     description:
       'Production data pipeline processing 40,000+ eviction records annually.',
@@ -19,7 +21,7 @@ export const projects: Project[] = [
       'Production data pipeline processing 40,000+ eviction records annually, serving 12+ partners including Dallas Eviction Advocacy Center, Eviction Lab, and Dallas HHS. Built the initial pipeline in R and have iterated on it for nearly five years as the system scaled.',
     tags: ['R', 'Data Pipeline', 'ETL', 'Housing'],
     href: '/resume/',
-    gradient: 'from-primary to-secondary',
+    gradient: 'from-canyon to-secondary',
     category: 'civic',
     highlights: [
       '40,000+ records processed annually',
@@ -28,6 +30,7 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: 'north-texas-evictions',
     title: 'North Texas Evictions',
     description:
       'Public-facing data transparency tool tracking eviction filings across Dallas County.',
@@ -35,7 +38,7 @@ export const projects: Project[] = [
       'Public-facing data transparency tool tracking eviction filings across Dallas County, helping residents and advocates understand displacement patterns. Built with R Shiny, it visualizes trends over time, maps filing hotspots, and provides downloadable data for researchers and journalists.',
     tags: ['R Shiny', 'Housing', 'Public Data', 'GIS'],
     href: 'https://northtexasevictions.org',
-    gradient: 'from-primary to-secondary',
+    gradient: 'from-canyon to-secondary',
     category: 'civic',
     image: '/images/projects/north-texas-evictions.png',
     highlights: [
@@ -45,22 +48,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: '30+ R Shiny Dashboards',
-    description:
-      'Suite of interactive dashboards informing decisions on housing, public safety, and resource allocation.',
-    longDescription:
-      'Suite of 30+ interactive R Shiny dashboards built at CPAL informing decisions on housing stability, public safety, resource allocation, and funding strategies. Range from internal operational tools to partner-facing products, each tailored to specific stakeholder needs.',
-    tags: ['R Shiny', 'Tableau', 'ggplot2', 'Dashboards'],
-    href: '/resume/',
-    gradient: 'from-cool to-secondary',
-    category: 'civic',
-    highlights: [
-      '30+ dashboards in production',
-      'Used across housing, safety, and policy teams',
-      'Internal and partner-facing products',
-    ],
-  },
-  {
+    slug: 'homestead-map',
     title: 'Dallas Homestead Exemption Map',
     description:
       'Interactive map visualizing homestead exemption take-up rates across Dallas.',
@@ -78,6 +66,7 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: 'block-walking',
     title: 'Dallas Block Walking Tool',
     description:
       'Internal parcel lookup and canvassing tool for community outreach teams.',
@@ -95,23 +84,25 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: 'DigiLab TCG Standings (R Shiny)',
+    slug: 'digilab-shiny',
+    title: 'DigiLab TCG Standings (R Shiny, archived)',
     description:
-      'Original community-driven Shiny dashboard that became the foundation for DigiLab.',
+      'Original R Shiny prototype that proved the concept and seeded the data model behind DigiLab.',
     longDescription:
-      'The original R Shiny dashboard tracking Digimon card game tournaments in North Texas. What started as a personal project became a community hub — players contribute match data collaboratively. This project evolved into the full DigiLab platform built with Astro.',
-    tags: ['R Shiny', 'Community', 'Personal'],
+      'The original R Shiny dashboard tracking Digimon TCG tournaments in North Texas. Validated community demand for tournament tracking and seeded the data model, then was superseded by the full DigiLab platform. Still hosted on Posit Connect for archival reference.',
+    tags: ['R Shiny', 'Archived', 'Prototype'],
     href: 'https://github.com/lopezmichael/digimon-tcg-standings',
     gradient: 'from-cool to-primary',
     category: 'personal',
     image: '/images/projects/digilab-shiny.png',
     highlights: [
-      'Community-driven data collection',
-      'Evolved into the full DigiLab platform',
-      'Open source on GitHub',
+      'Proved community demand for tournament tracking',
+      'Superseded by the current DigiLab platform',
+      'Archived; open source on GitHub',
     ],
   },
   {
+    slug: 'rodriguez-wellbeing',
     title: 'Rodriguez Wellbeing & Counseling',
     description:
       'Bilingual therapy practice website built with Astro and Tailwind CSS.',
@@ -129,23 +120,25 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: 'digilab',
     title: 'DigiLab',
     description:
-      'Tournament tracking and competitive rating platform for the Digimon TCG community.',
+      'Production tournament tracking and meta analysis platform for the global Digimon TCG community.',
     longDescription:
-      'Full-featured tournament tracking platform for the Digimon TCG community. Includes player ratings with competitive tiers, deck meta analysis, decklists database, tournament history, and store/organizer management. Built as a PWA with Astro for on-the-go use at events.',
-    tags: ['Astro', 'PWA', 'Community', 'Web Development'],
+      'Full-stack data platform I designed and built for the Digimon TCG community. SSR-rendered entity pages (tamers, stores, decks, tournaments) with Highcharts visualizations and Mapbox maps, scene-aware leaderboards, regional meta analysis, MDX blog, dynamic OG images, a public token-authenticated API for external apps, and a separate admin subdomain for CRUD. Backed by a Discord community of 350+ members and 3,000+ tournaments logged worldwide.',
+    tags: ['Astro', 'Preact', 'Neon', 'Vercel', 'Mapbox', 'Highcharts', 'TypeScript'],
     href: 'https://digilab.cards',
     gradient: 'from-cool to-primary',
     category: 'personal',
     image: '/images/projects/digilab.png',
     highlights: [
-      'Player rating system with competitive leaderboards',
-      'Deck meta analysis and decklists database',
-      'PWA for mobile use at tournaments',
+      '3,000+ tournaments logged · 350+ Discord community members',
+      'SSR Astro + Preact islands · Neon Postgres on Vercel edge',
+      'Public token-authenticated API and admin CRUD subdomain',
     ],
   },
   {
+    slug: 'atomtemplates',
     title: 'atomtemplates',
     description:
       'R package for standardized project creation and handling.',
@@ -164,5 +157,8 @@ export const projects: Project[] = [
   },
 ];
 
-// Featured projects shown on homepage
-export const featuredProjects = [projects[0], projects[6], projects[7]];
+// Featured projects shown on homepage. Slug-based so reordering projects[] doesn't silently change the home page.
+const featuredSlugs = ['eviction-pipeline', 'homestead-map', 'digilab'];
+export const featuredProjects = featuredSlugs
+  .map((slug) => projects.find((p) => p.slug === slug))
+  .filter((p): p is Project => p !== undefined);

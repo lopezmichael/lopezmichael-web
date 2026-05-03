@@ -1,0 +1,32 @@
+---
+import { projects, type Project } from '../../data/projects';
+import ProjectDetail from '../../page-views/projects/ProjectDetail.astro';
+import EvictionPipelineCaseStudy from '../../page-views/projects/EvictionPipelineCaseStudy.astro';
+import HomesteadMapCaseStudy from '../../page-views/projects/HomesteadMapCaseStudy.astro';
+import DigiLabCaseStudy from '../../page-views/projects/DigiLabCaseStudy.astro';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+
+const CaseStudyComponent = {
+  'eviction-pipeline': EvictionPipelineCaseStudy,
+  'homestead-map': HomesteadMapCaseStudy,
+  'digilab': DigiLabCaseStudy,
+}[project.slug];
+---
+
+{CaseStudyComponent ? (
+  <CaseStudyComponent project={project} />
+) : (
+  <ProjectDetail project={project} />
+)}

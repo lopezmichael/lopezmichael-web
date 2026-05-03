@@ -12,7 +12,7 @@ const { title, company, dates, summary, bullets } = Astro.props;
 
 <div class="mb-8">
   <h4 class="text-base font-semibold text-neutral dark:text-dark-text">{title}</h4>
-  <p class="text-primary dark:text-secondary font-medium text-sm mt-0.5">{company} &middot; {dates}</p>
+  <p class="text-cool dark:text-secondary font-medium text-sm mt-0.5">{company} &middot; {dates}</p>
   {summary && (
     <p class="text-sm italic mt-2 opacity-80">{summary}</p>
   )}

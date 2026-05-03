@@ -6,20 +6,25 @@ interface Props {
 }
 
 const { project } = Astro.props;
+const detailHref = `/projects/${project.slug}/`;
 const isExternal = project.href.startsWith('http');
 
+const caseStudySlugs = new Set(['eviction-pipeline', 'homestead-map', 'digilab']);
+const hasCaseStudy = caseStudySlugs.has(project.slug);
+
 const gradientMap: Record<string, string> = {
-  'from-primary to-secondary': 'from-primary to-secondary',
-  'from-cool to-primary': 'from-cool to-primary',
+  'from-canyon to-secondary': 'from-canyon to-secondary',
+  'from-cool to-canyon': 'from-cool to-canyon',
   'from-secondary to-accent': 'from-secondary to-accent',
   'from-cool to-secondary': 'from-cool to-secondary',
-  'from-neutral to-cool': 'from-neutral to-cool',
+  'from-canyon to-cool': 'from-canyon to-cool',
   'from-primary to-cool': 'from-primary to-cool',
+  'from-cool to-primary': 'from-cool to-primary',
 };
-const gradientClasses = gradientMap[project.gradient] ?? 'from-primary to-secondary';
+const gradientClasses = gradientMap[project.gradient] ?? 'from-canyon to-secondary';
 ---
 
-<article class="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-surface dark:bg-dark-surface">
+<article class="relative rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-surface dark:bg-dark-surface">
   <div class="md:flex">
     <!-- Screenshot or gradient side -->
     {project.image ? (
@@ -27,6 +32,8 @@ const gradientClasses = gradientMap[project.gradient] ?? 'from-primary to-second
         <img
           src={project.image}
           alt={`Screenshot of ${project.title}`}
+          width="1280"
+          height="720"
           class="w-full h-full object-cover object-top"
           loading="lazy"
         />
@@ -38,13 +45,20 @@ const gradientClasses = gradientMap[project.gradient] ?? 'from-primary to-second
     <!-- Content -->
     <div class="p-6 flex-1">
       <div class="flex items-start justify-between gap-4 mb-2">
-        <h3 class="text-lg font-semibold dark:text-dark-text">{project.title}</h3>
+        <h3 class="text-lg font-semibold dark:text-dark-text">
+          <a
+            href={detailHref}
+            class="text-current no-underline hover:text-cool dark:hover:text-secondary transition-colors before:content-[''] before:absolute before:inset-0"
+          >
+            {project.title}
+          </a>
+        </h3>
         {isExternal && (
           <a
             href={project.href}
             target="_blank"
             rel="noopener noreferrer"
-            class="shrink-0 inline-flex items-center gap-1 text-xs font-medium text-primary dark:text-secondary hover:text-secondary no-underline mt-1"
+            class="relative z-10 shrink-0 inline-flex items-center gap-1 text-xs font-medium text-cool dark:text-secondary hover:text-secondary no-underline mt-1"
           >
             Visit
             <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -59,22 +73,27 @@ const gradientClasses = gradientMap[project.gradient] ?? 'from-primary to-second
       </p>
 
       {project.highlights && (
-        <ul class="text-xs space-y-1 mb-3 opacity-65 dark:text-dark-text">
+        <ul class="text-xs space-y-1 mb-3 opacity-80 dark:text-dark-text">
           {project.highlights.map((h) => (
             <li class="flex items-center gap-1.5">
-              <span class="text-cool font-bold">&gt;</span>
+              <span class="text-cool dark:text-accent font-bold">&gt;</span>
               {h}
             </li>
           ))}
         </ul>
       )}
 
-      <div class="flex flex-wrap gap-2">
-        {project.tags.map((tag) => (
-          <span class="text-xs px-2.5 py-1 rounded-full bg-accent/20 text-primary dark:bg-accent/15 dark:text-accent font-medium">
-            {tag}
-          </span>
-        ))}
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div class="flex flex-wrap gap-2">
+          {project.tags.map((tag) => (
+            <span class="text-xs px-2.5 py-1 rounded-full bg-accent/20 text-primary dark:bg-accent/15 dark:text-accent font-medium">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <span class="text-xs font-medium text-cool dark:text-secondary whitespace-nowrap">
+          {hasCaseStudy ? 'Read case study' : 'Project details'} →
+        </span>
       </div>
     </div>
   </div>

@@ -25,8 +25,8 @@
 
     function updateIcons() {
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      sun.style.display = isDark ? 'block' : 'none';
-      moon.style.display = isDark ? 'none' : 'block';
+      sun!.style.display = isDark ? 'block' : 'none';
+      moon!.style.display = isDark ? 'none' : 'block';
     }
 
     updateIcons();

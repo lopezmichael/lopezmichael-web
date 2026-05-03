@@ -1,0 +1,113 @@
+---
+import CaseStudyLayout from '../../components/CaseStudyLayout.astro';
+import type { Project } from '../../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+
+const techStack = [
+  'R Shiny',
+  'Mapbox GL JS',
+  'sf (geospatial R)',
+  'Dallas Central Appraisal District (DCAD) data',
+  'American Community Survey (ACS)',
+  'Census tract / zip / neighborhood boundaries',
+];
+
+const metrics = [
+  { value: '3', label: 'geographic scales' },
+  { value: '2', label: 'data sources joined' },
+  { value: 'Public', label: 'open access tool' },
+];
+---
+
+<CaseStudyLayout
+  project={project}
+  metaDescription="Equity-focused choropleth tool mapping Dallas homestead exemption take-up rates by tract, zip, and neighborhood, surfacing who is and isn't claiming property tax savings."
+  techStack={techStack}
+  metrics={metrics}
+>
+
+  <Fragment slot="problem">
+    <p>
+      The Texas homestead exemption is a meaningful property tax break, for households that
+      claim it. In Dallas, the exemption can save a family hundreds to thousands of dollars per
+      year, and stacking it with the over-65 or disability exemption multiplies that.
+    </p>
+    <p>
+      But take-up is uneven. Some neighborhoods file at near-universal rates. Others, often the
+      same neighborhoods with the highest housing-cost burdens, leave the exemption on the
+      table. The disparity is visible if you can see it, but Dallas Central Appraisal District
+      (DCAD) data is published in a form that doesn't surface it. There was no public tool that
+      let advocates, policymakers, or residents see who was claiming and who wasn't, broken down
+      by neighborhood and demographics.
+    </p>
+    <p>
+      Without that visibility, outreach campaigns to expand take-up were essentially flying blind.
+    </p>
+  </Fragment>
+
+  <Fragment slot="approach">
+    <p>
+      I built an R Shiny application that joins DCAD parcel data to American Community Survey
+      demographics and renders the result as an interactive choropleth across three geographic
+      scales (census tract, zip code, and neighborhood) with equity-focused filters.
+    </p>
+    <p>The tool lets a user:</p>
+    <ul>
+      <li>See exemption take-up by tract / zip / neighborhood across the entire county</li>
+      <li>Filter by race/ethnicity composition and household income to surface disparities</li>
+      <li>Compare year-over-year changes to track the impact of outreach efforts</li>
+      <li>Download the underlying data and a summary report for further analysis</li>
+    </ul>
+    <p>
+      Three design decisions shaped the final product:
+    </p>
+    <ul>
+      <li><strong>Equity defaults.</strong> The default view doesn't ask "where are exemption rates highest?" That question is uninteresting. It asks "where is the gap between high-burden households and exemption take-up largest?", which is the question the tool exists to answer. Default framing tells the story.</li>
+      <li><strong>Color scale honesty.</strong> Choropleth color choices can mislead. We chose a single-hue ramp anchored at the county median to make over- and under-take-up visually symmetric, rather than a divergent scale that implies a "right" rate.</li>
+      <li><strong>Multiple geographies.</strong> Tract-level data is statistically cleaner; neighborhood-level is more legible to non-technical users. We supported both rather than choosing one.</li>
+    </ul>
+    <p>
+      Hosted at <a href="https://dallashomesteads.tools.cpal.org" target="_blank" rel="noopener noreferrer">dallashomesteads.tools.cpal.org</a> with public access. No login, no friction.
+    </p>
+  </Fragment>
+
+  <Fragment slot="outcome">
+    <p>
+      The tool is built for Dallas housing advocates working to identify neighborhoods where
+      outreach can have the highest impact, for policymakers evaluating proposals to expand
+      exemption access, and for residents who want to check their own neighborhood's exemption
+      rate.
+    </p>
+    <p>
+      It exposes downloadable reports and open data for journalists and researchers covering
+      Dallas housing affordability. Internally at CPAL, it sits alongside other equity-focused
+      analytics tools that support program design.
+    </p>
+  </Fragment>
+
+  <Fragment slot="reflection">
+    <p>
+      The lesson I keep coming back to from this project is that <strong>a data tool is making an
+      argument whether you intend it to or not</strong>. Default views, color scales, filter
+      orderings, what's foregrounded in tooltips: all of it shapes what the user concludes. The
+      "neutral" choice is a choice.
+    </p>
+    <p>
+      For an equity-focused tool, getting the framing right is half the work. Showing exemption
+      take-up rates without context implies the rate is the metric. Showing the rate alongside
+      household income reframes the question to "who is left out." Same data, different
+      conclusion.
+    </p>
+    <p>
+      The other lesson: <strong>geospatial transparency is advocacy</strong>. A static report on
+      exemption disparities makes a number of points. An interactive map that lets a user pull up
+      their own zip and see the gap makes one, and it's the one that tends to move people.
+    </p>
+  </Fragment>
+
+</CaseStudyLayout>

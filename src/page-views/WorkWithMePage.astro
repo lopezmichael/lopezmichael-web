@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ScrollReveal from '../components/ScrollReveal.astro';
+
+const engagements = [
+  {
+    title: 'Data team setup for nonprofits',
+    lead: 'I help nonprofits build their first or next data team.',
+    icon: 'users',
+    looksLike: [
+      'Defining roles and team structure',
+      'Hiring strategy and interview design',
+      'Tooling stack selection (BI, GIS, AI, vendors)',
+      'Onboarding documentation and processes',
+      'Mentoring junior analysts and data engineers',
+    ],
+    goodFit: [
+      'You have 0–1 data people and want to scale',
+      "You've outgrown ad-hoc data work",
+      "You want someone who's built this before",
+    ],
+  },
+  {
+    title: 'Modern data stack & infrastructure',
+    lead: 'I help orgs build scalable data infrastructure they can grow into.',
+    icon: 'database',
+    looksLike: [
+      'Databricks (or similar) setup and migration',
+      'Pipeline architecture and ETL design',
+      'Vendor evaluation and selection',
+      'AI workflow integration (Anthropic / Claude Enterprise)',
+      'Data warehouse design',
+    ],
+    goodFit: [
+      "You're outgrowing file-based or fragmented tooling",
+      'You have data but no scalable way to manage it',
+      'You want to introduce AI tooling thoughtfully',
+    ],
+  },
+  {
+    title: 'Data-forward tool & site development',
+    lead: 'I build the tools, dashboards, and sites that make data actionable.',
+    icon: 'code',
+    looksLike: [
+      'Internal tools for non-technical staff (CRUD, lookup)',
+      'R Shiny dashboards and interactive data products',
+      'Astro / Preact sites and public data tools',
+      'Mapbox-based geospatial tools',
+      'Public APIs and report generators',
+    ],
+    goodFit: [
+      'You need a custom tool but lack in-house dev capacity',
+      'You want a public-facing data product for transparency',
+      'You need a thoughtful website for a small org or practice',
+    ],
+  },
+];
+
+const howIWork = [
+  {
+    title: 'Scope',
+    body: 'Low-to-medium scale, typically a few weeks to a few months of part-time work. For larger projects, I can help you scope, plan, and find the right team for the job.',
+  },
+  {
+    title: 'Schedule',
+    body: 'I work alongside my full-time role, which means evenings and weekends. I\'m thoughtful about not over-committing, usually one or two projects active at a time.',
+  },
+  {
+    title: 'Style',
+    body: 'Every engagement starts with a free 30-minute call to understand the work and check fit. Then a written proposal with deliverables, timeline, and rate. I work iteratively and communicate frequently.',
+  },
+  {
+    title: 'Rates',
+    body: 'Flexible based on org type, scope, and budget. Sliding scale for nonprofits and mission-aligned orgs. Happy to discuss what works for you.',
+  },
+];
+---
+
+<BaseLayout
+  title="Work with me"
+  description="Selected consulting alongside my full-time role at Child Poverty Action Lab. I help nonprofits set up data teams, migrate to modern infrastructure, and build data-forward tools and sites."
+>
+  <div class="border-t-4 border-cool">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+
+      <!-- Hero -->
+      <ScrollReveal>
+        <div class="mb-16 max-w-2xl">
+          <h1 class="text-3xl font-bold mb-4">Work with me</h1>
+          <p class="text-base leading-relaxed mb-3">
+            I take on a small number of consulting engagements each year alongside my full-time
+            role at Child Poverty Action Lab. Low-to-medium scale projects where I can deliver
+            real impact.
+          </p>
+          <p class="text-sm leading-relaxed opacity-75">
+            Currently available. Let's see if we're a fit.
+          </p>
+        </div>
+      </ScrollReveal>
+
+      <!-- Engagement types -->
+      <ScrollReveal>
+        <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-2">
+          <span class="w-8 h-0.5 bg-canyon"></span>
+          What I help with
+        </h2>
+      </ScrollReveal>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-16">
+        {engagements.map((e, i) => (
+          <ScrollReveal delay={i * 100}>
+            <div class="rounded-xl bg-surface dark:bg-dark-surface shadow-sm p-6 h-full flex flex-col">
+              <svg class="w-8 h-8 text-cool dark:text-secondary mb-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                {e.icon === 'users' && (
+                  <>
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  </>
+                )}
+                {e.icon === 'database' && (
+                  <>
+                    <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                  </>
+                )}
+                {e.icon === 'code' && (
+                  <>
+                    <polyline points="16 18 22 12 16 6"/>
+                    <polyline points="8 6 2 12 8 18"/>
+                  </>
+                )}
+              </svg>
+              <h3 class="text-lg font-semibold mb-2 dark:text-dark-text">{e.title}</h3>
+              <p class="text-sm leading-relaxed opacity-80 mb-5">{e.lead}</p>
+              <div class="text-xs space-y-4 mt-auto">
+                <div>
+                  <p class="font-semibold uppercase tracking-wider text-cool dark:text-secondary mb-1.5">What this looks like</p>
+                  <ul class="space-y-1 opacity-80">
+                    {e.looksLike.map((item) => (
+                      <li class="flex gap-1.5"><span class="text-cool dark:text-accent shrink-0">•</span>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <p class="font-semibold uppercase tracking-wider text-cool dark:text-secondary mb-1.5">Good fit if</p>
+                  <ul class="space-y-1 opacity-80">
+                    {e.goodFit.map((item) => (
+                      <li class="flex gap-1.5"><span class="text-cool dark:text-accent shrink-0">•</span>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        ))}
+      </div>
+
+      <!-- How I work -->
+      <ScrollReveal>
+        <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-2">
+          <span class="w-8 h-0.5 bg-canyon"></span>
+          How I work
+        </h2>
+      </ScrollReveal>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-16">
+        {howIWork.map((item, i) => (
+          <ScrollReveal delay={i * 80}>
+            <div class="rounded-xl border border-accent/40 dark:border-dark-surface p-5 h-full">
+              <h3 class="text-sm font-semibold text-cool dark:text-secondary uppercase tracking-wider mb-2">{item.title}</h3>
+              <p class="text-sm leading-relaxed opacity-85">{item.body}</p>
+            </div>
+          </ScrollReveal>
+        ))}
+      </div>
+
+      <!-- Contact CTA -->
+      <ScrollReveal>
+        <div class="rounded-xl bg-accent/10 dark:bg-accent/5 p-8 sm:p-10 text-center">
+          <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-3">Have a project in mind?</h2>
+          <p class="text-sm leading-relaxed max-w-xl mx-auto mb-6 opacity-80">
+            The fastest way to start is to email me with a brief description of the project,
+            your timeline, and your budget range (if you have one). I usually respond within
+            a couple of days.
+          </p>
+          <div class="flex flex-wrap items-center justify-center gap-3 mb-5">
+            <a href="mailto:michael@lopezstudio.dev?subject=Project%20inquiry" class="inline-flex items-center gap-1.5 px-5 py-2.5 bg-primary dark:bg-secondary text-white rounded-lg hover:bg-secondary dark:hover:bg-canyon transition-colors no-underline text-sm font-medium">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              michael@lopezstudio.dev
+            </a>
+            <a href="https://linkedin.com/in/michael-d-lopez" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-5 py-2.5 border-2 border-primary text-primary dark:border-dark-text dark:text-dark-text rounded-lg hover:bg-primary hover:text-white dark:hover:bg-dark-text dark:hover:text-dark-bg transition-colors no-underline text-sm font-medium">
+              LinkedIn
+            </a>
+          </div>
+          <p class="text-xs opacity-60 max-w-xl mx-auto">
+            Recruiters: I'm also open to conversations about full-time data leadership roles. Same email works.
+          </p>
+        </div>
+      </ScrollReveal>
+
+    </div>
+  </div>
+</BaseLayout>

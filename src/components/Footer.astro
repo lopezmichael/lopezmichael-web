@@ -6,12 +6,13 @@ const quickLinks = [
   { label: 'About', href: '/about/' },
   { label: 'Projects', href: '/projects/' },
   { label: 'Resume', href: '/resume/' },
+  { label: 'Work with me', href: '/work-with-me/' },
 ];
 
 const socialLinks = [
   { label: 'GitHub', href: 'https://github.com/lopezmichael' },
   { label: 'LinkedIn', href: 'https://linkedin.com/in/michael-d-lopez' },
-  { label: 'Email', href: 'mailto:lopezmikeok@gmail.com' },
+  { label: 'Email', href: 'mailto:michael@lopezstudio.dev' },
 ];
 ---
 
@@ -20,8 +21,8 @@ const socialLinks = [
   <div class="bg-accent/10 dark:bg-accent/5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
       <p class="font-medium mb-1">Interested in working together?</p>
-      <a href="mailto:lopezmikeok@gmail.com" class="text-sm font-medium">
-        lopezmikeok@gmail.com
+      <a href="mailto:michael@lopezstudio.dev" class="text-sm font-medium">
+        michael@lopezstudio.dev
       </a>
     </div>
   </div>
@@ -30,18 +31,18 @@ const socialLinks = [
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
       <!-- Brand -->
       <div>
-        <a href="/" class="text-primary dark:text-secondary font-heading text-lg font-semibold no-underline">Michael Lopez</a>
+        <a href="/" class="text-primary dark:text-dark-text font-heading text-lg font-semibold no-underline">Michael Lopez</a>
         <p class="text-sm opacity-60 mt-2 leading-relaxed">
           Data Strategist | Civic Tech & Social Impact
         </p>
         <p class="text-xs opacity-40 mt-2">
-          Currently: Leading Databricks migration at CPAL
+          Director, Data Operations · Child Poverty Action Lab
         </p>
       </div>
 
       <!-- Quick Links -->
       <div>
-        <h3 class="text-sm font-semibold uppercase tracking-wider text-primary dark:text-secondary mb-4">Pages</h3>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-primary dark:text-dark-text mb-4">Pages</h3>
         <ul class="space-y-2">
           {quickLinks.map((link) => (
             <li>
@@ -55,7 +56,7 @@ const socialLinks = [
 
       <!-- Connect -->
       <div>
-        <h3 class="text-sm font-semibold uppercase tracking-wider text-primary dark:text-secondary mb-4">Connect</h3>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-primary dark:text-dark-text mb-4">Connect</h3>
         <ul class="space-y-2">
           {socialLinks.map((link) => (
             <li>

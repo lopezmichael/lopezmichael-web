@@ -1,0 +1,124 @@
+---
+import CaseStudyLayout from '../../components/CaseStudyLayout.astro';
+import type { Project } from '../../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+
+const techStack = [
+  'Astro 5 (SSR + static hybrid)',
+  'Preact (interactive islands)',
+  'Neon Postgres (serverless DB)',
+  'Vercel (edge hosting)',
+  'better-auth',
+  'Mapbox GL JS',
+  'Highcharts',
+  'MDX (blog)',
+  '@vercel/og (dynamic OG images)',
+  'Discord webhooks',
+];
+
+const metrics = [
+  { value: '3,000+', label: 'tournaments logged' },
+  { value: '350+', label: 'Discord members' },
+  { value: '2 yrs', label: 'in development' },
+];
+---
+
+<CaseStudyLayout
+  project={project}
+  metaDescription="Full-stack data platform for the global Digimon TCG community: SSR Astro + Preact + Neon Postgres + Vercel, with public API, admin CRUD, dynamic OG, and 3,000+ tournaments logged worldwide."
+  techStack={techStack}
+  metrics={metrics}
+>
+
+  <Fragment slot="problem">
+    <p>
+      The Digimon TCG community is global, growing, and ran on duct tape. Tournament results
+      lived in Discord screenshots and individual Twitter posts. Player ratings were calculated
+      manually by a handful of dedicated organizers. Deck meta analysis required scraping ten
+      different community sources by hand. Store information was tribal knowledge.
+    </p>
+    <p>
+      I started DigiLab as a side project to fix this for North Texas tournaments specifically,
+      then watched it become the fix for the worldwide community. What started as "let me just
+      build a Shiny dashboard for our local scene" turned into a multi-year build of real
+      production infrastructure.
+    </p>
+    <p>
+      It's also a project where the constraints are unusually real for a side project: the
+      community depends on it for tournament prep, store operators depend on it for player
+      reach, players depend on it for accurate ratings. Uptime matters. Data accuracy matters.
+      Ops costs matter. The kinds of things that are abstract in a coursework project are
+      concrete here.
+    </p>
+  </Fragment>
+
+  <Fragment slot="approach">
+    <p>
+      DigiLab evolved through two phases. First, a <strong>Shiny prototype</strong> tracking
+      North Texas events, which validated demand and seeded the data model. Then a <strong>full
+      rebuild</strong> as a modern web platform on Astro + Preact + Neon Postgres + Vercel,
+      which is what runs at <a href="https://digilab.cards" target="_blank" rel="noopener noreferrer">digilab.cards</a> today.
+    </p>
+    <p>
+      The current platform is a real product, not a hobby site:
+    </p>
+    <ul>
+      <li><strong>SSR entity pages</strong> for tamers (players), stores, decks, and tournaments. Each gets a real URL, structured JSON-LD, dynamic OG images via @vercel/og, and cross-linking. Search engines index the whole catalog.</li>
+      <li><strong>Scene-aware leaderboards</strong> that scope to a geography (Dallas, Texas, US, global) so a player in Dallas sees the leaderboard that's relevant to their travel radius.</li>
+      <li><strong>Regional meta analysis</strong> with archetype breakdowns, color distribution, and format trends. The analytics layer that makes the platform useful for tournament prep, not just history lookup.</li>
+      <li><strong>Highcharts visualizations and Mapbox maps</strong> on every entity page where they add information.</li>
+      <li><strong>MDX blog</strong> for announcements, technical posts, meta deep-dives, and community spotlights.</li>
+      <li><strong>Public token-authenticated API</strong> so external tools and bots can build on DigiLab data; multiple community projects already do.</li>
+      <li><strong>Admin subdomain</strong> with full CRUD for tournament organizers to enter results, plus form-based bug/data-error reporting that fires Discord webhooks to me.</li>
+      <li><strong>Auth and roles</strong> via better-auth, distinguishing players, store operators, TOs, and admins.</li>
+    </ul>
+    <p>
+      Architecturally, the most consequential decision was <strong>SSR-first with Preact islands
+      for interactivity</strong>. The site needed to be SEO-discoverable (every player and store
+      profile is a landing page), needed to feel fast on tournament-day connections, and needed
+      enough interactivity to support filtering and exploration. Astro's hybrid model fits
+      exactly that brief. Preact handles the interactive bits without dragging React's full
+      runtime onto every page.
+    </p>
+    <p>
+      AI tooling, Claude Code in particular, accelerated this dramatically. Building a real
+      multi-entity platform in evenings and weekends would have been a much longer project
+      pre-AI. That's a real, repeatable lesson I now apply to my CPAL work.
+    </p>
+  </Fragment>
+
+  <Fragment slot="outcome">
+    <p>
+      DigiLab tracks <strong>3,000+ tournaments worldwide</strong> across the major Digimon TCG
+      formats. The associated <strong>Discord community has 350+ members</strong> contributing
+      data, reporting issues, and shaping the roadmap. The public API powers external community
+      projects.
+    </p>
+    <p>
+      But the more interesting outcomes are softer:
+    </p>
+    <ul>
+      <li>It changed the conversation in the Digimon TCG community about what tournament data infrastructure can look like; competitors and adjacent communities have started building toward similar models.</li>
+      <li>It is the project I point to when I want to show what I can build end-to-end. Building something real, with real users reporting real bugs, has been the most concentrated learning of my career.</li>
+      <li>It is the clearest evidence I have that I can take a modern web platform from idea to production (design system, database schema, API, admin tooling, auth, deployment, ops), not just data pipelines.</li>
+    </ul>
+  </Fragment>
+
+  <Fragment slot="reflection">
+    <p>
+      A few things I'd carry into any similar project:
+    </p>
+    <ul>
+      <li><strong>Side projects with real users are the best portfolio.</strong> Coursework, take-homes, and demos let you skip the unglamorous parts. Real users force you to do them well: auth, ops, data integrity, performance under load, support communications.</li>
+      <li><strong>Community-driven data has unique constraints.</strong> Volunteer contributors will not tolerate friction. Every form field, every report flow, every login gate is a tax. The data quality is a function of how easy you make contribution.</li>
+      <li><strong>Build the boring infrastructure.</strong> The SEO-friendly URLs, the JSON-LD, the dynamic OG images, the admin CRUD, the API tokens. None of those are glamorous, and all of them are why DigiLab is used by people I've never met.</li>
+      <li><strong>AI tooling changes the side-project equation.</strong> What used to be "I can't build this in evenings" becomes "I can build this in evenings if I'm thoughtful about scope." That has shaped what I take on professionally too.</li>
+    </ul>
+  </Fragment>
+
+</CaseStudyLayout>

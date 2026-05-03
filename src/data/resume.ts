@@ -23,23 +23,42 @@ export interface SelectedProject {
   href?: string;
 }
 
+export interface MediaItem {
+  outlet: string;
+  title: string;
+  date: string;
+  href: string;
+  /** 'press' = news mention; 'visualization' = data viz I contributed to a publication */
+  type: 'press' | 'visualization';
+}
+
 export const experience: Experience[] = [
+  {
+    title: 'Director, Data Operations',
+    company: 'Child Poverty Action Lab',
+    dates: 'January 2026 - Present',
+    summary:
+      'Director role evolved in January 2026 with a sharpened focus on CPAL\'s Databricks migration, AI-enabled team workflows, and managing external data engineering capacity alongside in-house staff.',
+    bullets: [
+      'Leading CPAL\'s data platform migration to Databricks (Unity Catalog, Workflows, Lakebase + Lakehouse on AWS, Git-tracked orchestration), systematizing 35-40 pipelines from file-based storage onto unified cloud infrastructure',
+      'Manage a 6-person external data engineering team via vendor partnership executing on the internal data roadmap, alongside one full-time data engineer reporting directly to me',
+      'Built AI-enabled team workflows (Claude Code with custom skills and agents, MCP servers, prompt caching with the Anthropic API), meaningfully accelerating how we develop pipelines, write documentation, review code, and communicate with stakeholders',
+      'Develop internal tools that let non-data staff act on data without analyst intervention, including a parcel-level outreach tool with 20 active field-team users',
+      'Maintain the Dallas County eviction data pipeline (40,000+ records annually, daily updates to 12+ partners including the Dallas Eviction Advocacy Center, the Princeton Eviction Lab, and Dallas Health & Human Services), now running on Databricks Python notebooks after migration from the original R implementation',
+    ],
+  },
   {
     title: 'Director, Data',
     company: 'Child Poverty Action Lab',
-    dates: 'May 2023 - Present',
+    dates: 'May 2023 - December 2025',
     summary:
-      'Leading data strategy, infrastructure, and team operations for a nonprofit focused on reducing child poverty in Dallas.',
+      'Led data strategy, infrastructure, and operations for the backbone nonprofit working to reduce child poverty across North Texas. Built CPAL\'s data engineering function and assumed expanded scope during the org\'s CDO transition.',
     bullets: [
-      'Assumed data team management, vendor relationships, and stakeholder management responsibilities following CDO departure (Dec 2024 - Dec 2025), reporting to CTO',
-      'Built project management system in Notion adopted org-wide by multiple departments',
-      'Architecting migration to Databricks, systematizing 35-40 data pipelines to transition from file-based storage to scalable infrastructure',
-      'Built eviction data pipeline processing 40,000+ Dallas County records annually, used by 12+ partners including Dallas Eviction Advocacy Center, Eviction Lab, and Dallas HHS',
-      'Designed parcel-level housing tool with 20 active users identifying residents eligible for assistance programs',
-      'Built data function from the ground up; led hiring for all data roles including organization\'s first data engineer',
-      'Managed team of up to 4 (3 analysts + 1 engineer); created onboarding documentation and mentored team in R, SQL, and data visualization',
-      'Evaluated and selected enterprise tools including Databricks, Claude Enterprise, Lucidchart, and data vendors (MySidewalk, DataAxle)',
-      'Oversaw development of 30+ R Shiny dashboards informing decisions on housing stability, public safety, and resource allocation',
+      'Built CPAL\'s data function from the ground up; led hiring for the org\'s first data engineer and prior analyst roles',
+      'Led the data org during CDO transition (Dec 2024 - Dec 2025): set department roadmap, hiring, vendor strategy, and budget; reported directly to the CTO',
+      'Oversaw development of an internal Shiny app suite (30+ apps) informing decisions across CPAL focus areas: housing, public safety, maternal health, benefits delivery, and criminal justice',
+      'Evaluated and selected the org\'s enterprise tooling stack: Databricks (chosen over Snowflake/dbt-Cloud after capacity assessment), Claude Enterprise org-wide, vendor data feeds (MySidewalk, DataAxle)',
+      'Built project management infrastructure in Notion now adopted across multiple CPAL departments',
     ],
   },
   {
@@ -83,6 +102,8 @@ export const experience: Experience[] = [
     title: 'Health and Social Policy Intern',
     company: 'Children at Risk',
     dates: 'June 2019 - August 2019',
+    summary:
+      'First exposure to the Dallas nonprofit sector. Taught me the gap between how policy works in textbooks and how it actually moves between research desks and state stakeholders.',
     bullets: [
       'Led policy research on early childhood development and school performance',
       'Developed policy briefs on Texas education best practices for senior leadership and state stakeholders',
@@ -92,6 +113,8 @@ export const experience: Experience[] = [
     title: 'Research Coordinator',
     company: 'University of Texas at Dallas',
     dates: 'Aug 2016 - Dec 2018',
+    summary:
+      'My first management role: coordinating a lab and supervising 10–15 unpaid research assistants each semester. Volunteers respond to motivation and meaning, not pay. The muscle of running a small team came from here.',
     bullets: [
       'Managed research operations for the Developmental Neurolinguistics Lab',
       'Recruited, trained, and supervised 10-15 research assistants each semester',
@@ -126,30 +149,57 @@ export const education: Education[] = [
 
 export const skills: SkillCategory[] = [
   {
-    label: 'Languages & Analytics',
-    items: ['R', 'SQL', 'Python', 'Statistical Modeling', 'ETL'],
+    label: 'Languages',
+    items: ['R (tidyverse, sf, Shiny)', 'SQL', 'Python', 'TypeScript'],
   },
   {
-    label: 'Data Infrastructure',
-    items: ['Databricks', 'CKAN', 'Jenkins', 'Git', 'CI/CD'],
+    label: 'Data Platform',
+    items: ['Databricks (Unity Catalog, Workflows, Lakebase + Lakehouse)', 'PostgreSQL / Neon', 'PostGIS', 'CKAN'],
   },
   {
-    label: 'Visualization & Apps',
-    items: ['R Shiny', 'Tableau', 'ggplot2', 'Quarto'],
+    label: 'Orchestration & Infra',
+    items: ['GitHub Actions', 'Prefect', 'Docker', 'AWS', 'Vercel'],
   },
   {
-    label: 'Geospatial',
-    items: ['QGIS', 'ArcGIS', 'Leaflet', 'sf'],
+    label: 'AI Workflows',
+    items: ['Claude Code (custom skills & agents)', 'MCP servers', 'Anthropic API (prompt caching)', 'Claude Enterprise rollout'],
   },
   {
-    label: 'Platforms & Tools',
-    items: ['Notion', 'Lucidchart', 'Claude Enterprise', 'PostgreSQL'],
+    label: 'Visualization & Geospatial',
+    items: ['R Shiny', 'Tableau', 'Highcharts', 'Mapbox GL', 'QGIS', 'ArcGIS'],
+  },
+  {
+    label: 'Observability',
+    items: ['Sentry', 'Structured logging'],
   },
   {
     label: 'Domains',
-    items: ['Housing', 'Public Safety', 'Social Policy', 'Community Development'],
+    items: ['Housing & Eviction', 'Public Safety', 'Maternal Health', 'Benefits Delivery', 'Community Development'],
   },
 ];
+
+/**
+ * Selected media: news mentions + data visualizations I contributed to publications.
+ * Populate this list to surface the section on the About page.
+ *
+ * Example entries (uncomment and edit):
+ *
+ *   {
+ *     outlet: 'Dallas Morning News',
+ *     title: 'How Dallas eviction filings climbed in 2024',
+ *     date: 'March 2024',
+ *     href: 'https://dallasnews.com/...',
+ *     type: 'press',
+ *   },
+ *   {
+ *     outlet: 'The Lab Report',
+ *     title: 'Mapping Dallas housing instability',
+ *     date: '2025',
+ *     href: 'https://thelabreport.org/...',
+ *     type: 'visualization',
+ *   },
+ */
+export const selectedMedia: MediaItem[] = [];
 
 export const selectedProjects: SelectedProject[] = [
   {

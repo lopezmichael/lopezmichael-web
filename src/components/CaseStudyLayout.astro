@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ScrollReveal from './ScrollReveal.astro';
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  metaDescription?: string;
+  techStack?: string[];
+  metrics?: { label: string; value: string }[];
+}
+
+const { project, metaDescription, techStack, metrics } = Astro.props;
+const isExternal = project.href.startsWith('http');
+const hasReflection = Astro.slots.has('reflection');
+---
+
+<BaseLayout title={project.title} description={metaDescription || project.description}>
+  <div class="border-t-4 border-canyon">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+
+      <!-- Back link -->
+      <ScrollReveal>
+        <a href="/projects/" class="inline-flex items-center gap-1 text-sm text-cool dark:text-secondary hover:text-secondary mb-8 no-underline">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          All projects
+        </a>
+      </ScrollReveal>
+
+      <!-- Hero -->
+      <ScrollReveal>
+        <p class="text-xs uppercase tracking-wider text-cool dark:text-secondary font-semibold mb-3">Case study</p>
+        <h1 class="text-3xl sm:text-4xl font-bold mb-4 leading-tight">{project.title}</h1>
+        <p class="text-base sm:text-lg leading-relaxed opacity-80 max-w-2xl mb-6">{project.description}</p>
+        <div class="flex flex-wrap gap-2 mb-6">
+          {project.tags.map((tag) => (
+            <span class="text-xs px-2.5 py-1 rounded-full bg-accent/20 text-primary dark:bg-accent/15 dark:text-accent font-medium">
+              {tag}
+            </span>
+          ))}
+        </div>
+        {isExternal && (
+          <a
+            href={project.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary dark:bg-secondary text-white rounded-lg hover:bg-secondary dark:hover:bg-canyon transition-colors no-underline text-sm font-medium"
+          >
+            Visit live
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
+            </svg>
+          </a>
+        )}
+      </ScrollReveal>
+
+      <!-- Screenshot -->
+      {project.image && (
+        <ScrollReveal>
+          <div class="my-10 rounded-xl overflow-hidden shadow-md">
+            <img src={project.image} alt={`Screenshot of ${project.title}`} width="1280" height="720" class="w-full h-auto" loading="lazy" />
+          </div>
+        </ScrollReveal>
+      )}
+
+      <!-- Metrics -->
+      {metrics && metrics.length > 0 && (
+        <ScrollReveal>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 my-10 p-6 rounded-xl bg-accent/10 dark:bg-accent/5">
+            {metrics.map((m) => (
+              <div>
+                <p class="text-2xl sm:text-3xl font-bold text-cool dark:text-secondary">{m.value}</p>
+                <p class="text-xs uppercase tracking-wider opacity-70 mt-1">{m.label}</p>
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
+      )}
+
+      <!-- Problem -->
+      <section class="my-12">
+        <ScrollReveal>
+          <h2 class="text-2xl font-semibold text-primary dark:text-dark-text mb-4 flex items-center gap-2">
+            <span class="w-8 h-0.5 bg-canyon"></span>
+            Problem
+          </h2>
+        </ScrollReveal>
+        <ScrollReveal>
+          <div class="prose-content space-y-4 text-base leading-relaxed">
+            <slot name="problem" />
+          </div>
+        </ScrollReveal>
+      </section>
+
+      <!-- Approach -->
+      <section class="my-12">
+        <ScrollReveal>
+          <h2 class="text-2xl font-semibold text-primary dark:text-dark-text mb-4 flex items-center gap-2">
+            <span class="w-8 h-0.5 bg-canyon"></span>
+            Approach
+          </h2>
+        </ScrollReveal>
+        <ScrollReveal>
+          <div class="prose-content space-y-4 text-base leading-relaxed">
+            <slot name="approach" />
+          </div>
+        </ScrollReveal>
+      </section>
+
+      <!-- Outcome -->
+      <section class="my-12">
+        <ScrollReveal>
+          <h2 class="text-2xl font-semibold text-primary dark:text-dark-text mb-4 flex items-center gap-2">
+            <span class="w-8 h-0.5 bg-canyon"></span>
+            Outcome
+          </h2>
+        </ScrollReveal>
+        <ScrollReveal>
+          <div class="prose-content space-y-4 text-base leading-relaxed">
+            <slot name="outcome" />
+          </div>
+        </ScrollReveal>
+      </section>
+
+      <!-- Reflection (optional) -->
+      {hasReflection && (
+        <section class="my-12">
+          <ScrollReveal>
+            <h2 class="text-2xl font-semibold text-primary dark:text-dark-text mb-4 flex items-center gap-2">
+              <span class="w-8 h-0.5 bg-canyon"></span>
+              Reflection
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal>
+            <div class="prose-content space-y-4 text-base leading-relaxed">
+              <slot name="reflection" />
+            </div>
+          </ScrollReveal>
+        </section>
+      )}
+
+      <!-- Tech stack -->
+      {techStack && techStack.length > 0 && (
+        <section class="my-12">
+          <ScrollReveal>
+            <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-4 flex items-center gap-2">
+              <span class="w-8 h-0.5 bg-canyon"></span>
+              Tech stack
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal>
+            <div class="flex flex-wrap gap-2">
+              {techStack.map((t) => (
+                <span class="text-sm px-3 py-1.5 rounded-full bg-accent/15 dark:bg-accent/10 text-primary dark:text-accent font-medium">{t}</span>
+              ))}
+            </div>
+          </ScrollReveal>
+        </section>
+      )}
+
+      <!-- Footer nav -->
+      <ScrollReveal>
+        <div class="mt-16 pt-8 border-t border-accent/30">
+          <a href="/projects/" class="inline-flex items-center gap-1 text-sm text-cool dark:text-secondary hover:text-secondary no-underline">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+            All projects
+          </a>
+        </div>
+      </ScrollReveal>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .prose-content :global(p) {
+    margin: 0;
+  }
+  .prose-content :global(ul) {
+    list-style: disc;
+    padding-left: 1.5rem;
+  }
+  .prose-content :global(ul li) {
+    margin-bottom: 0.4rem;
+  }
+  .prose-content :global(strong) {
+    font-weight: 600;
+  }
+</style>

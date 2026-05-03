@@ -37,16 +37,19 @@ scripts/
 - **Theme toggle:** `data-theme="dark"` attribute on `<html>`. Flash prevention via inline `<script is:inline>` in `<head>`. Validated localStorage read (allowlist for 'dark'/'light').
 - **Terrain always dark:** Three.js hero renders in dark mode regardless of site theme. Canyon wireframe on near-black background for maximum visual impact. No theme transition code — simple and clean.
 - **Terrain isolation:** Three.js only loads on the home page via dynamic import in `TerrainHero.astro`.
-- **Canyon palette:** Primary `#8B4D3B`, Secondary `#C4724D`, Accent `#E8C496`, Cool `#5A7D6B`, Neutral `#5C4D45`.
+- **Palette (editorial canyon):** Primary `#2A2520` (charcoal — body, headings, primary buttons), Secondary `#D86B3A` (warm orange — hover states, gradients), Accent `#F2C685` (sand — pill backgrounds), Cool `#8B2D3D` (wine — links, nav active, inline emphasis; despite the "cool" token name it's a warm interactive accent), Canyon `#A04428` (decorative — section dividers, gradient fallbacks, terrain), Neutral `#2A2520` (same as primary). Light bg `#FBF6EE`, dark bg `#1d1411`. Headings stay `text-primary` (charcoal weight does the work); inline emphasis like company/school/tagline uses `text-cool` for visual distinction since primary == neutral. Terrain hero keeps its own canyon-warm palette (see `src/lib/terrain/config.ts`). Avoid teal — collides with CPAL brand.
+- **Skills source of truth:** `src/data/resume.ts` — `<SkillsGrid />` (About page) and the Resume page both render from this single export.
 - **Project screenshots:** `npm run screenshots` uses Playwright to capture 1280x720 @2x screenshots. Cards show screenshot when available, gradient fallback otherwise.
 - **ScrollReveal:** IntersectionObserver-based fade-in-up animations, respects `prefers-reduced-motion`.
 
 ## Pages
 
 - **Home** — Terrain hero, intro paragraph, 3 featured project cards
-- **About** — Bio, "What I've Built" card, skills grid, contact CTA
-- **Projects** — All projects grouped by category (civic, personal, open-source) with wide screenshot cards
+- **About** — Bio, "What I've Built" card, skills grid, optional Selected Media section (renders only if `selectedMedia` in `resume.ts` is populated), contact CTA
+- **Projects** — All projects grouped by category with wide screenshot cards. Each card title links to `/projects/[slug]/`; "Visit" external link is separate.
+- **Project detail (`/projects/[slug]/`)** — Dynamic route. `pages/projects/[slug].astro` resolves the slug to either a custom case-study component (Eviction Pipeline / Homestead Map / DigiLab) or the generic `ProjectDetail` view. Case studies use the shared `CaseStudyLayout` component which provides hero + screenshot + metrics + Problem/Approach/Outcome/Reflection slot sections + tech stack.
 - **Resume** — Experience (primary + collapsible earlier roles), education, skills, selected projects, PDF download
+- **Work with me** — Hero, three engagement-type cards, How I work, contact CTA
 
 ## Commands
 
@@ -69,6 +72,8 @@ CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions
 
 - [ ] Add `public/favicon.ico`
 - [ ] Add `public/images/og-image.png` (social sharing preview)
-- [ ] Add `public/files/Michael_Lopez_Resume.pdf`
+- [ ] Add `public/files/Michael_Lopez_Resume.pdf` and flip `hasResumePdf` to `true` in `ResumePage.astro` to surface the download button
 - [ ] Replace About page headshot gradient placeholder with real photo
+- [ ] Populate `selectedMedia` in `src/data/resume.ts` to surface the "Selected Media & Visualizations" section on About
 - [ ] Deploy to Vercel and configure DNS
+- [ ] Astro 6 upgrade deferred — `@tailwindcss/vite` (4.2.4) is incompatible with Astro 6's Rolldown-based Vite (`Missing field 'tsconfigPaths' on BindingViteResolvePluginConfig.resolveOptions`). The blocked advisory (GHSA-j687-52p2-xcff) is `define:vars` XSS which this codebase does not use, so practical exposure is zero. Retry the upgrade when `@tailwindcss/vite` ships an Astro-6-compatible release.

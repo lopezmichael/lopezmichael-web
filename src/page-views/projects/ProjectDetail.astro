@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ScrollReveal from '../../components/ScrollReveal.astro';
+import type { Project } from '../../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const isExternal = project.href.startsWith('http');
+---
+
+<BaseLayout title={project.title} description={project.description}>
+  <div class="border-t-4 border-canyon">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+
+      <ScrollReveal>
+        <a href="/projects/" class="inline-flex items-center gap-1 text-sm text-cool dark:text-secondary hover:text-secondary mb-8 no-underline">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          All projects
+        </a>
+      </ScrollReveal>
+
+      <!-- Hero -->
+      <ScrollReveal>
+        <h1 class="text-3xl font-bold mb-3">{project.title}</h1>
+        <p class="text-base leading-relaxed opacity-80 mb-5">{project.description}</p>
+        <div class="flex flex-wrap gap-2 mb-6">
+          {project.tags.map((tag) => (
+            <span class="text-xs px-2.5 py-1 rounded-full bg-accent/20 text-primary dark:bg-accent/15 dark:text-accent font-medium">
+              {tag}
+            </span>
+          ))}
+        </div>
+        {isExternal && (
+          <a
+            href={project.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary dark:bg-secondary text-white rounded-lg hover:bg-secondary dark:hover:bg-canyon transition-colors no-underline text-sm font-medium"
+          >
+            Visit live
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
+            </svg>
+          </a>
+        )}
+      </ScrollReveal>
+
+      <!-- Screenshot -->
+      {project.image && (
+        <ScrollReveal>
+          <div class="my-10 rounded-xl overflow-hidden shadow-md">
+            <img src={project.image} alt={`Screenshot of ${project.title}`} width="1280" height="720" class="w-full h-auto" loading="lazy" />
+          </div>
+        </ScrollReveal>
+      )}
+
+      <!-- About -->
+      <ScrollReveal>
+        <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-4 flex items-center gap-2">
+          <span class="w-8 h-0.5 bg-canyon"></span>
+          About
+        </h2>
+        <p class="text-base leading-relaxed mb-8">{project.longDescription}</p>
+      </ScrollReveal>
+
+      <!-- Highlights -->
+      {project.highlights && project.highlights.length > 0 && (
+        <ScrollReveal>
+          <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-4 flex items-center gap-2">
+            <span class="w-8 h-0.5 bg-canyon"></span>
+            Highlights
+          </h2>
+          <ul class="space-y-2 mb-8">
+            {project.highlights.map((h) => (
+              <li class="flex items-start gap-2 text-base leading-relaxed">
+                <span class="text-cool dark:text-accent font-bold shrink-0 mt-0.5">&gt;</span>
+                {h}
+              </li>
+            ))}
+          </ul>
+        </ScrollReveal>
+      )}
+
+    </div>
+  </div>
+</BaseLayout>

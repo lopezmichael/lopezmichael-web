@@ -2,11 +2,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SkillsGrid from '../components/SkillsGrid.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
+import { selectedMedia } from '../data/resume';
+
+const press = selectedMedia.filter((m) => m.type === 'press');
+const viz = selectedMedia.filter((m) => m.type === 'visualization');
 ---
 
 <BaseLayout
   title="About"
-  description="Michael Lopez — Director of Data at Child Poverty Action Lab. Building data infrastructure that turns administrative data into community action."
+  description="Michael Lopez, Director of Data Operations at Child Poverty Action Lab. Building data infrastructure that turns administrative data into community action."
 >
   <!-- Page header with accent -->
   <div class="border-t-4 border-cool">
@@ -22,59 +26,108 @@ import ScrollReveal from '../components/ScrollReveal.astro';
       <ScrollReveal>
         <div class="space-y-4 text-base leading-relaxed">
           <p>
-            I build data systems that help communities. As Director of Data at Child Poverty Action Lab,
-            I've spent nearly six years designing infrastructure that turns administrative data into
-            action—from eviction records that connect families to legal aid, to tools that help
-            organizations identify residents eligible for housing assistance.
+            I came to civic-tech the way a lot of people do: supposed to be doing something else. As an
+            undergrad I was on a path toward a research PhD, and in my first job, coordinating a developmental
+            neurolinguistics lab at UT Dallas, I sat with the parents of our young participants and explained
+            what we were finding. The gap between how researchers talk to each other and how findings actually
+            reach the people who can do something with them turned out to be the thread of my career.
           </p>
           <p>
-            My background in psychology, anthropology, and public policy shaped how I approach this work.
-            I'm most effective at the intersection of technical and programmatic—translating between
-            technical teams and community stakeholders, ensuring analytical rigor while keeping the
-            focus on real-world impact.
+            I followed it through a policy internship at <a href="https://childrenatrisk.org" target="_blank" rel="noopener noreferrer">Children at Risk</a>,
+            an MPP at UT Dallas, and into <a href="https://childpovertyactionlab.org" target="_blank" rel="noopener noreferrer">Child Poverty Action Lab</a> in 2020.
+            CPAL is a backbone organization for nonprofits across North Texas. We focus on the things that
+            move the needle on child poverty in Dallas: public safety, maternal health, benefits delivery,
+            housing, and criminal justice. As Director, Data Operations, I lead the data engineering team, the
+            modern data platform (Databricks migration, AI-enabled workflows), and the internal tools that
+            put data into the hands of non-technical staff and partner orgs.
+          </p>
+          <p>
+            Two convictions sit underneath the work. First: <strong>public data is only useful when the
+            people closest to a problem can act on it</strong>, and most of the data that could help families
+            is still locked up in formats and systems that field-team workers, community organizations, and
+            decision-makers can't reach. Second: <strong>nonprofits deserve the same data infrastructure as
+            the institutions and markets they're often working against.</strong> Most of what I do, at CPAL
+            and outside of it, is in service of those two ideas.
           </p>
         </div>
       </ScrollReveal>
 
-      <!-- What I've Built -->
+      <!-- What we've built -->
       <ScrollReveal>
         <div class="mt-12 p-6 rounded-xl bg-surface dark:bg-dark-surface shadow-sm">
-          <h2 class="text-xl font-semibold text-primary mb-4">What I've Built</h2>
+          <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-4">What we've built at CPAL</h2>
           <p class="mb-4 text-sm">
-            At CPAL, I've led the development of data infrastructure that serves real community needs:
+            A snapshot of the data infrastructure powering our work:
           </p>
           <ul class="space-y-2 list-disc list-outside ml-5 text-sm leading-relaxed">
-            <li>Data pipelines processing 40,000+ eviction records annually, used by partners including Dallas Eviction Advocacy Center and Eviction Lab</li>
-            <li>30+ interactive dashboards (R Shiny) informing decisions on housing stability, public safety, and resource allocation</li>
-            <li>Project management systems and operational processes now used org-wide</li>
-            <li>Currently leading migration to Databricks, systematizing 35-40 data pipelines for long-term scale</li>
+            <li>An eviction data pipeline shared daily with 12+ partner organizations across legal aid, advocacy, government, and academic research; the data foundation behind <a href="https://northtexasevictions.org" target="_blank" rel="noopener noreferrer">North Texas Evictions</a></li>
+            <li>A 30+ Shiny app suite informing decisions across CPAL focus areas: housing, public safety, maternal health, benefits delivery, and criminal justice</li>
+            <li>The Databricks platform migration (Unity Catalog, Workflows, Lakebase + Lakehouse on AWS, Git-tracked orchestration), moving 35-40 pipelines onto unified cloud infrastructure</li>
+            <li>AI workflows embedded across the team (Claude Code with custom skills and agents, MCP servers, prompt caching), meaningfully changing how we develop pipelines, write documentation, and review code</li>
+            <li>A data engineering team scaled from 1 in-house analyst to 6 external data engineers + 1 in-house data engineer, executing on the internal data roadmap</li>
+            <li>Internal tools that let non-data staff act on data without analyst intervention, including a parcel-level outreach tool with 20 active field-team users</li>
           </ul>
         </div>
       </ScrollReveal>
 
       <!-- Skills Grid -->
       <ScrollReveal>
-        <h2 class="text-xl font-semibold text-primary mt-12 mb-6">Technical Skills</h2>
+        <h2 class="text-xl font-semibold text-primary dark:text-dark-text mt-12 mb-6">Technical Skills</h2>
         <SkillsGrid />
       </ScrollReveal>
+
+      <!-- Selected Media & Visualizations -->
+      {selectedMedia.length > 0 && (
+        <ScrollReveal>
+          <h2 class="text-xl font-semibold text-primary dark:text-dark-text mt-12 mb-6">Selected Media & Visualizations</h2>
+          {press.length > 0 && (
+            <div class="mb-6">
+              <h3 class="text-xs font-semibold uppercase tracking-wider text-cool dark:text-secondary mb-3">Featured in</h3>
+              <ul class="space-y-2">
+                {press.map((m) => (
+                  <li class="text-sm leading-relaxed">
+                    <a href={m.href} target="_blank" rel="noopener noreferrer" class="font-medium">{m.outlet}</a>
+                    <span class="opacity-75">, {m.title}</span>
+                    <span class="opacity-50 text-xs"> · {m.date}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {viz.length > 0 && (
+            <div>
+              <h3 class="text-xs font-semibold uppercase tracking-wider text-cool dark:text-secondary mb-3">Data visualizations contributed to</h3>
+              <ul class="space-y-2">
+                {viz.map((m) => (
+                  <li class="text-sm leading-relaxed">
+                    <a href={m.href} target="_blank" rel="noopener noreferrer" class="font-medium">{m.outlet}</a>
+                    <span class="opacity-75">, {m.title}</span>
+                    <span class="opacity-50 text-xs"> · {m.date}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </ScrollReveal>
+      )}
 
       <!-- Contact -->
       <ScrollReveal>
         <div class="mt-12 text-center p-8 rounded-xl bg-accent/10 dark:bg-accent/5">
-          <h2 class="text-xl font-semibold text-primary mb-3">Let's Connect</h2>
+          <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-3">Let's Connect</h2>
           <p class="mb-4 text-sm">
             I'm always interested in connecting with others working at the intersection of data,
             technology, and social impact.
           </p>
           <div class="flex items-center justify-center gap-4 text-sm">
-            <a href="mailto:lopezmikeok@gmail.com" class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-white rounded-lg hover:bg-secondary transition-colors no-underline text-sm font-medium">
+            <a href="mailto:michael@lopezstudio.dev" class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary dark:bg-secondary text-white rounded-lg hover:bg-secondary dark:hover:bg-canyon transition-colors no-underline text-sm font-medium">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
               Email
             </a>
-            <a href="https://linkedin.com/in/michael-d-lopez" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 border-2 border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors no-underline text-sm font-medium">
+            <a href="https://linkedin.com/in/michael-d-lopez" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 border-2 border-primary text-primary dark:border-dark-text dark:text-dark-text rounded-lg hover:bg-primary hover:text-white dark:hover:bg-dark-text dark:hover:text-dark-bg transition-colors no-underline text-sm font-medium">
               LinkedIn
             </a>
-            <a href="https://github.com/lopezmichael" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 border-2 border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors no-underline text-sm font-medium">
+            <a href="https://github.com/lopezmichael" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 border-2 border-primary text-primary dark:border-dark-text dark:text-dark-text rounded-lg hover:bg-primary hover:text-white dark:hover:bg-dark-text dark:hover:text-dark-bg transition-colors no-underline text-sm font-medium">
               GitHub
             </a>
           </div>
