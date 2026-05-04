@@ -4,7 +4,8 @@ import ResumeEntry from '../components/ResumeEntry.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
 import { experience, education, skills, selectedProjects } from '../data/resume';
 
-// Split experience: first 4 (CPAL roles) are primary, rest are collapsible
+// First 4 experience entries are the connected CPAL spine.
+// Anything after is collapsed under an "Earlier experience" disclosure.
 const primaryExperience = experience.slice(0, 4);
 const earlierExperience = experience.slice(4);
 
@@ -16,124 +17,217 @@ const hasResumePdf = false;
   title="Resume"
   description="Michael Lopez resume. Data leader with experience in civic tech, housing policy, and nonprofit data infrastructure."
 >
-  <!-- Page header with accent -->
   <div class="border-t-4 border-secondary">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 py-16">
-      <!-- Download button (hidden until PDF lands in public/files/) -->
-      {hasResumePdf && (
-        <ScrollReveal>
-          <div class="text-center mb-8">
-            <a
-              href="/files/Michael_Lopez_Resume.pdf"
-              download
-              class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary dark:bg-secondary text-white rounded-lg font-medium text-sm hover:bg-secondary dark:hover:bg-canyon transition-colors no-underline"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
-              </svg>
-              Download PDF
-            </a>
-          </div>
-        </ScrollReveal>
-      )}
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
 
-      <!-- Header -->
+      <!-- Hero -->
       <ScrollReveal>
-        <div class="text-center mb-8">
-          <h1 class="text-3xl font-bold">Michael Lopez</h1>
-          <p class="text-cool dark:text-secondary font-medium mt-2">
-            Data Strategist | Translating Complex Data into Community Action | Civic Tech & Nonprofit
+        <header class="mb-12 lg:mb-16 max-w-3xl">
+          <h1 class="text-3xl lg:text-4xl font-bold tracking-tight">Michael Lopez</h1>
+          <p class="mt-3 text-cool dark:text-secondary font-medium">
+            Data Strategist · Civic Tech & Nonprofit
           </p>
-        </div>
+          <p class="mt-2 text-sm opacity-80">
+            Translating Complex Data into Community Action
+          </p>
+        </header>
       </ScrollReveal>
 
-      <hr class="border-accent border-t-2 my-8" />
+      <div class="flex flex-col lg:flex-row lg:gap-12 lg:items-start">
 
-      <!-- Experience -->
-      <ScrollReveal>
-        <h2 class="text-xl font-semibold mb-6">Experience</h2>
-      </ScrollReveal>
+        <!-- Sidebar -->
+        <aside class="order-last lg:order-first lg:w-64 lg:shrink-0 mt-16 lg:mt-0">
+          <div class="lg:sticky lg:top-24 space-y-8">
 
-      {primaryExperience.map((entry) => (
-        <ScrollReveal>
-          <ResumeEntry
-            title={entry.title}
-            company={entry.company}
-            dates={entry.dates}
-            summary={entry.summary}
-            bullets={entry.bullets}
-          />
-        </ScrollReveal>
-      ))}
-
-      <!-- Earlier experience (collapsible) -->
-      {earlierExperience.length > 0 && (
-        <details class="group mb-8">
-          <summary class="cursor-pointer select-none list-none flex items-center gap-2 text-sm font-medium text-cool dark:text-secondary hover:text-secondary transition-colors py-3">
-            <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-            Earlier experience ({earlierExperience.length} roles)
-          </summary>
-          <div class="mt-4 pl-6 border-l-2 border-accent/40">
-            {earlierExperience.map((entry) => (
-              <ResumeEntry
-                title={entry.title}
-                company={entry.company}
-                dates={entry.dates}
-                summary={entry.summary}
-                bullets={entry.bullets}
-              />
-            ))}
-          </div>
-        </details>
-      )}
-
-      <hr class="border-accent border-t-2 my-8" />
-
-      <!-- Education -->
-      <ScrollReveal>
-        <h2 class="text-xl font-semibold mb-6">Education</h2>
-        {education.map((edu) => (
-          <div class="mb-4">
-            <h4 class="text-base font-semibold dark:text-dark-text">{edu.degree}</h4>
-            <p class="text-cool dark:text-secondary font-medium text-sm">{edu.school} &middot; {edu.year}</p>
-          </div>
-        ))}
-      </ScrollReveal>
-
-      <hr class="border-accent border-t-2 my-8" />
-
-      <!-- Technical Skills -->
-      <ScrollReveal>
-        <h2 class="text-xl font-semibold mb-4">Technical Skills</h2>
-        <div class="text-sm space-y-1">
-          {skills.map((cat) => (
-            <p>
-              <strong>{cat.label}:</strong>{' '}{cat.items.join(', ')}
+            <!-- Status -->
+            <p class="flex items-center gap-2 text-sm font-medium text-neutral dark:text-dark-text">
+              <span class="relative flex w-2 h-2" aria-hidden="true">
+                <span class="absolute inset-0 rounded-full bg-secondary opacity-60 motion-safe:animate-ping"></span>
+                <span class="relative w-2 h-2 rounded-full bg-secondary"></span>
+              </span>
+              Currently in Dallas
             </p>
-          ))}
-        </div>
-      </ScrollReveal>
 
-      <hr class="border-accent border-t-2 my-8" />
+            <!-- Contact -->
+            <div>
+              <h3 class="text-[11px] uppercase tracking-[0.14em] text-cool dark:text-secondary font-semibold mb-3">
+                Contact
+              </h3>
+              <ul class="space-y-2 text-sm">
+                <li>
+                  <a href="mailto:michael@lopezstudio.dev" class="no-underline hover:text-secondary transition-colors">
+                    michael@lopezstudio.dev
+                  </a>
+                </li>
+                <li>
+                  <a href="https://linkedin.com/in/michael-d-lopez" target="_blank" rel="noopener noreferrer" class="no-underline hover:text-secondary transition-colors">
+                    LinkedIn
+                  </a>
+                </li>
+                <li>
+                  <a href="https://github.com/lopezmichael" target="_blank" rel="noopener noreferrer" class="no-underline hover:text-secondary transition-colors">
+                    GitHub
+                  </a>
+                </li>
+              </ul>
+            </div>
 
-      <!-- Selected Projects -->
-      <ScrollReveal>
-        <h2 class="text-xl font-semibold mb-4">Selected Projects</h2>
-        <ul class="space-y-2 list-disc list-outside ml-5 text-sm">
-          {selectedProjects.map((proj) => (
-            <li>
-              <strong>{proj.name}</strong>:{' '}
-              {proj.href ? (
-                <a href={proj.href} target="_blank" rel="noopener noreferrer">{proj.description}</a>
-              ) : (
-                proj.description
-              )}
-            </li>
-          ))}
-        </ul>
-      </ScrollReveal>
+            {hasResumePdf && (
+              <a
+                href="/files/Michael_Lopez_Resume.pdf"
+                download
+                class="inline-flex items-center gap-2 px-4 py-2 bg-primary dark:bg-secondary text-white rounded-lg font-medium text-sm hover:bg-secondary dark:hover:bg-canyon transition-colors no-underline"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                </svg>
+                Download PDF
+              </a>
+            )}
+
+            <!-- Skills as chip clusters -->
+            <div>
+              <h3 class="text-[11px] uppercase tracking-[0.14em] text-cool dark:text-secondary font-semibold mb-4">
+                Skills
+              </h3>
+              <div class="space-y-4">
+                {skills.map((cat) => (
+                  <div>
+                    <p class="text-xs font-semibold opacity-75 mb-2">{cat.label}</p>
+                    <ul class="flex flex-wrap gap-1.5">
+                      {cat.items.map((item) => (
+                        <li class="text-[11px] leading-tight px-2 py-1 rounded-full ring-1 ring-canyon/40 dark:ring-canyon/50 text-neutral dark:text-dark-text">
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Main column -->
+        <main class="lg:flex-1 lg:min-w-0">
+
+          <!-- Experience -->
+          <section class="mb-16">
+            <ScrollReveal>
+              <h2 class="text-xl font-semibold mb-8 flex items-center gap-3">
+                <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
+                Experience
+              </h2>
+            </ScrollReveal>
+
+            <ScrollReveal>
+              <header class="mb-8">
+                <p class="text-[11px] uppercase tracking-[0.14em] text-canyon font-semibold">2020 to Present</p>
+                <h3 class="text-2xl font-semibold mt-1">Child Poverty Action Lab</h3>
+                <p class="text-sm opacity-75 mt-1.5 max-w-prose">
+                  Four-role progression from analytics associate to director of data operations.
+                </p>
+              </header>
+            </ScrollReveal>
+
+            <ol class="relative border-l-2 border-canyon/40 dark:border-canyon/50 pl-8 space-y-12">
+              {primaryExperience.map((entry, i) => (
+                <ScrollReveal delay={i * 60}>
+                  <li class="relative">
+                    <span
+                      class="absolute -left-[37px] top-2 w-2.5 h-2.5 rounded-full bg-canyon ring-4 ring-light dark:ring-dark-bg"
+                      aria-hidden="true"
+                    ></span>
+                    <p class="text-[11px] uppercase tracking-[0.14em] text-canyon font-semibold">{entry.dates}</p>
+                    <h4 class="text-lg font-semibold mt-1 text-neutral dark:text-dark-text">{entry.title}</h4>
+                    {entry.summary && (
+                      <p class="text-sm italic mt-3 opacity-80 leading-relaxed">{entry.summary}</p>
+                    )}
+                    <ul class="mt-3 space-y-1.5 list-disc list-outside ml-5">
+                      {entry.bullets.map((bullet) => (
+                        <li class="text-sm leading-relaxed">{bullet}</li>
+                      ))}
+                    </ul>
+                  </li>
+                </ScrollReveal>
+              ))}
+            </ol>
+
+            {earlierExperience.length > 0 && (
+              <details class="group mt-12">
+                <summary class="cursor-pointer select-none list-none flex items-center gap-2 text-sm font-medium text-cool dark:text-secondary hover:text-secondary transition-colors py-3">
+                  <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                  Earlier experience ({earlierExperience.length} roles)
+                </summary>
+                <div class="mt-6 pl-6 border-l-2 border-accent/40 dark:border-accent/30">
+                  {earlierExperience.map((entry) => (
+                    <ResumeEntry
+                      title={entry.title}
+                      company={entry.company}
+                      dates={entry.dates}
+                      summary={entry.summary}
+                      bullets={entry.bullets}
+                    />
+                  ))}
+                </div>
+              </details>
+            )}
+          </section>
+
+          <!-- Education -->
+          <section class="mb-16">
+            <ScrollReveal>
+              <h2 class="text-xl font-semibold mb-6 flex items-center gap-3">
+                <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
+                Education
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal>
+              <div class="space-y-5">
+                {education.map((edu) => (
+                  <div>
+                    <p class="text-[11px] uppercase tracking-[0.14em] text-canyon font-semibold">{edu.year}</p>
+                    <h4 class="text-base font-semibold mt-1">{edu.degree}</h4>
+                    <p class="flex items-center gap-2 text-sm text-cool dark:text-secondary mt-1">
+                      <span class="w-1.5 h-1.5 rounded-full bg-canyon shrink-0" aria-hidden="true"></span>
+                      {edu.school}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </ScrollReveal>
+          </section>
+
+          <!-- Selected Projects -->
+          <section>
+            <ScrollReveal>
+              <h2 class="text-xl font-semibold mb-6 flex items-center gap-3">
+                <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
+                Selected Projects
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal>
+              <ul class="space-y-3 text-sm">
+                {selectedProjects.map((proj) => (
+                  <li class="flex gap-3">
+                    <span class="w-1.5 h-1.5 bg-canyon shrink-0 mt-2" aria-hidden="true"></span>
+                    <span class="leading-relaxed">
+                      <strong class="font-semibold">{proj.name}</strong>:{' '}
+                      {proj.href ? (
+                        <a href={proj.href} target="_blank" rel="noopener noreferrer">{proj.description}</a>
+                      ) : (
+                        <span class="opacity-85">{proj.description}</span>
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </ScrollReveal>
+          </section>
+        </main>
+      </div>
     </div>
   </div>
 </BaseLayout>

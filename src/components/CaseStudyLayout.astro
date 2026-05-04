@@ -13,11 +13,12 @@ interface Props {
 const { project, metaDescription, techStack, metrics } = Astro.props;
 const isExternal = project.href.startsWith('http');
 const hasReflection = Astro.slots.has('reflection');
+const hasPullquote = Astro.slots.has('pullquote');
 ---
 
 <BaseLayout title={project.title} description={metaDescription || project.description}>
   <div class="border-t-4 border-canyon">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-12 lg:py-16">
 
       <!-- Back link -->
       <ScrollReveal>
@@ -27,32 +28,62 @@ const hasReflection = Astro.slots.has('reflection');
         </a>
       </ScrollReveal>
 
-      <!-- Hero -->
+      <!-- Hero (with canyon contour SVG behind) -->
       <ScrollReveal>
-        <p class="text-xs uppercase tracking-wider text-cool dark:text-secondary font-semibold mb-3">Case study</p>
-        <h1 class="text-3xl sm:text-4xl font-bold mb-4 leading-tight">{project.title}</h1>
-        <p class="text-base sm:text-lg leading-relaxed opacity-80 max-w-2xl mb-6">{project.description}</p>
-        <div class="flex flex-wrap gap-2 mb-6">
-          {project.tags.map((tag) => (
-            <span class="text-xs px-2.5 py-1 rounded-full bg-accent/20 text-primary dark:bg-accent/15 dark:text-accent font-medium">
-              {tag}
-            </span>
-          ))}
-        </div>
-        {isExternal && (
-          <a
-            href={project.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary dark:bg-secondary text-white rounded-lg hover:bg-secondary dark:hover:bg-canyon transition-colors no-underline text-sm font-medium"
+        <header class="relative pb-2 mb-10">
+          <svg
+            class="absolute inset-0 w-full h-full text-canyon opacity-[0.07] dark:opacity-[0.14] pointer-events-none"
+            viewBox="0 0 800 320"
+            preserveAspectRatio="none"
+            aria-hidden="true"
           >
-            Visit live
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
-            </svg>
-          </a>
-        )}
+            <path d="M0 60 Q120 40 220 55 T420 50 T620 65 T800 55" fill="none" stroke="currentColor" stroke-width="1" />
+            <path d="M0 110 Q140 85 280 100 T540 92 T780 108 L800 105" fill="none" stroke="currentColor" stroke-width="1" />
+            <path d="M0 170 Q100 145 220 162 T440 155 T660 172 T800 162" fill="none" stroke="currentColor" stroke-width="1" />
+            <path d="M0 230 Q150 205 320 220 T620 210 T800 225" fill="none" stroke="currentColor" stroke-width="1" />
+            <path d="M0 290 Q180 270 360 285 T720 275 L800 282" fill="none" stroke="currentColor" stroke-width="1" />
+          </svg>
+          <div class="relative">
+            <p class="text-[11px] uppercase tracking-[0.16em] text-cool dark:text-secondary font-semibold mb-3">Case study</p>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight mb-5">{project.title}</h1>
+            <p class="text-base sm:text-lg leading-relaxed opacity-80 max-w-2xl mb-6">{project.description}</p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              {project.tags.map((tag) => (
+                <span class="text-xs px-2.5 py-1 rounded-full bg-accent/20 text-primary dark:bg-accent/15 dark:text-accent font-medium">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            {isExternal && (
+              <a
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary dark:bg-secondary text-white rounded-lg hover:bg-secondary dark:hover:bg-canyon transition-colors no-underline text-sm font-medium"
+              >
+                Visit live
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
+                </svg>
+              </a>
+            )}
+          </div>
+        </header>
       </ScrollReveal>
+
+      <!-- Metrics (lifted above screenshot, hero-scale) -->
+      {metrics && metrics.length > 0 && (
+        <ScrollReveal>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-8 my-10">
+            {metrics.map((m) => (
+              <div class="border-t-2 border-canyon pt-4">
+                <p class="text-4xl sm:text-5xl font-bold text-primary dark:text-dark-text leading-none tabular-nums">{m.value}</p>
+                <p class="text-[11px] uppercase tracking-[0.14em] opacity-70 mt-3">{m.label}</p>
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
+      )}
 
       <!-- Screenshot -->
       {project.image && (
@@ -63,75 +94,62 @@ const hasReflection = Astro.slots.has('reflection');
         </ScrollReveal>
       )}
 
-      <!-- Metrics -->
-      {metrics && metrics.length > 0 && (
+      <!-- 01 Problem -->
+      <section class="my-16">
         <ScrollReveal>
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 my-10 p-6 rounded-xl bg-accent/10 dark:bg-accent/5">
-            {metrics.map((m) => (
-              <div>
-                <p class="text-2xl sm:text-3xl font-bold text-cool dark:text-secondary">{m.value}</p>
-                <p class="text-xs uppercase tracking-wider opacity-70 mt-1">{m.label}</p>
-              </div>
-            ))}
-          </div>
-        </ScrollReveal>
-      )}
-
-      <!-- Problem -->
-      <section class="my-12">
-        <ScrollReveal>
-          <h2 class="text-2xl font-semibold text-primary dark:text-dark-text mb-4 flex items-center gap-2">
-            <span class="w-8 h-0.5 bg-canyon"></span>
-            Problem
-          </h2>
-        </ScrollReveal>
-        <ScrollReveal>
+          <header class="flex items-baseline gap-4 md:gap-5 mb-6">
+            <span class="text-4xl md:text-5xl lg:text-6xl font-light text-canyon/40 dark:text-canyon/55 leading-none tabular-nums shrink-0">01</span>
+            <h2 class="text-2xl md:text-3xl font-semibold text-primary dark:text-dark-text">Problem</h2>
+          </header>
           <div class="prose-content space-y-4 text-base leading-relaxed">
             <slot name="problem" />
           </div>
         </ScrollReveal>
       </section>
 
-      <!-- Approach -->
-      <section class="my-12">
+      <!-- 02 Approach -->
+      <section class="my-16">
         <ScrollReveal>
-          <h2 class="text-2xl font-semibold text-primary dark:text-dark-text mb-4 flex items-center gap-2">
-            <span class="w-8 h-0.5 bg-canyon"></span>
-            Approach
-          </h2>
-        </ScrollReveal>
-        <ScrollReveal>
+          <header class="flex items-baseline gap-4 md:gap-5 mb-6">
+            <span class="text-4xl md:text-5xl lg:text-6xl font-light text-canyon/40 dark:text-canyon/55 leading-none tabular-nums shrink-0">02</span>
+            <h2 class="text-2xl md:text-3xl font-semibold text-primary dark:text-dark-text">Approach</h2>
+          </header>
           <div class="prose-content space-y-4 text-base leading-relaxed">
             <slot name="approach" />
           </div>
         </ScrollReveal>
       </section>
 
-      <!-- Outcome -->
-      <section class="my-12">
+      <!-- Pullquote (optional, breaks out of prose width) -->
+      {hasPullquote && (
         <ScrollReveal>
-          <h2 class="text-2xl font-semibold text-primary dark:text-dark-text mb-4 flex items-center gap-2">
-            <span class="w-8 h-0.5 bg-canyon"></span>
-            Outcome
-          </h2>
+          <blockquote class="my-16 sm:-mx-4 lg:-mx-12 border-l-4 border-canyon pl-6 sm:pl-8 italic font-light text-xl sm:text-2xl lg:text-[1.65rem] leading-snug text-primary dark:text-dark-text opacity-95">
+            <slot name="pullquote" />
+          </blockquote>
         </ScrollReveal>
+      )}
+
+      <!-- 03 Outcome -->
+      <section class="my-16">
         <ScrollReveal>
+          <header class="flex items-baseline gap-4 md:gap-5 mb-6">
+            <span class="text-4xl md:text-5xl lg:text-6xl font-light text-canyon/40 dark:text-canyon/55 leading-none tabular-nums shrink-0">03</span>
+            <h2 class="text-2xl md:text-3xl font-semibold text-primary dark:text-dark-text">Outcome</h2>
+          </header>
           <div class="prose-content space-y-4 text-base leading-relaxed">
             <slot name="outcome" />
           </div>
         </ScrollReveal>
       </section>
 
-      <!-- Reflection (optional) -->
+      <!-- 04 Reflection (optional) -->
       {hasReflection && (
-        <section class="my-12">
+        <section class="my-16">
           <ScrollReveal>
-            <h2 class="text-2xl font-semibold text-primary dark:text-dark-text mb-4 flex items-center gap-2">
-              <span class="w-8 h-0.5 bg-canyon"></span>
-              Reflection
-            </h2>
-          </ScrollReveal>
-          <ScrollReveal>
+            <header class="flex items-baseline gap-4 md:gap-5 mb-6">
+              <span class="text-4xl md:text-5xl lg:text-6xl font-light text-canyon/40 dark:text-canyon/55 leading-none tabular-nums shrink-0">04</span>
+              <h2 class="text-2xl md:text-3xl font-semibold text-primary dark:text-dark-text">Reflection</h2>
+            </header>
             <div class="prose-content space-y-4 text-base leading-relaxed">
               <slot name="reflection" />
             </div>
@@ -139,16 +157,14 @@ const hasReflection = Astro.slots.has('reflection');
         </section>
       )}
 
-      <!-- Tech stack -->
+      <!-- Tech stack (aside, not numbered) -->
       {techStack && techStack.length > 0 && (
-        <section class="my-12">
+        <section class="my-16">
           <ScrollReveal>
-            <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-4 flex items-center gap-2">
-              <span class="w-8 h-0.5 bg-canyon"></span>
+            <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-4 flex items-center gap-3">
+              <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
               Tech stack
             </h2>
-          </ScrollReveal>
-          <ScrollReveal>
             <div class="flex flex-wrap gap-2">
               {techStack.map((t) => (
                 <span class="text-sm px-3 py-1.5 rounded-full bg-accent/15 dark:bg-accent/10 text-primary dark:text-accent font-medium">{t}</span>
@@ -162,7 +178,7 @@ const hasReflection = Astro.slots.has('reflection');
       <ScrollReveal>
         <div class="mt-16 pt-8 border-t border-accent/30">
           <a href="/projects/" class="inline-flex items-center gap-1 text-sm text-cool dark:text-secondary hover:text-secondary no-underline">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
             All projects
           </a>
         </div>

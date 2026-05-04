@@ -10,15 +10,19 @@ interface Props {
 const { title, company, dates, summary, bullets } = Astro.props;
 ---
 
-<div class="mb-8">
-  <h4 class="text-base font-semibold text-neutral dark:text-dark-text">{title}</h4>
-  <p class="text-cool dark:text-secondary font-medium text-sm mt-0.5">{company} &middot; {dates}</p>
+<article class="mb-8 last:mb-0">
+  <p class="text-[11px] uppercase tracking-[0.14em] text-canyon font-semibold">{dates}</p>
+  <h4 class="text-lg font-semibold mt-1 text-neutral dark:text-dark-text">{title}</h4>
+  <p class="flex items-center gap-2 text-sm text-cool dark:text-secondary font-medium mt-1">
+    <span class="w-1.5 h-1.5 rounded-full bg-canyon shrink-0" aria-hidden="true"></span>
+    {company}
+  </p>
   {summary && (
-    <p class="text-sm italic mt-2 opacity-80">{summary}</p>
+    <p class="text-sm italic mt-3 opacity-80 leading-relaxed">{summary}</p>
   )}
-  <ul class="mt-2 space-y-1.5 list-disc list-outside ml-5">
+  <ul class="mt-3 space-y-1.5 list-disc list-outside ml-5">
     {bullets.map((bullet) => (
       <li class="text-sm leading-relaxed">{bullet}</li>
     ))}
   </ul>
-</div>
+</article>
