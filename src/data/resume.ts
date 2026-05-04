@@ -62,7 +62,7 @@ export const experience: Experience[] = [
     ],
   },
   {
-    title: 'Manager, Data Analytics',
+    title: 'Manager, Data',
     company: 'Child Poverty Action Lab',
     dates: 'May 2022 - May 2023',
     summary:
@@ -76,7 +76,7 @@ export const experience: Experience[] = [
     ],
   },
   {
-    title: 'Associate, Analytics',
+    title: 'Associate, Data',
     company: 'Child Poverty Action Lab',
     dates: 'June 2020 - April 2022',
     summary:

@@ -1,17 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProjectCardCaseStudy from '../components/ProjectCardCaseStudy.astro';
 import ProjectCardWide from '../components/ProjectCardWide.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
-import { projects, caseStudySlugs } from '../data/projects';
+import { projects } from '../data/projects';
 
 const civicProjects = projects.filter((p) => p.category === 'civic');
 const openSourceProjects = projects.filter((p) => p.category === 'open-source');
 const personalProjects = projects.filter((p) => p.category === 'personal');
-
-function cardFor(slug: string) {
-  return caseStudySlugs.has(slug) ? ProjectCardCaseStudy : ProjectCardWide;
-}
 ---
 
 <BaseLayout
@@ -40,14 +35,11 @@ function cardFor(slug: string) {
       </h2>
     </ScrollReveal>
     <div class="space-y-6 mb-16">
-      {civicProjects.map((project, i) => {
-        const Card = cardFor(project.slug);
-        return (
-          <ScrollReveal delay={i * 80}>
-            <Card project={project} />
-          </ScrollReveal>
-        );
-      })}
+      {civicProjects.map((project, i) => (
+        <ScrollReveal delay={i * 80}>
+          <ProjectCardWide project={project} />
+        </ScrollReveal>
+      ))}
     </div>
 
     <!-- Personal Projects -->
@@ -60,14 +52,11 @@ function cardFor(slug: string) {
           </h2>
         </ScrollReveal>
         <div class="space-y-6 mb-16">
-          {personalProjects.map((project, i) => {
-            const Card = cardFor(project.slug);
-            return (
-              <ScrollReveal delay={i * 80}>
-                <Card project={project} />
-              </ScrollReveal>
-            );
-          })}
+          {personalProjects.map((project, i) => (
+            <ScrollReveal delay={i * 80}>
+              <ProjectCardWide project={project} />
+            </ScrollReveal>
+          ))}
         </div>
       </>
     )}
@@ -80,14 +69,11 @@ function cardFor(slug: string) {
       </h2>
     </ScrollReveal>
     <div class="space-y-6">
-      {openSourceProjects.map((project, i) => {
-        const Card = cardFor(project.slug);
-        return (
-          <ScrollReveal delay={i * 80}>
-            <Card project={project} />
-          </ScrollReveal>
-        );
-      })}
+      {openSourceProjects.map((project, i) => (
+        <ScrollReveal delay={i * 80}>
+          <ProjectCardWide project={project} />
+        </ScrollReveal>
+      ))}
     </div>
   </div>
 </BaseLayout>

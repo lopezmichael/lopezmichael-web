@@ -9,6 +9,8 @@ export interface Project {
   category: 'civic' | 'open-source' | 'personal';
   highlights?: string[];
   image?: string;
+  /** Optional card-only image; cards prefer this over `image`, detail pages don't read it. */
+  cardImage?: string;
 }
 
 export const projects: Project[] = [
@@ -23,7 +25,7 @@ export const projects: Project[] = [
     href: '/resume/',
     gradient: 'from-canyon to-secondary',
     category: 'civic',
-    image: '/images/projects/eviction-pipeline.png',
+    cardImage: '/images/projects/eviction-pipeline.png',
     highlights: [
       '40,000+ records processed annually',
       '12+ partner organizations served',
@@ -157,10 +159,6 @@ export const projects: Project[] = [
     ],
   },
 ];
-
-// Slugs that have a full case study at /projects/[slug]/. Used to pick the case-study card
-// variant on the Projects page and the routing component in pages/projects/[slug].astro.
-export const caseStudySlugs = new Set<string>(['eviction-pipeline', 'homestead-map', 'digilab']);
 
 // Featured projects shown on homepage. Slug-based so reordering projects[] doesn't silently change the home page.
 const featuredSlugs = ['eviction-pipeline', 'homestead-map', 'digilab'];

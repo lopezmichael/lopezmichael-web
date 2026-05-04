@@ -24,10 +24,10 @@ const gradientClasses = gradientMap[project.gradient] ?? 'from-canyon to-seconda
 <article class="relative rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 bg-surface dark:bg-dark-surface ring-1 ring-accent/30 dark:ring-dark-bg/40">
   <div class="md:flex">
     <!-- Screenshot or gradient side -->
-    {project.image ? (
+    {(project.cardImage ?? project.image) ? (
       <div class="md:w-96 md:shrink-0 h-44 md:h-auto overflow-hidden">
         <img
-          src={project.image}
+          src={project.cardImage ?? project.image}
           alt={`Screenshot of ${project.title}`}
           width="1280"
           height="720"

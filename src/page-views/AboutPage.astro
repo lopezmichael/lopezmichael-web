@@ -10,7 +10,7 @@ const viz = selectedMedia.filter((m) => m.type === 'visualization');
 
 <BaseLayout
   title="About"
-  description="Michael Lopez, Director of Data Operations at Child Poverty Action Lab. Building data infrastructure that turns administrative data into community action."
+  description="Michael Lopez, Director of Data Operations at the Child Poverty Action Lab. Building data infrastructure that turns administrative data into community action."
 >
   <div class="border-t-4 border-cool">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
@@ -22,7 +22,7 @@ const viz = selectedMedia.filter((m) => m.type === 'visualization');
           <h1 class="text-3xl lg:text-4xl font-bold tracking-tight mb-6">Hi, I'm Michael</h1>
           <div class="space-y-4 text-base leading-relaxed">
             <p>
-              Hi, I'm Michael. I lead data operations at <a href="https://childpovertyactionlab.org" target="_blank" rel="noopener noreferrer">Child Poverty Action Lab</a>,
+              I lead data operations at the <a href="https://childpovertyactionlab.org" target="_blank" rel="noopener noreferrer">Child Poverty Action Lab</a>,
               a backbone organization for nonprofits across North Texas. CPAL focuses on the things that move
               the needle on child poverty in Dallas: public safety, maternal health, benefits delivery,
               housing, and criminal justice. As Director, Data Operations, I run the data engineering team, our
@@ -52,7 +52,9 @@ const viz = selectedMedia.filter((m) => m.type === 'visualization');
         <!-- Headshot + role chip + status (md: right, mobile: top) -->
         <ScrollReveal class="order-1 md:order-2 md:w-60 md:shrink-0">
           <aside class="flex flex-col items-center md:items-start text-center md:text-left">
-            <div class="w-44 h-44 md:w-52 md:h-52 rounded-full bg-gradient-to-br from-primary to-secondary mb-5 ring-4 ring-accent/70 dark:ring-canyon/60"></div>
+            <div class="w-44 h-44 md:w-52 md:h-52 rounded-full bg-canyon mb-5 ring-4 ring-accent/70 dark:ring-canyon/60 flex items-center justify-center" aria-label="Michael Lopez monogram placeholder">
+              <span class="text-light text-6xl md:text-7xl font-extrabold tracking-tight select-none">ML</span>
+            </div>
             <p class="text-sm font-semibold text-primary dark:text-dark-text">Director, Data Operations</p>
             <p class="text-sm text-cool dark:text-secondary mt-0.5 mb-4">Child Poverty Action Lab</p>
             <p class="flex items-center gap-2 text-sm font-medium text-neutral dark:text-dark-text">
