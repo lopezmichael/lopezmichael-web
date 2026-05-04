@@ -178,28 +178,36 @@ export const skills: SkillCategory[] = [
   },
 ];
 
-/**
- * Selected media: news mentions + data visualizations I contributed to publications.
- * Populate this list to surface the section on the About page.
- *
- * Example entries (uncomment and edit):
- *
- *   {
- *     outlet: 'Dallas Morning News',
- *     title: 'How Dallas eviction filings climbed in 2024',
- *     date: 'March 2024',
- *     href: 'https://dallasnews.com/...',
- *     type: 'press',
- *   },
- *   {
- *     outlet: 'The Lab Report',
- *     title: 'Mapping Dallas housing instability',
- *     date: '2025',
- *     href: 'https://thelabreport.org/...',
- *     type: 'visualization',
- *   },
- */
-export const selectedMedia: MediaItem[] = [];
+export const selectedMedia: MediaItem[] = [
+  {
+    outlet: 'The Lab Report',
+    title: 'How Dallas Police Ramped Up Homeless Enforcement',
+    date: 'April 2026',
+    href: 'https://labreportdallas.com/criminal-justice/how-dallas-police-ramped-up-homeless-enforcement/',
+    type: 'visualization',
+  },
+  {
+    outlet: 'The Lab Report',
+    title: 'Where Did the Patrol Cops Go?',
+    date: 'February 2026',
+    href: 'https://labreportdallas.com/criminal-justice/dallas-patrol-officers-staffing-analysis/',
+    type: 'visualization',
+  },
+  {
+    outlet: 'D Magazine',
+    title: "The Lawyer Who Landlords Don't Want to See in Court",
+    date: 'May 2024',
+    href: 'https://www.dmagazine.com/publications/d-magazine/2024/may/the-lawyer-who-landlords-dont-want-to-see-in-court/',
+    type: 'press',
+  },
+  {
+    outlet: 'KERA News',
+    title: "Eviction less likely for Dallas County tenants who get a lawyer, but most don't have one",
+    date: 'January 2024',
+    href: 'https://www.keranews.org/news/2024-01-17/eviction-less-likely-for-dallas-county-tenants-who-get-a-lawyer-but-most-dont-have-one',
+    type: 'press',
+  },
+];
 
 export const selectedProjects: SelectedProject[] = [
   {

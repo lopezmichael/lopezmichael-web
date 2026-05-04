@@ -1,0 +1,262 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Branding preview"
+  description="Internal preview of OG image and favicon candidates."
+>
+  <div class="border-t-4 border-canyon">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+
+      <header class="mb-12">
+        <p class="text-[11px] uppercase tracking-[0.16em] text-cool dark:text-secondary font-semibold mb-3">Internal preview</p>
+        <h1 class="text-3xl lg:text-4xl font-bold tracking-tight mb-3">Branding candidates</h1>
+        <p class="text-base opacity-80 max-w-2xl">
+          Three OG image candidates in the canyon + wireframe direction (OG-1) and three favicon
+          candidates in the geometric data-node direction (FAV-5). Pick a winner from each;
+          chosen versions get exported to PNG/ICO.
+        </p>
+      </header>
+
+      <!-- OG IMAGES -->
+      <section class="mb-20">
+        <h2 class="text-xl font-semibold mb-2 flex items-center gap-3">
+          <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
+          OG image candidates
+        </h2>
+        <p class="text-sm opacity-70 mb-8 max-w-prose">Rendered at native 1200&times;630, scaled to fit. This is what shows in LinkedIn / iMessage / X previews.</p>
+
+        <div class="space-y-12">
+
+          <!-- OG-A: Editorial top-left text + bottom terrain -->
+          <figure>
+            <figcaption class="text-sm font-semibold mb-3 flex items-center gap-3">
+              <span class="text-canyon dark:text-secondary">OG-A</span> · Editorial top-left + bottom canyon terrain
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-canyon text-light text-[10px] uppercase tracking-[0.14em] font-bold">Picked</span>
+            </figcaption>
+            <div class="rounded-xl overflow-hidden ring-1 ring-accent/40 dark:ring-canyon/40 shadow-lg">
+              <svg viewBox="0 0 1200 630" preserveAspectRatio="xMidYMid meet" class="block w-full h-auto" role="img" aria-label="OG-A">
+                <defs>
+                  <linearGradient id="bg-a" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#1d1411" />
+                    <stop offset="100%" stop-color="#2a1814" />
+                  </linearGradient>
+                  <linearGradient id="terrain-fade-a" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#A04428" stop-opacity="0" />
+                    <stop offset="100%" stop-color="#A04428" stop-opacity="0.45" />
+                  </linearGradient>
+                </defs>
+                <rect width="1200" height="630" fill="url(#bg-a)" />
+                <rect y="350" width="1200" height="280" fill="url(#terrain-fade-a)" />
+                <g fill="none" stroke="#A04428" stroke-width="1.4" stroke-linecap="round">
+                  <path d="M0 380 Q150 350 300 365 T600 355 T900 370 T1200 360" opacity="0.95" />
+                  <path d="M0 430 Q180 400 360 415 T720 405 T1080 420 L1200 415" opacity="0.85" />
+                  <path d="M0 480 Q120 450 240 465 T480 460 T720 470 T960 462 T1200 470" opacity="0.7" />
+                  <path d="M0 530 Q150 510 320 522 T640 515 T960 525 T1200 520" opacity="0.55" />
+                  <path d="M0 580 Q180 565 360 575 T720 570 T1080 580 L1200 578" opacity="0.4" />
+                </g>
+                <g font-family="Inter, system-ui, sans-serif" fill="#FBF6EE">
+                  <text x="80" y="180" font-size="84" font-weight="700" letter-spacing="-2">Michael Lopez</text>
+                  <text x="82" y="232" font-size="28" font-weight="500" fill="#F2C685">Data Strategist · Civic Tech &amp; Social Impact</text>
+                  <text x="82" y="288" font-size="20" font-weight="400" opacity="0.7">Translating complex data into community action.</text>
+                </g>
+                <text x="1120" y="595" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600" fill="#FBF6EE" opacity="0.55" text-anchor="end" letter-spacing="2">LOPEZMICHAEL.DEV</text>
+              </svg>
+            </div>
+          </figure>
+
+          <!-- OG-B: Centered with full-width wireframe behind -->
+          <figure>
+            <figcaption class="text-sm font-semibold mb-3">
+              <span class="text-canyon dark:text-secondary">OG-B</span> · Centered, full-width terrain behind
+            </figcaption>
+            <div class="rounded-xl overflow-hidden ring-1 ring-accent/40 dark:ring-canyon/40 shadow-lg">
+              <svg viewBox="0 0 1200 630" preserveAspectRatio="xMidYMid meet" class="block w-full h-auto" role="img" aria-label="OG-B">
+                <defs>
+                  <linearGradient id="bg-b" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#1d1411" />
+                    <stop offset="100%" stop-color="#2a1814" />
+                  </linearGradient>
+                </defs>
+                <rect width="1200" height="630" fill="url(#bg-b)" />
+                <g fill="none" stroke="#A04428" stroke-width="1" stroke-linecap="round">
+                  <path d="M0 90 Q150 70 300 82 T600 75 T900 85 T1200 78" opacity="0.35" />
+                  <path d="M0 140 Q180 120 360 132 T720 125 T1080 138 L1200 132" opacity="0.4" />
+                  <path d="M0 190 Q120 170 240 182 T480 178 T720 188 T960 180 T1200 188" opacity="0.45" />
+                  <path d="M0 240 Q150 222 300 232 T600 226 T900 236 T1200 230" opacity="0.3" />
+                  <path d="M0 420 Q120 405 260 418 T540 412 T820 422 T1200 416" opacity="0.7" />
+                  <path d="M0 470 Q150 452 320 464 T640 458 T960 468 T1200 462" opacity="0.7" />
+                  <path d="M0 520 Q180 506 360 516 T720 510 T1080 520 L1200 518" opacity="0.55" />
+                  <path d="M0 570 Q120 558 280 565 T560 562 T840 568 T1200 565" opacity="0.4" />
+                </g>
+                <g font-family="Inter, system-ui, sans-serif" fill="#FBF6EE" text-anchor="middle">
+                  <text x="600" y="305" font-size="100" font-weight="700" letter-spacing="-3">Michael Lopez</text>
+                  <text x="600" y="365" font-size="28" font-weight="500" fill="#F2C685" letter-spacing="0.4">Data Strategist · Civic Tech &amp; Social Impact</text>
+                </g>
+                <text x="600" y="595" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600" fill="#FBF6EE" opacity="0.55" text-anchor="middle" letter-spacing="3">LOPEZMICHAEL.DEV</text>
+              </svg>
+            </div>
+          </figure>
+
+          <!-- OG-C: Split layout -->
+          <figure>
+            <figcaption class="text-sm font-semibold mb-3">
+              <span class="text-canyon dark:text-secondary">OG-C</span> · Split: text left, dramatic terrain right
+            </figcaption>
+            <div class="rounded-xl overflow-hidden ring-1 ring-accent/40 dark:ring-canyon/40 shadow-lg">
+              <svg viewBox="0 0 1200 630" preserveAspectRatio="xMidYMid meet" class="block w-full h-auto" role="img" aria-label="OG-C">
+                <defs>
+                  <linearGradient id="bg-c" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#1d1411" />
+                    <stop offset="100%" stop-color="#2a1814" />
+                  </linearGradient>
+                  <linearGradient id="fade-right" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#1d1411" stop-opacity="1" />
+                    <stop offset="20%" stop-color="#1d1411" stop-opacity="0" />
+                  </linearGradient>
+                </defs>
+                <rect width="1200" height="630" fill="url(#bg-c)" />
+
+                <!-- Right-half terrain with perspective lines -->
+                <g transform="translate(540, 60)">
+                  <g fill="none" stroke="#A04428" stroke-width="0.8" opacity="0.35">
+                    <line x1="0" y1="60" x2="0" y2="510" />
+                    <line x1="80" y1="60" x2="80" y2="510" />
+                    <line x1="160" y1="60" x2="160" y2="510" />
+                    <line x1="240" y1="60" x2="240" y2="510" />
+                    <line x1="320" y1="60" x2="320" y2="510" />
+                    <line x1="400" y1="60" x2="400" y2="510" />
+                    <line x1="480" y1="60" x2="480" y2="510" />
+                    <line x1="560" y1="60" x2="560" y2="510" />
+                    <line x1="640" y1="60" x2="640" y2="510" />
+                  </g>
+                  <g fill="none" stroke="#A04428" stroke-width="1.1" stroke-linecap="round">
+                    <path d="M0 120 Q80 100 160 112 T320 105 T480 118 T640 110" opacity="0.85" />
+                    <path d="M0 180 Q100 160 200 172 T400 165 T580 180 T640 175" opacity="0.85" />
+                    <path d="M0 240 Q60 220 130 232 T280 226 T440 240 T640 232" opacity="0.8" />
+                    <path d="M0 300 Q120 280 240 292 T480 285 T640 296" opacity="0.75" />
+                    <path d="M0 360 Q90 342 180 352 T360 348 T540 360 T640 355" opacity="0.7" />
+                    <path d="M0 420 Q70 405 140 415 T280 410 T420 422 T560 415 T640 420" opacity="0.6" />
+                    <path d="M0 480 Q120 465 240 475 T480 470 T640 480" opacity="0.5" />
+                  </g>
+                </g>
+                <!-- Subtle fade on left edge of terrain to blend into text side -->
+                <rect x="540" y="0" width="120" height="630" fill="url(#fade-right)" />
+
+                <g font-family="Inter, system-ui, sans-serif" fill="#FBF6EE">
+                  <text x="80" y="270" font-size="72" font-weight="700" letter-spacing="-1.5">Michael Lopez</text>
+                  <text x="80" y="318" font-size="24" font-weight="500" fill="#F2C685">Data Strategist</text>
+                  <text x="80" y="350" font-size="22" font-weight="400" opacity="0.75">Civic Tech &amp; Social Impact</text>
+                  <text x="80" y="455" font-size="16" font-weight="600" opacity="0.55" letter-spacing="2">LOPEZMICHAEL.DEV</text>
+                </g>
+              </svg>
+            </div>
+          </figure>
+
+        </div>
+      </section>
+
+      <!-- FAVICONS -->
+      <section>
+        <h2 class="text-xl font-semibold mb-2 flex items-center gap-3">
+          <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
+          Favicon candidates
+        </h2>
+        <p class="text-sm opacity-70 mb-3 max-w-prose">Each shown at 16, 32, 64, and 180 (apple-touch). The 16px column is the realistic browser-tab test.</p>
+        <p class="text-xs opacity-55 mb-8">Round 1 (FAV-A/B/C, data-node geometry) was rejected. Below: a fresh batch in different directions.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+          <!-- FAV-D: ML monogram -->
+          <figure class="rounded-xl bg-surface dark:bg-dark-surface ring-1 ring-accent/40 dark:ring-canyon/40 p-6 shadow-sm">
+            <figcaption class="text-sm font-semibold mb-4">
+              <span class="text-canyon dark:text-secondary">FAV-D</span> · ML monogram
+            </figcaption>
+            <div class="grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-4">
+              <span class="text-xs uppercase tracking-wider opacity-60">16 px (tab)</span>
+              <span class="favicon-d w-4 h-4"></span>
+              <span class="text-xs uppercase tracking-wider opacity-60">32 px</span>
+              <span class="favicon-d w-8 h-8"></span>
+              <span class="text-xs uppercase tracking-wider opacity-60">64 px</span>
+              <span class="favicon-d w-16 h-16"></span>
+              <span class="text-xs uppercase tracking-wider opacity-60">180 px (apple)</span>
+              <span class="favicon-d inline-block" style="width:180px;height:180px"></span>
+            </div>
+          </figure>
+
+          <!-- FAV-E: Canyon ridge silhouette -->
+          <figure class="rounded-xl bg-surface dark:bg-dark-surface ring-1 ring-accent/40 dark:ring-canyon/40 p-6 shadow-sm">
+            <figcaption class="text-sm font-semibold mb-4">
+              <span class="text-canyon dark:text-secondary">FAV-E</span> · Canyon ridge silhouette
+            </figcaption>
+            <div class="grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-4">
+              <span class="text-xs uppercase tracking-wider opacity-60">16 px (tab)</span>
+              <span class="favicon-e w-4 h-4"></span>
+              <span class="text-xs uppercase tracking-wider opacity-60">32 px</span>
+              <span class="favicon-e w-8 h-8"></span>
+              <span class="text-xs uppercase tracking-wider opacity-60">64 px</span>
+              <span class="favicon-e w-16 h-16"></span>
+              <span class="text-xs uppercase tracking-wider opacity-60">180 px (apple)</span>
+              <span class="favicon-e inline-block" style="width:180px;height:180px"></span>
+            </div>
+          </figure>
+
+          <!-- FAV-F: Topographic contour ring -->
+          <figure class="rounded-xl bg-surface dark:bg-dark-surface ring-1 ring-accent/40 dark:ring-canyon/40 p-6 shadow-sm">
+            <figcaption class="text-sm font-semibold mb-4">
+              <span class="text-canyon dark:text-secondary">FAV-F</span> · Topographic contour
+            </figcaption>
+            <div class="grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-4">
+              <span class="text-xs uppercase tracking-wider opacity-60">16 px (tab)</span>
+              <span class="favicon-f w-4 h-4"></span>
+              <span class="text-xs uppercase tracking-wider opacity-60">32 px</span>
+              <span class="favicon-f w-8 h-8"></span>
+              <span class="text-xs uppercase tracking-wider opacity-60">64 px</span>
+              <span class="favicon-f w-16 h-16"></span>
+              <span class="text-xs uppercase tracking-wider opacity-60">180 px (apple)</span>
+              <span class="favicon-f inline-block" style="width:180px;height:180px"></span>
+            </div>
+          </figure>
+
+        </div>
+
+        <p class="text-xs opacity-55 mt-8">Once you pick, I'll export the OG to <code>public/images/og-image.png</code> and the favicon to <code>public/favicon.svg</code> + <code>public/favicon.ico</code> + <code>public/apple-touch-icon.png</code>.</p>
+      </section>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .favicon-a, .favicon-b, .favicon-c {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    display: inline-block;
+  }
+  /* FAV-A: 4-spoke data node */
+  .favicon-a {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><g fill='none' stroke='%23A04428' stroke-width='2' stroke-linecap='round'><line x1='16' y1='6' x2='16' y2='13'/><line x1='26' y1='16' x2='19' y2='16'/><line x1='16' y1='19' x2='16' y2='26'/><line x1='6' y1='16' x2='13' y2='16'/></g><circle cx='16' cy='16' r='3.5' fill='%23A04428'/><circle cx='16' cy='4' r='2.2' fill='%23A04428'/><circle cx='28' cy='16' r='2.2' fill='%23A04428'/><circle cx='16' cy='28' r='2.2' fill='%23A04428'/><circle cx='4' cy='16' r='2.2' fill='%23A04428'/></svg>");
+  }
+  /* FAV-B: 6-spoke hex node */
+  .favicon-b {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><g fill='none' stroke='%23A04428' stroke-width='1.8' stroke-linecap='round'><line x1='16' y1='6' x2='16' y2='13'/><line x1='25' y1='10.5' x2='19' y2='14'/><line x1='25' y1='21.5' x2='19' y2='18'/><line x1='16' y1='26' x2='16' y2='19'/><line x1='7' y1='21.5' x2='13' y2='18'/><line x1='7' y1='10.5' x2='13' y2='14'/></g><circle cx='16' cy='16' r='3.2' fill='%23A04428'/><circle cx='16' cy='4' r='2' fill='%23A04428'/><circle cx='27' cy='9.5' r='2' fill='%23A04428'/><circle cx='27' cy='22.5' r='2' fill='%23A04428'/><circle cx='16' cy='28' r='2' fill='%23A04428'/><circle cx='5' cy='22.5' r='2' fill='%23A04428'/><circle cx='5' cy='9.5' r='2' fill='%23A04428'/></svg>");
+  }
+  /* FAV-C: triangle network */
+  .favicon-c {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><polygon points='16,6 27,25 5,25' fill='none' stroke='%23A04428' stroke-width='1.8' stroke-linejoin='round'/><circle cx='16' cy='6' r='3' fill='%23A04428'/><circle cx='27' cy='25' r='3' fill='%23A04428'/><circle cx='5' cy='25' r='3' fill='%23A04428'/></svg>");
+  }
+  /* FAV-D: ML monogram on canyon rounded square */
+  .favicon-d {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23A04428'/><text x='16' y='22' font-family='Inter, system-ui, sans-serif' font-size='15' font-weight='800' fill='%23FBF6EE' text-anchor='middle' letter-spacing='-0.5'>ML</text></svg>");
+  }
+  /* FAV-E: Canyon ridge silhouette */
+  .favicon-e {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231d1411'/><path d='M2 32 L2 22 L9 14 L14 19 L20 9 L25 16 L30 12 L30 32 Z' fill='%23A04428'/><path d='M0 32 L0 27 L6 22 L12 26 L18 21 L24 25 L32 22 L32 32 Z' fill='%23A04428' opacity='0.55'/></svg>");
+  }
+  /* FAV-F: Topographic contour ring */
+  .favicon-f {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231d1411'/><g fill='none' stroke='%23A04428' stroke-width='1.6' stroke-linejoin='round'><path d='M16 4 Q24 5 27 11 Q29 17 26 23 Q22 28 16 28 Q10 28 6 23 Q3 17 5 11 Q8 5 16 4 Z'/><path d='M16 11 Q21 12 22 16 Q22 20 18 21 Q14 21 11 18 Q11 13 16 11 Z'/></g><circle cx='16' cy='16' r='1.6' fill='%23A04428'/></svg>");
+  }
+</style>
