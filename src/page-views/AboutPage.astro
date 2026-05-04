@@ -12,116 +12,163 @@ const viz = selectedMedia.filter((m) => m.type === 'visualization');
   title="About"
   description="Michael Lopez, Director of Data Operations at Child Poverty Action Lab. Building data infrastructure that turns administrative data into community action."
 >
-  <!-- Page header with accent -->
   <div class="border-t-4 border-cool">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 py-16">
-      <!-- Headshot + Bio -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+
+      <!-- 2-col editorial hero -->
+      <div class="flex flex-col md:flex-row md:items-start md:gap-12 lg:gap-16 mb-12 lg:mb-16">
+        <!-- Bio (md: left, mobile: below headshot) -->
+        <ScrollReveal class="order-2 md:order-1 md:flex-1 md:min-w-0 mt-10 md:mt-0">
+          <h1 class="text-3xl lg:text-4xl font-bold tracking-tight mb-6">Hi, I'm Michael</h1>
+          <div class="space-y-4 text-base leading-relaxed">
+            <p>
+              I came to civic-tech the way a lot of people do: supposed to be doing something else. As an
+              undergrad I was on a path toward a research PhD, and in my first job, coordinating a developmental
+              neurolinguistics lab at UT Dallas, I sat with the parents of our young participants and explained
+              what we were finding. The gap between how researchers talk to each other and how findings actually
+              reach the people who can do something with them turned out to be the thread of my career.
+            </p>
+            <p>
+              I followed it through a policy internship at <a href="https://childrenatrisk.org" target="_blank" rel="noopener noreferrer">Children at Risk</a>,
+              an MPP at UT Dallas, and into <a href="https://childpovertyactionlab.org" target="_blank" rel="noopener noreferrer">Child Poverty Action Lab</a> in 2020.
+              CPAL is a backbone organization for nonprofits across North Texas. We focus on the things that
+              move the needle on child poverty in Dallas: public safety, maternal health, benefits delivery,
+              housing, and criminal justice. As Director, Data Operations, I lead the data engineering team, the
+              modern data platform (Databricks migration, AI-enabled workflows), and the internal tools that
+              put data into the hands of non-technical staff and partner orgs.
+            </p>
+            <p>
+              Two convictions sit underneath the work. First: <strong>public data is only useful when the
+              people closest to a problem can act on it</strong>, and most of the data that could help families
+              is still locked up in formats and systems that field-team workers, community organizations, and
+              decision-makers can't reach. Second: <strong>nonprofits deserve the same data infrastructure as
+              the institutions and markets they're often working against.</strong> Most of what I do, at CPAL
+              and outside of it, is in service of those two ideas.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        <!-- Headshot + role chip + status (md: right, mobile: top) -->
+        <ScrollReveal class="order-1 md:order-2 md:w-60 md:shrink-0">
+          <aside class="flex flex-col items-center md:items-start text-center md:text-left">
+            <div class="w-44 h-44 md:w-52 md:h-52 rounded-full bg-gradient-to-br from-primary to-secondary mb-5 ring-4 ring-accent/70 dark:ring-canyon/60"></div>
+            <p class="text-sm font-semibold text-primary dark:text-dark-text">Director, Data Operations</p>
+            <p class="text-sm text-cool dark:text-secondary mt-0.5 mb-4">Child Poverty Action Lab</p>
+            <p class="flex items-center gap-2 text-sm font-medium text-neutral dark:text-dark-text">
+              <span class="relative flex w-2 h-2" aria-hidden="true">
+                <span class="absolute inset-0 rounded-full bg-secondary opacity-60 motion-safe:animate-ping"></span>
+                <span class="relative w-2 h-2 rounded-full bg-secondary"></span>
+              </span>
+              Currently in Dallas
+            </p>
+          </aside>
+        </ScrollReveal>
+      </div>
+
+      <!-- Pullquote (matches case-study treatment) -->
       <ScrollReveal>
-        <div class="text-center mb-12">
-          <div class="w-48 h-48 mx-auto rounded-full bg-gradient-to-br from-primary to-secondary mb-6 border-4 border-accent"></div>
-          <h1 class="text-3xl font-bold mb-4">Hi, I'm Michael</h1>
-        </div>
+        <blockquote class="my-12 lg:my-16 sm:-mx-4 lg:-mx-12 border-l-4 border-canyon pl-6 sm:pl-8 italic font-light text-xl sm:text-2xl lg:text-[1.65rem] leading-snug text-primary dark:text-dark-text opacity-95 max-w-3xl">
+          Public data is only useful when the people closest to a problem can act on it.
+        </blockquote>
       </ScrollReveal>
 
+      <!-- What we've built (tinted card, numbered) -->
       <ScrollReveal>
-        <div class="space-y-4 text-base leading-relaxed">
-          <p>
-            I came to civic-tech the way a lot of people do: supposed to be doing something else. As an
-            undergrad I was on a path toward a research PhD, and in my first job, coordinating a developmental
-            neurolinguistics lab at UT Dallas, I sat with the parents of our young participants and explained
-            what we were finding. The gap between how researchers talk to each other and how findings actually
-            reach the people who can do something with them turned out to be the thread of my career.
-          </p>
-          <p>
-            I followed it through a policy internship at <a href="https://childrenatrisk.org" target="_blank" rel="noopener noreferrer">Children at Risk</a>,
-            an MPP at UT Dallas, and into <a href="https://childpovertyactionlab.org" target="_blank" rel="noopener noreferrer">Child Poverty Action Lab</a> in 2020.
-            CPAL is a backbone organization for nonprofits across North Texas. We focus on the things that
-            move the needle on child poverty in Dallas: public safety, maternal health, benefits delivery,
-            housing, and criminal justice. As Director, Data Operations, I lead the data engineering team, the
-            modern data platform (Databricks migration, AI-enabled workflows), and the internal tools that
-            put data into the hands of non-technical staff and partner orgs.
-          </p>
-          <p>
-            Two convictions sit underneath the work. First: <strong>public data is only useful when the
-            people closest to a problem can act on it</strong>, and most of the data that could help families
-            is still locked up in formats and systems that field-team workers, community organizations, and
-            decision-makers can't reach. Second: <strong>nonprofits deserve the same data infrastructure as
-            the institutions and markets they're often working against.</strong> Most of what I do, at CPAL
-            and outside of it, is in service of those two ideas.
-          </p>
-        </div>
+        <section class="mt-12 lg:mt-16 p-6 sm:p-8 lg:p-10 rounded-xl bg-accent/15 dark:bg-accent/8 ring-1 ring-accent/30 dark:ring-canyon/30">
+          <h2 class="text-xl lg:text-2xl font-semibold text-primary dark:text-dark-text mb-2">What we've built at CPAL</h2>
+          <p class="text-sm opacity-75 mb-6 lg:mb-8 max-w-2xl">A snapshot of the data infrastructure powering our work.</p>
+
+          <ol class="space-y-5 lg:space-y-6">
+            <li class="flex items-baseline gap-4 lg:gap-5">
+              <span class="text-canyon/60 dark:text-canyon font-light tabular-nums leading-none text-2xl lg:text-3xl shrink-0 w-9">01</span>
+              <span class="text-sm lg:text-base leading-relaxed">An eviction data pipeline shared daily with 12+ partner organizations across legal aid, advocacy, government, and academic research; the data foundation behind <a href="https://northtexasevictions.org" target="_blank" rel="noopener noreferrer">North Texas Evictions</a>.</span>
+            </li>
+            <li class="flex items-baseline gap-4 lg:gap-5">
+              <span class="text-canyon/60 dark:text-canyon font-light tabular-nums leading-none text-2xl lg:text-3xl shrink-0 w-9">02</span>
+              <span class="text-sm lg:text-base leading-relaxed">A 30+ Shiny app suite informing decisions across CPAL focus areas: housing, public safety, maternal health, benefits delivery, and criminal justice.</span>
+            </li>
+            <li class="flex items-baseline gap-4 lg:gap-5">
+              <span class="text-canyon/60 dark:text-canyon font-light tabular-nums leading-none text-2xl lg:text-3xl shrink-0 w-9">03</span>
+              <span class="text-sm lg:text-base leading-relaxed">The Databricks platform migration (Unity Catalog, Workflows, Lakebase + Lakehouse on AWS, Git-tracked orchestration), moving 35-40 pipelines onto unified cloud infrastructure.</span>
+            </li>
+            <li class="flex items-baseline gap-4 lg:gap-5">
+              <span class="text-canyon/60 dark:text-canyon font-light tabular-nums leading-none text-2xl lg:text-3xl shrink-0 w-9">04</span>
+              <span class="text-sm lg:text-base leading-relaxed">AI workflows embedded across the team (Claude Code with custom skills and agents, MCP servers, prompt caching), meaningfully changing how we develop pipelines, write documentation, and review code.</span>
+            </li>
+            <li class="flex items-baseline gap-4 lg:gap-5">
+              <span class="text-canyon/60 dark:text-canyon font-light tabular-nums leading-none text-2xl lg:text-3xl shrink-0 w-9">05</span>
+              <span class="text-sm lg:text-base leading-relaxed">A data engineering team scaled from 1 in-house analyst to 6 external data engineers + 1 in-house data engineer, executing on the internal data roadmap.</span>
+            </li>
+            <li class="flex items-baseline gap-4 lg:gap-5">
+              <span class="text-canyon/60 dark:text-canyon font-light tabular-nums leading-none text-2xl lg:text-3xl shrink-0 w-9">06</span>
+              <span class="text-sm lg:text-base leading-relaxed">Internal tools that let non-data staff act on data without analyst intervention, including a parcel-level outreach tool with 20 active field-team users.</span>
+            </li>
+          </ol>
+        </section>
       </ScrollReveal>
 
-      <!-- What we've built -->
+      <!-- Skills (clean grid, no card wrap) -->
       <ScrollReveal>
-        <div class="mt-12 p-6 rounded-xl bg-surface dark:bg-dark-surface shadow-sm">
-          <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-4">What we've built at CPAL</h2>
-          <p class="mb-4 text-sm">
-            A snapshot of the data infrastructure powering our work:
-          </p>
-          <ul class="space-y-2 list-disc list-outside ml-5 text-sm leading-relaxed">
-            <li>An eviction data pipeline shared daily with 12+ partner organizations across legal aid, advocacy, government, and academic research; the data foundation behind <a href="https://northtexasevictions.org" target="_blank" rel="noopener noreferrer">North Texas Evictions</a></li>
-            <li>A 30+ Shiny app suite informing decisions across CPAL focus areas: housing, public safety, maternal health, benefits delivery, and criminal justice</li>
-            <li>The Databricks platform migration (Unity Catalog, Workflows, Lakebase + Lakehouse on AWS, Git-tracked orchestration), moving 35-40 pipelines onto unified cloud infrastructure</li>
-            <li>AI workflows embedded across the team (Claude Code with custom skills and agents, MCP servers, prompt caching), meaningfully changing how we develop pipelines, write documentation, and review code</li>
-            <li>A data engineering team scaled from 1 in-house analyst to 6 external data engineers + 1 in-house data engineer, executing on the internal data roadmap</li>
-            <li>Internal tools that let non-data staff act on data without analyst intervention, including a parcel-level outreach tool with 20 active field-team users</li>
-          </ul>
-        </div>
+        <section class="mt-16 lg:mt-20">
+          <h2 class="text-xl lg:text-2xl font-semibold text-primary dark:text-dark-text mb-8 flex items-center gap-3">
+            <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
+            Technical Skills
+          </h2>
+          <SkillsGrid />
+        </section>
       </ScrollReveal>
 
-      <!-- Skills Grid -->
-      <ScrollReveal>
-        <h2 class="text-xl font-semibold text-primary dark:text-dark-text mt-12 mb-6">Technical Skills</h2>
-        <SkillsGrid />
-      </ScrollReveal>
-
-      <!-- Selected Media & Visualizations -->
+      <!-- Selected Media & Visualizations (inline list, hairline dividers) -->
       {selectedMedia.length > 0 && (
         <ScrollReveal>
-          <h2 class="text-xl font-semibold text-primary dark:text-dark-text mt-12 mb-6">Selected Media & Visualizations</h2>
-          {press.length > 0 && (
-            <div class="mb-6">
-              <h3 class="text-xs font-semibold uppercase tracking-wider text-cool dark:text-secondary mb-3">Featured in</h3>
-              <ul class="space-y-2">
-                {press.map((m) => (
-                  <li class="text-sm leading-relaxed">
-                    <a href={m.href} target="_blank" rel="noopener noreferrer" class="font-medium">{m.outlet}</a>
-                    <span class="opacity-75">, {m.title}</span>
-                    <span class="opacity-50 text-xs"> · {m.date}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {viz.length > 0 && (
-            <div>
-              <h3 class="text-xs font-semibold uppercase tracking-wider text-cool dark:text-secondary mb-3">Data visualizations contributed to</h3>
-              <ul class="space-y-2">
-                {viz.map((m) => (
-                  <li class="text-sm leading-relaxed">
-                    <a href={m.href} target="_blank" rel="noopener noreferrer" class="font-medium">{m.outlet}</a>
-                    <span class="opacity-75">, {m.title}</span>
-                    <span class="opacity-50 text-xs"> · {m.date}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          <section class="mt-16 lg:mt-20">
+            <h2 class="text-xl lg:text-2xl font-semibold text-primary dark:text-dark-text mb-8 flex items-center gap-3">
+              <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
+              Selected Media & Visualizations
+            </h2>
+            {press.length > 0 && (
+              <div class="mb-8">
+                <h3 class="text-[11px] uppercase tracking-[0.14em] font-semibold text-cool dark:text-secondary mb-3">Featured in</h3>
+                <ul class="divide-y divide-accent/40 dark:divide-canyon/30">
+                  {press.map((m) => (
+                    <li class="py-3 text-sm leading-relaxed flex flex-wrap items-baseline gap-x-2">
+                      <a href={m.href} target="_blank" rel="noopener noreferrer" class="font-medium">{m.outlet}</a>
+                      <span class="opacity-75">{m.title}</span>
+                      <span class="opacity-50 text-xs ml-auto">{m.date}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {viz.length > 0 && (
+              <div>
+                <h3 class="text-[11px] uppercase tracking-[0.14em] font-semibold text-cool dark:text-secondary mb-3">Data visualizations contributed to</h3>
+                <ul class="divide-y divide-accent/40 dark:divide-canyon/30">
+                  {viz.map((m) => (
+                    <li class="py-3 text-sm leading-relaxed flex flex-wrap items-baseline gap-x-2">
+                      <a href={m.href} target="_blank" rel="noopener noreferrer" class="font-medium">{m.outlet}</a>
+                      <span class="opacity-75">{m.title}</span>
+                      <span class="opacity-50 text-xs ml-auto">{m.date}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </section>
         </ScrollReveal>
       )}
 
-      <!-- Contact -->
+      <!-- Contact CTA -->
       <ScrollReveal>
-        <div class="mt-12 text-center p-8 rounded-xl bg-accent/10 dark:bg-accent/5">
-          <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-3">Let's Connect</h2>
-          <p class="mb-4 text-sm">
-            I'm always interested in connecting with others working at the intersection of data,
+        <section class="mt-16 lg:mt-20 text-center p-8 lg:p-10 rounded-xl bg-accent/10 dark:bg-accent/5 ring-1 ring-accent/30 dark:ring-canyon/30">
+          <h2 class="text-xl lg:text-2xl font-semibold text-primary dark:text-dark-text mb-3">Let's connect</h2>
+          <p class="mb-5 text-sm max-w-md mx-auto opacity-85">
+            I'm always interested in talking with others working at the intersection of data,
             technology, and social impact.
           </p>
-          <div class="flex items-center justify-center gap-4 text-sm">
+          <div class="flex flex-wrap items-center justify-center gap-3 text-sm">
             <a href="mailto:michael@lopezstudio.dev" class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary dark:bg-secondary text-white rounded-lg hover:bg-secondary dark:hover:bg-canyon transition-colors no-underline text-sm font-medium">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
               Email
             </a>
             <a href="https://linkedin.com/in/michael-d-lopez" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 border-2 border-primary text-primary dark:border-dark-text dark:text-dark-text rounded-lg hover:bg-primary hover:text-white dark:hover:bg-dark-text dark:hover:text-dark-bg transition-colors no-underline text-sm font-medium">
@@ -131,7 +178,7 @@ const viz = selectedMedia.filter((m) => m.type === 'visualization');
               GitHub
             </a>
           </div>
-        </div>
+        </section>
       </ScrollReveal>
     </div>
   </div>

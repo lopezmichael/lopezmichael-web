@@ -16,63 +16,93 @@ const socialLinks = [
 ];
 ---
 
-<footer class="border-t border-accent/20 dark:border-dark-surface">
+<footer class="relative">
   <!-- CTA banner -->
-  <div class="bg-accent/10 dark:bg-accent/5">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
-      <p class="font-medium mb-1">Interested in working together?</p>
-      <a href="mailto:michael@lopezstudio.dev" class="text-sm font-medium">
-        michael@lopezstudio.dev
-      </a>
+  <div class="bg-accent/15 dark:bg-accent/8 border-t border-accent/30 dark:border-canyon/25">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-14">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div class="max-w-xl">
+          <h2 class="text-2xl lg:text-3xl font-semibold text-primary dark:text-dark-text leading-tight">
+            Building something for the people closest to the problem?
+          </h2>
+          <p class="text-sm lg:text-base opacity-80 mt-3">
+            I take on a small number of consulting engagements each year. The fastest way in is a short email.
+          </p>
+        </div>
+        <a
+          href="mailto:michael@lopezstudio.dev"
+          class="shrink-0 inline-flex items-center gap-2 px-5 py-3 bg-primary dark:bg-secondary text-white rounded-lg hover:bg-secondary dark:hover:bg-canyon transition-colors no-underline text-sm font-semibold"
+        >
+          michael@lopezstudio.dev
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7-7 7M21 12H3" />
+          </svg>
+        </a>
+      </div>
     </div>
   </div>
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-      <!-- Brand -->
-      <div>
-        <a href="/" class="text-primary dark:text-dark-text font-heading text-lg font-semibold no-underline">Michael Lopez</a>
-        <p class="text-sm opacity-60 mt-2 leading-relaxed">
-          Data Strategist | Civic Tech & Social Impact
+  <!-- Canyon contour silhouette (echoes the terrain hero) -->
+  <div class="relative h-16 lg:h-20 -mb-px overflow-hidden bg-light dark:bg-dark-bg" aria-hidden="true">
+    <svg
+      class="absolute inset-x-0 bottom-0 w-full h-full text-canyon opacity-[0.15] dark:opacity-[0.22]"
+      viewBox="0 0 1200 80"
+      preserveAspectRatio="none"
+    >
+      <path d="M0 60 Q120 45 240 55 T480 50 T720 60 T960 50 T1200 58 L1200 80 L0 80 Z" fill="currentColor" />
+      <path d="M0 50 Q150 30 300 42 T600 36 T900 46 T1200 40" fill="none" stroke="currentColor" stroke-width="1" stroke-opacity="0.6" />
+      <path d="M0 70 Q180 58 360 65 T720 62 T1080 68 L1200 67" fill="none" stroke="currentColor" stroke-width="1" stroke-opacity="0.6" />
+    </svg>
+  </div>
+
+  <div class="bg-light dark:bg-dark-bg border-t border-accent/20 dark:border-dark-surface">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-8 lg:gap-12">
+        <!-- Brand (wider) -->
+        <div>
+          <a href="/" class="text-primary dark:text-dark-text font-heading text-lg font-semibold no-underline">Michael Lopez</a>
+          <p class="text-sm opacity-70 mt-3 leading-relaxed max-w-sm">
+            Data Strategist working at the intersection of civic tech and social impact.
+          </p>
+          <p class="text-xs opacity-50 mt-3">
+            Director, Data Operations · Child Poverty Action Lab
+          </p>
+        </div>
+
+        <!-- Pages -->
+        <div>
+          <h3 class="text-[11px] font-semibold uppercase tracking-[0.14em] text-cool dark:text-secondary mb-4">Pages</h3>
+          <ul class="space-y-2">
+            {quickLinks.map((link) => (
+              <li>
+                <a href={link.href} class="text-sm opacity-75 hover:opacity-100 transition-opacity no-underline">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Connect -->
+        <div>
+          <h3 class="text-[11px] font-semibold uppercase tracking-[0.14em] text-cool dark:text-secondary mb-4">Connect</h3>
+          <ul class="space-y-2">
+            {socialLinks.map((link) => (
+              <li>
+                <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined} class="text-sm opacity-75 hover:opacity-100 transition-opacity no-underline">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-10 pt-6 border-t border-accent/15 dark:border-dark-surface">
+        <p class="text-xs opacity-50 text-center">
+          &copy; {year} Michael Lopez. Built with Astro and Three.js.
         </p>
-        <p class="text-xs opacity-40 mt-2">
-          Director, Data Operations · Child Poverty Action Lab
-        </p>
       </div>
-
-      <!-- Quick Links -->
-      <div>
-        <h3 class="text-sm font-semibold uppercase tracking-wider text-primary dark:text-dark-text mb-4">Pages</h3>
-        <ul class="space-y-2">
-          {quickLinks.map((link) => (
-            <li>
-              <a href={link.href} class="text-sm opacity-70 hover:opacity-100 transition-opacity no-underline">
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- Connect -->
-      <div>
-        <h3 class="text-sm font-semibold uppercase tracking-wider text-primary dark:text-dark-text mb-4">Connect</h3>
-        <ul class="space-y-2">
-          {socialLinks.map((link) => (
-            <li>
-              <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined} class="text-sm opacity-70 hover:opacity-100 transition-opacity no-underline">
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-
-    <div class="mt-10 pt-6 border-t border-accent/15 dark:border-dark-surface">
-      <p class="text-xs opacity-40 text-center">
-        &copy; {year} Michael Lopez. Built with Astro and Three.js.
-      </p>
     </div>
   </div>
 </footer>

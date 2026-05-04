@@ -2,17 +2,17 @@
 import { skills } from '../data/resume';
 ---
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8">
   {skills.map((cat) => (
     <div>
-      <h3 class="text-sm font-semibold text-cool dark:text-secondary mb-3 pb-2 border-b-2 border-accent">
+      <h3 class="text-[11px] uppercase tracking-[0.14em] font-semibold text-cool dark:text-secondary mb-3 pb-2 border-b border-accent/60 dark:border-canyon/40">
         {cat.label}
       </h3>
       <ul class="space-y-1.5">
         {cat.items.map((item) => (
-          <li class="text-sm flex items-center gap-2">
-            <span class="text-cool dark:text-accent font-bold text-xs">&gt;</span>
-            {item}
+          <li class="text-sm flex items-baseline gap-2.5 leading-relaxed">
+            <span class="w-1.5 h-1.5 bg-canyon shrink-0 mt-1.5" aria-hidden="true"></span>
+            <span>{item}</span>
           </li>
         ))}
       </ul>

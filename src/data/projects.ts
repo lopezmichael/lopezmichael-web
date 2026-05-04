@@ -157,6 +157,10 @@ export const projects: Project[] = [
   },
 ];
 
+// Slugs that have a full case study at /projects/[slug]/. Used to pick the case-study card
+// variant on the Projects page and the routing component in pages/projects/[slug].astro.
+export const caseStudySlugs = new Set<string>(['eviction-pipeline', 'homestead-map', 'digilab']);
+
 // Featured projects shown on homepage. Slug-based so reordering projects[] doesn't silently change the home page.
 const featuredSlugs = ['eviction-pipeline', 'homestead-map', 'digilab'];
 export const featuredProjects = featuredSlugs

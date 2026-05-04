@@ -1,23 +1,27 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCardCaseStudy from '../components/ProjectCardCaseStudy.astro';
 import ProjectCardWide from '../components/ProjectCardWide.astro';
 import ScrollReveal from '../components/ScrollReveal.astro';
-import { projects } from '../data/projects';
+import { projects, caseStudySlugs } from '../data/projects';
 
 const civicProjects = projects.filter((p) => p.category === 'civic');
 const openSourceProjects = projects.filter((p) => p.category === 'open-source');
 const personalProjects = projects.filter((p) => p.category === 'personal');
+
+function cardFor(slug: string) {
+  return caseStudySlugs.has(slug) ? ProjectCardCaseStudy : ProjectCardWide;
+}
 ---
 
 <BaseLayout
   title="Projects"
   description="Selected projects by Michael Lopez. Data pipelines, dashboards, open source tools, and community-driven data products."
 >
-  <!-- Page header with accent -->
   <div class="border-t-4 border-canyon">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
       <ScrollReveal>
-        <h1 class="text-3xl font-bold mb-4">Projects</h1>
+        <h1 class="text-3xl lg:text-4xl font-bold tracking-tight mb-4">Projects</h1>
         <p class="text-base leading-relaxed opacity-80 max-w-2xl">
           A selection of data systems, tools, and products I've built, from production pipelines
           serving community partners to open-source packages and personal projects.
@@ -26,54 +30,64 @@ const personalProjects = projects.filter((p) => p.category === 'personal');
     </div>
   </div>
 
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 pb-20">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+
     <!-- Civic Data & Infrastructure -->
     <ScrollReveal>
-      <h2 class="text-lg font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-2">
-        <span class="w-8 h-0.5 bg-canyon"></span>
+      <h2 class="text-lg font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-3">
+        <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
         Civic Data & Infrastructure
       </h2>
     </ScrollReveal>
-    <div class="space-y-5 mb-16">
-      {civicProjects.map((project, i) => (
-        <ScrollReveal delay={i * 100}>
-          <ProjectCardWide project={project} />
-        </ScrollReveal>
-      ))}
+    <div class="space-y-6 mb-16">
+      {civicProjects.map((project, i) => {
+        const Card = cardFor(project.slug);
+        return (
+          <ScrollReveal delay={i * 80}>
+            <Card project={project} />
+          </ScrollReveal>
+        );
+      })}
     </div>
 
     <!-- Personal Projects -->
     {personalProjects.length > 0 && (
       <>
         <ScrollReveal>
-          <h2 class="text-lg font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-2">
-            <span class="w-8 h-0.5 bg-canyon"></span>
+          <h2 class="text-lg font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-3">
+            <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
             Personal & Community
           </h2>
         </ScrollReveal>
-        <div class="space-y-5 mb-16">
-          {personalProjects.map((project, i) => (
-            <ScrollReveal delay={i * 100}>
-              <ProjectCardWide project={project} />
-            </ScrollReveal>
-          ))}
+        <div class="space-y-6 mb-16">
+          {personalProjects.map((project, i) => {
+            const Card = cardFor(project.slug);
+            return (
+              <ScrollReveal delay={i * 80}>
+                <Card project={project} />
+              </ScrollReveal>
+            );
+          })}
         </div>
       </>
     )}
 
     <!-- Open Source -->
     <ScrollReveal>
-      <h2 class="text-lg font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-2">
-        <span class="w-8 h-0.5 bg-canyon"></span>
+      <h2 class="text-lg font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-3">
+        <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
         Open Source
       </h2>
     </ScrollReveal>
-    <div class="space-y-5">
-      {openSourceProjects.map((project, i) => (
-        <ScrollReveal delay={i * 100}>
-          <ProjectCardWide project={project} />
-        </ScrollReveal>
-      ))}
+    <div class="space-y-6">
+      {openSourceProjects.map((project, i) => {
+        const Card = cardFor(project.slug);
+        return (
+          <ScrollReveal delay={i * 80}>
+            <Card project={project} />
+          </ScrollReveal>
+        );
+      })}
     </div>
   </div>
 </BaseLayout>

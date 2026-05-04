@@ -11,8 +11,6 @@ const engagements = [
       'Defining roles and team structure',
       'Hiring strategy and interview design',
       'Tooling stack selection (BI, GIS, AI, vendors)',
-      'Onboarding documentation and processes',
-      'Mentoring junior analysts and data engineers',
     ],
     goodFit: [
       'You have 0–1 data people and want to scale',
@@ -27,9 +25,7 @@ const engagements = [
     looksLike: [
       'Databricks (or similar) setup and migration',
       'Pipeline architecture and ETL design',
-      'Vendor evaluation and selection',
       'AI workflow integration (Anthropic / Claude Enterprise)',
-      'Data warehouse design',
     ],
     goodFit: [
       "You're outgrowing file-based or fragmented tooling",
@@ -45,8 +41,6 @@ const engagements = [
       'Internal tools for non-technical staff (CRUD, lookup)',
       'R Shiny dashboards and interactive data products',
       'Astro / Preact sites and public data tools',
-      'Mapbox-based geospatial tools',
-      'Public APIs and report generators',
     ],
     goodFit: [
       'You need a custom tool but lack in-house dev capacity',
@@ -81,18 +75,22 @@ const howIWork = [
   description="Selected consulting alongside my full-time role at Child Poverty Action Lab. I help nonprofits set up data teams, migrate to modern infrastructure, and build data-forward tools and sites."
 >
   <div class="border-t-4 border-cool">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
 
       <!-- Hero -->
       <ScrollReveal>
-        <div class="mb-16 max-w-2xl">
-          <h1 class="text-3xl font-bold mb-4">Work with me</h1>
+        <div class="mb-14 lg:mb-16 max-w-2xl">
+          <h1 class="text-3xl lg:text-4xl font-bold tracking-tight mb-4">Work with me</h1>
           <p class="text-base leading-relaxed mb-3">
             I take on a small number of consulting engagements each year alongside my full-time
             role at Child Poverty Action Lab. Low-to-medium scale projects where I can deliver
             real impact.
           </p>
-          <p class="text-sm leading-relaxed opacity-75">
+          <p class="flex items-center gap-2 text-sm font-medium text-neutral dark:text-dark-text">
+            <span class="relative flex w-2 h-2" aria-hidden="true">
+              <span class="absolute inset-0 rounded-full bg-secondary opacity-60 motion-safe:animate-ping"></span>
+              <span class="relative w-2 h-2 rounded-full bg-secondary"></span>
+            </span>
             Currently available. Let's see if we're a fit.
           </p>
         </div>
@@ -100,55 +98,68 @@ const howIWork = [
 
       <!-- Engagement types -->
       <ScrollReveal>
-        <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-2">
-          <span class="w-8 h-0.5 bg-canyon"></span>
+        <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-3">
+          <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
           What I help with
         </h2>
       </ScrollReveal>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-16">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-20">
         {engagements.map((e, i) => (
           <ScrollReveal delay={i * 100}>
-            <div class="rounded-xl bg-surface dark:bg-dark-surface shadow-sm p-6 h-full flex flex-col">
-              <svg class="w-8 h-8 text-cool dark:text-secondary mb-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                {e.icon === 'users' && (
-                  <>
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                    <circle cx="9" cy="7" r="4"/>
-                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                  </>
-                )}
-                {e.icon === 'database' && (
-                  <>
-                    <ellipse cx="12" cy="5" rx="9" ry="3"/>
-                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
-                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
-                  </>
-                )}
-                {e.icon === 'code' && (
-                  <>
-                    <polyline points="16 18 22 12 16 6"/>
-                    <polyline points="8 6 2 12 8 18"/>
-                  </>
-                )}
-              </svg>
+            <div class="rounded-xl bg-surface dark:bg-dark-surface shadow-sm ring-1 ring-accent/30 dark:ring-canyon/25 p-6 h-full flex flex-col">
+              <div class="flex items-start justify-between mb-5">
+                <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-canyon/15 dark:bg-canyon/25" aria-hidden="true">
+                  <svg class="w-7 h-7 text-canyon dark:text-secondary" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    {e.icon === 'users' && (
+                      <>
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                      </>
+                    )}
+                    {e.icon === 'database' && (
+                      <>
+                        <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                      </>
+                    )}
+                    {e.icon === 'code' && (
+                      <>
+                        <polyline points="16 18 22 12 16 6"/>
+                        <polyline points="8 6 2 12 8 18"/>
+                      </>
+                    )}
+                  </svg>
+                </div>
+                <span class="text-canyon/60 dark:text-canyon font-light text-3xl tabular-nums leading-none mt-1" aria-hidden="true">
+                  0{i + 1}
+                </span>
+              </div>
               <h3 class="text-lg font-semibold mb-2 dark:text-dark-text">{e.title}</h3>
               <p class="text-sm leading-relaxed opacity-80 mb-5">{e.lead}</p>
               <div class="text-xs space-y-4 mt-auto">
                 <div>
-                  <p class="font-semibold uppercase tracking-wider text-cool dark:text-secondary mb-1.5">What this looks like</p>
-                  <ul class="space-y-1 opacity-80">
+                  <p class="font-semibold uppercase tracking-[0.14em] text-cool dark:text-secondary mb-2">What this looks like</p>
+                  <ul class="space-y-1.5">
                     {e.looksLike.map((item) => (
-                      <li class="flex gap-1.5"><span class="text-cool dark:text-accent shrink-0">•</span>{item}</li>
+                      <li class="flex items-baseline gap-2">
+                        <span class="w-1.5 h-1.5 bg-canyon shrink-0 mt-1" aria-hidden="true"></span>
+                        <span class="opacity-85">{item}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
                 <div>
-                  <p class="font-semibold uppercase tracking-wider text-cool dark:text-secondary mb-1.5">Good fit if</p>
-                  <ul class="space-y-1 opacity-80">
+                  <p class="font-semibold uppercase tracking-[0.14em] text-cool dark:text-secondary mb-2">Good fit if</p>
+                  <ul class="space-y-1.5">
                     {e.goodFit.map((item) => (
-                      <li class="flex gap-1.5"><span class="text-cool dark:text-accent shrink-0">•</span>{item}</li>
+                      <li class="flex items-baseline gap-2">
+                        <span class="w-1.5 h-1.5 bg-canyon shrink-0 mt-1" aria-hidden="true"></span>
+                        <span class="opacity-85">{item}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -158,20 +169,20 @@ const howIWork = [
         ))}
       </div>
 
-      <!-- How I work -->
+      <!-- How I work (visually heavier than engagement cards — this is the differentiator) -->
       <ScrollReveal>
-        <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-2">
-          <span class="w-8 h-0.5 bg-canyon"></span>
+        <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-3">
+          <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
           How I work
         </h2>
       </ScrollReveal>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-16">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-20">
         {howIWork.map((item, i) => (
           <ScrollReveal delay={i * 80}>
-            <div class="rounded-xl border border-accent/40 dark:border-dark-surface p-5 h-full">
-              <h3 class="text-sm font-semibold text-cool dark:text-secondary uppercase tracking-wider mb-2">{item.title}</h3>
-              <p class="text-sm leading-relaxed opacity-85">{item.body}</p>
+            <div class="rounded-xl bg-surface dark:bg-dark-surface ring-1 ring-accent/40 dark:ring-canyon/30 border-t-2 border-canyon p-7 lg:p-8 h-full">
+              <h3 class="text-xl lg:text-2xl font-semibold text-primary dark:text-dark-text mb-3 leading-tight">{item.title}</h3>
+              <p class="text-sm lg:text-base leading-relaxed opacity-85">{item.body}</p>
             </div>
           </ScrollReveal>
         ))}
@@ -179,16 +190,16 @@ const howIWork = [
 
       <!-- Contact CTA -->
       <ScrollReveal>
-        <div class="rounded-xl bg-accent/10 dark:bg-accent/5 p-8 sm:p-10 text-center">
-          <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-3">Have a project in mind?</h2>
-          <p class="text-sm leading-relaxed max-w-xl mx-auto mb-6 opacity-80">
+        <section class="rounded-xl bg-accent/10 dark:bg-accent/5 ring-1 ring-accent/30 dark:ring-canyon/30 p-8 sm:p-10 text-center">
+          <h2 class="text-xl lg:text-2xl font-semibold text-primary dark:text-dark-text mb-3">Have a project in mind?</h2>
+          <p class="text-sm leading-relaxed max-w-xl mx-auto mb-6 opacity-85">
             The fastest way to start is to email me with a brief description of the project,
             your timeline, and your budget range (if you have one). I usually respond within
             a couple of days.
           </p>
           <div class="flex flex-wrap items-center justify-center gap-3 mb-5">
             <a href="mailto:michael@lopezstudio.dev?subject=Project%20inquiry" class="inline-flex items-center gap-1.5 px-5 py-2.5 bg-primary dark:bg-secondary text-white rounded-lg hover:bg-secondary dark:hover:bg-canyon transition-colors no-underline text-sm font-medium">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
               michael@lopezstudio.dev
             </a>
             <a href="https://linkedin.com/in/michael-d-lopez" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-5 py-2.5 border-2 border-primary text-primary dark:border-dark-text dark:text-dark-text rounded-lg hover:bg-primary hover:text-white dark:hover:bg-dark-text dark:hover:text-dark-bg transition-colors no-underline text-sm font-medium">
@@ -198,7 +209,7 @@ const howIWork = [
           <p class="text-xs opacity-60 max-w-xl mx-auto">
             Recruiters: I'm also open to conversations about full-time data leadership roles. Same email works.
           </p>
-        </div>
+        </section>
       </ScrollReveal>
 
     </div>

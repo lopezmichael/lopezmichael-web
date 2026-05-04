@@ -9,9 +9,6 @@ const { project } = Astro.props;
 const detailHref = `/projects/${project.slug}/`;
 const isExternal = project.href.startsWith('http');
 
-const caseStudySlugs = new Set(['eviction-pipeline', 'homestead-map', 'digilab']);
-const hasCaseStudy = caseStudySlugs.has(project.slug);
-
 const gradientMap: Record<string, string> = {
   'from-canyon to-secondary': 'from-canyon to-secondary',
   'from-cool to-canyon': 'from-cool to-canyon',
@@ -24,11 +21,11 @@ const gradientMap: Record<string, string> = {
 const gradientClasses = gradientMap[project.gradient] ?? 'from-canyon to-secondary';
 ---
 
-<article class="relative rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-surface dark:bg-dark-surface">
+<article class="relative rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 bg-surface dark:bg-dark-surface ring-1 ring-accent/30 dark:ring-dark-bg/40">
   <div class="md:flex">
     <!-- Screenshot or gradient side -->
     {project.image ? (
-      <div class="md:w-72 md:shrink-0 h-44 md:h-auto overflow-hidden">
+      <div class="md:w-96 md:shrink-0 h-44 md:h-auto overflow-hidden">
         <img
           src={project.image}
           alt={`Screenshot of ${project.title}`}
@@ -39,7 +36,7 @@ const gradientClasses = gradientMap[project.gradient] ?? 'from-canyon to-seconda
         />
       </div>
     ) : (
-      <div class={`md:w-56 md:shrink-0 h-32 md:h-auto bg-gradient-to-br ${gradientClasses}`}></div>
+      <div class={`md:w-72 md:shrink-0 h-32 md:h-auto bg-gradient-to-br ${gradientClasses}`}></div>
     )}
 
     <!-- Content -->
@@ -61,7 +58,7 @@ const gradientClasses = gradientMap[project.gradient] ?? 'from-canyon to-seconda
             class="relative z-10 shrink-0 inline-flex items-center gap-1 text-xs font-medium text-cool dark:text-secondary hover:text-secondary no-underline mt-1"
           >
             Visit
-            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
             </svg>
           </a>
@@ -76,7 +73,7 @@ const gradientClasses = gradientMap[project.gradient] ?? 'from-canyon to-seconda
         <ul class="text-xs space-y-1 mb-3 opacity-80 dark:text-dark-text">
           {project.highlights.map((h) => (
             <li class="flex items-center gap-1.5">
-              <span class="text-cool dark:text-accent font-bold">&gt;</span>
+              <span class="text-cool dark:text-accent font-bold" aria-hidden="true">&gt;</span>
               {h}
             </li>
           ))}
@@ -92,7 +89,7 @@ const gradientClasses = gradientMap[project.gradient] ?? 'from-canyon to-seconda
           ))}
         </div>
         <span class="text-xs font-medium text-cool dark:text-secondary whitespace-nowrap">
-          {hasCaseStudy ? 'Read case study' : 'Project details'} →
+          Project details →
         </span>
       </div>
     </div>
