@@ -21,7 +21,7 @@ const targets = [
   { slug: 'blockwalking', url: 'https://blockwalking.tools.cpal.org' },
   { slug: 'rodriguez-wellbeing', url: 'https://www.rodriguezwellbeing.com' },
   { slug: 'digilab', url: 'https://digilab.cards' },
-  { slug: 'digilab-shiny', url: 'https://github.com/lopezmichael/digimon-tcg-standings' },
+  { slug: 'digilab-shiny', url: 'https://github.com/lopezmichael/digilab-app' },
   { slug: 'atomtemplates', url: 'https://github.com/lopezmichael/atomtemplates' },
 ];
 
@@ -39,9 +39,21 @@ for (const { slug, url } of targets) {
 
   try {
     console.log(`Capturing ${slug} — ${url}`);
-    await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
-    // Extra wait for JS-rendered content (Shiny apps, SPAs)
-    await page.waitForTimeout(2000);
+    // Shiny apps keep WebSockets open and never reach networkidle, so we wait on `load`
+    // and let JS-rendered content settle with a fixed delay.
+    await page.goto(url, { waitUntil: 'load', timeout: 30000 });
+    await page.waitForTimeout(3500);
+
+    // NTE shows a welcome modal on first load; dismiss it before capturing.
+    if (slug === 'north-texas-evictions') {
+      try {
+        await page.getByRole('button', { name: /dismiss/i }).click({ timeout: 4000 });
+        await page.waitForTimeout(1500);
+      } catch {
+        // modal may not appear on every load — proceed regardless
+      }
+    }
+
     await page.screenshot({ path: outPath, type: 'png' });
     console.log(`  -> saved ${outPath}`);
   } catch (err) {
