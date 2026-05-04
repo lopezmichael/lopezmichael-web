@@ -23,6 +23,7 @@ export const projects: Project[] = [
     href: '/resume/',
     gradient: 'from-canyon to-secondary',
     category: 'civic',
+    image: '/images/projects/eviction-pipeline.png',
     highlights: [
       '40,000+ records processed annually',
       '12+ partner organizations served',

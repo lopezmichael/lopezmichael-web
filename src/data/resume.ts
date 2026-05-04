@@ -154,23 +154,19 @@ export const skills: SkillCategory[] = [
   },
   {
     label: 'Data Platform',
-    items: ['Databricks (Unity Catalog, Workflows, Lakebase + Lakehouse)', 'PostgreSQL / Neon', 'PostGIS', 'CKAN'],
+    items: ['Databricks (Lakehouse + Unity Catalog)', 'PostgreSQL / Neon', 'PostGIS', 'CKAN'],
   },
   {
     label: 'Orchestration & Infra',
-    items: ['GitHub Actions', 'Prefect', 'Docker', 'AWS', 'Vercel'],
+    items: ['GitHub Actions', 'Prefect', 'Docker', 'AWS', 'Vercel', 'Sentry', 'Structured logging'],
   },
   {
     label: 'AI Workflows',
-    items: ['Claude Code (custom skills & agents)', 'MCP servers', 'Anthropic API (prompt caching)', 'Claude Enterprise rollout'],
+    items: ['Claude Code (custom skills & agents)', 'MCP servers', 'Anthropic API'],
   },
   {
     label: 'Visualization & Geospatial',
     items: ['R Shiny', 'Tableau', 'Highcharts', 'Mapbox GL', 'QGIS', 'ArcGIS'],
-  },
-  {
-    label: 'Observability',
-    items: ['Sentry', 'Structured logging'],
   },
   {
     label: 'Domains',
