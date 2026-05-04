@@ -9,11 +9,13 @@ Built with [Astro](https://astro.build), [Tailwind CSS](https://tailwindcss.com)
 - **Three.js terrain hero** — GPU-driven wireframe landscape with simplex noise shaders and bloom post-processing. Randomized on every page load with mouse-reactive camera.
 - **Dark/light mode** — system preference detection, localStorage persistence, flash prevention. Terrain hero stays dark for visual impact; rest of site follows the toggle.
 - **Auto-generated project screenshots** — Playwright captures live screenshots of each project URL for use in project cards.
+- **Case study layout** — shared `CaseStudyLayout` with numbered Problem/Approach/Outcome/Reflection sections, lifted metrics, optional pullquote slot.
 - **Scroll-reveal animations** — IntersectionObserver fade-in-up effects that respect `prefers-reduced-motion`.
 - **Responsive** — mobile hamburger nav, adaptive layouts, touch-friendly.
 - **Accessible** — skip-to-content link, ARIA attributes, semantic HTML, reduced-motion support.
 - **SEO** — JSON-LD structured data, Open Graph/Twitter meta tags, canonical URLs, sitemap generation.
 - **Security headers** — CSP, HSTS, X-Frame-Options, and more via Vercel config.
+- **Privacy-friendly analytics** — Vercel Web Analytics, same-origin script, no cookies, no consent banner.
 
 ## Getting Started
 
@@ -68,19 +70,25 @@ scripts/
 | 3D | Three.js with custom GLSL shaders |
 | Post-processing | UnrealBloomPass (EffectComposer) |
 | Screenshots | Playwright + Chromium |
+| Analytics | Vercel Web Analytics |
 | Hosting | Vercel |
 
 ## Color Palette
 
-The site uses a canyon-inspired earthy palette:
+Editorial canyon palette (F2):
 
 | Token | Hex | Usage |
 |-------|-----|-------|
-| Primary | `#8B4D3B` | Brown — headings, links, accents |
-| Secondary | `#C4724D` | Orange-brown — hover states, highlights |
-| Accent | `#E8C496` | Tan — borders, tags, subtle backgrounds |
-| Cool | `#5A7D6B` | Sage green — contrast accent |
-| Neutral | `#5C4D45` | Dark brown — body text |
+| Primary | `#2A2520` | Charcoal — body, headings, primary buttons |
+| Secondary | `#D86B3A` | Warm orange — hover states, gradients |
+| Accent | `#F2C685` | Sand — pill backgrounds, ring accents |
+| Cool | `#8B2D3D` | Wine — links, nav active, inline emphasis (warm interactive accent despite the token name) |
+| Canyon | `#A04428` | Decorative — section dividers, gradient fallbacks, terrain wireframe |
+| Neutral | `#2A2520` | Token-compat alias for Primary |
+| Light bg | `#FBF6EE` | Cream page background |
+| Dark bg | `#1d1411` | Near-black page background |
+
+Avoid teal: it collides with CPAL brand.
 
 ## License
 

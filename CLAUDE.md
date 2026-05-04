@@ -39,17 +39,20 @@ scripts/
 - **Terrain isolation:** Three.js only loads on the home page via dynamic import in `TerrainHero.astro`.
 - **Palette (editorial canyon):** Primary `#2A2520` (charcoal — body, headings, primary buttons), Secondary `#D86B3A` (warm orange — hover states, gradients), Accent `#F2C685` (sand — pill backgrounds), Cool `#8B2D3D` (wine — links, nav active, inline emphasis; despite the "cool" token name it's a warm interactive accent), Canyon `#A04428` (decorative — section dividers, gradient fallbacks, terrain), Neutral `#2A2520` (same as primary). Light bg `#FBF6EE`, dark bg `#1d1411`. Headings stay `text-primary` (charcoal weight does the work); inline emphasis like company/school/tagline uses `text-cool` for visual distinction since primary == neutral. Terrain hero keeps its own canyon-warm palette (see `src/lib/terrain/config.ts`). Avoid teal — collides with CPAL brand.
 - **Skills source of truth:** `src/data/resume.ts` — `<SkillsGrid />` (About page) and the Resume page both render from this single export.
-- **Project screenshots:** `npm run screenshots` uses Playwright to capture 1280x720 @2x screenshots. Cards show screenshot when available, gradient fallback otherwise.
+- **Project screenshots:** `npm run screenshots` uses Playwright to capture 1280x720 @2x screenshots. Script uses `waitUntil: 'load'` (not `networkidle`) because Shiny apps keep WebSockets open. NTE auto-dismisses its welcome modal before capture. Cards show screenshot when available, gradient fallback otherwise.
+- **`cardImage` vs `image`:** `Project.image` renders in cards AND on the case study detail page. `Project.cardImage` (optional) is card-only — cards prefer it over `image`, detail pages ignore it. Used for the Eviction Pipeline canyon-terrain placeholder so the card shows imagery while the case study page renders no screenshot.
 - **ScrollReveal:** IntersectionObserver-based fade-in-up animations, respects `prefers-reduced-motion`.
+- **Analytics:** Vercel Analytics via `@vercel/analytics/astro` `<Analytics />` in BaseLayout. Loads same-origin (`/_vercel/insights/script.js`) in production, so no CSP changes needed. Inert until enabled in the Vercel project dashboard.
 
 ## Pages
 
 - **Home** — Terrain hero, intro paragraph, 3 featured project cards
-- **About** — Bio, "What I've Built" card, skills grid, optional Selected Media section (renders only if `selectedMedia` in `resume.ts` is populated), contact CTA
-- **Projects** — All projects grouped by category with wide screenshot cards. Each card title links to `/projects/[slug]/`; "Visit" external link is separate.
-- **Project detail (`/projects/[slug]/`)** — Dynamic route. `pages/projects/[slug].astro` resolves the slug to either a custom case-study component (Eviction Pipeline / Homestead Map / DigiLab) or the generic `ProjectDetail` view. Case studies use the shared `CaseStudyLayout` component which provides hero + screenshot + metrics + Problem/Approach/Outcome/Reflection slot sections + tech stack.
-- **Resume** — Experience (primary + collapsible earlier roles), education, skills, selected projects, PDF download
-- **Work with me** — Hero, three engagement-type cards, How I work, contact CTA
+- **About** — Bio (opens in present, then origin story), pullquote, "What we've built at CPAL" numbered list, skills grid, Selected Media section (renders only if `selectedMedia` in `resume.ts` is populated), contact CTA. Headshot is currently an ML monogram placeholder on canyon-orange.
+- **Projects** — All projects grouped by category. Uniform `ProjectCardWide` (image column + content side); no separate case-study card variant. Each card title links to `/projects/[slug]/`; "Visit" external link is separate.
+- **Project detail (`/projects/[slug]/`)** — Dynamic route. `pages/projects/[slug].astro` resolves the slug to either a custom case-study component (Eviction Pipeline / Homestead Map / DigiLab) or the generic `ProjectDetail` view. Case studies use the shared `CaseStudyLayout` component which provides hero + numbered Problem/Approach/Outcome/Reflection slots + lifted metrics + optional pullquote slot + tech stack.
+- **Resume** — Sticky 2-col at `lg+`: sidebar with skills/contact/status, main column with CPAL spine timeline + earlier roles disclosure.
+- **Work with me** — Hero with status pulse, three numbered engagement-type cards, four "How I work" cards, contact CTA.
+- **Branding preview** (`/preview/branding/`) — Internal-only swatch page used while iterating on the OG image and favicon. Kept around for future iteration; visible in the sitemap.
 
 ## Commands
 
@@ -70,10 +73,20 @@ CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions
 
 ## Remaining TODOs
 
-- [ ] Add `public/favicon.ico`
-- [ ] Add `public/images/og-image.png` (social sharing preview)
+- [ ] Replace ML monogram placeholder on About page with a real photo of Michael
 - [ ] Add `public/files/Michael_Lopez_Resume.pdf` and flip `hasResumePdf` to `true` in `ResumePage.astro` to surface the download button
-- [ ] Replace About page headshot gradient placeholder with real photo
-- [ ] Populate `selectedMedia` in `src/data/resume.ts` to surface the "Selected Media & Visualizations" section on About
-- [ ] Deploy to Vercel and configure DNS
+- [ ] Configure DNS so `lopezmichael.dev` points at the Vercel deployment
+- [ ] Enable Web Analytics in the Vercel project dashboard (the `<Analytics />` component is wired but inert until then)
 - [ ] Astro 6 upgrade deferred — `@tailwindcss/vite` (4.2.4) is incompatible with Astro 6's Rolldown-based Vite (`Missing field 'tsconfigPaths' on BindingViteResolvePluginConfig.resolveOptions`). The blocked advisory (GHSA-j687-52p2-xcff) is `define:vars` XSS which this codebase does not use, so practical exposure is zero. Retry the upgrade when `@tailwindcss/vite` ships an Astro-6-compatible release.
+
+## Done since the previous CLAUDE.md snapshot
+
+- F2 palette + mission-first content rewrite shipped.
+- `/work-with-me/` page added.
+- Three full case studies (Eviction Pipeline / Homestead Map / DigiLab) wired through `CaseStudyLayout`.
+- Phase B visual elevation: resume sidebar pivot, case-study numbered sections + pullquote, About editorial hero, uniform projects cards, Header/Footer polish.
+- Phase 5: OG image (`/images/og-image.png`), favicon SVG + PNG fallbacks + apple-touch-icon (no `.ico` — modern browsers don't need it).
+- `selectedMedia` populated (two Lab Report data-viz credits, KERA News, D Magazine).
+- Vercel Analytics wired in BaseLayout.
+- Editorial canyon-terrain illustration for the Eviction Pipeline card (uses `cardImage`).
+- Merged to `main` and deployed.
