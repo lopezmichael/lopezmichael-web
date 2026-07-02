@@ -9,18 +9,16 @@ interface Props {
 const { project } = Astro.props;
 
 const techStack = [
-  'Databricks (Python notebooks, Workflows, Lakebase + Lakehouse)',
+  'Databricks (Python, Workflows)',
   'AWS',
   'SFTP feed (Dallas County courts)',
-  'CKAN (partner data publishing)',
-  'PostGIS (spatial queries)',
-  'Mapbox GL',
   'American Community Survey',
-  'R (legacy initial implementation)',
+  'Mapbox GL',
+  'R (original 2020 build)',
 ];
 
 const metrics = [
-  { value: '40K+', label: 'records / year' },
+  { value: '40K+', label: 'filings / year' },
   { value: '12+', label: 'partner orgs' },
   { value: '5+', label: 'years in production' },
 ];
@@ -28,100 +26,114 @@ const metrics = [
 
 <CaseStudyLayout
   project={project}
-  metaDescription="How I built and scaled the Dallas County eviction data pipeline. Five years of production data infrastructure serving 12+ partner organizations including the Princeton Eviction Lab, Dallas HHS, and the Dallas Eviction Advocacy Center."
+  metaDescription="The Dallas County eviction data workstream: a daily feed that puts newly-filed eviction cases in front of legal aid and tenant-outreach organizations, plus a public transparency site. Five years in production, 12+ partners including the Princeton Eviction Lab and the Dallas Eviction Advocacy Center."
   techStack={techStack}
   metrics={metrics}
 >
 
   <Fragment slot="problem">
     <p>
-      Dallas County processes roughly 40,000 eviction filings each year, among the highest counts
-      in the country. But the data describing those filings was effectively invisible to the people
-      who needed it most: tenants facing displacement, the legal aid organizations trying to reach
-      them, the journalists covering the housing crisis, and the researchers studying it.
+      Dallas County records roughly 40,000 eviction filings a year, among the highest counts in the
+      country. Behind each filing is a household at risk of losing its home, often on a timeline of
+      weeks. And the data describing those filings was effectively invisible to the people who most
+      needed to see it: the tenants themselves, the legal aid organizations trying to reach them
+      before a hearing, the journalists covering the housing crisis, and the researchers studying it.
     </p>
     <p>
-      Court records sat in a county system designed for case management, not analysis. Field
-      definitions changed without notice. Address formatting was inconsistent. There was no
-      reliable way to aggregate filings into trend lines, map them onto neighborhoods, or join them
-      to demographic data. Each partner organization that wanted the data was rebuilding the same
-      cleaning logic from scratch. More often, they were just doing without it.
+      The records existed. They sat in a county court system built for case management, not analysis
+      or outreach. Field definitions changed without notice. Addresses came in inconsistent formats.
+      There was no reliable way to turn a day's filings into a list of households to contact, map
+      them onto neighborhoods, or read the trend across a year. A tenant facing eviction can't parse
+      a court docket. An outreach worker can't wait a month for a clean export. The information that
+      could help someone keep their home was locked in a shape only the court could use.
     </p>
     <p>
-      When CPAL committed to making housing instability a focus area, we needed a single
-      authoritative pipeline that everyone (internal teams, external partners, the public) could
-      build on top of.
+      When CPAL made housing instability a focus area, the question wasn't how to build a database.
+      It was how to get accurate, timely eviction data into the hands of people who could act on it,
+      and to do that every single day.
     </p>
   </Fragment>
 
   <Fragment slot="approach">
     <p>
-      I built the first version in R in 2020 when I joined CPAL as an analyst. The conceptual
-      architecture has been remarkably durable across five years of scaling. The implementation
-      hasn't been: the pipeline started as R scripts running on cron, and has since been rebuilt
-      on Databricks (Python notebooks orchestrated through Workflows on AWS) as the system grew
-      past what one analyst could maintain.
-    </p>
-    <p>The pipeline does four things:</p>
-    <ul>
-      <li><strong>Ingest.</strong> Daily SFTP feed from the Dallas County court system, normalizing fields that change shape between releases.</li>
-      <li><strong>Clean and geocode.</strong> Standardizes addresses, geocodes them to coordinates, joins to census tract / zip / neighborhood boundaries, and surfaces records that fail validation for human review.</li>
-      <li><strong>Enrich.</strong> Joins demographic data from the American Community Survey to enable equity analysis (filings by race/ethnicity, income, household composition).</li>
-      <li><strong>Publish.</strong> Outputs to CKAN for partner organizations, feeds the public-facing North Texas Evictions site, and powers internal Shiny dashboards used by CPAL teams.</li>
-    </ul>
-    <p>
-      The single biggest design decision was treating partner organizations as the primary users
-      rather than incidental consumers. That shaped every choice that followed: schema stability
-      (partners write code against our outputs), versioned data releases (so analyses don't break
-      mid-month), documented quirks (so partners don't rediscover the same edge cases), and
-      reliability (so legal-aid intake systems aren't pinned to a flaky upstream).
+      The heart of this work isn't a database. It's a daily feed. Every weekday, the newest eviction
+      filings go straight to legal aid and tenant-outreach organizations, who use them to contact
+      filed-against tenants directly, offer legal advice, and connect people to assistance before a
+      hearing. Everything upstream exists to make that hand-off fast, accurate, and dependable.
     </p>
     <p>
-      <strong>On working with sensitive data.</strong> Eviction filings are court records: technically
-      public, ethically loaded. The pipeline publishes aggregated data at the tract level on the public
-      site; record-level data (names, addresses, case detail) goes only to partners with executed
-      data-use agreements who actually need it to reach tenants. We don't publish defendant names. We
-      vet who gets record-level access. Not every requester has the operational capacity to handle
-      this data carefully, and not every requester has good intentions in the first place. The
-      <a href="https://evictionlab.org/why-eviction-matters/" target="_blank" rel="noopener noreferrer">Princeton Eviction Lab's published ethics framework</a>
-      is part of how I think about this.
+      So I designed around the partner, not the data. The organizations doing outreach are the real
+      users, and the whole workstream answers to their needs. Their intake systems run against our
+      output, so the schema stays stable. Their analyses can't break mid-case, so releases are
+      versioned. Their staff shouldn't have to rediscover the same court-data quirk twice, so the
+      quirks are documented. And their outreach can't stall because an upstream job flaked overnight,
+      so reliability comes first. Treating them as users instead of incidental recipients set the bar
+      for every decision that followed.
+    </p>
+    <p>
+      <strong>Public record, private caution.</strong> Eviction filings are court records: technically
+      public, ethically loaded. Each one carries a name and an address at one of the hardest moments in
+      a person's life. So the workstream splits along a hard line. Record-level data, names and
+      addresses and case detail, goes only to vetted partners with executed data-use agreements who
+      need it to reach tenants. Anything public is aggregated to the census-tract level, with no
+      defendant names. The public-facing arm of the workstream,
+      <a href="https://northtexasevictions.org" target="_blank" rel="noopener noreferrer">North Texas Evictions</a>,
+      shows the shape of displacement across Dallas County without exposing any single household. Not
+      every requester has the capacity to handle sensitive data carefully, and not every requester has
+      good reasons for wanting it. The
+      <a href="https://evictionlab.org/why-eviction-matters/" target="_blank" rel="noopener noreferrer">Princeton Eviction Lab's ethics framework</a>
+      shaped how I drew that line.
+    </p>
+    <p>
+      Underneath, the mechanics are ordinary and boring by design. The workstream ingests a daily SFTP
+      feed from the Dallas County courts, cleans and geocodes the records to tracts and neighborhoods,
+      enriches them with American Community Survey demographics for equity analysis, then publishes to
+      partners and the public site. I built the first version in R in 2020 when I joined CPAL as an
+      analyst. As it grew past what one person could maintain, I rebuilt it on Databricks with Python
+      and Workflows on AWS. The stack changed. The four stages, and the commitment to the people at the
+      end of them, didn't.
     </p>
   </Fragment>
 
   <Fragment slot="pullquote">
-    Treating partner organizations as the primary users, rather than incidental consumers, shaped every choice that followed.
+    The point was never the pipeline. It was getting a name and an address to someone who could knock on the door before the hearing.
   </Fragment>
 
   <Fragment slot="outcome">
     <p>
-      What the pipeline does in practice: every weekday, newly-filed eviction cases get sent to
-      local legal aid and tenant-outreach organizations, who use the data to contact filed-against
-      tenants directly, offering support, legal advice, and connection to assistance programs.
-      Partner orgs handle hundreds to thousands of cases a year through this work, reaching
-      tenants who would otherwise have gone unreached. The pipeline is also the daily feed that
-      the <a href="https://evictionlab.org" target="_blank" rel="noopener noreferrer">Princeton Eviction Lab</a>
-      uses for its national eviction tracking, and the foundation behind
-      <a href="https://northtexasevictions.org" target="_blank" rel="noopener noreferrer">North Texas Evictions</a>,
-      the public transparency site advocates, residents, and reporters use to understand
-      displacement patterns in Dallas County.
+      Every weekday, newly-filed eviction cases land with local legal aid and tenant-outreach
+      organizations, including the Dallas Eviction Advocacy Center, who use them to contact
+      filed-against tenants directly and offer support, legal advice, and a path to assistance
+      programs. Partners work through hundreds to thousands of cases a year off this feed, reaching
+      people who would otherwise have faced a hearing alone. [TODO: confirm a documented mission
+      number, e.g. tenants contacted per year across partners, or evictions prevented / diverted.]
     </p>
     <p>
-      The more durable outcome is structural: 12+ organizations (legal aid, advocacy, government,
-      journalism, academic research) now build on shared infrastructure rather than each
-      maintaining their own brittle copies of the same court data. That's the part that compounds.
+      The same daily feed powers the
+      <a href="https://evictionlab.org" target="_blank" rel="noopener noreferrer">Princeton Eviction Lab's</a>
+      national eviction tracking and stands behind
+      <a href="https://northtexasevictions.org" target="_blank" rel="noopener noreferrer">North Texas Evictions</a>,
+      where advocates, residents, and reporters can see displacement patterns across Dallas County
+      without any household being exposed.
+    </p>
+    <p>
+      The most durable win is structural. 12+ organizations across legal aid, advocacy, government,
+      journalism, and academic research now build on one shared source instead of each maintaining a
+      brittle copy of the same court data. One workstream, maintained once, feeds all of them. That's
+      the part that compounds year over year.
     </p>
   </Fragment>
 
   <Fragment slot="reflection">
     <p>
-      Five years of running production data infrastructure for a small nonprofit taught me a
-      handful of things I'd do the same way again:
+      Five years of running this workstream for a small nonprofit taught me a handful of things I'd do
+      the same way again:
     </p>
     <ul>
-      <li><strong>Reliability is a feature, not an afterthought.</strong> The first time a partner's intake system breaks because your schema changed, you understand exactly why upstream stability matters. Versioning and clear deprecation windows beat heroics.</li>
-      <li><strong>Document the weird stuff.</strong> Dallas court fields change definitions silently. Address parsing has corner cases that bite once a quarter. Every recurring quirk goes in a docs folder so the next analyst (or me, six months from now) doesn't burn an afternoon rediscovering it.</li>
-      <li><strong>Build for the people downstream.</strong> When you treat partners as users rather than as people lucky to receive your output, the system gets better at the things that actually matter: schema stability, data freshness, documentation, support.</li>
-      <li><strong>Architecture is the durable thing, not the stack.</strong> The pipeline started as R scripts running on cron. It now runs as Python notebooks on Databricks Workflows. The four-stage decomposition, the partner-as-user mindset, and the schema commitments held up across the rewrite. Stack churn is a real cost; designing for the next migration before you need it is the boring discipline that makes the migration cheap when it comes.</li>
+      <li><strong>The people downstream are the design.</strong> The outreach worker with a hearing on Thursday is the real user, not the dataset. Once you build for her (fresh data, a shape she can act on, no surprises) every technical choice gets easier to make, because there's a person on the other end telling you what matters.</li>
+      <li><strong>Sensitive public data needs a line you can defend.</strong> "It's a public record" is where the ethics conversation starts, not where it ends. Deciding what goes to vetted partners under an agreement versus what the whole internet can see, and being able to explain that line to a skeptical reporter or a nervous tenant, is as much of the work as the code.</li>
+      <li><strong>Reliability is a feature.</strong> The first time a partner's intake breaks because a field changed shape, you learn why upstream stability isn't optional. When people are contacting tenants off your data every day, a quiet failure isn't a bug ticket. It's someone who didn't get reached. Versioning and clear notice beat heroics.</li>
+      <li><strong>Architecture outlasts the stack.</strong> This started as R scripts on cron and now runs as Python on Databricks. The four stages, the partner-as-user mindset, and the schema commitments carried straight across the rewrite. The stack is going to change again. Designing for that keeps the next migration cheap.</li>
     </ul>
   </Fragment>
 

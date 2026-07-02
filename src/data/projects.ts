@@ -35,20 +35,20 @@ export const projects: Project[] = [
   },
   {
     slug: 'eviction-pipeline',
-    title: 'Dallas County Eviction Pipeline',
+    title: 'Dallas County Eviction Data',
     description:
-      'Production data pipeline processing 40,000+ eviction records annually.',
+      'The data workstream that gets Dallas County eviction filings to the legal-aid and outreach teams reaching tenants facing displacement.',
     longDescription:
-      'Production data pipeline processing 40,000+ eviction records annually, serving 12+ partners including Dallas Eviction Advocacy Center, Eviction Lab, and Dallas HHS. Built the initial pipeline in R and have iterated on it for nearly five years as the system scaled.',
-    tags: ['R', 'Data Pipeline', 'ETL', 'Housing'],
+      "The eviction data workstream behind the Child Poverty Action Lab's housing work: turning messy county court records into a daily feed that 12+ partners (the Dallas Eviction Advocacy Center, the Princeton Eviction Lab, Dallas HHS) use to reach tenants facing displacement, and into the public transparency of North Texas Evictions. Built in R in 2020 and scaled onto Databricks across five years — but the point was never the pipeline, it was who the data reaches.",
+    tags: ['Housing & Eviction', 'Public Records', 'Partner Data', 'Data for Outreach'],
     href: '',
     gradient: 'from-canyon to-secondary',
     category: 'civic',
     cardImage: '/images/projects/eviction-pipeline.png',
     highlights: [
-      '40,000+ records processed annually',
-      '12+ partner organizations served',
-      'Foundation for northtexasevictions.org',
+      '40,000+ filings a year turned into tenant outreach',
+      '12+ legal-aid, advocacy, and research partners',
+      'The data behind North Texas Evictions',
     ],
   },
   {
@@ -181,7 +181,7 @@ export const projects: Project[] = [
 ];
 
 // Featured projects shown on homepage. Slug-based so reordering projects[] doesn't silently change the home page.
-const featuredSlugs = ['homestead-map', 'eviction-pipeline', 'building-cpal-data-function'];
+const featuredSlugs = ['homestead-map', 'eviction-pipeline', 'digilab'];
 export const featuredProjects = featuredSlugs
   .map((slug) => projects.find((p) => p.slug === slug))
   .filter((p): p is Project => p !== undefined);
