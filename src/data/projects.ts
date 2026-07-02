@@ -181,7 +181,7 @@ export const projects: Project[] = [
 ];
 
 // Featured projects shown on homepage. Slug-based so reordering projects[] doesn't silently change the home page.
-const featuredSlugs = ['building-cpal-data-function', 'eviction-pipeline', 'homestead-map'];
+const featuredSlugs = ['homestead-map', 'eviction-pipeline', 'building-cpal-data-function'];
 export const featuredProjects = featuredSlugs
   .map((slug) => projects.find((p) => p.slug === slug))
   .filter((p): p is Project => p !== undefined);
