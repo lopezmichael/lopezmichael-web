@@ -8,7 +8,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const isExternal = project.href.startsWith('http');
+const isExternal = project.href.startsWith('http') && !project.restricted;
 ---
 
 <BaseLayout title={project.title} description={project.description}>

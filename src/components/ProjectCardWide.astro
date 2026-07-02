@@ -7,7 +7,7 @@ interface Props {
 
 const { project } = Astro.props;
 const detailHref = `/projects/${project.slug}/`;
-const isExternal = project.href.startsWith('http');
+const isExternal = project.href.startsWith('http') && !project.restricted;
 
 const gradientMap: Record<string, string> = {
   'from-canyon to-secondary': 'from-canyon to-secondary',

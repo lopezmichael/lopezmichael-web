@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { project, metaDescription, techStack, metrics } = Astro.props;
-const isExternal = project.href.startsWith('http');
+const isExternal = project.href.startsWith('http') && !project.restricted;
 const hasReflection = Astro.slots.has('reflection');
 const hasPullquote = Astro.slots.has('pullquote');
 ---

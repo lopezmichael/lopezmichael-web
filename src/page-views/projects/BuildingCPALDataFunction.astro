@@ -1,0 +1,120 @@
+---
+import CaseStudyLayout from '../../components/CaseStudyLayout.astro';
+import type { Project } from '../../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+
+const techStack = [
+  'Databricks (Unity Catalog, Workflows, Lakebase + Lakehouse)',
+  'AWS',
+  'Claude Enterprise (org-wide)',
+  'Claude Code (custom skills, agents, MCP servers)',
+  'Notion (cross-department PM infrastructure)',
+  'Vendor data feeds (MySidewalk, DataAxle)',
+  'R / Shiny (legacy analytics suite)',
+];
+
+const metrics = [
+  { value: '1 → 7', label: 'team scaled' },
+  { value: '6 yrs', label: 'building the function' },
+  { value: '30+', label: 'decision tools shipped' },
+];
+---
+
+<CaseStudyLayout
+  project={project}
+  metaDescription="How I built Child Poverty Action Lab's data function from a single analyst role into a seven-person team, a cloud platform, and a 30+ app suite informing decisions across housing, public safety, maternal health, and benefits delivery."
+  techStack={techStack}
+  metrics={metrics}
+>
+
+  <Fragment slot="problem">
+    <p>
+      CPAL exists to cut child poverty across North Texas. Doing that means working across housing,
+      public safety, maternal health, benefits delivery, and criminal justice, and every one of
+      those areas generates enormous amounts of administrative data. When I joined in 2020 as an
+      early analytics hire, the org had almost no way to turn that data into decisions. There was
+      no data team, no infrastructure, and no shared standards for how data got collected, cleaned,
+      or handed to the people who needed it.
+    </p>
+    <p>
+      The problem was never a shortage of data. It was the opposite. Public agencies, courts, and
+      partners were sitting on far more records than anyone could read. What CPAL didn't have was a
+      way to make any of it usable: to clean it, hold it somewhere durable, and put it in front of
+      staff making real decisions. Analysis happened in one-off scripts on one person's laptop.
+      Nothing compounded, and nothing survived the person who built it.
+    </p>
+    <p>
+      So the thing to build wasn't a dashboard or a report. It was a data function: people,
+      infrastructure, standards, and enough trust across the org that non-data staff would actually
+      change what they did based on what the data said. That's a leadership problem before it's a
+      technical one.
+    </p>
+  </Fragment>
+
+  <Fragment slot="approach">
+    <p>
+      I built the function over six years and three roles, from analyst to manager to director. The
+      through-line was treating data as organizational capacity to be built on purpose, not a
+      service desk taking requests. A few decisions carried the most weight.
+    </p>
+    <ul>
+      <li><strong>The team model.</strong> I scaled the team from one in-house analyst (me) to seven: one in-house data engineer I hired, CPAL's first, plus six external data engineers through a vendor partnership. The vendor-augmented model was a deliberate call. A nonprofit budget can't carry a full in-house engineering payroll, but the work needed real engineering depth, so I bought the depth on terms the org could sustain and kept the architecture and priorities in-house. I also mentored the analysts who came through the team, including an intern I brought on full-time.</li>
+      <li><strong>Tooling I chose and defended.</strong> I selected Databricks over Snowflake and dbt Cloud after a capacity assessment weighing the team's size and skill mix, the migration cost, and the value of a single unified platform over a stitched-together stack. I brought Claude Enterprise in org-wide, contracted vendor data feeds (MySidewalk, DataAxle), and built project-management infrastructure in Notion that's since been adopted across multiple CPAL departments. I owned the roadmap, the vendor strategy, and the budget behind these calls.</li>
+      <li><strong>Leading through the CDO transition.</strong> When the chief data officer role turned over (Dec 2024 to Dec 2025), I led the data org through the transition, reporting to the CTO. I set the department roadmap, ran hiring, owned vendor strategy, and held the budget. The function kept shipping through a leadership change, which is the real test of whether you've built something that depends on more than one person.</li>
+      <li><strong>AI adoption as change management.</strong> Rolling Claude Code and Claude Enterprise across the team wasn't a procurement exercise, it was a change-management one. I built the scaffolding (custom skills and agents, MCP servers, prompt caching through the Anthropic API) and then did the harder work of getting people to change how they work. It changed how the team develops pipelines, writes documentation, reviews code, and communicates with stakeholders. The license was the easy part. Adoption was the job.</li>
+    </ul>
+    <p>
+      Underneath all of it is a conviction I keep coming back to: a nonprofit fighting poverty
+      deserves the same quality of data infrastructure as the institutions and markets it's often
+      working against. Building that on a nonprofit's terms, with a nonprofit's budget, is most of
+      what the last six years were about.
+    </p>
+  </Fragment>
+
+  <Fragment slot="pullquote">
+    Building a data function at a nonprofit isn't about buying better tools. It's deciding what to build, who to hire, and getting the whole org to trust the answer.
+  </Fragment>
+
+  <Fragment slot="outcome">
+    <p>
+      In 2020 CPAL had one analyst and a laptop. Today it has a data function that outlasts any
+      single project or person. A suite of 30+ R Shiny applications informs decisions across
+      housing, public safety, maternal health, benefits delivery, and criminal justice. The Dallas
+      County eviction pipeline runs daily to 12+ partner organizations, moving 40,000+ records a
+      year. Internal tools let non-data staff act on data without waiting on an analyst, including
+      a parcel-level outreach tool with 20 active field-team users.
+    </p>
+    <p>
+      The infrastructure underneath it is being systematized too. The team is migrating 35 to 40
+      pipelines off file-based storage onto Databricks on AWS, with Unity Catalog, Workflows, a
+      Lakebase and Lakehouse setup, and Git-tracked orchestration. That's the difference between a
+      collection of clever scripts and a platform an organization can build on for years.
+    </p>
+    <p>
+      The outcomes that matter most are the ones the data made possible downstream:
+      [TODO: a concrete mission outcome number, e.g. tenants reached / benefits dollars delivered /
+      decisions changed]. On the operating side, the function now runs on
+      [TODO: annual data budget owned] and serves [TODO: number of internal teams / focus areas]
+      across the org.
+    </p>
+  </Fragment>
+
+  <Fragment slot="reflection">
+    <p>
+      Building and leading a data team at a mission org taught me a handful of things I'd do the
+      same way again:
+    </p>
+    <ul>
+      <li><strong>Build capacity, not deliverables.</strong> A data function is people and systems that keep working after the person who built them moves on. If your value walks out the door when you do, you built a role, not a function.</li>
+      <li><strong>Buy the right tool for the team you have.</strong> The Databricks-over-Snowflake call came from a capacity assessment, not a feature checklist. The best platform is the one your actual team can run, migrate onto, and maintain, not the one that demos well.</li>
+      <li><strong>Adoption is the real work.</strong> New tooling, AI included, is change management wearing a procurement costume. Getting people to change how they work is slower and harder than any purchase, and it's the part that determines whether the investment pays off.</li>
+      <li><strong>A nonprofit budget is a design constraint, not an excuse.</strong> The vendor-augmented team model was how I got engineering depth without an engineering payroll. Constraints force clearer decisions about what to build in-house and what to buy.</li>
+    </ul>
+  </Fragment>
+
+</CaseStudyLayout>

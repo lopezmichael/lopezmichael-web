@@ -11,9 +11,28 @@ export interface Project {
   image?: string;
   /** Optional card-only image; cards prefer this over `image`, detail pages don't read it. */
   cardImage?: string;
+  /** Live URL exists but is access-gated / internal — suppresses the "Visit" button so recruiters don't hit a login wall or 403. */
+  restricted?: boolean;
 }
 
 export const projects: Project[] = [
+  {
+    slug: 'building-cpal-data-function',
+    title: "Building CPAL's Data Function",
+    description:
+      'Building a nonprofit data function from one analyst into a seven-person team, a cloud platform, and a 30+ app decision-support suite.',
+    longDescription:
+      "The six-year story of building the Child Poverty Action Lab's data function from scratch: hiring the org's first data engineer, standing up a vendor-augmented team, selecting and migrating to Databricks, leading the data org through a CDO transition, and rolling AI-enabled workflows across the team. A leadership case study, not a pipeline write-up.",
+    tags: ['Data Leadership', 'Team Building', 'Data Strategy', 'Databricks'],
+    href: '',
+    gradient: 'from-canyon to-cool',
+    category: 'civic',
+    highlights: [
+      'Scaled the data team from 1 analyst to 7',
+      'Led the data org through a CDO transition',
+      'Selected and migrated to Databricks; rolled out AI workflows org-wide',
+    ],
+  },
   {
     slug: 'eviction-pipeline',
     title: 'Dallas County Eviction Pipeline',
@@ -22,7 +41,7 @@ export const projects: Project[] = [
     longDescription:
       'Production data pipeline processing 40,000+ eviction records annually, serving 12+ partners including Dallas Eviction Advocacy Center, Eviction Lab, and Dallas HHS. Built the initial pipeline in R and have iterated on it for nearly five years as the system scaled.',
     tags: ['R', 'Data Pipeline', 'ETL', 'Housing'],
-    href: '/resume/',
+    href: '',
     gradient: 'from-canyon to-secondary',
     category: 'civic',
     cardImage: '/images/projects/eviction-pipeline.png',
@@ -77,6 +96,7 @@ export const projects: Project[] = [
       'Map-based parcel lookup tool for door-to-door outreach workers in Dallas. Lets canvassers search or GPS-locate addresses, view nearby parcels on an interactive map, filter by outreach status, and export target lists. Built with R Shiny and Mapbox GL, sourcing property data from the Dallas Central Appraisal District. Access restricted to authorized outreach teams.',
     tags: ['R Shiny', 'Mapbox', 'Internal Tool', 'GIS'],
     href: 'https://blockwalking.tools.cpal.org',
+    restricted: true,
     gradient: 'from-cool to-secondary',
     category: 'civic',
     image: '/images/projects/blockwalking.png',
@@ -161,7 +181,7 @@ export const projects: Project[] = [
 ];
 
 // Featured projects shown on homepage. Slug-based so reordering projects[] doesn't silently change the home page.
-const featuredSlugs = ['eviction-pipeline', 'homestead-map', 'digilab'];
+const featuredSlugs = ['building-cpal-data-function', 'eviction-pipeline', 'homestead-map'];
 export const featuredProjects = featuredSlugs
   .map((slug) => projects.find((p) => p.slug === slug))
   .filter((p): p is Project => p !== undefined);

@@ -8,12 +8,15 @@ interface Props {
   title: string;
   description: string;
   image?: string;
+  /** Keep this page out of search engines (internal/WIP pages). */
+  noindex?: boolean;
 }
 
 const {
   title,
   description,
   image = '/images/og-image.png',
+  noindex = false,
 } = Astro.props;
 
 const siteName = 'Michael Lopez';
@@ -29,6 +32,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <title>{siteTitle}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalURL} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
 
   <!-- Flash prevention: set theme before render -->
   <script is:inline>
@@ -71,7 +75,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       "@type": "Organization",
       "name": "Child Poverty Action Lab"
     },
-    "description": "Data Strategist specializing in civic tech and social impact",
+    "description": "Data leader specializing in civic tech, social impact, and nonprofit data infrastructure",
     "alumniOf": [
       { "@type": "EducationalOrganization", "name": "University of Texas at Dallas" },
       { "@type": "EducationalOrganization", "name": "Florida International University" }
