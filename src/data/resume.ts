@@ -149,20 +149,8 @@ export const education: Education[] = [
 
 export const skills: SkillCategory[] = [
   {
-    label: 'Languages',
+    label: 'Analysis & Languages',
     items: ['R (tidyverse, sf, Shiny)', 'SQL', 'Python', 'TypeScript'],
-  },
-  {
-    label: 'Data Platform',
-    items: ['Databricks (Lakehouse + Unity Catalog)', 'PostgreSQL / Neon', 'PostGIS', 'CKAN'],
-  },
-  {
-    label: 'Orchestration & Infra',
-    items: ['GitHub Actions', 'Prefect', 'Docker', 'AWS', 'Vercel', 'Sentry', 'Structured logging'],
-  },
-  {
-    label: 'AI Workflows',
-    items: ['Claude Code (custom skills & agents)', 'MCP servers', 'Anthropic API'],
   },
   {
     label: 'Visualization & Geospatial',
@@ -171,6 +159,18 @@ export const skills: SkillCategory[] = [
   {
     label: 'Domains',
     items: ['Housing & Eviction', 'Public Safety', 'Maternal Health', 'Benefits Delivery', 'Community Development'],
+  },
+  {
+    label: 'Data Platform',
+    items: ['Databricks (Lakehouse + Unity Catalog)', 'PostgreSQL / Neon', 'PostGIS', 'CKAN'],
+  },
+  {
+    label: 'AI Workflows',
+    items: ['Claude Code (custom skills & agents)', 'MCP servers', 'Anthropic API'],
+  },
+  {
+    label: 'Orchestration & Infra',
+    items: ['GitHub Actions', 'Prefect', 'Docker', 'AWS', 'Vercel', 'Sentry', 'Structured logging'],
   },
 ];
 

@@ -94,45 +94,34 @@ const viz = selectedMedia.filter((m) => m.type === 'visualization');
       <ScrollReveal>
         <section class="mt-12 lg:mt-16 p-6 sm:p-8 lg:p-10 rounded-xl bg-accent/15 dark:bg-accent/8 ring-1 ring-accent/30 dark:ring-canyon/30">
           <h2 class="text-xl lg:text-2xl font-semibold text-primary dark:text-dark-text mb-2">What we've built at CPAL</h2>
-          <p class="text-sm opacity-75 mb-6 lg:mb-8 max-w-2xl">A snapshot of the data infrastructure powering our work.</p>
+          <p class="text-sm opacity-75 mb-6 lg:mb-8 max-w-2xl">A snapshot of the work, from the decisions it informs to the infrastructure underneath.</p>
 
           <ol class="space-y-5 lg:space-y-6">
             <li class="flex items-baseline gap-4 lg:gap-5">
               <span class="text-canyon/60 dark:text-canyon font-light tabular-nums leading-none text-2xl lg:text-3xl shrink-0 w-9">01</span>
-              <span class="text-sm lg:text-base leading-relaxed">An eviction data pipeline shared daily with 12+ partner organizations across legal aid, advocacy, government, and academic research; the data foundation behind <a href="https://northtexasevictions.org" target="_blank" rel="noopener noreferrer">North Texas Evictions</a>.</span>
-            </li>
-            <li class="flex items-baseline gap-4 lg:gap-5">
-              <span class="text-canyon/60 dark:text-canyon font-light tabular-nums leading-none text-2xl lg:text-3xl shrink-0 w-9">02</span>
               <span class="text-sm lg:text-base leading-relaxed">A 30+ Shiny app suite informing decisions across CPAL focus areas: housing, public safety, maternal health, benefits delivery, and criminal justice.</span>
             </li>
             <li class="flex items-baseline gap-4 lg:gap-5">
+              <span class="text-canyon/60 dark:text-canyon font-light tabular-nums leading-none text-2xl lg:text-3xl shrink-0 w-9">02</span>
+              <span class="text-sm lg:text-base leading-relaxed">An eviction data workstream feeding newly-filed cases daily to 12+ partner organizations across legal aid, advocacy, government, and academic research; the data behind <a href="https://northtexasevictions.org" target="_blank" rel="noopener noreferrer">North Texas Evictions</a>.</span>
+            </li>
+            <li class="flex items-baseline gap-4 lg:gap-5">
               <span class="text-canyon/60 dark:text-canyon font-light tabular-nums leading-none text-2xl lg:text-3xl shrink-0 w-9">03</span>
-              <span class="text-sm lg:text-base leading-relaxed">The Databricks platform migration on AWS, moving 35-40 pipelines from file-based storage onto unified cloud infrastructure with Git-tracked orchestration.</span>
+              <span class="text-sm lg:text-base leading-relaxed">Internal tools that let non-data staff act on data without analyst intervention, including a parcel-level outreach tool with 20 active field-team users.</span>
             </li>
             <li class="flex items-baseline gap-4 lg:gap-5">
               <span class="text-canyon/60 dark:text-canyon font-light tabular-nums leading-none text-2xl lg:text-3xl shrink-0 w-9">04</span>
-              <span class="text-sm lg:text-base leading-relaxed">AI workflows embedded across the team (Claude Code with custom skills and agents, MCP servers), meaningfully changing how we develop pipelines, write documentation, and review code.</span>
+              <span class="text-sm lg:text-base leading-relaxed">The Databricks platform migration on AWS, moving 35-40 pipelines from file-based storage onto unified cloud infrastructure with Git-tracked orchestration.</span>
             </li>
             <li class="flex items-baseline gap-4 lg:gap-5">
               <span class="text-canyon/60 dark:text-canyon font-light tabular-nums leading-none text-2xl lg:text-3xl shrink-0 w-9">05</span>
-              <span class="text-sm lg:text-base leading-relaxed">A data engineering team scaled from 1 in-house analyst to 6 external data engineers + 1 in-house data engineer, executing on the internal data roadmap.</span>
+              <span class="text-sm lg:text-base leading-relaxed">AI workflows embedded across the team (Claude Code with custom skills and agents, MCP servers), meaningfully changing how we develop pipelines, write documentation, and review code.</span>
             </li>
             <li class="flex items-baseline gap-4 lg:gap-5">
               <span class="text-canyon/60 dark:text-canyon font-light tabular-nums leading-none text-2xl lg:text-3xl shrink-0 w-9">06</span>
-              <span class="text-sm lg:text-base leading-relaxed">Internal tools that let non-data staff act on data without analyst intervention, including a parcel-level outreach tool with 20 active field-team users.</span>
+              <span class="text-sm lg:text-base leading-relaxed">A data engineering team scaled from 1 in-house analyst to 6 external data engineers + 1 in-house data engineer, executing on the internal data roadmap.</span>
             </li>
           </ol>
-        </section>
-      </ScrollReveal>
-
-      <!-- Skills (clean grid, no card wrap) -->
-      <ScrollReveal>
-        <section class="mt-16 lg:mt-20">
-          <h2 class="text-xl lg:text-2xl font-semibold text-primary dark:text-dark-text mb-8 flex items-center gap-3">
-            <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
-            Technical Skills
-          </h2>
-          <SkillsGrid />
         </section>
       </ScrollReveal>
 
@@ -175,6 +164,17 @@ const viz = selectedMedia.filter((m) => m.type === 'visualization');
           </section>
         </ScrollReveal>
       )}
+
+      <!-- Skills (clean grid, no card wrap) -->
+      <ScrollReveal>
+        <section class="mt-16 lg:mt-20">
+          <h2 class="text-xl lg:text-2xl font-semibold text-primary dark:text-dark-text mb-8 flex items-center gap-3">
+            <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
+            Technical Skills
+          </h2>
+          <SkillsGrid />
+        </section>
+      </ScrollReveal>
 
       <!-- Contact CTA -->
       <ScrollReveal>
