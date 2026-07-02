@@ -1,6 +1,8 @@
 # lopezmichael.dev
 
-Personal portfolio for Michael Lopez — data strategist at the intersection of civic tech and social impact.
+Personal portfolio for Michael Lopez — a data leader in civic tech and social impact.
+
+**Positioning (job search):** The site is set up for a full-time data-role search. It leads with **data knowledge** (decisions, domain expertise, analytical rigor, communication) over infrastructure, and targets bringing built-from-scratch data leadership into a **larger / more-established org to operate at greater scale** — deliberately NOT positioned as chasing a top "Head of Data" seat. Consulting ("Work with me") is secondary and subordinated in nav. All site prose should go through the `voice-professional` agent; banned jargon: "move the needle," "actionable," "deliver real impact," overusing "at the intersection of," and em dashes in body copy.
 
 ## Stack
 
@@ -40,7 +42,9 @@ scripts/
 - **Palette (editorial canyon):** Primary `#2A2520` (charcoal — body, headings, primary buttons), Secondary `#D86B3A` (warm orange — hover states, gradients), Accent `#F2C685` (sand — pill backgrounds), Cool `#8B2D3D` (wine — links, nav active, inline emphasis; despite the "cool" token name it's a warm interactive accent), Canyon `#A04428` (decorative — section dividers, gradient fallbacks, terrain), Neutral `#2A2520` (same as primary). Light bg `#FBF6EE`, dark bg `#1d1411`. Headings stay `text-primary` (charcoal weight does the work); inline emphasis like company/school/tagline uses `text-cool` for visual distinction since primary == neutral. Terrain hero keeps its own canyon-warm palette (see `src/lib/terrain/config.ts`). Avoid teal — collides with CPAL brand.
 - **Skills source of truth:** `src/data/resume.ts` — `<SkillsGrid />` (About page) and the Resume page both render from this single export.
 - **Project screenshots:** `npm run screenshots` uses Playwright to capture 1280x720 @2x screenshots. Script uses `waitUntil: 'load'` (not `networkidle`) because Shiny apps keep WebSockets open. NTE auto-dismisses its welcome modal before capture. Cards show screenshot when available, gradient fallback otherwise.
-- **`cardImage` vs `image`:** `Project.image` renders in cards AND on the case study detail page. `Project.cardImage` (optional) is card-only — cards prefer it over `image`, detail pages ignore it. Used for the Eviction Pipeline canyon-terrain placeholder so the card shows imagery while the case study page renders no screenshot.
+- **`cardImage` vs `image`:** `Project.image` renders in cards AND on the case study detail page. `Project.cardImage` (optional) is card-only — cards prefer it over `image`, detail pages ignore it. Used for the eviction-workstream canyon-terrain placeholder so the card shows imagery while the case study page renders no screenshot.
+- **`restricted` flag:** `Project.restricted` suppresses the "Visit"/"Visit live" button — ProjectCardWide, ProjectDetail, and CaseStudyLayout all gate on `href.startsWith('http') && !project.restricted`. Used for the access-gated Block Walking tool; projects with no public URL (eviction workstream, Building CPAL's Data Function) use `href: ''`, which fails the `http` check and suppresses the button too.
+- **`noindex` prop:** `BaseLayout` accepts `noindex?: boolean` → renders `<meta name="robots" content="noindex, nofollow">`. Used by the internal `/preview/branding/` page, which is ALSO excluded from the sitemap via the `filter` in `astro.config.mjs`.
 - **ScrollReveal:** IntersectionObserver-based fade-in-up animations, respects `prefers-reduced-motion`.
 - **Analytics:** Vercel Analytics via `@vercel/analytics/astro` `<Analytics />` in BaseLayout. Loads same-origin (`/_vercel/insights/script.js`) in production, so no CSP changes needed. Inert until enabled in the Vercel project dashboard.
 
@@ -49,10 +53,10 @@ scripts/
 - **Home** — Terrain hero, intro paragraph, 3 featured project cards
 - **About** — Bio (opens in present, then origin story), pullquote, "What we've built at CPAL" numbered list, skills grid, Selected Media section (renders only if `selectedMedia` in `resume.ts` is populated), contact CTA. Headshot is currently an ML monogram placeholder on canyon-orange.
 - **Projects** — All projects grouped by category. Uniform `ProjectCardWide` (image column + content side); no separate case-study card variant. Each card title links to `/projects/[slug]/`; "Visit" external link is separate.
-- **Project detail (`/projects/[slug]/`)** — Dynamic route. `pages/projects/[slug].astro` resolves the slug to either a custom case-study component (Eviction Pipeline / Homestead Map / DigiLab) or the generic `ProjectDetail` view. Case studies use the shared `CaseStudyLayout` component which provides hero + numbered Problem/Approach/Outcome/Reflection slots + lifted metrics + optional pullquote slot + tech stack.
+- **Project detail (`/projects/[slug]/`)** — Dynamic route. `pages/projects/[slug].astro` resolves the slug to either a custom case-study component (Building CPAL's Data Function / Dallas County Eviction Data / Homestead Map / DigiLab) or the generic `ProjectDetail` view. Case studies use the shared `CaseStudyLayout` component which provides hero + numbered Problem/Approach/Outcome/Reflection slots + lifted metrics + optional pullquote slot + tech stack.
 - **Resume** — Sticky 2-col at `lg+`: sidebar with skills/contact/status, main column with CPAL spine timeline + earlier roles disclosure.
 - **Work with me** — Hero with status pulse, three numbered engagement-type cards, four "How I work" cards, contact CTA.
-- **Branding preview** (`/preview/branding/`) — Internal-only swatch page used while iterating on the OG image and favicon. Kept around for future iteration; visible in the sitemap.
+- **Branding preview** (`/preview/branding/`) — Internal-only swatch page used while iterating on the OG image and favicon. Kept around for future iteration; `noindex` + excluded from the sitemap so recruiters/crawlers don't surface it.
 
 ## Commands
 
@@ -73,6 +77,8 @@ CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions
 
 ## Remaining TODOs
 
+- [ ] **Fill the 5 `[TODO]` placeholders in case studies before merging `develop`→`main`** (they render as visible bracket text): Building CPAL's Data Function ×3 (mission-outcome number, annual data budget owned, internal-team/focus-area count), Dallas County Eviction Data ×1 (documented mission number — tenants contacted/yr or evictions diverted), DigiLab ×1 (adoption stat — MAU / API consumers / blog readership). Never fabricate these.
+- [ ] Regenerate `/images/og-image.png` if it still shows the retired "Data Strategist" tagline — it's the OG/Twitter image on every route, so a stale title shows in every social share. Source mock: `/preview/branding/`.
 - [ ] Replace ML monogram placeholder on About page with a real photo of Michael
 - [ ] Add `public/files/Michael_Lopez_Resume.pdf` and flip `hasResumePdf` to `true` in `ResumePage.astro` to surface the download button
 - [ ] Configure DNS so `lopezmichael.dev` points at the Vercel deployment
@@ -88,5 +94,6 @@ CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions
 - Phase 5: OG image (`/images/og-image.png`), favicon SVG + PNG fallbacks + apple-touch-icon (no `.ico` — modern browsers don't need it).
 - `selectedMedia` populated (two Lab Report data-viz credits, KERA News, D Magazine).
 - Vercel Analytics wired in BaseLayout.
-- Editorial canyon-terrain illustration for the Eviction Pipeline card (uses `cardImage`).
+- Editorial canyon-terrain illustration for the eviction-workstream card (uses `cardImage`).
 - Merged to `main` and deployed.
+- **Data-leadership repositioning (2026-07, on `develop`, NOT yet merged to `main` — blocked on the 5 case-study `[TODO]`s above):** data-knowledge-forward hero taglines + "What I'm looking for" statements; new "Building CPAL's Data Function" case study; eviction reframed as a data *workstream* and retitled "Dallas County Eviction Data"; DigiLab reframed toward community + insights and re-featured on home; About "What we've built" + skills grid reordered to lead with analysis/domain/decisions; Selected Media surfaced above skills; "Work with me" subordinated in nav; `restricted` flag + `noindex` prop added; full voice + consistency sweep.

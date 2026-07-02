@@ -39,7 +39,7 @@ export const projects: Project[] = [
     description:
       'The data workstream that gets Dallas County eviction filings to the legal-aid and outreach teams reaching tenants facing displacement.',
     longDescription:
-      "The eviction data workstream behind the Child Poverty Action Lab's housing work: turning messy county court records into a daily feed that 12+ partners (the Dallas Eviction Advocacy Center, the Princeton Eviction Lab, Dallas HHS) use to reach tenants facing displacement, and into the public transparency of North Texas Evictions. Built in R in 2020 and scaled onto Databricks across five years — but the point was never the pipeline, it was who the data reaches.",
+      "The eviction data workstream behind the Child Poverty Action Lab's housing work: turning messy county court records into a daily feed that 12+ partners (the Dallas Eviction Advocacy Center, the Princeton Eviction Lab, Dallas HHS) use to reach tenants facing displacement, and into the public transparency of North Texas Evictions. Built in R in 2020 and scaled onto Databricks across five years. What mattered was always who the data reaches.",
     tags: ['Housing & Eviction', 'Public Records', 'Partner Data', 'Data for Outreach'],
     href: '',
     gradient: 'from-canyon to-secondary',
@@ -55,9 +55,9 @@ export const projects: Project[] = [
     slug: 'north-texas-evictions',
     title: 'North Texas Evictions',
     description:
-      'Public-facing data transparency tool tracking eviction filings across Dallas County.',
+      'The public dashboard of the Dallas eviction data workstream, tracking eviction filings across Dallas County.',
     longDescription:
-      'Public-facing data transparency tool tracking eviction filings across Dallas County, helping residents and advocates understand displacement patterns. Built with R Shiny, it visualizes trends over time, maps filing hotspots, and provides downloadable data for researchers and journalists.',
+      'The public-facing arm of the eviction data workstream: a transparency dashboard tracking eviction filings across Dallas County, helping residents and advocates understand displacement patterns. Built with R Shiny, it visualizes trends over time, maps filing hotspots, and provides downloadable data for researchers and journalists.',
     tags: ['R Shiny', 'Housing', 'Public Data', 'GIS'],
     href: 'https://northtexasevictions.org',
     gradient: 'from-canyon to-secondary',
@@ -148,8 +148,8 @@ export const projects: Project[] = [
     description:
       'Production tournament tracking and meta analysis platform for the global Digimon TCG community.',
     longDescription:
-      'Full-stack data platform I designed and built for the Digimon TCG community. SSR-rendered entity pages (tamers, stores, decks, tournaments) with Highcharts visualizations and Mapbox maps, scene-aware leaderboards, regional meta analysis, MDX blog, dynamic OG images, a public token-authenticated API for external apps, and a separate admin subdomain for CRUD. Backed by a Discord community of 350+ members and 3,000+ tournaments logged worldwide.',
-    tags: ['Astro', 'Preact', 'Neon', 'Vercel', 'Mapbox', 'Highcharts', 'TypeScript'],
+      'A community-sourced tournament data platform for the global Digimon TCG scene. A 350+ member Discord and a network of volunteer organizers keep the data flowing; the platform turns it into regional meta analysis, scene-aware leaderboards, and blog deep-dives players use to prep for events. 3,000+ tournaments logged worldwide, plus a public API that external community tools build on. Built on Astro, Preact, and Neon Postgres.',
+    tags: ['Community Data', 'Meta Analysis', 'Data Insights', 'Astro', 'Neon', 'Public API'],
     href: 'https://digilab.cards',
     gradient: 'from-cool to-primary',
     category: 'personal',

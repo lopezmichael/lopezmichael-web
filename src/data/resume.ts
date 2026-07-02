@@ -44,7 +44,7 @@ export const experience: Experience[] = [
       'Manage a 6-person external data engineering team via vendor partnership executing on the internal data roadmap, alongside one full-time data engineer reporting directly to me',
       'Built AI-enabled team workflows (Claude Code with custom skills and agents, MCP servers, prompt caching with the Anthropic API), meaningfully accelerating how we develop pipelines, write documentation, review code, and communicate with stakeholders',
       'Develop internal tools that let non-data staff act on data without analyst intervention, including a parcel-level outreach tool with 20 active field-team users',
-      'Maintain the Dallas County eviction data pipeline (40,000+ records annually, daily updates to 12+ partners including the Dallas Eviction Advocacy Center, the Princeton Eviction Lab, and Dallas Health & Human Services), now running on Databricks Python notebooks after migration from the original R implementation',
+      'Maintain the Dallas County eviction data workstream (40,000+ records annually, daily updates to 12+ partners including the Dallas Eviction Advocacy Center, the Princeton Eviction Lab, and Dallas Health & Human Services), now running on Databricks Python notebooks after migration from the original R implementation',
     ],
   },
   {
@@ -52,7 +52,7 @@ export const experience: Experience[] = [
     company: 'Child Poverty Action Lab',
     dates: 'May 2023 - December 2025',
     summary:
-      'Led data strategy, infrastructure, and operations for the backbone nonprofit working to reduce child poverty across North Texas. Built CPAL\'s data engineering function and assumed expanded scope during the org\'s CDO transition.',
+      'Led data strategy, infrastructure, and operations for the backbone organization working to reduce child poverty across North Texas. Built CPAL\'s data engineering function and assumed expanded scope during the org\'s CDO transition.',
     bullets: [
       'Built CPAL\'s data function from the ground up; led hiring for the org\'s first data engineer and prior analyst roles',
       'Led the data org during CDO transition (Dec 2024 - Dec 2025): set department roadmap, hiring, vendor strategy, and budget; reported directly to the CTO',
@@ -207,9 +207,9 @@ export const selectedMedia: MediaItem[] = [
 
 export const selectedProjects: SelectedProject[] = [
   {
-    name: 'Dallas County Eviction Pipeline',
+    name: 'Dallas County Eviction Data',
     description:
-      'Processing 40,000+ records annually, used by 12+ partners for outreach and intervention',
+      'Daily eviction-filing feed reaching 12+ legal-aid and outreach partners; 40,000+ filings a year turned into tenant outreach',
   },
   {
     name: 'North Texas Evictions',
@@ -227,9 +227,9 @@ export const selectedProjects: SelectedProject[] = [
       'Interactive tools for housing stability, public safety, and resource allocation',
   },
   {
-    name: 'DigiLab TCG Standings',
+    name: 'DigiLab',
     description:
-      'Shiny dashboard tracking Digimon TCG events in North Texas; built community for collaborative data collection',
+      'Community-sourced tournament data platform for the global Digimon TCG scene; 3,000+ tournaments logged, with regional meta analysis players use to prep',
     href: 'https://digilab.cards',
   },
   {
