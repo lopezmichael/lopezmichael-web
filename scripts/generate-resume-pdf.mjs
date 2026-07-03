@@ -47,10 +47,8 @@ const experience = [
 ];
 
 const earlier = [
-  { title: 'Research Project Assistant', company: 'UT Southwestern Medical Center', dates: 'Dec 2019 – May 2020', line: 'Conducted participant interviews and assessments, analyzed data, and produced reports for biomedical research projects.' },
   { title: 'Health & Social Policy Intern', company: 'Children at Risk', dates: 'Jun 2019 – Aug 2019', line: 'Led policy research on early childhood development and developed policy briefs for senior leadership and state stakeholders.' },
   { title: 'Research Coordinator', company: 'University of Texas at Dallas', dates: 'Aug 2016 – Dec 2018', line: 'Managed the Developmental Neurolinguistics Lab; recruited, trained, and supervised 10–15 research assistants each semester and 300+ participants.' },
-  { title: 'Research Assistant', company: 'Florida International University', dates: 'May 2013 – May 2015', line: "Assessed pre-K children's spatial and verbal abilities; trained assistants and recruited participants across Miami-Dade County schools." },
 ];
 
 const education = [
@@ -192,7 +190,7 @@ li::marker{color:#A04428;}
   <div class="company">Child Poverty Action Lab <span class="co-meta">DALLAS, TX · 2020 – PRESENT</span></div>
   <div class="spine">${roleHtml}</div>
 
-  <h2>Earlier Experience</h2>
+  <h2>Earlier Leadership &amp; Policy Experience</h2>
   ${earlierHtml}
 
   <h2>Skills</h2>
