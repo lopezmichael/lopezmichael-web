@@ -133,6 +133,7 @@ a{color:#8B2D3D;text-decoration:none;}
 
 /* Section headings */
 h2{display:flex;align-items:center;gap:8px;font-size:9pt;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:#8B2D3D;margin:13px 0 7px;}
+h2.page-break{break-before:page;page-break-before:always;margin-top:0;padding-top:2px;}
 h2::before{content:'';width:11px;height:11px;background:#A04428;border-radius:2px;flex:0 0 auto;}
 h2::after{content:'';flex:1;height:1px;background:#e3c9a6;}
 
@@ -190,7 +191,7 @@ li::marker{color:#A04428;}
   <div class="company">Child Poverty Action Lab <span class="co-meta">DALLAS, TX · 2020 – PRESENT</span></div>
   <div class="spine">${roleHtml}</div>
 
-  <h2>Earlier Leadership &amp; Policy Experience</h2>
+  <h2 class="page-break">Earlier Leadership &amp; Policy Experience</h2>
   ${earlierHtml}
 
   <h2>Skills</h2>
