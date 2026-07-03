@@ -42,7 +42,7 @@ export const projects: Project[] = [
     longDescription:
       "The eviction data workstream behind the Child Poverty Action Lab's housing work: turning messy county court records into a daily feed that 12+ partners (the Dallas Eviction Advocacy Center, the Princeton Eviction Lab, Dallas HHS) use to reach tenants facing displacement, and into the public transparency of North Texas Evictions. Built in R in 2020, then rebuilt on Databricks by our data engineering team as it scaled to four North Texas counties. What mattered was always who the data reaches.",
     tags: ['Housing & Eviction', 'Public Records', 'Partner Data', 'Data for Outreach'],
-    href: '',
+    href: 'https://northtexasevictions.org',
     gradient: 'from-canyon to-secondary',
     category: 'civic',
     image: '/images/projects/north-texas-evictions.png',
@@ -50,24 +50,6 @@ export const projects: Project[] = [
       '48,000+ Dallas filings a year turned into tenant outreach',
       '~800 tenants a year connected to legal representation',
       'Feeds 12+ partners and North Texas Evictions',
-    ],
-  },
-  {
-    slug: 'north-texas-evictions',
-    title: 'North Texas Evictions',
-    description:
-      'The public dashboard of the Dallas eviction data workstream, tracking eviction filings across Dallas County.',
-    longDescription:
-      'The public-facing arm of the eviction data workstream: a transparency dashboard tracking eviction filings across Dallas County, helping residents and advocates understand displacement patterns. Built with R Shiny, it visualizes trends over time, maps filing hotspots, and provides downloadable data for researchers and journalists.',
-    tags: ['R Shiny', 'Housing', 'Public Data', 'GIS'],
-    href: 'https://northtexasevictions.org',
-    gradient: 'from-canyon to-secondary',
-    category: 'civic',
-    image: '/images/projects/north-texas-evictions.png',
-    highlights: [
-      'Used by advocates, journalists, and researchers',
-      'Interactive mapping of filing hotspots',
-      'Downloadable open data',
     ],
   },
   {
