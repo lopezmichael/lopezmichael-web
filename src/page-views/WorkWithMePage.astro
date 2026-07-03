@@ -4,37 +4,22 @@ import ScrollReveal from '../components/ScrollReveal.astro';
 
 const engagements = [
   {
-    title: 'Data team setup for nonprofits',
-    lead: 'I help nonprofits build their first or next data team.',
+    title: 'Data strategy & analysis',
+    lead: 'I help orgs figure out what their data can actually answer, and turn it into decisions.',
     icon: 'users',
     looksLike: [
-      'Defining roles and team structure',
-      'Hiring strategy and interview design',
-      'Tooling stack selection (BI, GIS, AI, vendors)',
+      'Turning a messy dataset into a clear answer',
+      'Analysis and data viz for a specific question',
+      'A data roadmap: what to build, measure, and prioritize',
     ],
     goodFit: [
-      'You have 0–1 data people and want to scale',
-      "You've outgrown ad-hoc data work",
-      "You want someone who's built this before",
+      'You have data but not the answers you need',
+      'You want an analysis done right, once',
+      'You need a plan before you hire or build a team',
     ],
   },
   {
-    title: 'Modern data stack & infrastructure',
-    lead: 'I help orgs build data infrastructure they can grow into.',
-    icon: 'database',
-    looksLike: [
-      'Databricks (or similar) setup and migration',
-      'Pipeline architecture and ETL design',
-      'AI workflow integration (Anthropic / Claude Enterprise)',
-    ],
-    goodFit: [
-      "You're outgrowing file-based or fragmented tooling",
-      'You have data but no scalable way to manage it',
-      'You want to introduce AI tooling thoughtfully',
-    ],
-  },
-  {
-    title: 'Data-forward tool & site development',
+    title: 'Data-forward tools & products',
     lead: 'I build the tools, dashboards, and sites that put data into the hands of the people who use it.',
     icon: 'code',
     looksLike: [
@@ -46,6 +31,21 @@ const engagements = [
       'You need a custom tool but lack in-house dev capacity',
       'You want a public-facing data product for transparency',
       'You need a thoughtful website for a small org or practice',
+    ],
+  },
+  {
+    title: 'Data infrastructure & stack',
+    lead: 'I help orgs build data infrastructure they can grow into.',
+    icon: 'database',
+    looksLike: [
+      'Databricks (or similar) setup and migration',
+      'Pipeline architecture and ETL design',
+      'AI workflow integration',
+    ],
+    goodFit: [
+      "You're outgrowing file-based or fragmented tooling",
+      'You have data but no scalable way to manage it',
+      'You want to introduce AI tooling thoughtfully',
     ],
   },
 ];
@@ -65,7 +65,7 @@ const howIWork = [
   },
   {
     title: 'Rates',
-    body: 'Flexible based on org type, scope, and budget. Sliding scale for nonprofits and mission-aligned orgs. Happy to discuss what works for you.',
+    body: 'Flexible based on org type, scope, and budget. Happy to discuss what works for you.',
   },
 ];
 ---
@@ -91,7 +91,7 @@ const howIWork = [
               <span class="absolute inset-0 rounded-full bg-secondary opacity-60 motion-safe:animate-ping"></span>
               <span class="relative w-2 h-2 rounded-full bg-secondary"></span>
             </span>
-            Open to select consulting projects, and to full-time data-leadership roles. Let's see if we're a fit.
+            Open to a project or two. Let's see if we're a fit.
           </p>
         </div>
       </ScrollReveal>
@@ -208,9 +208,6 @@ const howIWork = [
           </div>
           <p class="text-xs opacity-60 max-w-xl mx-auto mb-2">
             Lopez Studio is my consulting practice, so <span class="whitespace-nowrap">michael@lopezstudio.dev</span> is the right address for project inquiries.
-          </p>
-          <p class="text-xs opacity-60 max-w-xl mx-auto">
-            Recruiters: I'm also open to conversations about full-time data leadership roles. Same email works.
           </p>
         </section>
       </ScrollReveal>

@@ -17,11 +17,7 @@ const techStack = [
   'Census tract / zip / neighborhood boundaries',
 ];
 
-const metrics = [
-  { value: '3', label: 'geographic scales' },
-  { value: '2', label: 'data sources joined' },
-  { value: 'Public', label: 'open access tool' },
-];
+const metrics: { label: string; value: string }[] = [];
 ---
 
 <CaseStudyLayout
@@ -96,21 +92,21 @@ const metrics = [
 
   <Fragment slot="reflection">
     <p>
-      The lesson I keep coming back to from this project is that <strong>a data tool is making an
-      argument whether you intend it to or not</strong>. Default views, color scales, filter
-      orderings, what's foregrounded in tooltips: all of it shapes what the user concludes. The
-      "neutral" choice is a choice.
+      Two things stuck with me after building this one.
     </p>
     <p>
-      For an equity-focused tool, getting the framing right is half the work. Showing exemption
-      take-up rates without context implies the rate is the metric. Showing the rate alongside
-      household income reframes the question to "who is left out." Same data, different
-      conclusion.
+      The default view does a lot of the talking. Which layer loads first, how the color scale is
+      anchored, what a tooltip shows: each of those quietly points the user toward a conclusion.
+      Show take-up rates on their own and the rate reads as the point. Show them next to household
+      income and the question becomes who's getting left out. Same data, different takeaway. There
+      was no way to build this without making those calls, so I made them on purpose and wrote down
+      why.
     </p>
     <p>
-      The other lesson: <strong>geospatial transparency is advocacy</strong>. A static report on
-      exemption disparities makes a number of points. An interactive map that lets a user pull up
-      their own zip and see the gap makes one, and it's the one that tends to move people.
+      An interactive map also lands differently than a static report. A PDF of exemption disparities
+      is easy to skim past. When someone can pull up their own zip code and see the gap in their own
+      neighborhood, they tend to sit with it. That's most of why this is a tool people can poke at
+      rather than a chart in a slide deck.
     </p>
   </Fragment>
 

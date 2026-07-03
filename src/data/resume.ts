@@ -44,7 +44,7 @@ export const experience: Experience[] = [
       'Manage a 6-person external data engineering team via vendor partnership executing on the internal data roadmap, alongside one full-time data engineer reporting directly to me',
       'Built AI-enabled team workflows (Claude Code with custom skills and agents, MCP servers, prompt caching with the Anthropic API), meaningfully accelerating how we develop pipelines, write documentation, review code, and communicate with stakeholders',
       'Develop internal tools that let non-data staff act on data without analyst intervention, including a parcel-level outreach tool with 20 active field-team users',
-      'Maintain the Dallas County eviction data workstream (40,000+ records annually, daily updates to 12+ partners including the Dallas Eviction Advocacy Center, the Princeton Eviction Lab, and Dallas Health & Human Services), now running on Databricks Python notebooks after migration from the original R implementation',
+      'Maintain the Dallas County eviction data workstream (~48,000 Dallas filings a year across four North Texas counties, daily updates to 12+ partners including the Dallas Eviction Advocacy Center, the Princeton Eviction Lab, and Dallas Health & Human Services), now running on Databricks Python notebooks after migration from the original R implementation',
     ],
   },
   {
@@ -162,15 +162,15 @@ export const skills: SkillCategory[] = [
   },
   {
     label: 'Data Platform',
-    items: ['Databricks (Lakehouse + Unity Catalog)', 'PostgreSQL / Neon', 'PostGIS', 'CKAN'],
+    items: ['Databricks (Lakehouse + Unity Catalog)', 'PostgreSQL / Neon', 'DuckDB', 'Polars', 'PostGIS', 'CKAN'],
   },
   {
     label: 'AI Workflows',
-    items: ['Claude Code (custom skills & agents)', 'MCP servers', 'Anthropic API'],
+    items: ['Claude Code (custom skills & agents)', 'MCP servers', 'Anthropic API', 'Google Cloud Vision (OCR)'],
   },
   {
     label: 'Orchestration & Infra',
-    items: ['GitHub Actions', 'Prefect', 'Docker', 'AWS', 'Vercel', 'Sentry', 'Structured logging'],
+    items: ['Terraform', 'GitHub Actions', 'Docker', 'AWS', 'Vercel', 'Prefect', 'Structured logging'],
   },
 ];
 
@@ -229,7 +229,7 @@ export const selectedProjects: SelectedProject[] = [
   {
     name: 'DigiLab',
     description:
-      'Community-sourced tournament data platform for the global Digimon TCG scene; 3,000+ tournaments logged, with regional meta analysis players use to prep',
+      'Community-sourced tournament data platform for the global Digimon TCG scene; 5,000+ tournaments logged in six months, with regional meta analysis players use to prep',
     href: 'https://digilab.cards',
   },
   {

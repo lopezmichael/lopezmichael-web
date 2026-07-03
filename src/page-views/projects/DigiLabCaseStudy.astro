@@ -22,26 +22,28 @@ const techStack = [
 ];
 
 const metrics = [
-  { value: '3,000+', label: 'tournaments logged worldwide' },
-  { value: '350+', label: 'Discord members' },
-  { value: '2 yrs', label: 'running in production' },
+  { value: '5,000+', label: 'tournaments logged in 6 months' },
+  { value: '9,000+', label: 'players tracked' },
+  { value: '1,000', label: 'daily active users' },
 ];
 ---
 
 <CaseStudyLayout
   project={project}
-  metaDescription="A community-sourced data operation for the global Digimon TCG scene: 350+ contributors, 3,000+ tournaments logged, and regional meta analysis players actually use for tournament prep. Built on Astro + Neon Postgres, with a public API powering external community tools."
+  metaDescription="A community-sourced data operation for the global Digimon TCG scene: 5,000+ tournaments logged in 6 months across 280 cities, 9,000+ players tracked, and regional meta analysis players actually use for tournament prep. Built on Astro + Neon Postgres, with a public API powering external community tools."
   techStack={techStack}
   metrics={metrics}
 >
 
   <Fragment slot="problem">
     <p>
-      The Digimon TCG community is global and growing, but its competitive data was going
+      The Digimon TCG is a competitive trading-card game with a real in-person tournament scene
+      all over the world (players call themselves tamers). The community is global and growing,
+      but its competitive data was going
       uncollected. Tournament results lived in Discord screenshots and one-off Twitter posts.
       Player ratings were calculated by hand by a few dedicated organizers. Understanding the
-      deck meta meant scraping ten different community sources yourself. Store information was
-      tribal knowledge.
+      meta (which decks and strategies are actually winning) meant scraping ten different
+      community sources yourself. Store information was tribal knowledge.
     </p>
     <p>
       This is a data problem before it's a website problem. A whole competitive scene was
@@ -53,7 +55,7 @@ const metrics = [
     <p>
       I started DigiLab to fix this for North Texas tournaments specifically, then watched the
       same gap show up everywhere. What began as "let me build a dashboard for our local scene"
-      became a two-year effort to turn a scattered community into a working data operation.
+      became an effort to turn a scattered community into a working data operation.
       And the constraints are real: players depend on the ratings, stores depend on the reach,
       organizers depend on the numbers being right. Data accuracy isn't abstract here. Someone
       notices the moment it's wrong.
@@ -68,7 +70,7 @@ const metrics = [
       community that feeds it, and the analysis that comes back out.
     </p>
     <p>
-      <strong>The community is the data engine.</strong> DigiLab runs on a 350+ member Discord
+      <strong>The community is the data engine.</strong> DigiLab runs on a 450+ member Discord
       and a network of volunteer tournament organizers who enter their results. That only works
       if contributing is nearly frictionless, so a lot of the real design work went into the
       unglamorous path: how an organizer submits a bracket, how a bad entry gets flagged, how a
@@ -113,17 +115,17 @@ const metrics = [
 
   <Fragment slot="outcome">
     <p>
-      DigiLab has logged <strong>3,000+ tournaments worldwide</strong> across the major Digimon TCG
-      formats, sourced from <strong>350+ contributors</strong> in the Discord who enter results,
+      In its first six months live, DigiLab has logged <strong>5,000+ tournaments</strong> across
+      <strong>280 cities worldwide</strong> and now tracks <strong>9,000+ players</strong> across the
+      major Digimon TCG formats, sourced from <strong>450+ Discord members</strong> who enter results,
       flag bad data, and shape the roadmap. The <strong>public API</strong> now powers external
       community tools built by people I've never met. The data outgrew the site.
     </p>
     <p>
-      The part I care about most is that the analysis gets used. Players prep for events off the
-      regional meta breakdowns. Organizers and stores cite the scene-aware leaderboards. The
-      numbers changed how the community reasons about tournament data, from a pile of screenshots
-      to a shared factbase people actually make decisions against.
-      [TODO: a concrete adoption stat would sharpen this: monthly active users, API consumers, or blog readership if available.]
+      The part I care about most is that the analysis gets used. Around <strong>1,000 people use
+      DigiLab every day</strong>, prepping for events off the regional meta breakdowns and citing the
+      scene-aware leaderboards. The numbers changed how the community reasons about tournament data,
+      from a pile of screenshots to a shared factbase people actually make decisions against.
     </p>
     <p>
       For where I'm headed, DigiLab is the cleanest evidence I have that I can run a data
@@ -139,7 +141,7 @@ const metrics = [
     </p>
     <ul>
       <li><strong>Community-driven data has unique constraints.</strong> Your contributors are volunteers, and they will not tolerate friction. Every form field, every report flow, every login gate is a tax that shows up as missing or wrong data later. You don't fix community data quality with validation rules alone. You fix it with contribution design.</li>
-      <li><strong>Turning data into insight is the whole point.</strong> Collecting 3,000 tournaments is worth nothing until it answers "what will I face at my next event." The leaderboards and meta analysis are why anyone contributes in the first place. Collection and insight are one loop, not two projects.</li>
+      <li><strong>Turning data into insight is the whole point.</strong> Collecting 5,000 tournaments is worth nothing until it answers "what will I face at my next event." The leaderboards and meta analysis are why anyone contributes in the first place. Collection and insight are one loop, not two projects.</li>
       <li><strong>Give the data back and it grows on its own.</strong> The public API and indexable entity pages are why DigiLab is used by tools and people well outside my reach. Open the data and the community extends it for you.</li>
       <li><strong>Side projects with real users are the best portfolio.</strong> Coursework and demos let you skip the unglamorous parts. Real users force data integrity, uptime, and honest support, and they tell you the moment a number is wrong. That's also where AI tooling changed the math: a real data platform in evenings and weekends is possible now if you're thoughtful about scope.</li>
     </ul>

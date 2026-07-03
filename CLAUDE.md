@@ -2,7 +2,7 @@
 
 Personal portfolio for Michael Lopez — a data leader in civic tech and social impact.
 
-**Positioning (job search):** The site is set up for a full-time data-role search. It leads with **data knowledge** (decisions, domain expertise, analytical rigor, communication) over infrastructure, and targets bringing built-from-scratch data leadership into a **larger / more-established org to operate at greater scale** — deliberately NOT positioned as chasing a top "Head of Data" seat. Consulting ("Work with me") is secondary and subordinated in nav. All site prose should go through the `voice-professional` agent; banned jargon: "move the needle," "actionable," "deliver real impact," overusing "at the intersection of," and em dashes in body copy.
+**Positioning:** A job-search-ready portfolio, but the job-search intent is kept **discreet**: no public "I'm looking to leave / operate at greater scale" language, because Michael's current employer could find the page. It reads as a strong portfolio under a **"Data Strategist · Civic Tech & Social Impact"** identity tagline (he prefers this over "data leader"), leads with **data knowledge** (decisions, domain expertise, analytical rigor, communication) over infrastructure, and keeps consulting ("Work with me") secondary, low-key, and subordinated in nav (no explicit recruiter/full-time callouts). Availability is signaled privately (LinkedIn/recruiters), not on the site. All site prose should go through the `voice-professional` agent; avoid "move the needle," "actionable," "deliver real impact," overusing "at the intersection of," and em dashes in body copy.
 
 ## Stack
 
@@ -77,7 +77,8 @@ CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions
 
 ## Remaining TODOs
 
-- [ ] **Fill the 5 `[TODO]` placeholders in case studies before merging `develop`→`main`** (they render as visible bracket text): Building CPAL's Data Function ×3 (mission-outcome number, annual data budget owned, internal-team/focus-area count), Dallas County Eviction Data ×1 (documented mission number — tenants contacted/yr or evictions diverted), DigiLab ×1 (adoption stat — MAU / API consumers / blog readership). Never fabricate these.
+- [x] ~~Fill the 5 case-study `[TODO]` placeholders~~ DONE (real numbers supplied 2026-07-02: eviction ~48K Dallas filings / ~800 tenants to legal rep / 4 counties; Trust Her ~15K women to contraceptive access over 3 yrs; 9 internal teams; DigiLab ~5K tournaments/6mo, 280 cities, ~9K players, 450+ Discord, ~1K DAU). Budget clause was dropped rather than published.
+- [ ] Confirm or cut skills NOT evidenced in local repos (may be real at CPAL in repos not audited): `CKAN`, `Sentry`, `Prefect` (possibly legacy vs Databricks Workflows), `MCP servers`, `Anthropic API`, `PostGIS` (vs GeoPandas/sf). Added as evidenced: `Terraform`, `DuckDB`, `Polars`, `Google Cloud Vision (OCR)`.
 - [ ] Regenerate `/images/og-image.png` if it still shows the retired "Data Strategist" tagline — it's the OG/Twitter image on every route, so a stale title shows in every social share. Source mock: `/preview/branding/`.
 - [ ] Replace ML monogram placeholder on About page with a real photo of Michael
 - [ ] Add `public/files/Michael_Lopez_Resume.pdf` and flip `hasResumePdf` to `true` in `ResumePage.astro` to surface the download button

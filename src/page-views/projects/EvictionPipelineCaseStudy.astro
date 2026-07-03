@@ -18,9 +18,9 @@ const techStack = [
 ];
 
 const metrics = [
-  { value: '40K+', label: 'filings / year' },
+  { value: '48K+', label: 'Dallas filings / year' },
+  { value: '4', label: 'counties covered' },
   { value: '12+', label: 'partner orgs' },
-  { value: '5+', label: 'years in production' },
 ];
 ---
 
@@ -33,8 +33,8 @@ const metrics = [
 
   <Fragment slot="problem">
     <p>
-      Dallas County records roughly 40,000 eviction filings a year, among the highest counts in the
-      country. Behind each filing is a household at risk of losing its home, often on a timeline of
+      Dallas County alone recorded roughly 48,000 eviction filings in 2025, among the highest counts
+      in the country. Behind each filing is a household at risk of losing its home, often on a timeline of
       weeks. And the data describing those filings was effectively invisible to the people who most
       needed to see it: the tenants themselves, the legal aid organizations trying to reach them
       before a hearing, the journalists covering the housing crisis, and the researchers studying it.
@@ -85,12 +85,12 @@ const metrics = [
       shaped how I drew that line.
     </p>
     <p>
-      Underneath, the mechanics are ordinary and boring by design. The workstream ingests a daily SFTP
-      feed from the Dallas County courts, cleans and geocodes the records to tracts and neighborhoods,
+      Underneath, the mechanics are ordinary and boring by design. The workstream ingests daily court
+      feeds from four North Texas counties (Dallas, Tarrant, Collin, and Denton), cleans and geocodes the records to tracts and neighborhoods,
       enriches them with American Community Survey demographics for equity analysis, then publishes to
       partners and the public site. I built the first version in R in 2020 when I joined CPAL as an
-      analyst. As it grew past what one person could maintain, I rebuilt it on Databricks with Python
-      and Workflows on AWS. The stack changed. The four stages, and the commitment to the people at the
+      analyst. As it grew past what one person could maintain, I brought in our data engineering team
+      to rebuild it on Databricks with Python and Workflows on AWS. The stack changed. The four stages, and the commitment to the people at the
       end of them, didn't.
     </p>
   </Fragment>
@@ -104,9 +104,10 @@ const metrics = [
       Every weekday, newly-filed eviction cases land with local legal aid and tenant-outreach
       organizations, including the Dallas Eviction Advocacy Center, who use them to contact
       filed-against tenants directly and offer support, legal advice, and a path to assistance
-      programs. Partners work through hundreds to thousands of cases a year off this feed, reaching
-      people who would otherwise have faced a hearing alone. [TODO: confirm a documented mission
-      number, e.g. tenants contacted per year across partners, or evictions prevented / diverted.]
+      programs. In 2025, partner organizations reached out to every one of the roughly 48,000
+      households with an eviction filing in Dallas County, and through CPAL's partnership with local
+      eviction-advocacy organizations, about 800 tenants a year secure legal representation they
+      would not otherwise have had.
     </p>
     <p>
       The same daily feed powers the
