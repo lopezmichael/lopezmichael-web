@@ -27,6 +27,7 @@ export const projects: Project[] = [
     href: '',
     gradient: 'from-canyon to-cool',
     category: 'civic',
+    image: '/images/projects/cpal-data-function.png',
     highlights: [
       'Scaled the data team from 1 analyst to 7',
       'Led the data org through a CDO transition',
@@ -44,7 +45,7 @@ export const projects: Project[] = [
     href: '',
     gradient: 'from-canyon to-secondary',
     category: 'civic',
-    cardImage: '/images/projects/eviction-pipeline.png',
+    image: '/images/projects/north-texas-evictions.png',
     highlights: [
       '48,000+ Dallas filings a year turned into tenant outreach',
       '~800 tenants a year connected to legal representation',
