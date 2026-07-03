@@ -5,3 +5,6 @@ node_modules/
 .claude/
 .env
 .env.*
+
+# Personal working file (LinkedIn copy) — not part of the site
+/linkedin-content.md
