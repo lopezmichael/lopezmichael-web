@@ -154,7 +154,7 @@ export const skills: SkillCategory[] = [
   },
   {
     label: 'Visualization & Geospatial',
-    items: ['R Shiny', 'Tableau', 'Highcharts', 'Mapbox GL', 'QGIS', 'ArcGIS'],
+    items: ['R Shiny', 'Tableau', 'Highcharts', 'Mapbox GL', 'Spatial SQL', 'QGIS', 'ArcGIS'],
   },
   {
     label: 'Domains',
