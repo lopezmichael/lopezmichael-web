@@ -42,7 +42,7 @@ export const experience: Experience[] = [
     bullets: [
       'Leading CPAL\'s data platform migration to Databricks (Unity Catalog, Workflows, Lakebase + Lakehouse on AWS, Git-tracked orchestration), systematizing 35-40 pipelines from file-based storage onto unified cloud infrastructure',
       'Manage a 6-person external data engineering team via vendor partnership executing on the internal data roadmap, alongside one full-time data engineer reporting directly to me',
-      'Built AI-enabled team workflows (Claude Code with custom skills and agents, MCP servers, prompt caching with the Anthropic API), meaningfully accelerating how we develop pipelines, write documentation, review code, and communicate with stakeholders',
+      'Built AI-enabled team workflows (Claude Code with custom skills and agents, prompt caching with the Anthropic API), meaningfully accelerating how we develop pipelines, write documentation, review code, and communicate with stakeholders',
       'Develop internal tools that let non-data staff act on data without analyst intervention, including a parcel-level outreach tool with 20 active field-team users',
       'Maintain the Dallas County eviction data workstream (~48,000 Dallas filings a year across four North Texas counties, daily updates to 12+ partners including the Dallas Eviction Advocacy Center, the Princeton Eviction Lab, and Dallas Health & Human Services), now running on Databricks Python notebooks after migration from the original R implementation',
     ],
@@ -166,7 +166,7 @@ export const skills: SkillCategory[] = [
   },
   {
     label: 'AI Workflows',
-    items: ['Claude Code (custom skills & agents)', 'MCP servers', 'Anthropic API', 'Google Cloud Vision (OCR)'],
+    items: ['Claude Code (custom skills & agents)', 'Anthropic API', 'Google Cloud Vision (OCR)'],
   },
   {
     label: 'Orchestration & Infra',

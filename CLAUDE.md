@@ -78,11 +78,11 @@ CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions
 ## Remaining TODOs
 
 - [x] ~~Fill the 5 case-study `[TODO]` placeholders~~ DONE (real numbers supplied 2026-07-02: eviction ~48K Dallas filings / ~800 tenants to legal rep / 4 counties; Trust Her ~15K women to contraceptive access over 3 yrs; 9 internal teams; DigiLab ~5K tournaments/6mo, 280 cities, ~9K players, 450+ Discord, ~1K DAU). Budget clause was dropped rather than published.
-- [ ] Confirm or cut skills NOT evidenced in local repos (may be real at CPAL in repos not audited): `CKAN`, `Sentry`, `Prefect` (possibly legacy vs Databricks Workflows), `MCP servers`, `Anthropic API`, `PostGIS` (vs GeoPandas/sf). Added as evidenced: `Terraform`, `DuckDB`, `Polars`, `Google Cloud Vision (OCR)`.
+- [ ] Confirm or cut skills NOT evidenced in local repos (may be real at CPAL in repos not audited): `CKAN`, `Sentry`, `Prefect` (possibly legacy vs Databricks Workflows), `Anthropic API`, `PostGIS` (vs GeoPandas/sf). Added as evidenced: `Terraform`, `DuckDB`, `Polars`, `Google Cloud Vision (OCR)`. Cut per Michael: `MCP servers` (consumed, not built).
 - [ ] Regenerate `/images/og-image.png` if it still shows the retired "Data Strategist" tagline — it's the OG/Twitter image on every route, so a stale title shows in every social share. Source mock: `/preview/branding/`.
 - [ ] Replace ML monogram placeholder on About page with a real photo of Michael
 - [ ] Add `public/files/Michael_Lopez_Resume.pdf` and flip `hasResumePdf` to `true` in `ResumePage.astro` to surface the download button
-- [ ] Configure DNS so `lopezmichael.dev` points at the Vercel deployment
+- [x] ~~Configure DNS~~ DONE — `lopezmichael.dev` resolves to Vercel (216.150.1.1) and serves HTTP 200. (Currently serving the `main` branch, i.e. pre-revision content, until `develop` is merged.)
 - [ ] Enable Web Analytics in the Vercel project dashboard (the `<Analytics />` component is wired but inert until then)
 - [ ] Astro 6 upgrade deferred — `@tailwindcss/vite` (4.2.4) is incompatible with Astro 6's Rolldown-based Vite (`Missing field 'tsconfigPaths' on BindingViteResolvePluginConfig.resolveOptions`). The blocked advisory (GHSA-j687-52p2-xcff) is `define:vars` XSS which this codebase does not use, so practical exposure is zero. Retry the upgrade when `@tailwindcss/vite` ships an Astro-6-compatible release.
 
