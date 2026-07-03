@@ -44,7 +44,7 @@ export const experience: Experience[] = [
       'Manage a 6-person external data engineering team via vendor partnership executing on the internal data roadmap, alongside one full-time data engineer reporting directly to me',
       'Built AI-enabled team workflows (Claude Code with custom skills and agents, prompt caching with the Anthropic API), meaningfully accelerating how we develop pipelines, write documentation, review code, and communicate with stakeholders',
       'Develop internal tools that let non-data staff act on data without analyst intervention, including a parcel-level outreach tool with 20 active field-team users',
-      'Maintain the Dallas County eviction data workstream (~48,000 Dallas filings a year across four North Texas counties, daily updates to 12+ partners including the Dallas Eviction Advocacy Center, the Princeton Eviction Lab, and Dallas Health & Human Services), now running on Databricks Python notebooks after migration from the original R implementation',
+      'Maintain the eviction data workstream across four North Texas counties (~48,000 filings in Dallas County alone in 2025; daily updates to 12+ partners including the Dallas Eviction Advocacy Center, the Princeton Eviction Lab, and Dallas Health & Human Services), now running on Databricks Python notebooks after migration from the original R implementation',
     ],
   },
   {

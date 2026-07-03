@@ -24,7 +24,7 @@ const experience = [
     'Manage a 6-person external data engineering team via vendor partnership executing the internal data roadmap, alongside one full-time data engineer reporting directly to me',
     'Built AI-enabled team workflows (Claude Code with custom skills and agents, prompt caching with the Anthropic API), accelerating how we develop pipelines, write documentation, review code, and communicate with stakeholders',
     'Develop internal tools that let non-data staff act on data without analyst intervention, including a parcel-level outreach tool with 20 active field-team users',
-    'Maintain the eviction data workstream (~48,000 Dallas filings a year across four North Texas counties; daily feed to 12+ partners including the Dallas Eviction Advocacy Center, the Princeton Eviction Lab, and Dallas Health & Human Services)',
+    'Maintain the eviction data workstream across four North Texas counties (~48,000 filings in Dallas County alone in 2025); daily feed to 12+ partners including the Dallas Eviction Advocacy Center, the Princeton Eviction Lab, and Dallas Health & Human Services',
   ]},
   { title: 'Director, Data', dates: 'May 2023 – Dec 2025', bullets: [
     "Built CPAL's data function from the ground up; led hiring for the org's first data engineer and prior analyst roles",
