@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "screenshots": "node scripts/generate-screenshots.mjs",
-    "resume:pdf": "node scripts/generate-resume-pdf.mjs"
+    "resume:pdf": "node scripts/generate-resume-pdf.mjs",
+    "cover:pdf": "node scripts/generate-cover-letter-pdf.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.3.1",
