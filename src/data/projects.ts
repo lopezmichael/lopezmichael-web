@@ -120,7 +120,7 @@ export const projects: Project[] = [
     category: 'personal',
     image: '/images/projects/digilab.png',
     highlights: [
-      '3,000+ tournaments logged · 350+ Discord community members',
+      '5,000+ tournaments logged · 450+ Discord community members',
       'SSR Astro + Preact islands · Neon Postgres on Vercel edge',
       'Public token-authenticated API and admin CRUD subdomain',
     ],
