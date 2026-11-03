@@ -30,8 +30,10 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 const argv = process.argv.slice(2);
 const positional = [];
 let dateOverride = null;
+let tight = false; // --tight: trims paragraph/date spacing when a letter spills a line or two onto page 2
 for (let i = 0; i < argv.length; i++) {
   if (argv[i] === '--date') dateOverride = argv[++i];
+  else if (argv[i] === '--tight') tight = true;
   else positional.push(argv[i]);
 }
 const inPath = positional[0];
@@ -96,6 +98,7 @@ a{color:#8B2D3D;text-decoration:none;}
 .date{font-size:9.6pt;color:#8a7d70;margin:22px 0 16px;}
 .letter p{font-size:10.6pt;line-height:1.5;color:#332e28;margin-bottom:11px;}
 .letter p:last-child{margin-bottom:0;}
+${tight ? '.date{margin:12px 0 8px;} .letter p{margin-bottom:7px;line-height:1.45;}' : ''}
 </style></head><body>
 
   <div class="header">
