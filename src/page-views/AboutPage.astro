@@ -98,15 +98,15 @@ const viz = media.filter((m) => m.type === 'visualization');
             </li>
             <li class="flex items-baseline gap-4 lg:gap-5">
               <span class="text-canyon/60 dark:text-canyon font-light tabular-nums leading-none text-2xl lg:text-3xl shrink-0 w-9">04</span>
-              <span class="text-sm lg:text-base leading-relaxed">The Databricks platform migration on AWS, moving 35-40 pipelines from file-based storage onto unified cloud infrastructure with Git-tracked orchestration.</span>
+              <span class="text-sm lg:text-base leading-relaxed">The Databricks platform migration on AWS, moving the org's pipelines off file-based storage onto unified, governed cloud infrastructure with Git-tracked orchestration.</span>
             </li>
             <li class="flex items-baseline gap-4 lg:gap-5">
               <span class="text-canyon/60 dark:text-canyon font-light tabular-nums leading-none text-2xl lg:text-3xl shrink-0 w-9">05</span>
-              <span class="text-sm lg:text-base leading-relaxed">AI-assisted workflows I've built into how I develop pipelines, write documentation, and review code (Claude Code with custom skills and agents), now rolling out across the team.</span>
+              <span class="text-sm lg:text-base leading-relaxed">AI-assisted workflows (Claude Code with custom skills and agents) that the team uses every day to develop pipelines, write documentation, and review code.</span>
             </li>
             <li class="flex items-baseline gap-4 lg:gap-5">
               <span class="text-canyon/60 dark:text-canyon font-light tabular-nums leading-none text-2xl lg:text-3xl shrink-0 w-9">06</span>
-              <span class="text-sm lg:text-base leading-relaxed">A data engineering team scaled from 1 in-house analyst to 6 external data engineers + 1 in-house data engineer, executing on the internal data roadmap.</span>
+              <span class="text-sm lg:text-base leading-relaxed">A data team grown from a single analyst to two in-house data engineers and a four-person vendor engineering team, executing on the internal data roadmap.</span>
             </li>
           </ol>
         </section>
@@ -157,9 +157,9 @@ const viz = media.filter((m) => m.type === 'visualization');
         <section class="mt-16 lg:mt-20">
           <h2 class="text-xl lg:text-2xl font-semibold text-primary dark:text-dark-text mb-8 flex items-center gap-3">
             <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
-            Technical Skills
+            Domains, Methods & Stack
           </h2>
-          <SkillsGrid />
+          <SkillsGrid only={['Domains', 'Methods', 'Data Platform', 'AI Workflows']} />
         </section>
       </ScrollReveal>
 

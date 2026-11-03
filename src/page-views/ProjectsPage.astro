@@ -5,21 +5,21 @@ import ScrollReveal from '../components/ScrollReveal.astro';
 import { projects } from '../data/projects';
 
 const civicProjects = projects.filter((p) => p.category === 'civic');
-const openSourceProjects = projects.filter((p) => p.category === 'open-source');
-const personalProjects = projects.filter((p) => p.category === 'personal');
+const communityProjects = projects.filter((p) => p.category === 'community');
+const otherProjects = projects.filter((p) => p.category === 'other');
 ---
 
 <BaseLayout
   title="Projects"
-  description="Selected projects by Michael Lopez. Data pipelines, dashboards, open source tools, and community-driven data products."
+  description="Selected work by Michael Lopez: building a nonprofit data function, civic data systems, and community-driven data products."
 >
   <div class="border-t-4 border-canyon">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
       <ScrollReveal>
         <h1 class="text-3xl lg:text-4xl font-bold tracking-tight mb-4">Projects</h1>
         <p class="text-base leading-relaxed opacity-80 max-w-2xl">
-          A selection of data systems, tools, and products I've built, from production pipelines
-          serving community partners to open-source packages and personal projects.
+          Selected work, from leading a nonprofit data function and the systems it runs on to a
+          community data platform I built and run on my own.
         </p>
       </ScrollReveal>
     </div>
@@ -43,16 +43,16 @@ const personalProjects = projects.filter((p) => p.category === 'personal');
     </div>
 
     <!-- Personal Projects -->
-    {personalProjects.length > 0 && (
+    {communityProjects.length > 0 && (
       <>
         <ScrollReveal>
           <h2 class="text-lg font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-3">
             <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
-            Personal & Community
+            Community Data
           </h2>
         </ScrollReveal>
         <div class="space-y-6 mb-16">
-          {personalProjects.map((project, i) => (
+          {communityProjects.map((project, i) => (
             <ScrollReveal delay={i * 80}>
               <ProjectCardWide project={project} />
             </ScrollReveal>
@@ -65,11 +65,11 @@ const personalProjects = projects.filter((p) => p.category === 'personal');
     <ScrollReveal>
       <h2 class="text-lg font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-3">
         <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
-        Open Source
+        Other Work
       </h2>
     </ScrollReveal>
     <div class="space-y-6">
-      {openSourceProjects.map((project, i) => (
+      {otherProjects.map((project, i) => (
         <ScrollReveal delay={i * 80}>
           <ProjectCardWide project={project} />
         </ScrollReveal>

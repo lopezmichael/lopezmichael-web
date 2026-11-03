@@ -6,7 +6,7 @@ export interface Project {
   tags: string[];
   href: string;
   gradient: string;
-  category: 'civic' | 'open-source' | 'personal';
+  category: 'civic' | 'community' | 'other';
   highlights?: string[];
   image?: string;
   /** Optional card-only image; cards prefer this over `image`, detail pages don't read it. */
@@ -20,18 +20,18 @@ export const projects: Project[] = [
     slug: 'building-cpal-data-function',
     title: "Building CPAL's Data Function",
     description:
-      'Building a nonprofit data function from one analyst into a seven-person team, a cloud platform, and a 30+ app decision-support suite.',
+      'Helping grow a nonprofit data function from one analyst into an in-house engineering team, a cloud platform, and a 30+ app decision-support suite.',
     longDescription:
-      "The six-year story of building the Child Poverty Action Lab's data function from scratch: hiring the org's first data engineer, standing up a vendor-augmented team, selecting and migrating to Databricks, leading the data org through a CDO transition, and rolling AI-enabled workflows across the team. A leadership case study, not a pipeline write-up.",
+      "The six-year story of growing the Child Poverty Action Lab's data function: hiring the org's first data engineer, bringing in vendor engineers to build the platform and then moving that work in-house, selecting and migrating to Databricks, leading the data org through a CDO transition, and rolling AI-enabled workflows across the team. A leadership case study, not a pipeline write-up.",
     tags: ['Data Leadership', 'Team Building', 'Data Strategy', 'Databricks'],
     href: '',
     gradient: 'from-canyon to-cool',
     category: 'civic',
     image: '/images/projects/cpal-data-function.png',
     highlights: [
-      'Scaled the data team from 1 analyst to 7',
+      'Grew the team from 1 analyst to 2 in-house + 4 vendor engineers',
       'Led the data org through a CDO transition',
-      'Selected and migrated to Databricks; rolled out AI workflows org-wide',
+      'Selected and migrated to Databricks; helped roll out Claude Enterprise org-wide',
     ],
   },
   {
@@ -47,7 +47,7 @@ export const projects: Project[] = [
     category: 'civic',
     image: '/images/projects/north-texas-evictions.png',
     highlights: [
-      '48,000+ Dallas filings a year turned into tenant outreach',
+      '~48,000 Dallas filings a year turned into tenant outreach',
       '~800 tenants a year connected to legal representation',
       'Feeds 12+ partners and North Texas Evictions',
     ],
@@ -99,7 +99,7 @@ export const projects: Project[] = [
     tags: ['Astro', 'Tailwind CSS', 'i18n', 'Web Development'],
     href: 'https://www.rodriguezwellbeing.com',
     gradient: 'from-secondary to-accent',
-    category: 'personal',
+    category: 'other',
     image: '/images/projects/rodriguez-wellbeing.png',
     highlights: [
       'Full English/Spanish bilingual support',
@@ -111,16 +111,16 @@ export const projects: Project[] = [
     slug: 'digilab',
     title: 'DigiLab',
     description:
-      'Production tournament tracking and meta analysis platform for the global Digimon TCG community.',
+      'Production tournament tracking and meta analysis platform for the Digimon and Gundam card game communities.',
     longDescription:
-      'A community-sourced tournament data platform for the global Digimon TCG scene. A 450+ member Discord and a network of volunteer organizers keep the data flowing; the platform turns it into regional meta analysis, scene-aware leaderboards, and blog deep-dives players use to prep for events. In its first six months: 5,000+ tournaments logged across 280 cities, 9,000+ players tracked, and around 1,000 daily active users. A public API powers external community tools. Built on Astro, Preact, and Neon Postgres.',
+      'A community-sourced tournament data platform for the Digimon and Gundam card game scenes. A 600-member Discord and a network of volunteer organizers keep the data flowing; the platform turns it into regional meta analysis, scene-aware leaderboards, and blog deep-dives players use to prep for events. So far: 10,800+ tournaments logged, 19,100+ players tracked, and around 2,000 daily active users. A public API powers external community tools. Built on Astro, Preact, and Neon Postgres.',
     tags: ['Community Data', 'Meta Analysis', 'Data Insights', 'Astro', 'Neon', 'Public API'],
     href: 'https://digilab.cards',
     gradient: 'from-cool to-primary',
-    category: 'personal',
+    category: 'community',
     image: '/images/projects/digilab.png',
     highlights: [
-      '5,000+ tournaments logged · 450+ Discord community members',
+      '10,800+ tournaments logged · 600 Discord community members',
       'SSR Astro + Preact islands · Neon Postgres on Vercel edge',
       'Public token-authenticated API and admin CRUD subdomain',
     ],
@@ -135,7 +135,7 @@ export const projects: Project[] = [
     tags: ['R Package', 'Open Source', 'DevTools'],
     href: 'https://github.com/lopezmichael/atomtemplates',
     gradient: 'from-secondary to-accent',
-    category: 'open-source',
+    category: 'other',
     image: '/images/projects/atomtemplates.png',
     highlights: [
       'Consistent project scaffolding',
@@ -146,7 +146,7 @@ export const projects: Project[] = [
 ];
 
 // Featured projects shown on homepage. Slug-based so reordering projects[] doesn't silently change the home page.
-const featuredSlugs = ['homestead-map', 'eviction-pipeline', 'digilab'];
+const featuredSlugs = ['building-cpal-data-function', 'eviction-pipeline', 'digilab'];
 export const featuredProjects = featuredSlugs
   .map((slug) => projects.find((p) => p.slug === slug))
   .filter((p): p is Project => p !== undefined);

@@ -4,7 +4,8 @@
  *  - `playercoach` — built AND still build. Lead/Director at mid-size mission
  *    orgs, and the player-coach roles that dominate the actual search
  *    (CfA Data Science Manager, Ignite Reading Senior Analytics Manager).
- *  - `platform`    — Staff/Principal IC at larger orgs. Leads with the migration,
+ *  - `platform`    — kept for reference, not targeted (leadership-only search since
+ *    2026-10-22). Originally Staff/Principal IC at larger orgs. Leads with the migration,
  *    pipelines, and modern stack; drops budget/vendor framing.
  *  - `research`    — evaluation shops, policy teams, research orgs. Leads with
  *    supply modeling, the bond-package index, RTM, and published analysis.
@@ -138,13 +139,13 @@ export interface VariantMeta {
 export const variantMeta: Record<Variant, VariantMeta> = {
   playercoach: {
     fileSuffix: '',
-    label: 'Player-coach (leadership + platform) — DEFAULT',
+    label: 'Leadership with technical authority — DEFAULT',
     summary:
-      "Data leader who still builds. Six years growing the Child Poverty Action Lab's data function from one analyst to a six-person team while personally building the Databricks platform, the eviction pipeline, and the spatial models underneath it. I take teams and systems from nothing to running.",
+      "Data leader. Six years helping grow the Child Poverty Action Lab's data function from one analyst to two in-house engineers and a four-person vendor team, leading it through a CDO transition, and helping roll out AI tools org-wide. I make the architecture and build-vs-partner calls myself. I take teams and systems from nothing to running.",
   },
   platform: {
     fileSuffix: '_Platform',
-    label: 'Platform (senior IC / Staff+)',
+    label: 'Platform (technical-depth framing; not an active target since the 10-22 leadership-only repivot)',
     summary:
       "Data and platform engineer with six years turning public and administrative data into systems people rely on. I lead the Child Poverty Action Lab's migration of around 40 pipelines onto Databricks, built its eviction data infrastructure from scratch, and run a production analytics platform of my own end to end.",
   },
@@ -170,7 +171,7 @@ export const experience: Experience[] = [
         text: "Lead CPAL's data platform migration to Databricks (Unity Catalog, Workflows, Lakebase + Lakehouse on AWS, Git-tracked orchestration), systematizing around 40 pipelines from file-based storage onto unified cloud infrastructure",
       },
       {
-        text: 'Manage a 4-person external data engineering team via vendor partnership executing the internal data roadmap, alongside one full-time data engineer reporting directly to me',
+        text: 'Direct and manage a 4-person external data engineering team via vendor partnership executing the internal data roadmap, plus two newly hired in-house data engineers reporting directly to me as that work moves in-house',
         variants: ['playercoach'],
       },
       {
@@ -197,7 +198,7 @@ export const experience: Experience[] = [
     group: 'cpal',
     bullets: [
       {
-        text: 'Built CPAL\'s data function from the ground up; led hiring for the org\'s first data engineer and prior analyst roles',
+        text: 'Helped grow CPAL\'s data function from a single analyst and managed a team of 2–4; led hiring for the org\'s first data engineer and prior analyst roles',
         // Intentionally untagged: belongs in every variant. Scope-of-ownership
         // reads well for Staff/Principal too, not just leadership.
       },
@@ -220,7 +221,7 @@ export const experience: Experience[] = [
         print: 'Oversaw a 30+ app R Shiny suite informing decisions across housing, public safety, maternal health, benefits delivery, and criminal justice',
       },
       {
-        text: 'Evaluated and selected the enterprise tooling stack: Databricks (over Snowflake / dbt-Cloud after a capacity assessment), Claude Enterprise org-wide, vendor data feeds (MySidewalk, DataAxle)',
+        text: 'Evaluated and selected the enterprise tooling stack: Databricks (over Snowflake / dbt-Cloud after a capacity assessment) and vendor data feeds (MySidewalk, DataAxle); helped bring Claude Enterprise in org-wide',
         variants: ['playercoach', 'platform'],
       },
       {
@@ -530,9 +531,9 @@ export const selectedProjects: SelectedProject[] = [
   {
     name: 'DigiLab',
     description:
-      'Community-sourced tournament data platform for the global Digimon TCG scene; 5,000+ tournaments logged in six months, with regional meta analysis players use to prep',
+      'Community-sourced tournament data platform for the Digimon and Gundam card game scenes; 10,800+ tournaments and 19,100+ players tracked, with regional meta analysis players use to prep',
     print:
-      'Community-sourced tournament data platform for the global Digimon TCG scene; 5,000+ tournaments logged in six months, built and run solo through agentic workflows.',
+      'Community-sourced tournament data platform for the Digimon and Gundam card game scenes; 10,800+ tournaments and 19,100+ players tracked, built and run solo through agentic workflows.',
     href: 'https://digilab.cards',
     tag: 'digilab.cards',
   },

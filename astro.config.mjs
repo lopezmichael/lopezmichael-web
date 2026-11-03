@@ -8,7 +8,8 @@ export default defineConfig({
   integrations: [
     sitemap({
       // Keep internal/WIP routes out of the sitemap so crawlers don't surface them.
-      filter: (page) => !page.includes('/preview/'),
+      // /work-with-me/ is hidden while job searching: off the nav, noindexed, out of the sitemap.
+      filter: (page) => !page.includes('/preview/') && !page.includes('/work-with-me/'),
     }),
   ],
   vite: {

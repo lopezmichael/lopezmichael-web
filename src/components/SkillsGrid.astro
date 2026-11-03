@@ -1,9 +1,18 @@
 ---
 import { skills } from '../data/resume';
+
+interface Props {
+  /** Category labels to show, in this order. Omit to show every category. */
+  only?: string[];
+}
+const { only } = Astro.props;
+const shown = only
+  ? only.map((label) => skills.find((c) => c.label === label)).filter((c) => c !== undefined)
+  : skills;
 ---
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8">
-  {skills.map((cat) => (
+  {shown.map((cat) => (
     <div>
       <h3 class="text-[11px] uppercase tracking-[0.14em] font-semibold text-cool dark:text-secondary mb-3 pb-2 border-b border-accent/60 dark:border-canyon/40">
         {cat.label}
