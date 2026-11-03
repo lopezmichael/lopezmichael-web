@@ -20,18 +20,18 @@ export const projects: Project[] = [
     slug: 'building-cpal-data-function',
     title: "Building CPAL's Data Function",
     description:
-      'Helping grow a nonprofit data function from one analyst into an in-house engineering team, a cloud platform, and a 30+ app decision-support suite.',
+      'Helping grow a nonprofit data function from one analyst into an in-house engineering team, with a cloud platform and a 30+ app decision-support suite.',
     longDescription:
-      "The six-year story of growing the Child Poverty Action Lab's data function: hiring the org's first data engineer, bringing in vendor engineers to build the platform and then moving that work in-house, selecting and migrating to Databricks, leading the data org through a CDO transition, and rolling AI-enabled workflows across the team. A leadership case study, not a pipeline write-up.",
+      "The six-year story of helping grow the Child Poverty Action Lab's data function: hiring the org's first data engineer, pairing vendor engineers with an in-house team to build the platform, selecting and migrating to Databricks, leading the data org through a CDO transition, and rolling out AI-enabled workflows across the team. A leadership case study, not a pipeline write-up.",
     tags: ['Data Leadership', 'Team Building', 'Data Strategy', 'Databricks'],
     href: '',
     gradient: 'from-canyon to-cool',
     category: 'civic',
     image: '/images/projects/cpal-data-function.png',
     highlights: [
-      'Grew the team from 1 analyst to 2 in-house + 4 vendor engineers',
+      'Helped grow the team from 1 analyst to 2 in-house + 4 vendor engineers',
       'Led the data org through a CDO transition',
-      'Selected and migrated to Databricks; helped roll out Claude Enterprise org-wide',
+      'Selected and migrated to Databricks; shaped the org-wide Claude Enterprise rollout',
     ],
   },
   {

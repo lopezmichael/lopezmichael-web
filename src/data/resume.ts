@@ -141,7 +141,7 @@ export const variantMeta: Record<Variant, VariantMeta> = {
     fileSuffix: '',
     label: 'Leadership with technical authority — DEFAULT',
     summary:
-      "Data leader. Six years helping grow the Child Poverty Action Lab's data function from one analyst to two in-house engineers and a four-person vendor team, leading it through a CDO transition, and helping roll out AI tools org-wide. I make the architecture and build-vs-partner calls myself. I take teams and systems from nothing to running.",
+      "Data leader. Six years helping grow the Child Poverty Action Lab's data function from one analyst to two in-house engineers and a four-person vendor team, leading it through a CDO transition, and shaping the org-wide AI rollout. I make the architecture and build-vs-partner calls myself. I take teams and systems from nothing to running.",
   },
   platform: {
     fileSuffix: '_Platform',
@@ -171,7 +171,7 @@ export const experience: Experience[] = [
         text: "Lead CPAL's data platform migration to Databricks (Unity Catalog, Workflows, Lakebase + Lakehouse on AWS, Git-tracked orchestration), systematizing around 40 pipelines from file-based storage onto unified cloud infrastructure",
       },
       {
-        text: 'Direct and manage a 4-person external data engineering team via vendor partnership executing the internal data roadmap, plus two newly hired in-house data engineers reporting directly to me as that work moves in-house',
+        text: 'Manage two in-house data engineers (direct reports) and direct a 4-person vendor data engineering team executing the internal data roadmap',
         variants: ['playercoach'],
       },
       {
@@ -198,7 +198,7 @@ export const experience: Experience[] = [
     group: 'cpal',
     bullets: [
       {
-        text: 'Helped grow CPAL\'s data function from a single analyst and managed a team of 2–4; led hiring for the org\'s first data engineer and prior analyst roles',
+        text: 'Helped grow CPAL\'s data function from a single analyst to a team of 2–4 reporting to me; led hiring for the org\'s first data engineer and prior analyst roles',
         // Intentionally untagged: belongs in every variant. Scope-of-ownership
         // reads well for Staff/Principal too, not just leadership.
       },
@@ -221,7 +221,7 @@ export const experience: Experience[] = [
         print: 'Oversaw a 30+ app R Shiny suite informing decisions across housing, public safety, maternal health, benefits delivery, and criminal justice',
       },
       {
-        text: 'Evaluated and selected the enterprise tooling stack: Databricks (over Snowflake / dbt-Cloud after a capacity assessment) and vendor data feeds (MySidewalk, DataAxle); helped bring Claude Enterprise in org-wide',
+        text: 'Evaluated and selected the enterprise tooling stack: Databricks (over Snowflake and dbt Cloud, after a capacity assessment) and vendor data feeds (MySidewalk, DataAxle); shaped the org-wide setup and rollout of Claude Enterprise',
         variants: ['playercoach', 'platform'],
       },
       {

@@ -103,7 +103,7 @@ a{color:#8B2D3D;text-decoration:none;}
     <div class="head-row">
       <div>
         <div class="name">Michael Lopez</div>
-        <div class="tagline">Data Strategist · Civic Tech &amp; Social Impact</div>
+        <div class="tagline">Data Leader · Civic Tech &amp; Social Impact</div>
       </div>
       <div class="contact">
         <div><span class="c-loc">Dallas, TX</span> · (305) 546-8721</div>
