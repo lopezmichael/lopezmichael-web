@@ -7,6 +7,8 @@ import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 export interface PostProcessing {
   composer: EffectComposer;
   resize: (width: number, height: number) => void;
+  /** Bloom is the glow; off on small screens. The output (sRGB) pass always runs, so colors match. */
+  setBloom: (enabled: boolean) => void;
   dispose: () => void;
 }
 
@@ -38,10 +40,14 @@ export function createPostProcessing(
     bloomPass.resolution.set(Math.floor(width / 2), Math.floor(height / 2));
   }
 
+  function setBloom(enabled: boolean) {
+    bloomPass.enabled = enabled;
+  }
+
   function dispose() {
     bloomPass.dispose();
     composer.dispose();
   }
 
-  return { composer, resize, dispose };
+  return { composer, resize, setBloom, dispose };
 }

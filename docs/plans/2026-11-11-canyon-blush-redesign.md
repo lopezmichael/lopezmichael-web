@@ -88,54 +88,38 @@ Shipped with no visible change: the four affected pages were pixel-identical to 
       `description`). Home still shows the three featured projects, plus an "All 7 projects" link.
 - [x] Consulting CTA band removed (it lived in the footer, so it's gone everywhere).
 
-### Phase 3: Terrain v2 (L)
+### Phase 3: Terrain v2 (L) · DONE 2026-11-11 except the City look (under review)
 
-Extends `src/lib/terrain/` rather than replacing it. The Three.js pipeline, GPU simplex
-shader, bloom, randomized parameters, dynamic import, and always-dark rendering all stay.
+Extends `src/lib/terrain/` rather than replacing it: Three.js pipeline, GPU simplex shader, bloom,
+generative parameters and always-dark rendering all kept.
 
-**3a. Modes as shader variants**
-- [ ] Add a `uMode` uniform and per-mode height functions in `shaders.ts`:
-  - **Canyon** (default; today's noise plus the mockup's improvements): mesa terraces
-    (quantized height with smooth steps) and a meandering river channel carved through the field.
-  - **City:** a street grid. Quantize the plane into blocks and lots; lot height comes from noise
-    weighted by distance to a "downtown" center, so it rises into a skyline and falls off to
-    neighborhoods; streets stay at ground level. In wireframe it reads as a city seen from above,
-    and it ties to the civic/urban work.
-  - **Prairie:** gentle rolling North Texas plains with one escarpment ridge (a nod to the
-    Dallas escarpment) and a creek line.
-- [ ] `config.ts`: per-mode parameter ranges in the style of `randomizeTerrainParams()`, so every mode
-      stays generative.
-- [ ] Smooth transition between modes (blend heights over ~800ms) rather than a hard cut.
-
-**3b. Reactivity and controls**
-- [ ] Pointer lift: raycast the pointer onto the terrain plane; pass `uPointer` and an eased
-      `uPointerStrength` to the shader for a gaussian rise. Touch-drag works the same way.
-- [ ] Controls on the band: mode switcher (Canyon · City · Prairie) and Regrow, as real buttons.
-      The label shows place, mode, and seed in mono.
-- [ ] Shareable terrain: `?terrain=city-4821` restores a mode and seed, so a visitor can send a view
-      they like.
-- [ ] Remember the visitor's last mode in `localStorage` (wrapped in try/catch; a convenience only).
-
-**3c. Location-aware defaults (privacy-first, in layers)**
-- [ ] **Layer 1, no network:** use the browser's time zone and local time.
-      - Time zone picks a default mode and place label (e.g. `America/Chicago` → Prairie or Canyon,
-        "North Texas"; large metro time zones → City).
-      - Local time shifts the ramp slightly: dawn, day, dusk, and night tints within the same canyon
-        palette.
-- [ ] **Layer 2, optional:** Vercel's IP geolocation headers (`x-vercel-ip-city`,
-      `x-vercel-ip-country-region`) read by a tiny Vercel Routing Middleware that sets a short-lived,
-      coarse-region cookie. The terrain seeds from a hash of the region, so a visitor from the same
-      place sees a consistent "their" terrain. Nothing is stored server-side, there are no third-party
-      lookups, and there's no browser geolocation prompt (`Permissions-Policy` already blocks it).
-      *Verify during build:* middleware support for a static Astro output on Vercel; fall back to a
-      single `/api/where` edge function if needed.
-- [ ] **Layer 3, later:** real elevation for the home place. Bake a small Dallas heightmap from public
-      USGS 3DEP data into a PNG at build time and blend it into Canyon/Prairie. No runtime network.
-
-**3d. Performance**
-- [ ] Pause rendering when the band is off-screen (IntersectionObserver) or the tab is hidden.
-- [ ] Fewer segments and no bloom on small screens or low-power devices.
-- [ ] Reduced motion: a still frame, with pointer lift only.
+- [x] `state.ts` (no Three.js): modes, the real Texas place each evokes (Palo Duro Canyon, Downtown
+      Dallas, Blackland Prairie), `paramsFor(mode, seed)` from a seeded PRNG so a mode + seed always
+      rebuilds the same terrain (noise, camera, tilt), time-of-day tint and default, `?terrain=` parsing.
+- [x] Shader modes with a blended A/B morph (~800ms; the outgoing terrain is only evaluated while a
+      morph runs): **Canyon** (original noise + mesa terraces + a meandering river), **Prairie**
+      (rolling plains, one escarpment ridge, a creek), **City** (see below).
+- [x] Height ramp switched to deep canyon → sand (`config.ts` `TERRAIN_RAMP`); the old top stop was
+      a teal-green that collides with the CPAL brand.
+- [x] Pointer/touch lift: raycast onto each mode's ground level after the camera moves; gentle
+      camera drift while the pointer is over the band.
+- [x] Controls on the band: Canyon · City · Prairie (`aria-pressed`) and Regrow. Label shows the
+      terrain's place + seed (never the visitor's location). Choices update `?terrain=mode-seed` for
+      sharing; the last chosen mode is remembered in `localStorage`.
+- [x] One renderer for the page's life: Regrow / mode switches change uniforms only; a click mid-morph
+      is queued. Wave and roll phases accumulate, so new speeds never jump.
+- [x] Performance: renders only while the band is on screen and the tab is visible; reduced motion =
+      still frame, rendering only while something changes; small screens use a lighter mesh and no
+      bloom (re-checked on resize). The shader encodes its own output color space, so the plain render
+      and the bloom composer match.
+- [x] **Decision (changed from the plan):** defaults come from the visitor's *local time*, not time
+      zone: night → City, dawn → Prairie, day/dusk → Canyon, plus a matching tint. Same privacy (device
+      clock, nothing leaves the browser), richer signal.
+- [ ] **City look.** Tried literal blocks (towers / mid-rise / houses / avenues / freeway loop / Trinity
+      river) and a soft density version; both read as busy or flat next to the canyon. Direction to be
+      chosen with Michael before polishing.
+- [ ] Layer 2 (Vercel IP-region seed via middleware) and Layer 3 (real Dallas elevation) not started;
+      both optional. Layer 2 needs a security review when built.
 
 ### Phase 4: Projects and case studies (L)
 

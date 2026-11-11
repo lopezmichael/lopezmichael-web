@@ -1,57 +1,146 @@
 ---
 // The generative terrain, as a dark band between blush sections (docs/design-principles.md →
-// Terrain principles). Same Three.js engine as before (src/lib/terrain); Phase 3 adds modes,
-// pointer lift and location-aware defaults.
+// Terrain principles). Modes, seeds and defaults live in src/lib/terrain/state.ts; the renderer in
+// src/lib/terrain/index.ts.
+import { TERRAIN_MODES, MODE_INFO } from '../lib/terrain/state';
 ---
 
-<section class="relative w-full h-[clamp(240px,32vw,420px)] overflow-hidden bg-band" aria-label="Generative terrain">
-  <div id="terrain-canvas" class="absolute inset-0" aria-hidden="true"></div>
-  <!-- Keeps the label and button legible when bright terrain sits behind them. -->
-  <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-band to-transparent pointer-events-none" aria-hidden="true"></div>
+<section class="relative w-full h-[clamp(260px,32vw,420px)] overflow-hidden bg-band touch-pan-y" aria-label="Generative terrain">
+  <div id="terrain-canvas" class="absolute inset-0 cursor-crosshair" aria-hidden="true"></div>
+  <!-- Keep the label and controls legible when bright terrain sits behind them. -->
+  <div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-band to-transparent pointer-events-none" aria-hidden="true"></div>
+  <div class="sm:hidden absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-band to-transparent pointer-events-none" aria-hidden="true"></div>
 
-  <p class="absolute left-4 sm:left-6 lg:left-8 bottom-3 m-0 font-mono text-[11px] tracking-[0.04em] text-on-band/85 pointer-events-none">
-    32.78° N, 96.80° W · North Texas<span data-terrain-seed></span>
-  </p>
-  <button
-    type="button"
-    data-terrain-regrow
-    class="absolute right-4 sm:right-6 lg:right-8 bottom-2 font-mono text-[11px] tracking-[0.04em] text-on-band bg-transparent border border-on-band/45 rounded-full px-3 py-1 cursor-pointer transition-colors hover:bg-on-band/15"
+  <p
+    class="absolute left-4 sm:left-6 lg:left-8 top-3 sm:top-auto sm:bottom-3 m-0 font-mono text-[11px] tracking-[0.04em] text-on-band/85 pointer-events-none"
+    data-terrain-label
   >
-    Regrow <span aria-hidden="true">↻</span>
-  </button>
+    {MODE_INFO.canyon.coords} · {MODE_INFO.canyon.place}
+  </p>
+
+  <div class="absolute right-4 sm:right-6 lg:right-8 bottom-2.5 flex items-center gap-1.5 font-mono text-[11px] tracking-[0.04em]" data-terrain-controls hidden>
+    <div class="flex items-center gap-1" role="group" aria-label="Terrain">
+      {TERRAIN_MODES.map((mode) => (
+        <button
+          type="button"
+          data-terrain-mode={mode}
+          aria-pressed="false"
+          class="terrain-btn"
+        >
+          {MODE_INFO[mode].label}
+        </button>
+      ))}
+    </div>
+    <button type="button" data-terrain-regrow class="terrain-btn">
+      Regrow <span aria-hidden="true">↻</span>
+    </button>
+  </div>
 </section>
 
+<style>
+  .terrain-btn {
+    color: var(--on-band);
+    background: transparent;
+    border: 1px solid color-mix(in srgb, var(--on-band) 40%, transparent);
+    border-radius: 999px;
+    padding: 0.25rem 0.7rem;
+    cursor: pointer;
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+  .terrain-btn:hover {
+    background: color-mix(in srgb, var(--on-band) 15%, transparent);
+  }
+  .terrain-btn[aria-pressed='true'] {
+    background: var(--on-band);
+    color: var(--band);
+    border-color: var(--on-band);
+  }
+</style>
+
 <script>
-  import { initTerrain } from '../lib/terrain/index';
+  import { createTerrain, type TerrainHandle } from '../lib/terrain/index';
+  import {
+    MODE_INFO,
+    defaultModeFor,
+    formatTerrainParam,
+    isTerrainMode,
+    parseTerrainParam,
+    randomSeed,
+    tintForHour,
+    type TerrainMode,
+    type TerrainState,
+  } from '../lib/terrain/state';
 
-  let cleanup: (() => void) | null = null;
+  const STORAGE_KEY = 'terrain-mode';
 
-  function startTerrain() {
-    cleanup?.();
-    cleanup = null;
-
-    const container = document.getElementById('terrain-canvas');
-    if (!container) return;
-
-    const seed = Math.floor(Math.random() * 10000);
-    cleanup = initTerrain(container, { seed });
-    if (!cleanup) {
-      // No WebGL: keep the plain dark band and hide the controls rather than showing a Regrow
-      // button that can't do anything.
-      document.querySelector<HTMLElement>('[data-terrain-regrow]')?.setAttribute('hidden', '');
-      return;
+  function readStoredMode(): TerrainMode | null {
+    try {
+      const v = localStorage.getItem(STORAGE_KEY);
+      return isTerrainMode(v) ? v : null;
+    } catch {
+      return null;
     }
-
-    const label = document.querySelector('[data-terrain-seed]');
-    if (label) label.textContent = ` · seed ${String(seed).padStart(4, '0')}`;
+  }
+  function storeMode(mode: TerrainMode) {
+    try {
+      localStorage.setItem(STORAGE_KEY, mode);
+    } catch {
+      // Private mode or blocked storage: remembering the mode is only a convenience.
+    }
   }
 
-  startTerrain();
-  document.querySelector('[data-terrain-regrow]')?.addEventListener('click', startTerrain);
+  // Starting state: a shared link wins, then the visitor's last mode, then their local time of day.
+  // The time comes from the device clock and never leaves the browser.
+  function initialState(): TerrainState {
+    const tint = tintForHour(new Date().getHours());
+    const shared = parseTerrainParam(new URLSearchParams(location.search).get('terrain'));
+    if (shared) return { ...shared, tint };
+    return { mode: readStoredMode() ?? defaultModeFor(tint), seed: randomSeed(), tint };
+  }
 
-  // Clean up on page swap (if View Transitions are ever added)
-  document.addEventListener('astro:before-swap', () => {
-    cleanup?.();
-    cleanup = null;
-  });
+  function start() {
+    const container = document.getElementById('terrain-canvas');
+    const label = document.querySelector<HTMLElement>('[data-terrain-label]');
+    const controls = document.querySelector<HTMLElement>('[data-terrain-controls]');
+    if (!container || !label || !controls) return;
+
+    let state = initialState();
+    const terrain: TerrainHandle | null = createTerrain(container, state);
+    // No WebGL: keep the plain dark band with its place label, and no controls that can't work.
+    if (!terrain) return;
+    controls.hidden = false;
+
+    const modeButtons = controls.querySelectorAll<HTMLButtonElement>('[data-terrain-mode]');
+
+    const show = () => {
+      const info = MODE_INFO[state.mode];
+      label.textContent = `${info.coords} · ${info.place} · seed ${String(state.seed).padStart(4, '0')}`;
+      modeButtons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.terrainMode === state.mode)));
+    };
+
+    // After the visitor changes the terrain, the URL carries it so the view can be shared.
+    const apply = (next: TerrainState) => {
+      state = next;
+      terrain.set(state);
+      show();
+      const url = new URL(location.href);
+      url.searchParams.set('terrain', formatTerrainParam(state.mode, state.seed));
+      history.replaceState(history.state, '', url);
+    };
+
+    modeButtons.forEach((b) =>
+      b.addEventListener('click', () => {
+        const mode = b.dataset.terrainMode;
+        if (!isTerrainMode(mode) || mode === state.mode) return;
+        storeMode(mode);
+        apply({ ...state, mode, seed: randomSeed() });
+      }),
+    );
+    controls.querySelector('[data-terrain-regrow]')?.addEventListener('click', () => apply({ ...state, seed: randomSeed() }));
+
+    show();
+    document.addEventListener('astro:before-swap', () => terrain.dispose(), { once: true });
+  }
+
+  start();
 </script>
