@@ -148,7 +148,7 @@ export const variantMeta: Record<Variant, VariantMeta> = {
     fileSuffix: '',
     label: 'Leadership with technical authority — DEFAULT',
     summary:
-      "Data leader. Six years helping build the Child Poverty Action Lab's data operations from a two-person team to two in-house engineers and a four-person vendor team, leading it through a CDO transition, and shaping the org-wide AI rollout. I make the architecture and build-vs-partner calls myself. I take teams and systems from nothing to running.",
+      "Data leader. Six years helping build the Child Poverty Action Lab's data operations from a two-person team to two in-house engineers and a four-person vendor team, stepping into department leadership during a CDO transition, and shaping the org-wide AI rollout. I make the architecture and build-vs-partner calls myself. I take teams and systems from nothing to running.",
   },
   platform: {
     fileSuffix: '_Platform',
@@ -211,6 +211,7 @@ export const experience: Experience[] = [
       },
       {
         text: 'Stepped into department leadership during the CDO transition (Dec 2024 to Dec 2025), reporting to the CTO: led all analyst and data work, set the roadmap, ran hiring, owned vendor strategy, and held the budget',
+        print: 'Stepped into department leadership during the CDO transition (Dec 2024 – Dec 2025), reporting to the CTO: led all analyst and data work and owned the roadmap, hiring, vendor strategy, and budget',
         variants: ['playercoach'],
       },
       {
