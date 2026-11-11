@@ -52,7 +52,7 @@ uniform float uWaveIntensity;
 uniform vec2 uPointer;
 uniform float uLift;
 
-varying float vHeight;
+varying float vTone;
 varying vec2 vUv;
 
 // Sine-free hash (Dave Hoskins, "Hash without Sine"); stays well-distributed on mobile GPUs.
@@ -133,6 +133,19 @@ float modeHeight(float mode, vec2 p, vec3 sc, vec3 ht, float seed) {
   return prairieHeight(p, sc, ht, seed);
 }
 
+// Height span mapped onto the full color ramp, per mode. Canyon keeps the original -15..15; City and
+// Prairie are flatter, so a shared span left them in one mid-tone. City's top is the tall towers.
+vec2 modeRange(float mode) {
+  if (mode < 0.5) return vec2(-15.0, 15.0);
+  if (mode < 1.5) return vec2(-10.0, 14.0);
+  return vec2(-10.0, 11.0);
+}
+
+float tone(float mode, float h) {
+  vec2 r = modeRange(mode);
+  return (h - r.x) / (r.y - r.x);
+}
+
 // The ambient wave is gentler where the landform has crisp edges (city blocks).
 float modeWave(float mode) {
   return mode > 0.5 && mode < 1.5 ? 0.25 : 1.0;
@@ -156,7 +169,7 @@ void main() {
   height += uLift * 7.0 * exp(-dot(dp, dp) / (2.0 * 8.0 * 8.0));
 
   pos.z = height;
-  vHeight = height;
+  vTone = clamp(mix(tone(uModeB, height), tone(uModeA, height), uBlend), 0.0, 1.0);
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
 }
@@ -170,12 +183,12 @@ uniform vec3 uColor3;
 uniform vec3 uColor4;
 uniform vec3 uTint;
 
-varying float vHeight;
+varying float vTone;
 varying vec2 vUv;
 
 void main() {
-  // Normalize height to 0-1 range
-  float h = clamp((vHeight + 15.0) / 30.0, 0.0, 1.0);
+  // Height already mapped to 0-1 per mode in the vertex shader (modeRange).
+  float h = vTone;
 
   // 5-stop gradient
   vec3 color;
