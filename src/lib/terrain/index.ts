@@ -45,7 +45,9 @@ export function createTerrain(container: HTMLElement, initial: TerrainState): Te
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
   renderer.setSize(width, height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  // Small screens get fewer pixels and frames: the slow drift doesn't need more, and phones pay for it.
+  const pixelRatio = () => Math.min(window.devicePixelRatio, small ? 1.5 : 2);
+  renderer.setPixelRatio(pixelRatio());
   container.appendChild(renderer.domElement);
 
   // Lighter mesh on small screens; swapped if the container crosses the breakpoint.
@@ -169,8 +171,15 @@ export function createTerrain(container: HTMLElement, initial: TerrainState): Te
   const ease = reduceMotion ? 1 : 0.06;
   const approach = (from: number, to: number, k: number) => (Math.abs(to - from) < 1e-3 ? to : from + (to - from) * k);
 
+  let lastFrame = 0;
   function frame(now: number) {
     raf = 0;
+    // 30 fps on small screens: a skipped frame reschedules through the same visibility gate.
+    if (small && !reduceMotion && now - lastFrame < 1000 / 30 - 1) {
+      if (visible && !document.hidden) raf = requestAnimationFrame(frame);
+      return;
+    }
+    lastFrame = now;
 
     // Phases accumulate, so a new speed changes the rate without jumping the wave or the roll.
     if (!reduceMotion) {
@@ -278,15 +287,19 @@ export function createTerrain(container: HTMLElement, initial: TerrainState): Te
     height = container.clientHeight || height;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-    post?.resize(width, height);
     const nowSmall = width < SMALL_SCREEN;
     if (nowSmall !== small) {
+      // Crossing the breakpoint: lighter or fuller mesh, bloom off or on, and the pixel ratio for
+      // both the renderer and the composer (it keeps its own copy) before the single resize below.
       small = nowSmall;
       mesh.geometry.dispose();
       mesh.geometry = makeGeometry();
       post?.setBloom(!small);
+      renderer.setPixelRatio(pixelRatio());
+      post?.composer.setPixelRatio(pixelRatio());
     }
+    renderer.setSize(width, height);
+    post?.resize(width, height);
     kick();
   });
   ro.observe(container);

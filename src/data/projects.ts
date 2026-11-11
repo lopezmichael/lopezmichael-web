@@ -19,10 +19,23 @@ export interface Project {
 /** Image for cards and index rows: the card-only image when set, else the main one (CLAUDE.md, "cardImage vs image"). */
 export const cardShot = (p: Project): string | undefined => p.cardImage ?? p.image;
 
+/** Base name of a screenshot in /images/projects/ (its derived WebPs live in thumbs/ and figures/);
+ *  undefined for images anywhere else. scripts/check-assets.mjs mirrors this rule. */
+const projectImageName = (src: string): string | undefined => src.match(/^\/images\/projects\/([^/]+)\.\w+$/)?.[1];
+
+/** WebP srcset for a project screenshot on its detail page (800w and 1600w, made by `npm run thumbs`).
+ *  Returns undefined for images outside /images/projects/, which then load as-is. */
+export const figureSrcset = (src: string): string | undefined => {
+  const name = projectImageName(src);
+  return name && `/images/projects/figures/${name}-800.webp 800w, /images/projects/figures/${name}-1600.webp 1600w`;
+};
+
 /** Small WebP of a project screenshot for hover previews, made by `npm run thumbs`. Paths outside
  *  /images/projects/ are returned unchanged. */
-export const thumbFor = (src: string): string =>
-  src.replace(/^\/images\/projects\/([^/]+)\.\w+$/, '/images/projects/thumbs/$1.webp');
+export const thumbFor = (src: string): string => {
+  const name = projectImageName(src);
+  return name ? `/images/projects/thumbs/${name}.webp` : src;
+};
 
 /** BaseLayout props for a project page: its link-preview image (from `npm run og`) and a schema.org
  *  CreativeWork. Pass the page's meta description so both say the same thing. */

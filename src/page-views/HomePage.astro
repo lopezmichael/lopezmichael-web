@@ -4,9 +4,12 @@ import TerrainBand from '../components/TerrainBand.astro';
 import ProjectIndex from '../components/ProjectIndex.astro';
 import LabeledSection from '../components/LabeledSection.astro';
 import { featuredProjects, projects } from '../data/projects';
-// The hero wordmark is the page's largest paint; preload its two faces so they don't wait for the CSS.
+// Preload every face in the hero (wordmark, tagline, supporting line) so they don't wait for the CSS
+// and the hero doesn't reflow (and nudge the terrain band) when they swap in.
 import wordmarkSans from '@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-800-normal.woff2?url';
 import wordmarkSerif from '@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url';
+import taglineSerif from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
+import bodySans from '@fontsource/instrument-sans/files/instrument-sans-latin-400-normal.woff2?url';
 ---
 
 <BaseLayout
@@ -16,6 +19,8 @@ import wordmarkSerif from '@fontsource/instrument-serif/files/instrument-serif-l
   <Fragment slot="head">
     <link rel="preload" href={wordmarkSans} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={wordmarkSerif} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={taglineSerif} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={bodySans} as="font" type="font/woff2" crossorigin />
   </Fragment>
 
   <!-- Hero: the one big type moment on the page (principle 1). -->

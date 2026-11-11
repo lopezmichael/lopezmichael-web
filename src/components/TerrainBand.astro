@@ -105,14 +105,9 @@ import { TERRAIN_MODES, MODE_INFO } from '../lib/terrain/state';
     const controls = document.querySelector<HTMLElement>('[data-terrain-controls]');
     if (!container || !label || !controls) return;
 
+    // The state (and so the label) is known right away; only the renderer waits for an idle moment.
     let state = initialState();
-    const terrain: TerrainHandle | null = createTerrain(container, state);
-    // No WebGL: keep the plain dark band with its place label, and no controls that can't work.
-    if (!terrain) return;
-    controls.hidden = false;
-
     const modeButtons = controls.querySelectorAll<HTMLButtonElement>('[data-terrain-mode]');
-
     const coords = label.querySelector('[data-terrain-coords]');
     const place = label.querySelector('[data-terrain-place]');
     const seed = label.querySelector('[data-terrain-seed]');
@@ -123,29 +118,46 @@ import { TERRAIN_MODES, MODE_INFO } from '../lib/terrain/state';
       if (seed) seed.textContent = ` · seed ${String(state.seed).padStart(4, '0')}`;
       modeButtons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.terrainMode === state.mode)));
     };
-
-    // After the visitor changes the terrain, the URL carries it so the view can be shared.
-    const apply = (next: TerrainState) => {
-      state = next;
-      terrain.set(state);
-      show();
-      const url = new URL(location.href);
-      url.searchParams.set('terrain', formatTerrainParam(state.mode, state.seed));
-      history.replaceState(history.state, '', url);
-    };
-
-    modeButtons.forEach((b) =>
-      b.addEventListener('click', () => {
-        const mode = b.dataset.terrainMode;
-        if (!isTerrainMode(mode) || mode === state.mode) return;
-        storeMode(mode);
-        apply({ ...state, mode, seed: randomSeed() });
-      }),
-    );
-    controls.querySelector('[data-terrain-regrow]')?.addEventListener('click', () => apply({ ...state, seed: randomSeed() }));
-
     show();
-    document.addEventListener('astro:before-swap', () => terrain.dispose(), { once: true });
+
+    // Start once the page has loaded and the browser is idle, so the terrain never competes with the
+    // first paint. Until then the band shows its dark ground and the label.
+    whenLoadedAndIdle(() => {
+      const terrain: TerrainHandle | null = createTerrain(container, state);
+      // No WebGL: keep the plain dark band with its place label, and no controls that can't work.
+      if (!terrain) return;
+      controls.hidden = false;
+      wire(terrain);
+    });
+
+    function wire(terrain: TerrainHandle) {
+      // After the visitor changes the terrain, the URL carries it so the view can be shared.
+      const apply = (next: TerrainState) => {
+        state = next;
+        terrain.set(state);
+        show();
+        const url = new URL(location.href);
+        url.searchParams.set('terrain', formatTerrainParam(state.mode, state.seed));
+        history.replaceState(history.state, '', url);
+      };
+
+      modeButtons.forEach((b) =>
+        b.addEventListener('click', () => {
+          const mode = b.dataset.terrainMode;
+          if (!isTerrainMode(mode) || mode === state.mode) return;
+          storeMode(mode);
+          apply({ ...state, mode, seed: randomSeed() });
+        }),
+      );
+      controls.querySelector('[data-terrain-regrow]')?.addEventListener('click', () => apply({ ...state, seed: randomSeed() }));
+      document.addEventListener('astro:before-swap', () => terrain.dispose(), { once: true });
+    }
+  }
+
+  function whenLoadedAndIdle(fn: () => void) {
+    const idle = () => ('requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 1500 }) : setTimeout(fn, 200));
+    if (document.readyState === 'complete') idle();
+    else window.addEventListener('load', idle, { once: true });
   }
 
   start();

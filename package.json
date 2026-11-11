@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "astro dev",
     "check:design": "node scripts/check-design.mjs",
-    "check:og": "node scripts/check-og.mjs",
-    "prebuild": "npm run check:design && npm run check:og",
+    "check:assets": "node scripts/check-assets.mjs",
+    "prebuild": "npm run check:design && npm run check:assets",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",

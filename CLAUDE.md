@@ -78,9 +78,9 @@ npm run build         # Production build
 npm run preview       # Preview production build
 npm run check:design  # Fail on hard-coded colors outside the token files (also runs before every build)
 npm run screenshots   # Regenerate project screenshots (requires: npx playwright install chromium)
-npm run thumbs        # 520px WebP previews of those screenshots for the project-row hover (re-run after screenshots)
+npm run thumbs        # WebP versions of those screenshots: 520px row-hover previews + 800/1600px figures for project pages (re-run after screenshots)
 npm run og            # Link-preview images (site + one per project) and favicons, from the tokens and projects.ts
-npm run check:og      # Fail if a project has no preview image (also runs before every build)
+npm run check:assets  # Fail if a preview card or a screenshot's WebP versions are missing (also runs before every build)
 ```
 
 ## Dark Mode

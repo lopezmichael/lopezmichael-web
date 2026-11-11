@@ -185,15 +185,26 @@ generative parameters and always-dark rendering all kept.
       Analytics in the Vercel dashboard. (Settle the unconfirmed skills in `resume.ts`, e.g. CKAN and
       PostGIS: `knowsAbout` mirrors that list.)
 
-### Phase 7: Copy pass and QA (M)
+### Phase 7: Copy pass and QA (M) · QA DONE 2026-11-11, copy pending
 
-- [ ] Run all changed prose through the `voice-professional` agent (new hooks, labels, terrain copy,
-      404, footer).
-- [ ] Accessibility audit against the principles' baseline (keyboard pass, screen reader spot
-      check, contrast in both themes, reduced motion).
-- [ ] Lighthouse on Home and one case study (performance budget: terrain must not push LCP past
-      2.5s on mobile).
-- [ ] Update `CLAUDE.md` (palette, fonts, components, terrain modes) and `ROADMAP.md`.
+- [ ] Copy pass with Michael, then run all changed prose through the `voice-professional` agent
+      (hooks, labels, terrain copy, 404, footer). Open items: "monitoring" in the prototype-to-
+      production paragraph; general edits.
+- [x] **Accessibility:** axe (WCAG 2.1 A/AA + best practice) on all 9 pages × light, dark, phone:
+      0 violations after underlining in-text links (wine on ink is under 3:1, so color alone failed
+      1.4.1; links opt out only via `no-underline` or a button utility). Keyboard pass on Home, a
+      case study and Resume: logical order, visible focus on every stop, no hidden stops, skip link
+      works. Reduced motion: terrain draws once then idles at 0 frames; no running CSS animations.
+      Not done: a manual screen-reader session (VoiceOver/NVDA).
+- [x] **Lighthouse (mobile):** case study 100 performance / 100 a11y / 100 SEO; LCP 0.8s, CLS 0.
+      Home: LCP 0.8s, CLS 0, a11y/SEO 100; performance scores ~70 only because the sandbox renders
+      WebGL in software (with the terrain script blocked, Home scores 100, TBT 0). Changes made:
+      terrain starts after load + idle, 30 fps and 1.5× pixel ratio on small screens, all hero
+      fonts preloaded (removed a font-swap layout shift), project screenshots served as 800/1600px
+      WebP via srcset (saved ~875 KB per case study; `check:assets` guards them).
+- [ ] **Real-device check (Michael):** terrain on a real GPU (laptop + phone) as part of the terrain
+      look iteration; Lighthouse on the production URL after merge.
+- [x] `CLAUDE.md` kept current through each phase.
 
 ---
 

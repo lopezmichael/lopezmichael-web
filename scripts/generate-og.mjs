@@ -12,7 +12,7 @@
  * titles and hooks are read from src/data/projects.ts. Importing .ts needs Node 22.6+ (the npm script
  * passes --experimental-strip-types) and only erasable TypeScript in those files (no enums).
  * Re-run after changing a token, a project's title or hook, or adding a project: `npm run og`.
- * The build fails (check:og) if a project has no image.
+ * The build fails (check:assets) if a project has no image.
  */
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
