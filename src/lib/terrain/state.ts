@@ -17,13 +17,13 @@ export interface TerrainState {
 /** Each mode is modeled on a real Texas landform; the label names that place, never the visitor's. */
 export const MODE_INFO: Record<TerrainMode, { label: string; place: string; coords: string }> = {
   canyon: { label: 'Canyon', place: 'Palo Duro Canyon', coords: '34.94° N, 101.66° W' },
-  city: { label: 'City', place: 'Downtown Dallas', coords: '32.78° N, 96.80° W' },
+  city: { label: 'City', place: 'Trinity River, Dallas', coords: '32.77° N, 96.81° W' },
   prairie: { label: 'Prairie', place: 'Blackland Prairie', coords: '33.02° N, 96.70° W' },
 };
 
 /** Each mode's ground level in mesh units, used to place the pointer lift on the surface
  *  rather than on the flat base plane (matches the offsets in shaders.ts). */
-export const MODE_GROUND: Record<TerrainMode, number> = { canyon: 0, city: -8, prairie: -1 };
+export const MODE_GROUND: Record<TerrainMode, number> = { canyon: 0, city: -5, prairie: -1 };
 
 export interface TerrainParams {
   /** Noise frequencies of the three octaves. */
@@ -75,11 +75,12 @@ const RANGES: Record<TerrainMode, ModeRanges> = {
     waveIntensity: [1, 2.5],
     cameraLift: 0,
   },
+  // City sits lower so the skyline reads as a silhouette on the horizon.
   city: {
-    scale: [[0.02, 0.03], [0.05, 0.08], [0.1, 0.16]],
-    height: [[1, 2], [0.5, 1], [0.2, 0.5]],
-    waveIntensity: [0.2, 0.5],
-    cameraLift: 6,
+    scale: [[0.02, 0.035], [0.05, 0.08], [0.1, 0.16]],
+    height: [[2, 4], [1, 2], [0.3, 0.8]],
+    waveIntensity: [0.3, 0.6],
+    cameraLift: -8,
   },
   prairie: {
     scale: [[0.015, 0.03], [0.035, 0.06], [0.07, 0.12]],

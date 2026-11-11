@@ -88,7 +88,7 @@ Shipped with no visible change: the four affected pages were pixel-identical to 
       `description`). Home still shows the three featured projects, plus an "All 7 projects" link.
 - [x] Consulting CTA band removed (it lived in the footer, so it's gone everywhere).
 
-### Phase 3: Terrain v2 (L) · DONE 2026-11-11 except the City look (under review)
+### Phase 3: Terrain v2 (L) · DONE 2026-11-11
 
 Extends `src/lib/terrain/` rather than replacing it: Three.js pipeline, GPU simplex shader, bloom,
 generative parameters and always-dark rendering all kept.
@@ -98,7 +98,7 @@ generative parameters and always-dark rendering all kept.
       rebuilds the same terrain (noise, camera, tilt), time-of-day tint and default, `?terrain=` parsing.
 - [x] Shader modes with a blended A/B morph (~800ms; the outgoing terrain is only evaluated while a
       morph runs): **Canyon** (original noise + mesa terraces + a meandering river), **Prairie**
-      (rolling plains, one escarpment ridge, a creek), **City** (see below).
+      (rolling plains, one escarpment ridge, a creek), **City** (Dallas skyline across the Trinity; see below).
 - [x] Height ramp switched to deep canyon → sand (`config.ts` `TERRAIN_RAMP`); the old top stop was
       a teal-green that collides with the CPAL brand.
 - [x] Pointer/touch lift: raycast onto each mode's ground level after the camera moves; gentle
@@ -115,9 +115,11 @@ generative parameters and always-dark rendering all kept.
 - [x] **Decision (changed from the plan):** defaults come from the visitor's *local time*, not time
       zone: night → City, dawn → Prairie, day/dusk → Canyon, plus a matching tint. Same privacy (device
       clock, nothing leaves the browser), richer signal.
-- [ ] **City look.** Tried literal blocks (towers / mid-rise / houses / avenues / freeway loop / Trinity
-      river) and a soft density version; both read as busy or flat next to the canyon. Direction to be
-      chosen with Michael before polishing.
+- [x] **City look:** literal blocks (zoning, avenues, freeway loop) and a soft density map both read as
+      busy or flat next to the canyon. Michael chose **skyline on the horizon**: Dallas seen across the
+      Trinity, with a smooth floodplain foreground (river + a levee on each bank), a lower camera, and a
+      seeded cluster of soft, tapered towers along the horizon. Label: "Trinity River, Dallas".
+      Needs a look on a real GPU in the preview; the sandbox renders it in software.
 - [ ] Layer 2 (Vercel IP-region seed via middleware) and Layer 3 (real Dallas elevation) not started;
       both optional. Layer 2 needs a security review when built.
 

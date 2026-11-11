@@ -15,7 +15,8 @@ import { TERRAIN_MODES, MODE_INFO } from '../lib/terrain/state';
     class="absolute left-4 sm:left-6 lg:left-8 top-3 sm:top-auto sm:bottom-3 m-0 font-mono text-[11px] tracking-[0.04em] text-on-band/85 pointer-events-none"
     data-terrain-label
   >
-    {MODE_INFO.canyon.coords} · {MODE_INFO.canyon.place}
+    <!-- Coordinates drop on phones so the label stays on one line. -->
+    <span class="hidden sm:inline"><span data-terrain-coords>{MODE_INFO.canyon.coords}</span> · </span><span data-terrain-place>{MODE_INFO.canyon.place}</span><span data-terrain-seed></span>
   </p>
 
   <div class="absolute right-4 sm:right-6 lg:right-8 bottom-2.5 flex items-center gap-1.5 font-mono text-[11px] tracking-[0.04em]" data-terrain-controls hidden>
@@ -112,9 +113,14 @@ import { TERRAIN_MODES, MODE_INFO } from '../lib/terrain/state';
 
     const modeButtons = controls.querySelectorAll<HTMLButtonElement>('[data-terrain-mode]');
 
+    const coords = label.querySelector('[data-terrain-coords]');
+    const place = label.querySelector('[data-terrain-place]');
+    const seed = label.querySelector('[data-terrain-seed]');
     const show = () => {
       const info = MODE_INFO[state.mode];
-      label.textContent = `${info.coords} · ${info.place} · seed ${String(state.seed).padStart(4, '0')}`;
+      if (coords) coords.textContent = info.coords;
+      if (place) place.textContent = info.place;
+      if (seed) seed.textContent = ` · seed ${String(state.seed).padStart(4, '0')}`;
       modeButtons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.terrainMode === state.mode)));
     };
 

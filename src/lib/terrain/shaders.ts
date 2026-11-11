@@ -80,54 +80,39 @@ float canyonHeight(vec2 p, vec3 sc, vec3 ht, float seed) {
   return mix(-9.0, h, carve);
 }
 
-// City, after Dallas, drawn as a soft density landscape rather than literal boxes, so it shares
-// the canyon's flowing lines: tapered spires downtown, gentle swells for mid-rise and
-// neighborhoods, streets and wider avenues as soft grooves, a freeway loop as a low ridge, and a
-// river with levees west of downtown (the Trinity). Hard steps alias into jagged noise at this
-// mesh density, so every edge here is a smoothstep.
+// City: Dallas seen across the Trinity River. The foreground is the floodplain, smooth like the
+// canyon, with the river crossing the view and a levee on each bank; the skyline rises along the
+// horizon as a seeded cluster of tapered towers. Every edge is a smoothstep: hard steps alias into
+// jagged noise at this mesh density.
 float softBox(vec2 f, vec2 inset, float soft) {
   vec2 a = smoothstep(inset, inset + soft, f) * smoothstep(inset, inset + soft, 1.0 - f);
   return a.x * a.y;
 }
 
 float cityHeight(vec2 p, vec3 sc, vec3 ht, float seed) {
-  float base = -8.0;
-  vec2 downtown = vec2(sin(seed) * 10.0, cos(seed * 1.3) * 6.0);
-  // Rolling ground under the city, like the land it was built on.
-  float ground = fbm(p, sc, ht, seed) * 0.9;
+  float h = fbm(p, sc, ht, seed) * 0.9 - 5.0;
 
-  // Blocks; offsets stay small because large values lose float precision on mobile GPUs.
-  float block = 8.0;
-  vec2 offset = vec2(fract(seed * 0.618034), fract(seed * 0.414214)) * 160.0;
-  vec2 q = (p + offset) / block;
-  vec2 cell = floor(q);
-  vec2 f = fract(q);
-  // Streets as insets on each block; every fourth street is a wider avenue.
-  vec2 inset = vec2(mod(cell.x, 4.0) < 0.5 ? 0.2 : 0.1, mod(cell.y, 4.0) < 0.5 ? 0.2 : 0.1);
+  // The Trinity and its levees, running across the view.
+  float ry = 6.0 + sin(p.x * 0.06 + seed) * 4.0 + sin(p.x * 0.15 + seed * 2.0) * 1.5;
+  float dr = abs(p.y - ry);
+  h -= 2.4 * (1.0 - smoothstep(1.5, 4.0, dr));
+  h += exp(-pow((dr - 8.0) / 1.3, 2.0)) * 1.8;
 
-  vec2 center = (cell + 0.5) * block - offset;
-  float d = length(center - downtown);
-  float core = exp(-(d * d) / (2.0 * 18.0 * 18.0));
-  float r = hash21(cell + offset);
-  float r2 = hash21(cell + offset + 17.0);
-
-  // Downtown rises like a hill, and its blocks grow into tall rounded peaks toward the center;
-  // farther out, blocks are low swells. Street grooves carry the grid across all of it.
-  float lotShape = softBox(f, inset + 0.04, 0.34);
-  float dome = core * 6.0;
-  float blocks = lotShape * mix(1.0 + r * 1.4, 3.0 + r * r * 17.0, core);
-  float park = step(r2, 0.12) * (1.0 - step(0.6, core)); // a few blocks stay open
-  float h = base + ground + dome + blocks * (1.0 - park * 0.85);
-
-  // Freeway loop around downtown: a low, soft ridge.
-  float ring = abs(length(p - downtown) - 27.0);
-  h = mix(h, base + ground * 0.6 + 1.2, 1.0 - smoothstep(0.6, 2.2, ring));
-
-  // River, levees and floodplain west of downtown.
-  float rx = downtown.x - 16.0 + sin(p.y * 0.05 + seed) * 5.0 + sin(p.y * 0.13 + seed * 2.0) * 2.0;
-  float dr = abs(p.x - rx);
-  float river = base + ground * 0.4 - 2.2 * (1.0 - smoothstep(1.5, 4.0, dr)) + exp(-pow((dr - 7.5) / 1.2, 2.0)) * 1.6;
-  return mix(river, h, smoothstep(6.0, 10.0, dr));
+  // The skyline: tapered towers in a cluster near the far edge (+y is away from the camera).
+  vec2 downtown = vec2(sin(seed) * 10.0, 20.0);
+  vec2 rel = (p - downtown) / vec2(18.0, 7.0);
+  float cluster = exp(-dot(rel, rel) * 1.6);
+  if (cluster > 0.02) {
+    float lot = 3.8;
+    // Small offsets: large values lose float precision on mobile GPUs.
+    vec2 off = vec2(fract(seed * 0.618034), fract(seed * 0.414214)) * 40.0;
+    vec2 q = (p + off) / lot;
+    vec2 cell = floor(q);
+    float r = hash21(cell + off);
+    float tower = step(0.2, r) * pow(softBox(fract(q), vec2(0.12), 0.32), 1.1);
+    h += cluster * (2.5 + tower * (6.0 + r * r * 20.0));
+  }
+  return h;
 }
 
 // Prairie: gentle rolling plains, one escarpment ridge, and a creek line below it.
