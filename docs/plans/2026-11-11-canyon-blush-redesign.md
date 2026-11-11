@@ -208,15 +208,65 @@ generative parameters and always-dark rendering all kept.
 
 ---
 
-## Suggested order
+## Handoff: remaining work (as of 2026-11-11)
 
-`0 → 1 → 2` first (the visible redesign lands quickly). `3` can start in parallel after `0`, since
-the terrain is self-contained. Then `4 → 5 → 6 → 7`. Phase 3c layers 2 and 3 are optional and can
-ship after everything else.
+Phases 0–6 and the Phase 7 QA checks are done on `claude/quirky-shannon-hpcwls` (not yet merged to
+`main`). Work continues locally. Everything still open is listed here, in a sensible order.
 
-## Inputs needed from Michael
+### 1. Terrain look iteration (Michael: "not super happy with it, iterate later")
+Needs a real GPU: the cloud sandbox renders WebGL in software, so judge only on a laptop/phone.
+- **Files:** `src/lib/terrain/shaders.ts` (per-mode height functions: `canyonHeight`, `cityHeight`,
+  `prairieHeight`, plus color ramp/tint in the fragment shader), `src/lib/terrain/state.ts` (per-mode
+  parameter ranges in `RANGES`, camera ranges in `paramsFor`, `MODE_INFO` labels, time-of-day
+  defaults), `src/lib/terrain/config.ts` (`TERRAIN_RAMP`, grid density), `src/lib/terrain/index.ts`
+  (renderer, morph, pointer lift, frame loop), `src/components/TerrainBand.astro` (band size, label,
+  controls, start timing).
+- **Fast loop:** `npm run dev`, open `/?terrain=canyon-0421` (or `city-0042`, `prairie-0007`) to pin a
+  mode + seed; Regrow and the mode buttons update the URL, so a view worth keeping can be bookmarked.
+- **Known state:** Canyon is the strongest. City went through literal blocks → soft density map →
+  current "skyline across the Trinity" (smooth floodplain + levees + a seeded cluster of soft
+  towers, lower camera); never reviewed on a real GPU. Prairie has an escarpment + creek.
+- **Open questions:** City and Prairie look; whether night visitors should default to City
+  (`defaultModeFor` in `state.ts`) or everyone starts on Canyon; band height
+  (`h-[clamp(260px,32vw,420px)]`); pointer-lift strength (`uLift * 7.0`, sigma 8 in the shader).
+- **Guardrails:** keep the canyon-to-sand ramp (no teal: CPAL brand); keep it generative and seeded
+  (`paramsFor` must stay deterministic); keep the cheap-rendering behavior (off-screen pause, idle
+  start, 30 fps + 1.5x pixel ratio on small screens, reduced motion = one frame).
+- **Optional later:** Layer 2 (coarse Vercel IP-region seed via middleware; needs a security review)
+  and Layer 3 (real Dallas elevation baked into a heightmap) from Phase 3c.
 
-- Answers to the open decisions above
-- Real data for the first case-study chart
-- Short hooks per project (drafts exist in the mockup; they'll go through the copy pass)
-- Real headshot (still pending from the old roadmap)
+### 2. Copy pass (with Michael), then `voice-professional`
+- All page prose and project hooks (drafts: `hook` fields in `src/data/projects.ts`; the three newest
+  are Block Walking, Rodriguez, atomtemplates).
+- Open item: "monitoring" in the "From prototype to production" paragraph of
+  `src/page-views/projects/BuildingCPALDataOperations.astro`; keep it only if accurate.
+- Scope rule (see `CLAUDE.md`): Michael leads **data operations**; never claim the whole data function.
+- After any `resume.ts` change: `npm run resume:pdf` (PDF must stay 2 pages). After any title/hook
+  change: `npm run og`.
+
+### 3. Case-study charts (Phase 4, waiting on data)
+The `figure` slot in `CaseStudyLayout` is ready; build one shared scrub-chart component when the first
+dataset arrives (no placeholder numbers ship). First: eviction (monthly Dallas County filings since
+2020 + one year's filings → outreach → representation). Full table under Phase 4.
+
+### 4. Before merge
+- Real-device pass (laptop + phone, light/dark): terrain, project-row hover previews, Resume.
+- Manual screen-reader spot check (VoiceOver or NVDA) on Home, a case study, Resume.
+- Run `/code-review` on the final diff; merge via PR to `main`.
+
+### 5. After it's live (Michael)
+- Lighthouse on the production URL (sandbox numbers for Home were limited by software WebGL).
+- Enable Vercel Web Analytics in the dashboard (no cookies, no banner; decided over Google Analytics).
+- Google Search Console: verify `lopezmichael.dev`, submit `sitemap-index.xml`.
+
+### 6. Content still owed
+- Confirm or cut unverified skills in `src/data/resume.ts` (CKAN, PostGIS, Sentry, Prefect,
+  Anthropic API); they also feed the JSON-LD `knowsAbout`.
+- Real headshot to replace the About monogram.
+
+### Working locally
+- Node 22.6+ (the `og` and `resume:pdf` scripts import TypeScript directly).
+- Playwright scripts (`screenshots`, `og`, `resume:pdf`) need `npx playwright install chromium` once;
+  `PW_CHROMIUM_PATH` is only for sandboxes with a different preinstalled Chromium.
+- `npm run build` runs `check:design` (no hard-coded colors) and `check:assets` (preview cards and
+  screenshot WebPs exist) first.
