@@ -4,6 +4,10 @@ Personal portfolio for Michael Lopez — a data leader in civic tech and social 
 
 **Positioning:** A job-search-ready portfolio, but the job-search intent is kept **discreet**: no public "I'm looking to leave / operate at greater scale" language, because Michael's current employer could find the page. It reads as a strong portfolio under a **"Data Leader · Civic Tech & Social Impact"** identity tagline (switched from "Data Strategist" on 2026-11-03 to match the leadership-only search), leads with **data knowledge** (decisions, domain expertise, analytical rigor, communication) over infrastructure, and keeps consulting ("Work with me") secondary, low-key, and subordinated in nav (no explicit recruiter/full-time callouts). Availability is signaled privately (LinkedIn/recruiters), not on the site. All site prose should go through the `voice-professional` agent; avoid "move the needle," "actionable," "deliver real impact," overusing "at the intersection of," and em dashes in body copy.
 
+## Redesign in progress (Canyon Blush, 2026-11)
+
+A full visual redesign is planned. **Read `docs/design-principles.md` before any UI work**; it supersedes the palette, type, and layout notes below once each phase lands. The phased plan is `docs/plans/2026-11-11-canyon-blush-redesign.md` and the reference mockup is `docs/mockups/canyon-blush.html`.
+
 ## Stack
 
 - **Framework:** Astro 5 (static output)
