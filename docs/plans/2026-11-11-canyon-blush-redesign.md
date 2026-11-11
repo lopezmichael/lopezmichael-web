@@ -274,8 +274,8 @@ dataset arrives (no placeholder numbers ship). First: eviction (monthly Dallas C
 - Google Search Console: verify `lopezmichael.dev`, submit `sitemap-index.xml`.
 
 ### 6. Content still owed
-- Confirm or cut unverified skills in `src/data/resume.ts` (CKAN, PostGIS, Prefect,
-  Anthropic API; Sentry cut 2026-11-11); they also feed the JSON-LD `knowsAbout`.
+- Confirm or cut unverified skills in `src/data/resume.ts` (only Prefect still open;
+  CKAN and PostGIS confirmed and Sentry cut 2026-11-11); they also feed the JSON-LD `knowsAbout`.
 - Real headshot to replace the About monogram.
 
 ### Working locally
