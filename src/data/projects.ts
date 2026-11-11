@@ -49,7 +49,7 @@ export const projects: Project[] = [
     title: "Building CPAL's Data Operations",
     hook: 'From two people and a laptop to data operations that outlast any one person.',
     description:
-      'Helping build a nonprofit\'s data operations from one analyst into an in-house engineering team, with a cloud platform and a 30+ app decision-support suite.',
+      'Helping build a nonprofit\'s data operations from a two-person team into an in-house engineering team, with a cloud platform and a 30+ app decision-support suite.',
     longDescription:
       "The six-year story of helping build the Child Poverty Action Lab's data operations: turning the strategic analytics team's proven prototypes into durable, access-controlled tools, hiring the org's first data engineer, pairing vendor engineers with an in-house team to build the platform, selecting and migrating to Databricks, leading the data org through a CDO transition, and rolling out AI-enabled workflows across the team. A leadership case study, not a pipeline write-up.",
     tags: ['Data Leadership', 'Team Building', 'Data Strategy', 'Databricks'],

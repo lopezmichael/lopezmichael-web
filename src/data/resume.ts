@@ -148,7 +148,7 @@ export const variantMeta: Record<Variant, VariantMeta> = {
     fileSuffix: '',
     label: 'Leadership with technical authority — DEFAULT',
     summary:
-      "Data leader. Six years helping build the Child Poverty Action Lab's data operations from one analyst to two in-house engineers and a four-person vendor team, leading it through a CDO transition, and shaping the org-wide AI rollout. I make the architecture and build-vs-partner calls myself. I take teams and systems from nothing to running.",
+      "Data leader. Six years helping build the Child Poverty Action Lab's data operations from a two-person team to two in-house engineers and a four-person vendor team, leading it through a CDO transition, and shaping the org-wide AI rollout. I make the architecture and build-vs-partner calls myself. I take teams and systems from nothing to running.",
   },
   platform: {
     fileSuffix: '_Platform',
