@@ -24,6 +24,25 @@ export const cardShot = (p: Project): string | undefined => p.cardImage ?? p.ima
 export const thumbFor = (src: string): string =>
   src.replace(/^\/images\/projects\/([^/]+)\.\w+$/, '/images/projects/thumbs/$1.webp');
 
+/** BaseLayout props for a project page: its link-preview image (from `npm run og`) and a schema.org
+ *  CreativeWork. Pass the page's meta description so both say the same thing. */
+export function projectSeo(p: Project, site: URL, description: string = p.description) {
+  const image = `/images/og/${p.slug}.png`;
+  return {
+    title: p.title,
+    description,
+    image,
+    structuredData: {
+      '@type': 'CreativeWork',
+      name: p.title,
+      description,
+      url: new URL(`/projects/${p.slug}/`, site).href,
+      image: new URL(image, site).href,
+      keywords: p.tags.join(', '),
+    },
+  };
+}
+
 export const projects: Project[] = [
   {
     slug: 'building-cpal-data-function',

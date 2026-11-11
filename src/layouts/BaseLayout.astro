@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Analytics from '@vercel/analytics/astro';
+import { contact, experience, skills } from '../data/resume';
 
 interface Props {
   title: string;
@@ -10,6 +11,8 @@ interface Props {
   image?: string;
   /** Keep this page out of search engines (internal/WIP pages). */
   noindex?: boolean;
+  /** Extra schema.org node for this page (e.g. a CreativeWork on a project page). */
+  structuredData?: Record<string, unknown>;
 }
 
 const {
@@ -17,11 +20,41 @@ const {
   description,
   image = '/images/og-image.png',
   noindex = false,
+  structuredData,
 } = Astro.props;
 
 const siteName = 'Michael Lopez';
 const siteTitle = title === siteName ? title : `${title} | ${siteName}`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const imageURL = new URL(image, Astro.site);
+
+// The Person node is on every page; page-level nodes refer to it by @id. Role, links and skills come
+// from src/data/resume.ts (the source of truth), so search engines see what the resume says.
+const skillItems = (label: string) => skills.find((c) => c.label === label)?.items ?? [];
+const current = experience[0];
+const person = {
+  '@type': 'Person',
+  '@id': 'https://lopezmichael.dev/#person',
+  name: 'Michael Lopez',
+  url: 'https://lopezmichael.dev',
+  jobTitle: current.title,
+  worksFor: { '@type': 'Organization', name: current.company },
+  description: 'Data leader specializing in civic tech, social impact, and nonprofit data infrastructure',
+  alumniOf: [
+    { '@type': 'EducationalOrganization', name: 'University of Texas at Dallas' },
+    { '@type': 'EducationalOrganization', name: 'Florida International University' },
+  ],
+  // Leads with leadership, domain and analysis (the positioning), then the platform.
+  knowsAbout: [
+    'Data Leadership', 'Data Strategy', 'Nonprofit Data Strategy', 'Civic Technology',
+    ...skillItems('Domains'), ...skillItems('Methods'), ...skillItems('Data Platform'),
+  ],
+  sameAs: [contact.github, contact.linkedin],
+};
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': structuredData ? [person, { ...structuredData, author: { '@id': person['@id'] } }] : [person],
+};
 ---
 
 <!DOCTYPE html>
@@ -48,7 +81,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:title" content={siteTitle} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={new URL(image, Astro.site)} />
+  <meta property="og:image" content={imageURL} />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
 
@@ -56,7 +89,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={siteTitle} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={new URL(image, Astro.site)} />
+  <meta name="twitter:image" content={imageURL} />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -68,27 +101,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <slot name="head" />
 
   <!-- JSON-LD Structured Data -->
-  <script is:inline type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Michael Lopez",
-    "url": "https://lopezmichael.dev",
-    "jobTitle": "Director, Data Operations",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Child Poverty Action Lab"
-    },
-    "description": "Data leader specializing in civic tech, social impact, and nonprofit data infrastructure",
-    "alumniOf": [
-      { "@type": "EducationalOrganization", "name": "University of Texas at Dallas" },
-      { "@type": "EducationalOrganization", "name": "Florida International University" }
-    ],
-    "knowsAbout": ["Data Infrastructure", "Data Engineering", "AI Workflows", "Databricks", "R", "SQL", "Python", "Geospatial Analysis", "Eviction Prevention", "Housing Policy", "Civic Technology", "Nonprofit Data Strategy", "Public Sector Data"],
-    "sameAs": [
-      "https://github.com/lopezmichael",
-      "https://linkedin.com/in/michael-d-lopez"
-    ]
-  })} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 </head>
 <body class="min-h-screen flex flex-col">
   <!-- Skip to content -->

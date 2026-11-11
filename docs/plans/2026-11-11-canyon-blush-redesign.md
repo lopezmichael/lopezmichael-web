@@ -169,15 +169,21 @@ generative parameters and always-dark rendering all kept.
 - [x] `ScrollReveal`, `ProjectCard`, `ProjectCardWide` and the wave divider are gone. `LabeledSection`
       takes an optional label so pull quotes align without copying the grid.
 
-### Phase 6: SEO and sharing (S)
+### Phase 6: SEO and sharing (S) · DONE 2026-11-11 (off-site steps are Michael's)
 
-- [ ] Regenerate `/images/og-image.png` and the favicon set in the new palette and type.
-- [ ] Per-case-study OG images: extend `scripts/` with a Playwright generator (title + terrain strip
-      per project), and pass `image` through `CaseStudyLayout` → `BaseLayout`.
-- [ ] JSON-LD: refresh `knowsAbout` to lead with leadership, domain, and analysis (it currently
-      leads with infrastructure terms); add `CreativeWork` markup on case studies.
-- [ ] Off-site setup (Michael): verify the domain in Google Search Console and submit the sitemap;
-      enable Web Analytics in the Vercel dashboard.
+- [x] `npm run og` (`scripts/generate-og.mjs`): site card (`MICHAEL` / *Lopez* + tagline) and one card per
+      project (title + hook), each over a strip of terrain ridgelines seeded by slug, 1200×630, fonts
+      embedded. Colors read from the `global.css` tokens and `TERRAIN_RAMP`; titles from `projects.ts`.
+- [x] New favicon (written by the same script): a terrain ridge + contour line on wine, no text, with a
+      wine strip at the bottom so the tile keeps its outline on light tabs. 16/32 PNG + apple-touch-icon.
+- [x] Project pages use their own OG image and emit a `CreativeWork` (author → the Person `@id`) via
+      `projectSeo()`; the description matches the page meta.
+- [x] Person JSON-LD derived from `resume.ts` (current role, `contact`, skills); `knowsAbout` leads with
+      leadership, domains and methods.
+- [x] `check:og` in `prebuild`: the build fails if any project lacks its preview image.
+- [ ] **Michael:** verify the domain in Google Search Console and submit `sitemap-index.xml`; enable Web
+      Analytics in the Vercel dashboard. (Settle the unconfirmed skills in `resume.ts`, e.g. CKAN and
+      PostGIS: `knowsAbout` mirrors that list.)
 
 ### Phase 7: Copy pass and QA (M)
 

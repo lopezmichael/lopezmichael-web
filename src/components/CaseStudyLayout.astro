@@ -4,7 +4,7 @@ import ProjectHeader from './ProjectHeader.astro';
 import LabeledSection from './LabeledSection.astro';
 import NextProject from './NextProject.astro';
 import ProjectFigure from './ProjectFigure.astro';
-import type { Project } from '../data/projects';
+import { projectSeo, type Project } from '../data/projects';
 
 interface Props {
   project: Project;
@@ -28,11 +28,13 @@ const pullquote = Astro.slots.has('pullquote') ? await Astro.slots.render('pullq
 const rendered = await Promise.all(sections.map((s) => Astro.slots.render(s.slot)));
 // A case study's interactive chart goes in the "figure" slot; until it has one, the screenshot shows.
 const hasFigure = Astro.slots.has('figure');
+const seo = projectSeo(project, Astro.site!, metaDescription);
+
 const outcomeAt = sections.findIndex((s) => s.slot === 'outcome');
 const pullquoteIndex = outcomeAt >= 0 ? outcomeAt : sections.length;
 ---
 
-<BaseLayout title={project.title} description={metaDescription || project.description}>
+<BaseLayout {...seo}>
   <article class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <ProjectHeader project={project} kind="Case study" />
 

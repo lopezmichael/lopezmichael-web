@@ -4,16 +4,17 @@ import ProjectHeader from '../../components/ProjectHeader.astro';
 import LabeledSection from '../../components/LabeledSection.astro';
 import NextProject from '../../components/NextProject.astro';
 import ProjectFigure from '../../components/ProjectFigure.astro';
-import type { Project } from '../../data/projects';
+import { projectSeo, type Project } from '../../data/projects';
 
 interface Props {
   project: Project;
 }
 
 const { project } = Astro.props;
+const seo = projectSeo(project, Astro.site!);
 ---
 
-<BaseLayout title={project.title} description={project.description}>
+<BaseLayout {...seo}>
   <article class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <ProjectHeader project={project} kind="Project" />
 
