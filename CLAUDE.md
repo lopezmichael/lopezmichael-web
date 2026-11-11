@@ -10,7 +10,7 @@ A full visual redesign is planned. **Read `docs/design-principles.md` before any
 
 ## Redesign status
 
-Phases 0–2 done (tokens, shell, home). Header = name + Work/About/Resume + Dallas clock; footer = "Say hello" + copy-email (no consulting CTA anywhere). Legacy color classes are aliased onto the new tokens until Phase 5, so un-rebuilt pages already render in Canyon Blush.
+Phases 0–2 done (tokens, shell, home). Header = name + Work/About/Resume + Dallas clock; footer = "Say hello" + copy-email (no consulting CTA anywhere). Legacy color classes are aliased onto the new tokens until Phase 5, so un-rebuilt pages already render in Canyon Blush. Buttons use the `btn-primary` / `btn-outline` utilities (padding at the call site); contact details live in `contact` in `src/data/resume.ts`; card/row images go through `cardShot()` in `src/data/projects.ts`.
 
 ## Stack
 
@@ -75,6 +75,7 @@ npm run build         # Production build
 npm run preview       # Preview production build
 npm run check:design  # Fail on hard-coded colors outside the token files (also runs before every build)
 npm run screenshots   # Regenerate project screenshots (requires: npx playwright install chromium)
+npm run thumbs        # 520px WebP previews of those screenshots for the project-row hover (re-run after screenshots)
 ```
 
 ## Dark Mode

@@ -17,6 +17,14 @@ export interface Project {
   restricted?: boolean;
 }
 
+/** Image for cards and index rows: the card-only image when set, else the main one (CLAUDE.md, "cardImage vs image"). */
+export const cardShot = (p: Project): string | undefined => p.cardImage ?? p.image;
+
+/** Small WebP of a project screenshot for hover previews, made by `npm run thumbs`. Paths outside
+ *  /images/projects/ are returned unchanged. */
+export const thumbFor = (src: string): string =>
+  src.replace(/^\/images\/projects\/([^/]+)\.\w+$/, '/images/projects/thumbs/$1.webp');
+
 export const projects: Project[] = [
   {
     slug: 'building-cpal-data-function',

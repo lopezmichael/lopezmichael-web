@@ -14,6 +14,13 @@
  */
 export type Variant = 'playercoach' | 'platform' | 'research';
 
+/** Contact details: the one place to change an address or profile URL. */
+export const contact = {
+  email: 'michael@lopezstudio.dev',
+  github: 'https://github.com/lopezmichael',
+  linkedin: 'https://linkedin.com/in/michael-d-lopez',
+} as const;
+
 export const VARIANTS: Variant[] = ['playercoach', 'platform', 'research'];
 
 export interface Bullet {

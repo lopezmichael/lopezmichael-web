@@ -25,7 +25,19 @@ export interface TerrainOptions {
   seed?: number;
 }
 
-export function initTerrain(container: HTMLElement, options: TerrainOptions = {}) {
+function webglAvailable(): boolean {
+  try {
+    const canvas = document.createElement('canvas');
+    return !!(canvas.getContext('webgl2') ?? canvas.getContext('webgl'));
+  } catch {
+    return false;
+  }
+}
+
+/** Starts the terrain in `container`. Returns a cleanup function, or null when the browser has no
+ *  WebGL (hardware acceleration off, blocklisted GPU); other failures throw as usual. */
+export function initTerrain(container: HTMLElement, options: TerrainOptions = {}): (() => void) | null {
+  if (!webglAvailable()) return null;
   disposed = false;
 
   // Guard against zero-size container

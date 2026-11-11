@@ -3,12 +3,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import TerrainBand from '../components/TerrainBand.astro';
 import ProjectIndex from '../components/ProjectIndex.astro';
 import { featuredProjects, projects } from '../data/projects';
+// The hero wordmark is the page's largest paint; preload its two faces so they don't wait for the CSS.
+import wordmarkSans from '@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-800-normal.woff2?url';
+import wordmarkSerif from '@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url';
 ---
 
 <BaseLayout
   title="Michael Lopez"
   description="Data leader working in civic tech and social impact. Building the teams and data systems that help communities act on what they know."
 >
+  <Fragment slot="head">
+    <link rel="preload" href={wordmarkSans} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={wordmarkSerif} as="font" type="font/woff2" crossorigin />
+  </Fragment>
+
   <!-- Hero: the one big type moment on the page (principle 1). -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-8">
     <h1 class="m-0 font-normal leading-[0.86]">

@@ -34,11 +34,10 @@
     if (!container) return;
 
     const seed = Math.floor(Math.random() * 10000);
-    try {
-      cleanup = initTerrain(container, { seed }) ?? null;
-    } catch {
-      // No WebGL (hardware acceleration off, blocklisted GPU): keep the plain dark band and
-      // hide the controls rather than showing a Regrow button that can't do anything.
+    cleanup = initTerrain(container, { seed });
+    if (!cleanup) {
+      // No WebGL: keep the plain dark band and hide the controls rather than showing a Regrow
+      // button that can't do anything.
       document.querySelector<HTMLElement>('[data-terrain-regrow]')?.setAttribute('hidden', '');
       return;
     }

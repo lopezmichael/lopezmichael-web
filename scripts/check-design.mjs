@@ -25,14 +25,14 @@ const ALLOW = [
 
 const EXTENSIONS = ['.astro', '.ts', '.tsx', '.js', '.mjs', '.css'];
 
-// A hex color: 3, 4, 6 or 8 hex digits after "#", not part of a longer word.
-// The look-behind skips URL fragments and ids such as href="#main-content" or "#a".
-const HEX = /(?<![\w&/="'-])#(?:[0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{3,4})(?![\w-])/g;
-// Also catch hex inside Tailwind arbitrary values and quoted strings, e.g. bg-[#fff] or '#fff'.
-const HEX_IN_VALUE = /(?:\[|["'])#(?:[0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{3,4})(?![\w-])/g;
+// Places where "#" starts a fragment or id, not a color (href="#fade", url(#grad), id="#abc").
+// They are blanked out before matching, so one hex rule needs no context look-behind.
+const FRAGMENT = /\b(?:href|xlink:href|id|for|aria-[a-z]+|data-[\w-]+)\s*=\s*["']?#[\w-]*|url\(\s*["']?#[\w-]+/g;
+// A hex color: 3, 4, 6 or 8 hex digits after "#" (not an HTML entity such as &#039;).
+const HEX = /(?<![&\w])#(?:[0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{3,4})(?![\w-])/g;
 const FUNC = /\b(?:rgba?|hsla?|oklch|oklab|lch|lab|hwb|color)\(\s*[\d.]/g;
-// Unquoted SVG/HTML attributes such as fill=#fff (the HEX look-behind skips "=").
-const HEX_ATTR = /\b(?:fill|stroke|color|stop-color|bgcolor)=#(?:[0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{3,4})(?![\w-])/g;
+// Named colors in CSS declarations (stylesheets and <style> blocks only).
+const CSS_KEYWORD = /\b(?:color|background(?:-color)?|fill|stroke|(?:border|outline)(?:-[a-z]+)?-color)\s*:\s*(?:white|black)\b/g;
 // Tailwind's built-in palette (text-white, bg-black/50, border-red-500, ...): these ignore the theme,
 // so white text on a wine fill turns unreadable in dark mode. Use ink / page / on-wine instead.
 const TW_PALETTE = new RegExp(
@@ -57,24 +57,26 @@ const problems = [];
 for (const file of walk(srcDir)) {
   const rel = relative(root, file).split(sep).join('/');
   if (allowed(rel)) continue;
-  readFileSync(file, 'utf8').split('\n').forEach((line, i) => {
+  let inStyle = rel.endsWith('.css');
+  readFileSync(file, 'utf8').split('\n').forEach((raw, i) => {
+    if (/<style[\s>]/.test(raw)) inStyle = true;
+    const line = raw.replace(FRAGMENT, '');
     const hits = [
       ...line.matchAll(HEX),
-      ...line.matchAll(HEX_IN_VALUE),
-      ...line.matchAll(HEX_ATTR),
       ...line.matchAll(FUNC),
       ...line.matchAll(TW_PALETTE),
+      ...(inStyle ? line.matchAll(CSS_KEYWORD) : []),
     ];
-    for (const m of hits) problems.push(`${rel}:${i + 1}  ${m[0].replace(/^[\["']/, '')}  →  ${line.trim().slice(0, 100)}`);
+    for (const m of hits) problems.push(`${rel}:${i + 1}  ${m[0]}  →  ${raw.trim().slice(0, 100)}`);
+    if (/<\/style>/.test(raw)) inStyle = false;
   });
 }
 
-const unique = [...new Set(problems)];
-if (unique.length) {
-  console.error(`\n✗ check:design found ${unique.length} hard-coded color(s). Use a theme token instead`);
+if (problems.length) {
+  console.error(`\n✗ check:design found ${problems.length} hard-coded color(s). Use a theme token instead`);
   console.error('  (see docs/design-principles.md → Tokens), or add the file to ALLOW in scripts/check-design.mjs');
   console.error('  if it truly must hold raw color values.\n');
-  for (const p of unique) console.error('  ' + p);
+  for (const p of problems) console.error('  ' + p);
   console.error('');
   process.exit(1);
 }

@@ -1,10 +1,12 @@
 ---
+import { contact } from '../data/resume';
+
 const year = new Date().getFullYear();
-const email = 'michael@lopezstudio.dev';
+const { email } = contact;
 
 const links = [
-  { label: 'GitHub', href: 'https://github.com/lopezmichael' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/michael-d-lopez' },
+  { label: 'GitHub', href: contact.github },
+  { label: 'LinkedIn', href: contact.linkedin },
   { label: 'Email', href: `mailto:${email}` },
 ];
 ---
@@ -12,7 +14,7 @@ const links = [
 <footer class="border-t border-line">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 pb-8">
     <div class="flex flex-wrap items-end justify-between gap-6">
-      <p class="font-serif text-[clamp(2.2rem,6vw,4.6rem)] leading-none m-0" data-hello>
+      <p class="font-serif text-[clamp(2.2rem,6vw,4.6rem)] leading-none m-0">
         Say <em class="inline-block text-wine transition-transform duration-300 ease-[cubic-bezier(.3,1.6,.5,1)] motion-reduce:transition-none" data-hello-word>hello.</em>
       </p>
       <button

@@ -11,6 +11,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "screenshots": "node scripts/generate-screenshots.mjs",
+    "thumbs": "node scripts/generate-thumbs.mjs",
     "resume:pdf": "node scripts/generate-resume-pdf.mjs",
     "resume:measure": "node scripts/generate-resume-pdf.mjs --measure",
     "resume:variants": "node scripts/generate-resume-pdf.mjs --list",
