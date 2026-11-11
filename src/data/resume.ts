@@ -210,7 +210,7 @@ export const experience: Experience[] = [
         // reads well for Staff/Principal too, not just leadership.
       },
       {
-        text: 'Led the data org through the CDO transition (Dec 2024 to Dec 2025): set department roadmap, hiring, vendor strategy, and budget, reporting directly to the CTO',
+        text: 'Stepped into department leadership during the CDO transition (Dec 2024 to Dec 2025), reporting to the CTO: led all analyst and data work, set the roadmap, ran hiring, owned vendor strategy, and held the budget',
         variants: ['playercoach'],
       },
       {
