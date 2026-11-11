@@ -1,5 +1,5 @@
-// Pure terrain state: modes, places, seeded parameters, time-of-day defaults and the shareable
-// URL form. No Three.js here, so the band's UI can use it without pulling in the renderer.
+// Pure terrain state: modes, labels, seeded parameters and camera shots, the random draw, the
+// time-of-day tint and the ?terrain= URL form. No Three.js here, so the band's UI can use it without pulling in the renderer.
 // Principles: docs/design-principles.md → Terrain principles.
 
 export const TERRAIN_MODES = ['canyon', 'city', 'prairie'] as const;
@@ -21,7 +21,7 @@ export const MODE_LABEL: Record<TerrainMode, string> = { canyon: 'Canyon', city:
 
 /** Each mode's ground level in mesh units, used to place the pointer lift on the surface
  *  rather than on the flat base plane (matches the offsets in shaders.ts). */
-export const MODE_GROUND: Record<TerrainMode, number> = { canyon: 0, city: -5, prairie: -1 };
+export const MODE_GROUND: Record<TerrainMode, number> = { canyon: 0, city: -5, prairie: -2.7 };
 
 export interface TerrainParams {
   /** Noise frequencies of the three octaves. */
@@ -151,13 +151,10 @@ export const TINTS: Record<TerrainTint, [number, number, number]> = {
   night: [0.78, 0.84, 1.05],
 };
 
-/** Shareable form used in ?terrain=, e.g. "city-0421". */
-export const formatTerrainParam = (mode: TerrainMode, seed: number): string =>
-  `${mode}-${String(seed).padStart(4, '0')}`;
-
 export const isTerrainMode = (v: unknown): v is TerrainMode =>
   typeof v === 'string' && (TERRAIN_MODES as readonly string[]).includes(v);
 
+/** Parses the ?terrain= form, e.g. "city-0421" (seed up to 4 digits). */
 export function parseTerrainParam(value: string | null): { mode: TerrainMode; seed: number } | null {
   const m = value?.match(/^([a-z]+)-(\d{1,4})$/);
   return m && isTerrainMode(m[1]) ? { mode: m[1], seed: Number(m[2]) } : null;

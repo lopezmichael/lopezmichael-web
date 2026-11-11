@@ -2,7 +2,6 @@
 // The generative terrain, as a dark band between blush sections (docs/design-principles.md →
 // Terrain principles). Modes, seeds and defaults live in src/lib/terrain/state.ts; the renderer in
 // src/lib/terrain/index.ts.
-import { MODE_LABEL } from '../lib/terrain/state';
 ---
 
 <!-- Height comes from the first-screen wrapper in HomePage.astro: it fills what the hero leaves. -->
@@ -16,8 +15,9 @@ import { MODE_LABEL } from '../lib/terrain/state';
     class="absolute left-4 sm:left-6 lg:left-8 top-3 sm:top-auto sm:bottom-3 m-0 font-mono text-[11px] tracking-[0.04em] text-on-band/85 pointer-events-none"
     data-terrain-label
   >
-    <!-- Filled in by the script with the drawn mode and seed. -->
-    <span data-terrain-mode-label>{MODE_LABEL.canyon}</span><span data-terrain-seed></span>
+    <!-- Empty until the script draws the mode and seed, so it never names the wrong mode (and
+         stays empty without JavaScript, when there is no terrain to label). -->
+    <span data-terrain-mode-label></span><span data-terrain-seed></span>
   </p>
 
   <div class="absolute right-4 sm:right-6 lg:right-8 bottom-2.5 flex items-center gap-1.5 font-mono text-[11px] tracking-[0.04em]" data-terrain-controls hidden>
@@ -47,7 +47,6 @@ import { MODE_LABEL } from '../lib/terrain/state';
   import { createTerrain, type TerrainHandle } from '../lib/terrain/index';
   import {
     MODE_LABEL,
-    formatTerrainParam,
     parseTerrainParam,
     randomState,
     tintForHour,
@@ -89,14 +88,18 @@ import { MODE_LABEL } from '../lib/terrain/state';
     });
 
     function wire(terrain: TerrainHandle) {
-      // After the visitor changes the terrain, the URL carries it so the view can be shared.
+      // Regrow never writes the URL: a reload should draw fresh. It clears a pinned ?terrain= too,
+      // so the address bar never names a view that's no longer on screen. To share a view, use the
+      // mode and seed from the label: /?terrain=city-0421.
       const apply = (next: TerrainState) => {
         state = next;
         terrain.set(state);
         show();
         const url = new URL(location.href);
-        url.searchParams.set('terrain', formatTerrainParam(state.mode, state.seed));
-        history.replaceState(history.state, '', url);
+        if (url.searchParams.has('terrain')) {
+          url.searchParams.delete('terrain');
+          history.replaceState(history.state, '', url);
+        }
       };
 
       controls.querySelector('[data-terrain-regrow]')?.addEventListener('click', () => apply(randomState(state.tint)));

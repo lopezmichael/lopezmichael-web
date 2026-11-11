@@ -164,8 +164,9 @@ float cityHeight(vec2 p, vec3 sc, vec3 ht, float seed) {
   // collapse into needles. A cubic height curve leaves a few tall landmarks among lower blocks.
   if (built > 0.02) {
     float lot = 5.0;
-    // Small offsets: large values lose float precision on mobile GPUs.
-    vec2 off = vec2(fract(seed * 0.618034), fract(seed * 0.414214)) * 40.0;
+    // Small offsets: large values lose float precision on mobile GPUs. Constants differ from the
+    // picks above, so the tower layout doesn't correlate with built form or river.
+    vec2 off = vec2(fract(seed * 0.236068), fract(seed * 0.141421)) * 40.0;
     vec2 q = (p + off) / lot;
     vec2 cell = floor(q);
     float r = hash21(cell + off);

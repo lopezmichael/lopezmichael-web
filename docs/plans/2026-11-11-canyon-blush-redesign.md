@@ -222,7 +222,7 @@ Needs a real GPU: the cloud sandbox renders WebGL in software, so judge only on 
   (renderer, morph, pointer lift, frame loop), `src/components/TerrainBand.astro` (band size, label,
   controls, start timing).
 - **Fast loop:** `npm run dev`, open `/?terrain=canyon-0421` (or `city-0042`, `prairie-0007`) to pin a
-  mode + seed; Regrow updates the URL, so a view worth keeping can be bookmarked.
+  mode + seed. Regrow doesn't write the URL (reloads draw fresh); read the mode + seed off the label to pin a view.
 - **State after the 2026-11-11 real-GPU session (all committed):**
   - Ground is a 280×100 strip (`GRID_WIDTH`/`GRID_DEPTH` in `config.ts`) so it spans the band.
   - First screen fits name + tagline + band: band fills what the hero leaves (240px to 62svh),
