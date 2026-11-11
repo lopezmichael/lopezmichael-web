@@ -23,13 +23,18 @@ import bodySans from '@fontsource/instrument-sans/files/instrument-sans-latin-40
     <link rel="preload" href={bodySans} as="font" type="font/woff2" crossorigin />
   </Fragment>
 
+  <!-- First screen: the name, the tagline and the terrain together. The wrapper is one viewport tall
+       (less the header: 4rem from sm up, ~6.5rem below it where the nav wraps) and the band takes whatever the hero leaves, between its min and max
+       heights in TerrainBand.astro. The wordmark is capped by viewport height too, so short laptop
+       screens still leave room for the band. -->
+  <div class="flex flex-col min-h-[calc(100svh-6.5rem)] sm:min-h-[calc(100svh-4rem)]">
   <!-- Hero: the one big type moment on the page (principle 1). -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-8">
+  <section class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[clamp(1.5rem,5svh,3.5rem)] pb-[clamp(1.25rem,3.5svh,2rem)]">
     <h1 class="m-0 font-normal leading-[0.86]">
-      <span class="block font-display font-extrabold uppercase tracking-[-0.035em] text-[clamp(3.4rem,15.5vw,12.5rem)]">Michael</span>
-      <span class="block font-serif italic text-wine text-right tracking-[-0.02em] text-[clamp(3.6rem,16vw,13rem)] -mt-[0.08em] pr-[0.04em]">Lopez</span>
+      <span class="block font-display font-extrabold uppercase tracking-[-0.035em] text-[clamp(3.4rem,min(15.5vw,21svh),12.5rem)]">Michael</span>
+      <span class="block font-serif italic text-wine text-right tracking-[-0.02em] text-[clamp(3.6rem,min(16vw,22svh),13rem)] -mt-[0.08em] pr-[0.04em]">Lopez</span>
     </h1>
-    <div class="flex flex-wrap items-end justify-between gap-5 mt-[clamp(1.25rem,4.5vw,3.75rem)]">
+    <div class="flex flex-wrap items-end justify-between gap-5 mt-[clamp(1.25rem,min(4.5vw,5svh),3.75rem)]">
       <p class="m-0 font-serif text-[clamp(1.15rem,2vw,1.5rem)] leading-tight max-w-[30ch]">
         Data Leader · Civic Tech &amp; Social Impact
       </p>
@@ -40,6 +45,7 @@ import bodySans from '@fontsource/instrument-sans/files/instrument-sans-latin-40
   </section>
 
   <TerrainBand />
+  </div>
 
   <!-- Now -->
   <LabeledSection label="Now" labelAs="p" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
