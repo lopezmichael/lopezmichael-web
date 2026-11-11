@@ -80,41 +80,90 @@ float canyonHeight(vec2 p, vec3 sc, vec3 ht, float seed) {
   return mix(-9.0, h, carve);
 }
 
-// City: Dallas seen across the Trinity River. The foreground is the floodplain, smooth like the
-// canyon, with the river crossing the view and a levee on each bank; the skyline rises along the
-// horizon as a seeded cluster of tapered towers. Every edge is a smoothstep: hard steps alias into
-// jagged noise at this mesh density.
+// City: built from seeded ingredients so seeds look like different kinds of city, not one picture.
+//   Built form (one per seed): a tall downtown cluster (with a smaller second cluster on some
+//     seeds) or a mid-rise band along the horizon. (A low dense grid was tried and dropped: busy.)
+//   River (about half the seeds): a flat strip of water; seen this low, a trench hides itself.
+//   Highways (about half the seeds): straight, flat-bottomed cuts through the ground and blocks.
+//     Nothing else in any mode is a straight line, so they read as made.
+// Every edge is a smoothstep: hard steps alias into jagged noise at this mesh density.
 float softBox(vec2 f, vec2 inset, float soft) {
   vec2 a = smoothstep(inset, inset + soft, f) * smoothstep(inset, inset + soft, 1.0 - f);
   return a.x * a.y;
 }
 
+// Distance from p to the line through o at angle a.
+float lineDist(vec2 p, vec2 o, float a) {
+  vec2 d = vec2(cos(a), sin(a));
+  vec2 v = p - o;
+  return abs(v.x * d.y - v.y * d.x);
+}
+
 float cityHeight(vec2 p, vec3 sc, vec3 ht, float seed) {
-  float h = fbm(p, sc, ht, seed) * 0.9 - 5.0;
+  // Independent seeded picks, each in [0, 1).
+  float pickForm = fract(seed * 0.618034);
+  float pickRiver = fract(seed * 0.414214);
+  float pickRoads = fract(seed * 0.324718);
+  float pickSecond = fract(seed * 0.754877);
+  float pickSide = fract(seed * 0.569840);
 
-  // The Trinity and its levees, running across the view.
-  float ry = 6.0 + sin(p.x * 0.06 + seed) * 4.0 + sin(p.x * 0.15 + seed * 2.0) * 1.5;
-  float dr = abs(p.y - ry);
-  h -= 2.4 * (1.0 - smoothstep(1.5, 4.0, dr));
-  h += exp(-pow((dr - 8.0) / 1.3, 2.0)) * 1.8;
+  // Calmer ground than the other modes, so the built form carries the view.
+  float h = fbm(p, sc, ht, seed) * 0.55 - 5.0;
 
-  // The skyline: tapered towers in a cluster near the far edge (+y is away from the camera).
+  vec2 core = vec2(sin(seed) * 10.0, 19.0);
+
+  // Highways: two straight cuts crossing near downtown, flattened to one level so their even grid
+  // lines read against the noisy ground (like the river). road is 0 on the roadway, 1 off it, and
+  // also clears buildings off the road.
+  float road = 1.0;
+  if (pickRoads < 0.5) {
+    float a1 = 0.35 + pickRoads * 1.2;
+    float a2 = a1 + 1.2 + pickSide * 0.6;
+    float d = min(lineDist(p, core + vec2(-6.0, -4.0), a1), lineDist(p, core + vec2(5.0, -2.0), a2));
+    road = smoothstep(1.2, 2.8, d);
+  }
+
+  // Built form: how strongly each spot is built up (0-1), and how tall its tallest towers get.
+  float built;
+  float peak;
+  float low;
+  if (pickForm < 0.55) {
+    vec2 rel = (p - core) / vec2(34.0, 9.0);
+    built = exp(-dot(rel, rel) * 1.6);
+    float side = pickSide < 0.5 ? -1.0 : 1.0;
+    vec2 rel2 = (p - vec2(core.x + side * 48.0, 21.0)) / vec2(16.0, 6.5);
+    built = max(built, step(0.5, pickSecond) * 0.85 * exp(-dot(rel2, rel2) * 1.6));
+    peak = 36.0;
+    low = 0.3;
+  } else {
+    // A long mid-rise band along the horizon, thinning toward the sides.
+    built = exp(-pow((p.y - 18.0) / 9.0, 2.0)) * (1.0 - smoothstep(40.0, 90.0, abs(p.x - core.x)));
+    peak = 14.0;
+    low = 0.25;
+  }
+
+  // River: flatten to a water level, and keep buildings out of it.
+  float water = 0.0;
+  if (pickRiver < 0.5) {
+    float ry = 5.0 + sin(p.x * 0.05 + seed) * 4.0 + sin(p.x * 0.13 + seed * 2.0) * 1.5;
+    water = 1.0 - smoothstep(2.5, 5.0, abs(p.y - ry));
+  }
+  built *= road * (1.0 - water);
+
   // Lots are ~6 vertices wide so each tower gets a flat top and sloped sides; narrower lots
-  // collapse into needles. Most lots stay low; a cubic height curve leaves a few tall landmarks.
-  vec2 downtown = vec2(sin(seed) * 14.0, 19.0);
-  vec2 rel = (p - downtown) / vec2(34.0, 9.0);
-  float cluster = exp(-dot(rel, rel) * 1.6);
-  if (cluster > 0.02) {
+  // collapse into needles. A cubic height curve leaves a few tall landmarks among lower blocks.
+  if (built > 0.02) {
     float lot = 5.0;
     // Small offsets: large values lose float precision on mobile GPUs.
     vec2 off = vec2(fract(seed * 0.618034), fract(seed * 0.414214)) * 40.0;
     vec2 q = (p + off) / lot;
     vec2 cell = floor(q);
     float r = hash21(cell + off);
-    float tower = step(0.3, r) * softBox(fract(q), vec2(0.1), 0.2);
-    h += cluster * (2.0 + tower * (4.0 + r * r * r * 36.0));
+    float tower = step(low, r) * softBox(fract(q), vec2(0.1), 0.2);
+    h += built * (1.5 + tower * (3.0 + r * r * r * peak));
   }
-  return h;
+  h = mix(-6.6, h, road);
+  return mix(h, -7.5, water);
 }
 
 // Prairie: long rolling swells that rise toward the horizon, a shallow creek, and wind moving
