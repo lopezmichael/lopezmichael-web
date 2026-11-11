@@ -2,7 +2,7 @@
   type="button"
   id="theme-toggle"
   class="flex items-center justify-center w-9 h-9 rounded-md text-neutral dark:text-dark-text hover:bg-accent/20 transition-colors"
-  aria-label="Toggle dark mode"
+  aria-label="Switch to dark mode"
 >
   <!-- Sun icon (shown in dark mode) -->
   <svg id="theme-sun" class="w-5 h-5" style="display:none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -27,6 +27,8 @@
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       sun!.style.display = isDark ? 'block' : 'none';
       moon!.style.display = isDark ? 'none' : 'block';
+      // Name the action, not the control, so screen readers hear the current state.
+      btn!.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
     }
 
     updateIcons();

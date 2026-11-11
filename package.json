@@ -5,6 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
+    "check:design": "node scripts/check-design.mjs",
+    "prebuild": "npm run check:design",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
@@ -16,7 +18,11 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.3.1",
+    "@fontsource/bricolage-grotesque": "^5.3.0",
+    "@fontsource/instrument-sans": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
     "@fontsource/inter": "^5.1.1",
+    "@fontsource/jetbrains-mono": "^5.3.0",
     "@vercel/analytics": "^2.0.1",
     "astro": "^5.18.1",
     "three": "^0.175.0"

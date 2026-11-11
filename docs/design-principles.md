@@ -100,10 +100,12 @@ easy for a future session to extend without drifting from this document.
 
 ### Color
 
+Defined once in `src/styles/global.css`. Each token is a CSS variable that flips with the theme, exposed to Tailwind as a color (`bg-page`, `text-ink`, `text-muted`, `border-line`, `text-wine`, `bg-wine-deep`, `text-on-wine`, `bg-band`), so components never need a `dark:` twin. Fonts are `font-display`, `font-serif`, `font-sans`, `font-mono`.
+
 | Token | Light | Dark | Role |
 |---|---|---|---|
-| `bg` | `#F2D8C9` blush | `#1E1211` | Page ground |
-| `surface` | `#F8E8DE` | `#2A1917` | Alternate section ground (e.g. the chart section) |
+| `page` | `#F2D8C9` blush | `#1E1211` | Page ground |
+| `raised` | `#F8E8DE` | `#2A1917` | Alternate section ground (e.g. the chart section) |
 | `ink` | `#34191A` oxblood | `#F2D8C9` | Body text, headings |
 | `muted` | `#7B5148` | `#C9A193` | Labels, captions, metadata |
 | `line` | `ink` @ 22% | `ink` @ 18% | Hairline rules |

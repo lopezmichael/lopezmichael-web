@@ -69,6 +69,7 @@ scripts/
 npm run dev           # Start dev server
 npm run build         # Production build
 npm run preview       # Preview production build
+npm run check:design  # Fail on hard-coded colors outside the token files (also runs before every build)
 npm run screenshots   # Regenerate project screenshots (requires: npx playwright install chromium)
 ```
 

@@ -39,20 +39,24 @@ data leadership roles. Copy edits continue in parallel and don't block this work
 Each phase is one PR off `main`, reviewed on a Vercel preview before merge. Sizes: S (≤ half a
 day of agent work), M (≈ a day), L (multi-day).
 
-### Phase 0: Foundations (M)
+### Phase 0: Foundations (M) · DONE 2026-11-11
 
-- [ ] Add `@fontsource/bricolage-grotesque`, `@fontsource/instrument-sans`,
-      `@fontsource/instrument-serif`, `@fontsource/jetbrains-mono`; remove Inter weights no longer used.
-- [ ] Rewrite the `@theme` block in `src/styles/global.css` to the new tokens (`bg`, `surface`,
-      `ink`, `muted`, `line`, `wine`, `wine-deep`, `on-wine`, `band`) with dark values under
-      `[data-theme="dark"]`. Map old names temporarily so pages don't break mid-migration, then remove
-      them in Phase 5.
-- [ ] Global base styles: `:focus-visible` outline, heading font roles, link style (wine,
-      underline offset), selection color.
-- [ ] `ThemeToggle.astro`: state-aware `aria-label` (fixes the static "Toggle dark mode").
-- [ ] Guardrail: `scripts/check-design.mjs` (run in `npm run build` via a `prebuild` script) that
-      fails on hex color literals in `src/**/*.astro` outside the allowed files (`global.css`,
-      `src/lib/terrain/config.ts`). Modeled on DigiLab's `conventions.test.ts`.
+Shipped with no visible change: the four affected pages were pixel-identical to the previous build.
+
+- [x] Added `@fontsource/bricolage-grotesque`, `@fontsource/instrument-sans`,
+      `@fontsource/instrument-serif`, `@fontsource/jetbrains-mono` (imported in `global.css`; browsers
+      download a face only once something uses it). Inter stays until Phase 1 switches the body font;
+      the resume and cover-letter scripts keep using `@fontsource/inter` either way.
+- [x] New token layer in `src/styles/global.css`: CSS variables that flip under `[data-theme="dark"]`,
+      exposed through `@theme inline` as `page`, `raised`, `ink`, `muted`, `line`, `wine`, `wine-deep`,
+      `on-wine`, `band`, plus `font-display/serif/sans/mono`. The legacy palette stays in its own
+      `@theme` block, marked for deletion in Phase 5.
+- [x] Global `:focus-visible` outline (2px wine, 3px offset) on every interactive element.
+- [x] `ThemeToggle.astro`: `aria-label` now names the action ("Switch to dark mode" / "Switch to
+      light mode") and updates on toggle.
+- [x] Guardrail: `scripts/check-design.mjs` (`npm run check:design`, and as `prebuild`, so Vercel builds
+      run it too) fails on hex/rgb/hsl color literals in `src/` outside `global.css`,
+      `src/lib/terrain/config.ts`, and `src/pages/preview/`.
 
 ### Phase 1: Site shell (S)
 

@@ -4,9 +4,71 @@
 @import "@fontsource/inter/latin-500.css";
 @import "@fontsource/inter/latin-600.css";
 @import "@fontsource/inter/latin-700.css";
+/* Canyon Blush type (docs/design-principles.md). Self-hosted: the CSP allows only font-src 'self'.
+   Browsers fetch a face's files only once a rendered glyph uses it, so these cost nothing until adopted. */
+@import "@fontsource/bricolage-grotesque/latin-700.css";
+@import "@fontsource/bricolage-grotesque/latin-800.css";
+@import "@fontsource/instrument-serif/latin-400.css";
+@import "@fontsource/instrument-serif/latin-400-italic.css";
+@import "@fontsource/instrument-sans/latin-400.css";
+@import "@fontsource/instrument-sans/latin-500.css";
+@import "@fontsource/instrument-sans/latin-600.css";
+@import "@fontsource/jetbrains-mono/latin-400.css";
+@import "@fontsource/jetbrains-mono/latin-500.css";
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
+/* ---------------------------------------------------------------------------
+   Canyon Blush tokens (docs/design-principles.md → Tokens).
+   Values flip with the theme here, so components use one class (text-ink, bg-page)
+   and never need a dark: twin. Contrast is AA or better in both themes; recheck if
+   any value changes.
+   --------------------------------------------------------------------------- */
+:root {
+  --page: #F2D8C9;      /* blush ground */
+  --raised: #F8E8DE;    /* alternate section ground */
+  --ink: #34191A;       /* oxblood text */
+  --muted: #7B5148;     /* labels, captions */
+  --wine: #8B2D3D;      /* the only highlight: italics, links, focus */
+  --wine-deep: #7E2836; /* hover fills, chart bars, primary buttons */
+  --on-wine: #F8E8DE;   /* text on wine-deep */
+  --band: #1F100E;      /* terrain band ground (always dark) */
+  --line: color-mix(in srgb, var(--ink) 22%, transparent);
+}
+
+[data-theme="dark"] {
+  --page: #1E1211;
+  --raised: #2A1917;
+  --ink: #F2D8C9;
+  --muted: #C9A193;
+  --wine: #F0A3A8;
+  --wine-deep: #6E2430;
+  --on-wine: #F8E1D6;
+  --band: #130A09;
+  --line: color-mix(in srgb, var(--ink) 18%, transparent);
+}
+
+@theme inline {
+  --color-page: var(--page);
+  --color-raised: var(--raised);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-wine: var(--wine);
+  --color-wine-deep: var(--wine-deep);
+  --color-on-wine: var(--on-wine);
+  --color-band: var(--band);
+  --color-line: var(--line);
+}
+
+@theme {
+  --font-display: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+
+/* Legacy palette (pre-redesign). Components migrate off these phase by phase;
+   the block is deleted in Phase 5 of docs/plans/2026-11-11-canyon-blush-redesign.md. */
 @theme {
   --color-primary: #2A2520;
   --color-secondary: #D86B3A;
@@ -71,5 +133,12 @@
 
   [data-theme="dark"] a:hover {
     color: var(--color-accent);
+  }
+
+  /* Visible keyboard focus on every interactive element (accessibility baseline). */
+  :where(a, button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+    outline: 2px solid var(--wine);
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 }
