@@ -12,7 +12,7 @@ A full visual redesign is planned. **Read `docs/design-principles.md` before any
 
 ## Redesign status
 
-Phases 0–6 and the Phase 7 QA checks done on branch `claude/quirky-shannon-hpcwls` (not yet merged). **Remaining work, in order, is in the "Handoff" section at the end of `docs/plans/2026-11-11-canyon-blush-redesign.md`** (terrain look iteration, copy pass, case-study charts, pre-merge checks). Every page is on the new components; the legacy color aliases and `ScrollReveal` are gone. Header = name + Work/About/Resume + Dallas clock; footer = "Say hello" + copy-email (no consulting CTA anywhere). Buttons use the `btn-primary` / `btn-outline` utilities (padding at the call site); contact details live in `contact` in `src/data/resume.ts`; card/row images go through `cardShot()` in `src/data/projects.ts`.
+Phases 0–6 and the Phase 7 QA checks done on branch `claude/quirky-shannon-hpcwls` (not yet merged). **Remaining work, in order, is in the "Handoff" section at the end of `docs/plans/2026-11-11-canyon-blush-redesign.md`** (terrain look iteration done 2026-11-11; next: copy pass, case-study charts, pre-merge checks). Every page is on the new components; the legacy color aliases and `ScrollReveal` are gone. Header = name + Work/About/Resume + Dallas clock; footer = "Say hello" + copy-email (no consulting CTA anywhere). Buttons use the `btn-primary` / `btn-outline` utilities (padding at the call site); contact details live in `contact` in `src/data/resume.ts`; card/row images go through `cardShot()` in `src/data/projects.ts`.
 
 ## Stack
 

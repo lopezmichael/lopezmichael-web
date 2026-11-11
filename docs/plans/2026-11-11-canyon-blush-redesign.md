@@ -213,29 +213,36 @@ generative parameters and always-dark rendering all kept.
 Phases 0–6 and the Phase 7 QA checks are done on `claude/quirky-shannon-hpcwls` (not yet merged to
 `main`). Work continues locally. Everything still open is listed here, in a sensible order.
 
-### 1. Terrain look iteration (Michael: "not super happy with it, iterate later")
+### 1. Terrain look iteration: DONE 2026-11-11 (only optional items remain)
 Needs a real GPU: the cloud sandbox renders WebGL in software, so judge only on a laptop/phone.
 - **Files:** `src/lib/terrain/shaders.ts` (per-mode height functions: `canyonHeight`, `cityHeight`,
   `prairieHeight`, plus color ramp/tint in the fragment shader), `src/lib/terrain/state.ts` (per-mode
-  parameter ranges in `RANGES`, camera ranges in `paramsFor`, `MODE_LABEL`, random draw, time-of-day
+  parameter ranges and camera `shots` in `RANGES`, `MODE_LABEL`, random draw, time-of-day
   tint), `src/lib/terrain/config.ts` (`TERRAIN_RAMP`, grid density), `src/lib/terrain/index.ts`
   (renderer, morph, pointer lift, frame loop), `src/components/TerrainBand.astro` (band size, label,
   controls, start timing).
 - **Fast loop:** `npm run dev`, open `/?terrain=canyon-0421` (or `city-0042`, `prairie-0007`) to pin a
   mode + seed; Regrow updates the URL, so a view worth keeping can be bookmarked.
-- **Known state:** Canyon is the strongest. City went through literal blocks → soft density map →
-  current "skyline across the Trinity" (smooth floodplain + levees + a seeded cluster of soft
-  towers, lower camera); never reviewed on a real GPU. Prairie has an escarpment + creek.
-- **Done 2026-11-11 (real-GPU session):** ground widened to a 280×100 strip so it spans the band;
-  City towers flat-topped with a larger downtown, lower camera and a flatter per-mode tilt
-  (`tiltDivisor`) so towers stand upright; first screen fits name + tagline + band (band fills what
-  the hero leaves, 240px to 62svh; wordmark capped by `svh`); **mode buttons removed**: each load
-  draws a random mode + seed, Regrow rerolls both, label is "Canyon · seed 0421" (no place names or
-  coordinates). Night-default question closed: no per-time default mode any more (tint stays).
-- **Next, in order:** per-mode color range (City/Prairie only use the middle of the ramp); Prairie
-  rebuild (long rolling hills + fine ripple + a travelling wind wave); City variety (1-2 clusters,
-  river that reads or no levees); Canyon variety (terrace step, river sometimes absent); seeded camera
-  composition per mode. Still open: pointer-lift strength (`uLift * 7.0`, sigma 8 in the shader).
+- **State after the 2026-11-11 real-GPU session (all committed):**
+  - Ground is a 280×100 strip (`GRID_WIDTH`/`GRID_DEPTH` in `config.ts`) so it spans the band.
+  - First screen fits name + tagline + band: band fills what the hero leaves (240px to 62svh),
+    wordmark capped by `svh`.
+  - No mode buttons: each load draws a random mode + seed, Regrow rerolls both, label is
+    "Canyon · seed 0421". No per-time default mode (tint still follows the local clock).
+  - Per-mode color range (`modeRange` in the shader) so City and Prairie use the whole ramp.
+  - **Canyon:** seeded terrace step (2.4-4.4) and edge softness; river in the middle (1/2 of
+    seeds), off to one side (1/4) or absent (1/4).
+  - **City:** seeded ingredients: built form (tall downtown with an optional second cluster, or a
+    mid-rise band along the horizon), river (1/2, a flat water strip), highways (1/2, two straight
+    flat-bottomed cuts). Flat per-mode tilt (`tiltDivisor`) keeps towers upright. A low dense grid
+    form was tried and dropped (too busy).
+  - **Prairie:** rebuilt as domain-warped swells, a rise toward the horizon, a shallow creek and a
+    travelling wind ripple masked into gusts (rides `uTime`, so reduced motion is one still frame).
+  - **Camera:** three hand-picked shots per mode (`shots` in `RANGES`), one per seed plus jitter.
+    Canyon's rim shot looks almost straight down; kept.
+- **Still open (optional):** pointer-lift strength (`uLift * 7.0`, sigma 8); `uTime` advances per
+  frame, so motion runs at half speed on 30 fps small screens (switch to elapsed time if it matters);
+  real-phone check of the 2.8x vertex count (drop `GRID_SEGMENTS_SMALL` if it struggles).
 - **Guardrails:** keep the canyon-to-sand ramp (no teal: CPAL brand); keep it generative and seeded
   (`paramsFor` must stay deterministic); keep the cheap-rendering behavior (off-screen pause, idle
   start, 30 fps + 1.5x pixel ratio on small screens, reduced motion = one frame).
