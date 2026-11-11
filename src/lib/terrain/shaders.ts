@@ -70,12 +70,22 @@ float fbm(vec2 p, vec3 sc, vec3 ht, float seed) {
 }
 
 // Canyon: the original noise field, stepped into mesa terraces, with a meandering river cut through.
+// Light seeded variety so reloads differ: terrace step height and edge sharpness, and the river runs
+// through the middle (half the seeds), off to one side (a quarter), or not at all (a quarter).
 float canyonHeight(vec2 p, vec3 sc, vec3 ht, float seed) {
+  float pickStep = fract(seed * 0.618034);
+  float pickEdge = fract(seed * 0.414214);
+  float pickRiver = fract(seed * 0.324718);
+
   float h = fbm(p, sc, ht, seed);
-  float stepH = 3.2;
+  float stepH = 2.4 + pickStep * 2.0;
+  float e = 0.25 + pickEdge * 0.15; // nearer 0.5 is crisper; past ~0.4 the edges alias
   float q = h / stepH;
-  h = (floor(q) + smoothstep(0.3, 0.7, fract(q))) * stepH;
-  float rx = sin(p.y * 0.06 + seed * 0.37) * 12.0 + sin(p.y * 0.15 + seed) * 4.0;
+  h = (floor(q) + smoothstep(e, 1.0 - e, fract(q))) * stepH;
+
+  if (pickRiver >= 0.75) return h;
+  float base = pickRiver < 0.5 ? 0.0 : (pickRiver < 0.625 ? -28.0 : 28.0);
+  float rx = base + sin(p.y * 0.06 + seed * 0.37) * 12.0 + sin(p.y * 0.15 + seed) * 4.0;
   float carve = smoothstep(2.5, 9.0, abs(p.x - rx));
   return mix(-9.0, h, carve);
 }
