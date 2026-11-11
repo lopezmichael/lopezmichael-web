@@ -22,20 +22,15 @@ data leadership roles. Copy edits continue in parallel and don't block this work
 - **Charts:** the team chart in the mockup is a placeholder idea. Each case study's chart is
   decided case by case with real data.
 
-## Open decisions (for Michael)
+## Decisions from review (2026-11-11)
 
-1. **Consulting CTA.** Drop the "Building something for the people closest to the problem?"
-   band from Home and About and let the footer's "Say hello" carry contact? *Recommended: yes.*
-2. **Showing the visitor's city.** When location-aware terrain is on, should the label say
-   "Generated for Chicago", or only use the location quietly as a seed? *Recommended: show the
-   region, not the city ("Generated for the Midwest"), to avoid feeling watched.*
-3. **Case-study charts.** Which dataset per case study, and who supplies the numbers. Candidates:
-   eviction filings over time (Eviction), take-up by tract (Homestead), tournaments/players
-   over time (DigiLab), team or platform milestones (CPAL Data Function).
-4. **Work with me page.** Restyle it, or leave it hidden and unchanged? It's already off the nav
-   and noindexed. *Recommended: restyle lightly so it matches if someone has the link.*
-5. **Resume PDF.** Re-theme to Canyon Blush, or keep the current canyon PDF? *Recommended: re-theme
-   later (it's printed/ATS-read, so it's lower priority).*
+1. **Consulting CTA:** dropped from Home and About. The footer's "Say hello" carries contact.
+2. **Visitor location on screen:** never shown. Location (time zone, optional coarse region) only
+   seeds and tints the terrain quietly; the label names the terrain's own place and seed, not the visitor's.
+3. **Case-study charts:** see "Case-study charts" under Phase 4. Eviction first.
+4. **Work with me:** restyle to match; it stays hidden from nav and noindexed.
+5. **Resume PDF:** keep the current design. Revisit only if the mismatch with the new site bothers us
+   (at most a swap of its accent color to wine and its font to Instrument Sans).
 
 ---
 
@@ -77,7 +72,7 @@ day of agent work), M (≈ a day), L (multi-day).
 - [ ] New `ProjectIndex.astro` + `ProjectRow.astro` (title · hook · tags · arrow) with wine hover
       fill and the trailing, tilting screenshot (pointer only; hidden on touch). Needs a short `hook`
       field per project in `src/data/projects.ts`.
-- [ ] Remove the consulting CTA band (pending open decision 1).
+- [ ] Remove the consulting CTA band.
 
 ### Phase 3: Terrain v2 (L)
 
@@ -141,8 +136,17 @@ shader, bloom, randomized parameters, dynamic import, and always-dark rendering 
     the fallback).
 - [ ] `ProjectDetail.astro` (generic projects): same grid and type, lighter.
 - [ ] Charts: build one shared `<ScrubChart>` component (SVG, range-input scrubber, `aria-live`
-      caption, theme tokens). Ship the first chart on one case study once real data is confirmed
-      (open decision 3); the others follow as data arrives.
+      caption, theme tokens). Ship the first chart on one case study once real data is confirmed;
+      the others follow as data arrives.
+
+**Case-study charts (proposed, one each)**
+
+| Case study | Chart | Data needed | Priority |
+|---|---|---|---|
+| Dallas County Eviction Data | Monthly Dallas County filings, 2020 to today, scrubbable, with a few annotations (e.g. the end of the moratorium). A second view shows the year as a funnel: filings → outreach → legal representation | Monthly filing counts (public; same source as North Texas Evictions); funnel counts for one year | **First** |
+| Dallas Homestead Map | Every Dallas tract as a dot along a take-up-rate axis; a slider filters by income so the disparity becomes visible | Tract take-up rate + median income (already in the app's data: DCAD + ACS) | Second |
+| DigiLab | Tournaments logged per week since launch, scrubbable, with a running count of cities and players | Weekly counts from DigiLab's own database/API | Third |
+| Building CPAL's Data Function | Three lanes on one timeline (people, platform, products): team size, the stack moving from scripts to Databricks, decision tools going from 0 to 30+ | Michael's dates for each milestone; app count by year if known | Fourth (needs the most input) |
 
 ### Phase 5: Remaining pages (M)
 
@@ -150,7 +154,7 @@ shader, bloom, randomized parameters, dynamic import, and always-dark rendering 
       built" as a ruled list without the decorative numerals, skills as plain columns, media list
       kept. Keep the monogram until the real photo arrives, restyled in wine/blush.
 - [ ] **Resume:** sidebar and timeline restyled to tokens and type.
-- [ ] **Work with me:** light restyle (pending open decision 4).
+- [ ] **Work with me:** restyle to match (stays hidden and noindexed).
 - [ ] **404:** a small terrain moment ("This ground hasn't been mapped yet") plus links home.
 - [ ] Remove the temporary old-token aliases from Phase 0, and delete unused components
       (`ProjectCard.astro`, card variants, wave divider).
