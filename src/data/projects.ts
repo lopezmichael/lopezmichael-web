@@ -21,7 +21,7 @@ export const projects: Project[] = [
   {
     slug: 'building-cpal-data-function',
     title: "Building CPAL's Data Function",
-    hook: 'One analyst to an in-house engineering team in six years.',
+    hook: 'Two people and a laptop to a full data function in six years.',
     description:
       'Helping grow a nonprofit data function from one analyst into an in-house engineering team, with a cloud platform and a 30+ app decision-support suite.',
     longDescription:
@@ -40,7 +40,7 @@ export const projects: Project[] = [
   {
     slug: 'eviction-pipeline',
     title: 'Dallas County Eviction Data',
-    hook: 'County court records to tenant outreach, every day.',
+    hook: 'County court records to tenant outreach, every weekday.',
     description:
       'The data workstream that gets eviction filings across four North Texas counties to the legal-aid and outreach teams reaching tenants facing displacement.',
     longDescription:

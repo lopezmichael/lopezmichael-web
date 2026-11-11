@@ -16,7 +16,7 @@ Phases 0–2 done (tokens, shell, home). Header = name + Work/About/Resume + Dal
 
 - **Framework:** Astro 5 (static output)
 - **Styling:** Tailwind CSS v4 with `@theme` tokens
-- **Font:** Inter (via `@fontsource/inter`)
+- **Fonts:** Bricolage Grotesque (display), Instrument Serif, Instrument Sans (body), JetBrains Mono, all self-hosted via `@fontsource`. Inter is kept only for the internal branding preview and the resume/cover-letter PDF scripts.
 - **3D:** Three.js terrain hero with GPU shaders and bloom post-processing
 - **Screenshots:** Playwright (dev dependency) for auto-generating project preview images
 - **Hosting:** Vercel

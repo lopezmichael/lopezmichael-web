@@ -34,7 +34,14 @@
     if (!container) return;
 
     const seed = Math.floor(Math.random() * 10000);
-    cleanup = initTerrain(container, { seed }) ?? null;
+    try {
+      cleanup = initTerrain(container, { seed }) ?? null;
+    } catch {
+      // No WebGL (hardware acceleration off, blocklisted GPU): keep the plain dark band and
+      // hide the controls rather than showing a Regrow button that can't do anything.
+      document.querySelector<HTMLElement>('[data-terrain-regrow]')?.setAttribute('hidden', '');
+      return;
+    }
 
     const label = document.querySelector('[data-terrain-seed]');
     if (label) label.textContent = ` · seed ${String(seed).padStart(4, '0')}`;

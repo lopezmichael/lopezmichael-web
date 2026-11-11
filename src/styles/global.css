@@ -1,9 +1,4 @@
 @import "tailwindcss";
-@import "@fontsource/inter/latin-300.css";
-@import "@fontsource/inter/latin-400.css";
-@import "@fontsource/inter/latin-500.css";
-@import "@fontsource/inter/latin-600.css";
-@import "@fontsource/inter/latin-700.css";
 /* Canyon Blush type (docs/design-principles.md). Self-hosted: the CSP allows only font-src 'self'.
    Browsers fetch a face's files only once a rendered glyph uses it, so these cost nothing until adopted. */
 @import "@fontsource/bricolage-grotesque/latin-700.css";
