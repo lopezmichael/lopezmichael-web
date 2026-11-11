@@ -64,14 +64,14 @@ export const projects: Project[] = [
     description:
       'Helping build a nonprofit\'s data operations from a two-person team into an in-house engineering team, with a cloud platform and a 30+ app decision-support suite.',
     longDescription:
-      "The six-year story of helping build the Child Poverty Action Lab's data operations: turning the strategic analytics team's proven prototypes into durable, access-controlled tools, hiring the org's first data engineer, pairing vendor engineers with an in-house team to build the platform, selecting and migrating to Databricks, leading the data org through a CDO transition, and rolling out AI-enabled workflows across the team. A leadership case study, not a pipeline write-up.",
+      "The six-year story of helping build the Child Poverty Action Lab's data operations: turning the strategic analytics team's proven prototypes into durable, access-controlled tools, hiring the org's first data engineer, pairing vendor engineers with an in-house team to build the platform, selecting and migrating to Databricks, stepping into department leadership for a year during a CDO transition, and rolling out AI-enabled workflows across the team. A leadership case study, not a pipeline write-up.",
     tags: ['Data Leadership', 'Team Building', 'Data Strategy', 'Databricks'],
     href: '',
     category: 'civic',
     image: '/images/projects/cpal-data-function.png',
     highlights: [
       'Helped grow the team from 1 analyst to 2 in-house + 4 vendor engineers',
-      'Led the data org through a CDO transition',
+      'Stepped into department leadership for a year during a CDO transition',
       'Selected and migrated to Databricks; shaped the org-wide Claude Enterprise rollout',
     ],
   },
@@ -161,7 +161,7 @@ export const projects: Project[] = [
     category: 'community',
     image: '/images/projects/digilab.png',
     highlights: [
-      '10,800+ tournaments logged · 600 Discord community members',
+      '11,000+ tournaments logged · 600 Discord community members',
       'SSR Astro + Preact islands · Neon Postgres on Vercel edge',
       'Public token-authenticated API and admin CRUD subdomain',
     ],

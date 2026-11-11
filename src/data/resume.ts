@@ -148,7 +148,7 @@ export const variantMeta: Record<Variant, VariantMeta> = {
     fileSuffix: '',
     label: 'Leadership with technical authority — DEFAULT',
     summary:
-      "Data leader. Six years helping build the Child Poverty Action Lab's data operations from a two-person team to two in-house engineers and a four-person vendor team, leading it through a CDO transition, and shaping the org-wide AI rollout. I make the architecture and build-vs-partner calls myself. I take teams and systems from nothing to running.",
+      "Data leader. Six years helping build the Child Poverty Action Lab's data operations from a two-person team to two in-house engineers and a four-person vendor team, stepping into department leadership during a CDO transition, and shaping the org-wide AI rollout. I make the architecture and build-vs-partner calls myself. I take teams and systems from nothing to running.",
   },
   platform: {
     fileSuffix: '_Platform',
@@ -200,7 +200,7 @@ export const experience: Experience[] = [
     company: 'Child Poverty Action Lab',
     dates: 'May 2023 - December 2025',
     summary:
-      'Led data strategy, infrastructure, and operations for the backbone organization working to reduce child poverty across North Texas. Built CPAL\'s data engineering function and assumed expanded scope during the org\'s CDO transition.',
+      'Led data strategy, infrastructure, and operations for the backbone organization working to reduce child poverty across North Texas. Helped build CPAL\'s data engineering team and took on expanded scope during the org\'s CDO transition.',
     printDates: 'May 2023 – Dec 2025',
     group: 'cpal',
     bullets: [
@@ -210,7 +210,8 @@ export const experience: Experience[] = [
         // reads well for Staff/Principal too, not just leadership.
       },
       {
-        text: 'Led the data org through the CDO transition (Dec 2024 to Dec 2025): set department roadmap, hiring, vendor strategy, and budget, reporting directly to the CTO',
+        text: 'Stepped into department leadership during the CDO transition (Dec 2024 to Dec 2025), reporting to the CTO: led all analyst and data work, set the roadmap, ran hiring, owned vendor strategy, and held the budget',
+        print: 'Stepped into department leadership during the CDO transition (Dec 2024 – Dec 2025), reporting to the CTO: led all analyst and data work and owned the roadmap, hiring, vendor strategy, and budget',
         variants: ['playercoach'],
       },
       {
@@ -224,8 +225,8 @@ export const experience: Experience[] = [
         variants: ['playercoach', 'research'],
       },
       {
-        text: 'Oversaw development of an internal Shiny app suite (30+ apps) informing decisions across CPAL focus areas: housing, public safety, maternal health, benefits delivery, and criminal justice',
-        print: 'Oversaw a 30+ app R Shiny suite informing decisions across housing, public safety, maternal health, benefits delivery, and criminal justice',
+        text: 'Led a 30+ app suite of internal decision-support tools, built mostly by my team alongside external consulting partners, informing decisions across CPAL focus areas: housing, public safety, maternal health, benefits delivery, and criminal justice',
+        print: 'Led a 30+ app suite of decision-support tools, built mostly in-house with external consulting partners, spanning housing, public safety, maternal health, benefits delivery, and criminal justice',
       },
       {
         text: 'Evaluated and selected the enterprise tooling stack: Databricks (over Snowflake and dbt Cloud, after a capacity assessment) and vendor data feeds (MySidewalk, DataAxle); shaped the org-wide setup and rollout of Claude Enterprise',
@@ -538,9 +539,9 @@ export const selectedProjects: SelectedProject[] = [
   {
     name: 'DigiLab',
     description:
-      'Community-sourced tournament data platform for the Digimon and Gundam card game scenes; 10,800+ tournaments and 19,100+ players tracked, with regional meta analysis players use to prep',
+      'Community-sourced tournament data platform for the Digimon and Gundam card game scenes; 11,000+ tournaments and 19,000+ players tracked, with regional meta analysis players use to prep',
     print:
-      'Community-sourced tournament data platform for the Digimon and Gundam card game scenes; 10,800+ tournaments and 19,100+ players tracked, built and run solo through agentic workflows.',
+      'Community-sourced tournament data platform for the Digimon and Gundam card game scenes; 11,000+ tournaments and 19,000+ players tracked, built and run solo through agentic workflows.',
     href: 'https://digilab.cards',
     tag: 'digilab.cards',
   },

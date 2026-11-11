@@ -210,8 +210,8 @@ generative parameters and always-dark rendering all kept.
 
 ## Handoff: remaining work (as of 2026-11-11)
 
-Phases 0–6 and the Phase 7 QA checks are done on `claude/quirky-shannon-hpcwls` (not yet merged to
-`main`). Work continues locally. Everything still open is listed here, in a sensible order.
+Phases 0–6 and the Phase 7 QA checks were merged to `main` (PR #1) and deployed on 2026-11-11.
+Follow-ups go through small PRs. Everything still open is listed here, in a sensible order.
 
 ### 1. Terrain look iteration: DONE 2026-11-11 (only optional items remain)
 Needs a real GPU: the cloud sandbox renders WebGL in software, so judge only on a laptop/phone.
@@ -252,8 +252,9 @@ Needs a real GPU: the cloud sandbox renders WebGL in software, so judge only on 
 ### 2. Copy pass (with Michael), then `voice-professional`
 - All page prose and project hooks (drafts: `hook` fields in `src/data/projects.ts`; the three newest
   are Block Walking, Rodriguez, atomtemplates).
-- Open item: "monitoring" in the "From prototype to production" paragraph of
-  `src/page-views/projects/BuildingCPALDataOperations.astro`; keep it only if accurate.
+- Resolved 2026-11-11: "monitoring" cut from "From prototype to production"; the CDO-transition
+  claim now reads "stepped into the department's leadership responsibilities, reporting to the CTO"
+  and led all analyst and data work *for that year* (case study, `projects.ts`, `resume.ts`).
 - Scope rule (see `CLAUDE.md`): Michael leads **data operations**; never claim the whole data function.
 - After any `resume.ts` change: `npm run resume:pdf` (PDF must stay 2 pages). After any title/hook
   change: `npm run og`.
@@ -263,10 +264,9 @@ The `figure` slot in `CaseStudyLayout` is ready; build one shared scrub-chart co
 dataset arrives (no placeholder numbers ship). First: eviction (monthly Dallas County filings since
 2020 + one year's filings → outreach → representation). Full table under Phase 4.
 
-### 4. Before merge
+### 4. Skipped before the merge (do on production)
 - Real-device pass (laptop + phone, light/dark): terrain, project-row hover previews, Resume.
 - Manual screen-reader spot check (VoiceOver or NVDA) on Home, a case study, Resume.
-- Run `/code-review` on the final diff; merge via PR to `main`.
 
 ### 5. After it's live (Michael)
 - Lighthouse on the production URL (sandbox numbers for Home were limited by software WebGL).
@@ -274,8 +274,8 @@ dataset arrives (no placeholder numbers ship). First: eviction (monthly Dallas C
 - Google Search Console: verify `lopezmichael.dev`, submit `sitemap-index.xml`.
 
 ### 6. Content still owed
-- Confirm or cut unverified skills in `src/data/resume.ts` (CKAN, PostGIS, Sentry, Prefect,
-  Anthropic API); they also feed the JSON-LD `knowsAbout`.
+- Confirm or cut unverified skills in `src/data/resume.ts` (only Prefect still open;
+  CKAN and PostGIS confirmed and Sentry cut 2026-11-11); they also feed the JSON-LD `knowsAbout`.
 - Real headshot to replace the About monogram.
 
 ### Working locally
