@@ -20,14 +20,14 @@ const techStack = [
 
 const metrics = [
   { value: '2 + 4', label: 'in-house + vendor engineers' },
-  { value: '6 yrs', label: 'growing the function' },
+  { value: '6 yrs', label: 'building data operations' },
   { value: '30+', label: 'decision tools shipped' },
 ];
 ---
 
 <CaseStudyLayout
   project={project}
-  metaDescription="How I helped grow the Child Poverty Action Lab's data function from a single analyst into an in-house engineering team backed by vendor engineers, with a cloud platform and a 30+ app suite informing decisions across housing, public safety, maternal health, and benefits delivery."
+  metaDescription="How I helped build the Child Poverty Action Lab's data operations from a single analyst into an in-house engineering team backed by vendor engineers, turning analytics prototypes into durable tools, with a cloud platform and a 30+ app suite informing decisions across housing, public safety, maternal health, and benefits delivery."
   techStack={techStack}
   metrics={metrics}
 >
@@ -49,7 +49,7 @@ const metrics = [
       Nothing compounded, and nothing survived the person who built it.
     </p>
     <p>
-      So the thing to build wasn't a dashboard or a report. It was a data function: people,
+      So the thing to build wasn't a dashboard or a report. It was data operations: the people,
       infrastructure, standards, and enough trust across the org that non-data staff would actually
       change what they did based on what the data said. That's a leadership problem before it's a
       technical one.
@@ -58,12 +58,13 @@ const metrics = [
 
   <Fragment slot="approach">
     <p>
-      I helped grow the function over six years and three roles, from analyst to manager to director,
-      and set its structure through most of that growth. The through-line was treating data as organizational capacity to be built on purpose, not a
+      I helped build CPAL's data operations over six years and three roles, from analyst to manager to
+      director, and set their structure through most of that growth. The through-line was treating data as organizational capacity to be built on purpose, not a
       service desk taking requests. A few decisions carried the most weight.
     </p>
     <ul>
       <li><strong>The team model.</strong> The team grew in stages: a first intern in 2022, the first additional full-time hire in 2023, and up to four people after that. I hired CPAL's first data engineer and mentored the analysts who came through, including an intern I brought on full-time. When the platform migration needed more engineering depth than a nonprofit payroll could carry, I brought in a four-person vendor engineering team and kept the architecture and priorities in-house. That got the foundation built. Today two in-house data engineers report to me and work alongside the vendor team on one roadmap.</li>
+      <li><strong>From prototype to production.</strong> CPAL's strategic analytics team moves fast: quick turnarounds and prototypes that test an idea with stakeholders. Once an idea proves its value, it moves to my team and the tech infrastructure team, and our job is to make it last. That means real pipelines instead of one-off scripts, a place on the platform, monitoring, and access for the right people and no one else, so the analysts can keep prototyping the next thing.</li>
       <li><strong>Tooling I chose and defended.</strong> I selected Databricks over Snowflake and dbt Cloud after a capacity assessment weighing the team's size and skill mix, the migration cost, and the value of one platform over a stitched-together stack. I contracted vendor data feeds (MySidewalk, DataAxle), shaped the setup and rollout of Claude Enterprise org-wide, and built project-management infrastructure in Notion that's since been adopted across multiple CPAL departments. I owned the roadmap, the vendor strategy, and the budget behind these calls.</li>
       <li><strong>Leading through the CDO transition.</strong> When the chief data officer role turned over (Dec 2024 to Dec 2025), I led the data org through the transition, reporting to the CTO. I set the department roadmap, ran hiring, owned vendor strategy, and held the budget. The function kept shipping through a leadership change, which is the real test of whether you've built something that depends on more than one person.</li>
       <li><strong>AI adoption as change management.</strong> Rolling Claude Code and Claude Enterprise across the team wasn't a procurement exercise, it was a change-management one. I built the scaffolding (custom skills and agents, prompt caching through the Anthropic API) and then did the harder work of getting people to change how they work. It changed how the team develops pipelines, writes documentation, reviews code, and communicates with stakeholders. The license was the easy part. Adoption was the job.</li>
@@ -77,13 +78,13 @@ const metrics = [
   </Fragment>
 
   <Fragment slot="pullquote">
-    Building a data function at a nonprofit isn't about buying better tools. It's deciding what to build, who to hire, and getting the whole org to trust the answer.
+    Building data operations at a nonprofit isn't about buying better tools. It's deciding what to build, who to hire, and getting the whole org to trust the answer.
   </Fragment>
 
   <Fragment slot="outcome">
     <p>
-      In 2020, CPAL's data team was two people and a laptop. Today CPAL has a data function that
-      outlasts any single project or person. A suite of 30+ R Shiny applications informs decisions across
+      In 2020, CPAL's data team was two people and a laptop. Today CPAL has data operations that
+      outlast any single project or person. A suite of 30+ R Shiny applications informs decisions across
       housing, public safety, maternal health, benefits delivery, and criminal justice. The eviction
       data workstream covers four North Texas counties and feeds 12+ partner organizations daily,
       moving tens of thousands of records a year. Internal tools let non-data staff act on data
@@ -102,7 +103,7 @@ const metrics = [
       County, and outreach teams follow up directly with a share of them. About 800 tenants a year
       get legal representation they otherwise wouldn't have. In the Trust Her
       maternal-health workstream, the data has helped connect more than 15,000 women to contraceptive
-      access over the last three years. Inside CPAL, the function now serves every team.
+      access over the last three years. Inside CPAL, data operations now support every team, including the analysts prototyping what comes next.
     </p>
   </Fragment>
 
@@ -112,7 +113,7 @@ const metrics = [
       same way again:
     </p>
     <ul>
-      <li><strong>Build capacity, not deliverables.</strong> A data function is people and systems that keep working after the person who built them moves on. If your value walks out the door when you do, you built a role, not a function.</li>
+      <li><strong>Build capacity, not deliverables.</strong> Data operations are people and systems that keep working after the person who built them moves on. If your value walks out the door when you do, you built a role, not a function.</li>
       <li><strong>Buy the right tool for the team you have.</strong> The Databricks-over-Snowflake call came from a capacity assessment, not a feature checklist. The best platform is the one your actual team can run, migrate onto, and maintain, not the one that demos well.</li>
       <li><strong>Adoption is the real work.</strong> New tooling, AI included, is change management wearing a procurement costume. Getting people to change how they work is slower and harder than any purchase, and it's the part that determines whether the investment pays off.</li>
       <li><strong>A nonprofit budget is a design constraint, not an excuse.</strong> The vendor team gave us engineering depth a nonprofit payroll couldn't carry on its own, while the architecture and priorities stayed with us. Constraints force clearer decisions about what to build in-house, what to buy, and when to switch.</li>

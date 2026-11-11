@@ -148,7 +148,7 @@ export const variantMeta: Record<Variant, VariantMeta> = {
     fileSuffix: '',
     label: 'Leadership with technical authority — DEFAULT',
     summary:
-      "Data leader. Six years helping grow the Child Poverty Action Lab's data function from one analyst to two in-house engineers and a four-person vendor team, leading it through a CDO transition, and shaping the org-wide AI rollout. I make the architecture and build-vs-partner calls myself. I take teams and systems from nothing to running.",
+      "Data leader. Six years helping build the Child Poverty Action Lab's data operations from one analyst to two in-house engineers and a four-person vendor team, leading it through a CDO transition, and shaping the org-wide AI rollout. I make the architecture and build-vs-partner calls myself. I take teams and systems from nothing to running.",
   },
   platform: {
     fileSuffix: '_Platform',
@@ -205,7 +205,7 @@ export const experience: Experience[] = [
     group: 'cpal',
     bullets: [
       {
-        text: 'Helped grow CPAL\'s data function from a single analyst to a team of 2–4 reporting to me; led hiring for the org\'s first data engineer and prior analyst roles',
+        text: 'Helped build CPAL\'s data operations from a single analyst to a team of 2–4 reporting to me; led hiring for the org\'s first data engineer and prior analyst roles',
         // Intentionally untagged: belongs in every variant. Scope-of-ownership
         // reads well for Staff/Principal too, not just leadership.
       },

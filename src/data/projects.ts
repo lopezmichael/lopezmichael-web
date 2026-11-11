@@ -45,13 +45,13 @@ export function projectSeo(p: Project, site: URL, description: string = p.descri
 
 export const projects: Project[] = [
   {
-    slug: 'building-cpal-data-function',
-    title: "Building CPAL's Data Function",
-    hook: 'Two people and a laptop to a full data function in six years.',
+    slug: 'building-cpal-data-operations',
+    title: "Building CPAL's Data Operations",
+    hook: 'From two people and a laptop to data operations that outlast any one person.',
     description:
-      'Helping grow a nonprofit data function from one analyst into an in-house engineering team, with a cloud platform and a 30+ app decision-support suite.',
+      'Helping build a nonprofit\'s data operations from one analyst into an in-house engineering team, with a cloud platform and a 30+ app decision-support suite.',
     longDescription:
-      "The six-year story of helping grow the Child Poverty Action Lab's data function: hiring the org's first data engineer, pairing vendor engineers with an in-house team to build the platform, selecting and migrating to Databricks, leading the data org through a CDO transition, and rolling out AI-enabled workflows across the team. A leadership case study, not a pipeline write-up.",
+      "The six-year story of helping build the Child Poverty Action Lab's data operations: turning the strategic analytics team's proven prototypes into durable, access-controlled tools, hiring the org's first data engineer, pairing vendor engineers with an in-house team to build the platform, selecting and migrating to Databricks, leading the data org through a CDO transition, and rolling out AI-enabled workflows across the team. A leadership case study, not a pipeline write-up.",
     tags: ['Data Leadership', 'Team Building', 'Data Strategy', 'Databricks'],
     href: '',
     category: 'civic',
@@ -174,7 +174,7 @@ export const projects: Project[] = [
 ];
 
 // Featured projects shown on homepage. Slug-based so reordering projects[] doesn't silently change the home page.
-const featuredSlugs = ['building-cpal-data-function', 'eviction-pipeline', 'digilab'];
+const featuredSlugs = ['building-cpal-data-operations', 'eviction-pipeline', 'digilab'];
 export const featuredProjects = featuredSlugs
   .map((slug) => projects.find((p) => p.slug === slug))
   .filter((p): p is Project => p !== undefined);

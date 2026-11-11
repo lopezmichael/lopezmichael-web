@@ -1,7 +1,7 @@
 ---
 import { projects, type Project } from '../../data/projects';
 import ProjectDetail from '../../page-views/projects/ProjectDetail.astro';
-import BuildingCPALDataFunction from '../../page-views/projects/BuildingCPALDataFunction.astro';
+import BuildingCPALDataOperations from '../../page-views/projects/BuildingCPALDataOperations.astro';
 import EvictionPipelineCaseStudy from '../../page-views/projects/EvictionPipelineCaseStudy.astro';
 import HomesteadMapCaseStudy from '../../page-views/projects/HomesteadMapCaseStudy.astro';
 import DigiLabCaseStudy from '../../page-views/projects/DigiLabCaseStudy.astro';
@@ -20,7 +20,7 @@ interface Props {
 const { project } = Astro.props;
 
 const CaseStudyComponent = {
-  'building-cpal-data-function': BuildingCPALDataFunction,
+  'building-cpal-data-operations': BuildingCPALDataOperations,
   'eviction-pipeline': EvictionPipelineCaseStudy,
   'homestead-map': HomesteadMapCaseStudy,
   'digilab': DigiLabCaseStudy,
