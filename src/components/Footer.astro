@@ -1,107 +1,98 @@
 ---
+import { contact } from '../data/resume';
+
 const year = new Date().getFullYear();
+const { email } = contact;
 
-const quickLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about/' },
-  { label: 'Projects', href: '/projects/' },
-  { label: 'Resume', href: '/resume/' },
-];
-
-const socialLinks = [
-  { label: 'GitHub', href: 'https://github.com/lopezmichael' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/michael-d-lopez' },
-  { label: 'Email', href: 'mailto:michael@lopezstudio.dev' },
+const links = [
+  { label: 'GitHub', href: contact.github },
+  { label: 'LinkedIn', href: contact.linkedin },
+  { label: 'Email', href: `mailto:${email}` },
 ];
 ---
 
-<footer class="relative">
-  <!-- CTA banner -->
-  <div class="bg-accent/15 dark:bg-accent/8 border-t border-accent/30 dark:border-canyon/25">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-14">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-        <div class="max-w-xl">
-          <h2 class="text-2xl lg:text-3xl font-semibold text-primary dark:text-dark-text leading-tight">
-            Building something for the people closest to the problem?
-          </h2>
-          <p class="text-sm lg:text-base opacity-80 mt-3">
-            I take on a small number of consulting and project engagements by request. The fastest way in is a short email.
-          </p>
-        </div>
-        <a
-          href="mailto:michael@lopezstudio.dev"
-          class="shrink-0 inline-flex items-center gap-2 px-5 py-3 bg-primary dark:bg-secondary text-white rounded-lg hover:bg-secondary dark:hover:bg-canyon transition-colors no-underline text-sm font-semibold"
-        >
-          michael@lopezstudio.dev
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7-7 7M21 12H3" />
-          </svg>
-        </a>
-      </div>
+<footer class="border-t border-line">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 pb-8">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <p class="font-serif text-[clamp(2.2rem,6vw,4.6rem)] leading-none m-0">
+        Say <em class="inline-block text-wine transition-transform duration-300 ease-[cubic-bezier(.3,1.6,.5,1)] motion-reduce:transition-none" data-hello-word>hello.</em>
+      </p>
+      <button
+        type="button"
+        data-copy-email={email}
+        class="inline-flex items-center gap-3 font-mono text-sm px-4 py-2.5 border border-ink rounded-full bg-transparent text-ink cursor-pointer transition-colors hover:bg-wine-deep hover:text-on-wine hover:border-wine-deep"
+      >
+        <span data-email-text>{email}</span>
+        <span class="font-sans text-xs opacity-70" data-copy-state aria-live="polite">Copy</span>
+      </button>
     </div>
-  </div>
 
-  <!-- Canyon contour silhouette (echoes the terrain hero) -->
-  <div class="relative h-16 lg:h-20 -mb-px overflow-hidden bg-light dark:bg-dark-bg" aria-hidden="true">
-    <svg
-      class="absolute inset-x-0 bottom-0 w-full h-full text-canyon opacity-[0.15] dark:opacity-[0.22]"
-      viewBox="0 0 1200 80"
-      preserveAspectRatio="none"
-    >
-      <path d="M0 60 Q120 45 240 55 T480 50 T720 60 T960 50 T1200 58 L1200 80 L0 80 Z" fill="currentColor" />
-      <path d="M0 50 Q150 30 300 42 T600 36 T900 46 T1200 40" fill="none" stroke="currentColor" stroke-width="1" stroke-opacity="0.6" />
-      <path d="M0 70 Q180 58 360 65 T720 62 T1080 68 L1200 67" fill="none" stroke="currentColor" stroke-width="1" stroke-opacity="0.6" />
-    </svg>
-  </div>
-
-  <div class="bg-light dark:bg-dark-bg border-t border-accent/20 dark:border-dark-surface">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-8 lg:gap-12">
-        <!-- Brand (wider) -->
-        <div>
-          <a href="/" class="text-primary dark:text-dark-text font-heading text-lg font-semibold no-underline">Michael Lopez</a>
-          <p class="text-sm opacity-70 mt-3 leading-relaxed max-w-sm">
-            Data leader building the teams and systems that get civic and social-impact data to the people who can use it.
-          </p>
-          <p class="text-xs opacity-50 mt-3">
-            Director, Data Operations · Child Poverty Action Lab
-          </p>
-        </div>
-
-        <!-- Pages -->
-        <div>
-          <h3 class="text-[11px] font-semibold uppercase tracking-[0.14em] text-cool dark:text-secondary mb-4">Pages</h3>
-          <ul class="space-y-2">
-            {quickLinks.map((link) => (
-              <li>
-                <a href={link.href} class="text-sm opacity-75 hover:opacity-100 transition-opacity no-underline">
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <!-- Connect -->
-        <div>
-          <h3 class="text-[11px] font-semibold uppercase tracking-[0.14em] text-cool dark:text-secondary mb-4">Connect</h3>
-          <ul class="space-y-2">
-            {socialLinks.map((link) => (
-              <li>
-                <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined} class="text-sm opacity-75 hover:opacity-100 transition-opacity no-underline">
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div class="mt-10 pt-6 border-t border-accent/15 dark:border-dark-surface">
-        <p class="text-xs opacity-50 text-center">
-          &copy; {year} Michael Lopez. Built with Astro and Three.js.
-        </p>
-      </div>
+    <div class="mt-12 pt-6 border-t border-line flex flex-wrap items-center justify-between gap-4 text-xs text-muted">
+      <span>&copy; {year} Michael Lopez</span>
+      <nav aria-label="Elsewhere" class="flex gap-5">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            target={link.href.startsWith('http') ? '_blank' : undefined}
+            rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            class="text-muted hover:text-ink"
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+      <span>Dallas, Texas</span>
     </div>
   </div>
 </footer>
+
+<script>
+  function setupCopyEmail() {
+    const btn = document.querySelector<HTMLButtonElement>('[data-copy-email]');
+    const state = document.querySelector<HTMLElement>('[data-copy-state]');
+    const word = document.querySelector<HTMLElement>('[data-hello-word]');
+    if (!btn || !state) return;
+    const address = btn.dataset.copyEmail ?? '';
+    let timer = 0;
+
+    const show = (copied: boolean) => {
+      state.textContent = copied ? 'Copied' : 'Select to copy';
+      if (copied && word) {
+        word.textContent = 'hello!';
+        word.style.transform = 'rotate(-6deg) scale(1.08)';
+      }
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        state.textContent = 'Copy';
+        if (word) {
+          word.textContent = 'hello.';
+          word.style.transform = '';
+        }
+      }, 1800);
+    };
+
+    // Fallback when the clipboard is unavailable: select the address so the visitor can copy it.
+    const selectAddress = () => {
+      const text = btn.querySelector('[data-email-text]');
+      const sel = window.getSelection();
+      if (!text || !sel) return;
+      const range = document.createRange();
+      range.selectNodeContents(text);
+      sel.removeAllRanges();
+      sel.addRange(range);
+    };
+
+    btn.addEventListener('click', () => {
+      if (!navigator.clipboard?.writeText) {
+        selectAddress();
+        show(false);
+        return;
+      }
+      navigator.clipboard.writeText(address).then(
+        () => show(true),
+        () => { selectAddress(); show(false); },
+      );
+    });
+  }
+  setupCopyEmail();
+</script>

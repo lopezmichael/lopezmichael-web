@@ -1,58 +1,72 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import TerrainHero from '../components/TerrainHero.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import ScrollReveal from '../components/ScrollReveal.astro';
-import { featuredProjects } from '../data/projects';
+import TerrainBand from '../components/TerrainBand.astro';
+import ProjectIndex from '../components/ProjectIndex.astro';
+import LabeledSection from '../components/LabeledSection.astro';
+import { featuredProjects, projects } from '../data/projects';
+// Preload every face in the hero (wordmark, tagline, supporting line) so they don't wait for the CSS
+// and the hero doesn't reflow (and nudge the terrain band) when they swap in.
+import wordmarkSans from '@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-800-normal.woff2?url';
+import wordmarkSerif from '@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2?url';
+import taglineSerif from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
+import bodySans from '@fontsource/instrument-sans/files/instrument-sans-latin-400-normal.woff2?url';
 ---
 
 <BaseLayout
   title="Michael Lopez"
   description="Data leader working in civic tech and social impact. Building the teams and data systems that help communities act on what they know."
 >
-  <TerrainHero />
+  <Fragment slot="head">
+    <link rel="preload" href={wordmarkSans} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={wordmarkSerif} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={taglineSerif} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={bodySans} as="font" type="font/woff2" crossorigin />
+  </Fragment>
 
-  <!-- Intro Section -->
-  <ScrollReveal>
-    <section class="max-w-3xl mx-auto px-4 sm:px-6 py-16 text-center">
-      <h2 class="text-2xl font-semibold text-primary dark:text-dark-text mb-4">
-        Data should reach the people closest to the problem.
-      </h2>
-      <p class="text-lg leading-relaxed opacity-80">
-        I lead the data function at the Child Poverty Action Lab, a backbone organization working on
-        child poverty across North Texas. That means the team, the roadmap, the platform
-        underneath, and the tools that get data in front of people who can act on it. The stubborn idea pulling it together: most of the data that could help
-        families is sitting somewhere it can't reach them. Most of the job is closing that gap.
+  <!-- First screen: the name, the tagline and the terrain together. The wrapper is one viewport tall
+       (less the header: 4rem from sm up, ~6.5rem below it where the nav wraps) and the band takes whatever the hero leaves, between its min and max
+       heights in TerrainBand.astro. The wordmark is capped by viewport height too, so short laptop
+       screens still leave room for the band. -->
+  <div class="flex flex-col min-h-[calc(100svh-6.5rem)] sm:min-h-[calc(100svh-4rem)]">
+  <!-- Hero: the one big type moment on the page (principle 1). -->
+  <section class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[clamp(1.5rem,5svh,3.5rem)] pb-[clamp(1.25rem,3.5svh,2rem)]">
+    <h1 class="m-0 font-normal leading-[0.86]">
+      <span class="block font-display font-extrabold uppercase tracking-[-0.035em] text-[clamp(3.4rem,min(15.5vw,21svh),12.5rem)]">Michael</span>
+      <span class="block font-serif italic text-wine text-right tracking-[-0.02em] text-[clamp(3.6rem,min(16vw,22svh),13rem)] -mt-[0.08em] pr-[0.04em]">Lopez</span>
+    </h1>
+    <div class="flex flex-wrap items-end justify-between gap-5 mt-[clamp(1.25rem,min(4.5vw,5svh),3.75rem)]">
+      <p class="m-0 font-serif text-[clamp(1.15rem,2vw,1.5rem)] leading-tight max-w-[30ch]">
+        Data Leader · Civic Tech &amp; Social Impact
       </p>
-    </section>
-  </ScrollReveal>
-
-  <!-- Featured Projects -->
-  <section class="max-w-6xl mx-auto px-4 sm:px-6 pb-20">
-    <ScrollReveal>
-      <h2 class="text-2xl font-semibold text-primary dark:text-dark-text text-center mb-10">
-        Featured Work
-      </h2>
-    </ScrollReveal>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {featuredProjects.map((project, i) => (
-        <ScrollReveal delay={i * 100}>
-          <ProjectCard project={project} />
-        </ScrollReveal>
-      ))}
+      <p class="m-0 text-sm text-muted sm:text-right max-w-[30ch]">
+        Building the teams and data systems that help communities act on what they know.
+      </p>
     </div>
-    <ScrollReveal>
-      <div class="text-center mt-10">
-        <a
-          href="/projects/"
-          class="inline-flex items-center gap-2 text-sm font-medium text-cool dark:text-secondary hover:text-secondary transition-colors no-underline"
-        >
-          View all projects
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </a>
-      </div>
-    </ScrollReveal>
+  </section>
+
+  <TerrainBand />
+  </div>
+
+  <!-- Now -->
+  <LabeledSection label="Now" labelAs="p" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="m-0 mb-6 font-serif font-normal text-[clamp(2rem,4.6vw,3.8rem)] leading-[1.02] tracking-[-0.015em] max-w-[18ch] text-balance">
+      Data should reach the people <em class="text-wine">closest to the problem.</em>
+    </h2>
+    <p class="m-0 text-[1.05rem] leading-relaxed max-w-[62ch]">
+      I lead data operations at the Child Poverty Action Lab, a backbone organization working on
+      child poverty across North Texas. That means the team, the roadmap, the platform
+      underneath, and the tools that get data in front of people who can act on it. The stubborn
+      idea pulling it together: most of the data that could help families is sitting somewhere it
+      can't reach them. Most of the job is closing that gap.
+    </p>
+  </LabeledSection>
+
+  <!-- Selected work -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
+    <ProjectIndex
+      projects={featuredProjects}
+      label="Selected work"
+      more={{ label: `All ${projects.length} projects`, href: '/projects/' }}
+    />
   </section>
 </BaseLayout>

@@ -1,0 +1,117 @@
+---
+// The generative terrain, as a dark band between blush sections (docs/design-principles.md →
+// Terrain principles). Modes, seeds and defaults live in src/lib/terrain/state.ts; the renderer in
+// src/lib/terrain/index.ts.
+---
+
+<!-- Height comes from the first-screen wrapper in HomePage.astro: it fills what the hero leaves. -->
+<section class="relative w-full flex-1 min-h-[240px] max-h-[62svh] overflow-hidden bg-band touch-pan-y" aria-label="Generative terrain">
+  <div id="terrain-canvas" class="absolute inset-0 cursor-crosshair" aria-hidden="true"></div>
+  <!-- Keep the label and controls legible when bright terrain sits behind them. -->
+  <div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-band to-transparent pointer-events-none" aria-hidden="true"></div>
+  <div class="sm:hidden absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-band to-transparent pointer-events-none" aria-hidden="true"></div>
+
+  <p
+    class="absolute left-4 sm:left-6 lg:left-8 top-3 sm:top-auto sm:bottom-3 m-0 font-mono text-[11px] tracking-[0.04em] text-on-band/85 pointer-events-none"
+    data-terrain-label
+  >
+    <!-- Empty until the script draws the mode and seed, so it never names the wrong mode (and
+         stays empty without JavaScript, when there is no terrain to label). -->
+    <span data-terrain-mode-label></span><span data-terrain-seed></span>
+  </p>
+
+  <div class="absolute right-4 sm:right-6 lg:right-8 bottom-2.5 flex items-center gap-1.5 font-mono text-[11px] tracking-[0.04em]" data-terrain-controls hidden>
+    <!-- One control: Regrow draws a new mode and seed. -->
+    <button type="button" data-terrain-regrow class="terrain-btn">
+      Regrow <span aria-hidden="true">↻</span>
+    </button>
+  </div>
+</section>
+
+<style>
+  .terrain-btn {
+    color: var(--on-band);
+    background: transparent;
+    border: 1px solid color-mix(in srgb, var(--on-band) 40%, transparent);
+    border-radius: 999px;
+    padding: 0.25rem 0.7rem;
+    cursor: pointer;
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+  .terrain-btn:hover {
+    background: color-mix(in srgb, var(--on-band) 15%, transparent);
+  }
+</style>
+
+<script>
+  import { createTerrain, type TerrainHandle } from '../lib/terrain/index';
+  import {
+    MODE_LABEL,
+    parseTerrainParam,
+    randomState,
+    tintForHour,
+    type TerrainState,
+  } from '../lib/terrain/state';
+
+  // Starting state: a shared ?terrain= link wins; otherwise a random mode and seed on every load.
+  // The tint follows the device clock, which never leaves the browser.
+  function initialState(): TerrainState {
+    const tint = tintForHour(new Date().getHours());
+    const shared = parseTerrainParam(new URLSearchParams(location.search).get('terrain'));
+    return shared ? { ...shared, tint } : randomState(tint);
+  }
+
+  function start() {
+    const container = document.getElementById('terrain-canvas');
+    const label = document.querySelector<HTMLElement>('[data-terrain-label]');
+    const controls = document.querySelector<HTMLElement>('[data-terrain-controls]');
+    if (!container || !label || !controls) return;
+
+    // The state (and so the label) is known right away; only the renderer waits for an idle moment.
+    let state = initialState();
+    const modeLabel = label.querySelector('[data-terrain-mode-label]');
+    const seed = label.querySelector('[data-terrain-seed]');
+    const show = () => {
+      if (modeLabel) modeLabel.textContent = MODE_LABEL[state.mode];
+      if (seed) seed.textContent = ` · seed ${String(state.seed).padStart(4, '0')}`;
+    };
+    show();
+
+    // Start once the page has loaded and the browser is idle, so the terrain never competes with the
+    // first paint. Until then the band shows its dark ground and the label.
+    whenLoadedAndIdle(() => {
+      const terrain: TerrainHandle | null = createTerrain(container, state);
+      // No WebGL: keep the plain dark band with its label, and no control that can't work.
+      if (!terrain) return;
+      controls.hidden = false;
+      wire(terrain);
+    });
+
+    function wire(terrain: TerrainHandle) {
+      // Regrow never writes the URL: a reload should draw fresh. It clears a pinned ?terrain= too,
+      // so the address bar never names a view that's no longer on screen. To share a view, use the
+      // mode and seed from the label: /?terrain=city-0421.
+      const apply = (next: TerrainState) => {
+        state = next;
+        terrain.set(state);
+        show();
+        const url = new URL(location.href);
+        if (url.searchParams.has('terrain')) {
+          url.searchParams.delete('terrain');
+          history.replaceState(history.state, '', url);
+        }
+      };
+
+      controls.querySelector('[data-terrain-regrow]')?.addEventListener('click', () => apply(randomState(state.tint)));
+      document.addEventListener('astro:before-swap', () => terrain.dispose(), { once: true });
+    }
+  }
+
+  function whenLoadedAndIdle(fn: () => void) {
+    const idle = () => ('requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 1500 }) : setTimeout(fn, 200));
+    if (document.readyState === 'complete') idle();
+    else window.addEventListener('load', idle, { once: true });
+  }
+
+  start();
+</script>

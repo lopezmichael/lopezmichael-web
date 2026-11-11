@@ -1,24 +1,9 @@
 import * as THREE from 'three';
-import { DARK_PALETTE } from './config';
+import { TERRAIN_RAMP, TERRAIN_BACKGROUND } from './config';
 
-function toVec3(rgb: readonly number[]): THREE.Color {
-  return new THREE.Color(rgb[0], rgb[1], rgb[2]);
-}
+const toColor = ([r, g, b]: readonly number[]) => new THREE.Color(r, g, b);
 
-export function getPaletteForTheme(_theme: string): {
-  colors: THREE.Color[];
-  background: THREE.Color;
-} {
-  // Terrain always renders dark regardless of site theme
-  const p = DARK_PALETTE;
-
-  const colors = [
-    toVec3(p.neutral),
-    toVec3(p.primary),
-    toVec3(p.secondary),
-    toVec3(p.accent),
-    toVec3(p.cool),
-  ];
-
-  return { colors, background: toVec3(p.background) };
+/** The terrain's colors. It always renders dark, whatever the site theme. */
+export function getTerrainPalette(): { colors: THREE.Color[]; background: THREE.Color } {
+  return { colors: TERRAIN_RAMP.map(toColor), background: toColor(TERRAIN_BACKGROUND) };
 }

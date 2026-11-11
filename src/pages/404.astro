@@ -1,13 +1,25 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import LabeledSection from '../components/LabeledSection.astro';
 ---
 
 <BaseLayout title="404 - Page Not Found" description="The page you're looking for doesn't exist.">
-  <div class="flex flex-col items-center justify-center min-h-[60vh] px-4 text-center">
-    <h1 class="text-6xl font-bold text-primary dark:text-dark-text mb-4">404</h1>
-    <p class="text-xl mb-8 opacity-75">The page you're looking for doesn't exist.</p>
-    <a href="/" class="px-5 py-2.5 bg-primary dark:bg-secondary text-white rounded-lg font-medium text-sm hover:bg-secondary dark:hover:bg-canyon transition-colors no-underline">
-      Back to Home
-    </a>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
+    <LabeledSection label="Not found" labelAs="p" class="pt-10 sm:pt-14">
+      <h1 class="m-0 font-display font-extrabold text-[clamp(5rem,18vw,12rem)] leading-[0.85] tracking-[-0.04em]">404</h1>
+      <p class="m-0 mt-6 font-serif text-[clamp(1.4rem,2.6vw,2rem)] leading-snug max-w-[30ch]">
+        This ground hasn't been <em class="text-wine">mapped</em> yet.
+      </p>
+      <!-- A few contour lines, echoing the terrain on the home page. -->
+      <svg class="mt-10 w-full max-w-2xl h-24 text-line" viewBox="0 0 600 96" preserveAspectRatio="xMinYMid meet" fill="none" stroke="currentColor" stroke-width="1.25" aria-hidden="true">
+        <path d="M0 70 C80 52 140 80 220 62 S380 40 460 58 S560 76 600 64" />
+        <path d="M0 52 C90 34 150 62 230 44 S390 22 470 40 S560 58 600 46" />
+        <path d="M0 34 C100 18 160 44 240 28 S400 6 480 24 S570 40 600 30" />
+      </svg>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/" class="btn-primary px-5 py-2.5">Back home</a>
+        <a href="/projects/" class="btn-outline px-5 py-2.5">See the work</a>
+      </div>
+    </LabeledSection>
   </div>
 </BaseLayout>

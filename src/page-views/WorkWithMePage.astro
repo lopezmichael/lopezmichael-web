@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ScrollReveal from '../components/ScrollReveal.astro';
+import LabeledSection from '../components/LabeledSection.astro';
+import { contact } from '../data/resume';
 
 const engagements = [
   {
     title: 'Data strategy & analysis',
     lead: 'I help orgs figure out what their data can actually answer, and turn it into decisions.',
-    icon: 'users',
     looksLike: [
       'Turning a messy dataset into a clear answer',
       'Analysis and data viz for a specific question',
@@ -21,7 +21,6 @@ const engagements = [
   {
     title: 'Data-forward tools & products',
     lead: 'I build the tools, dashboards, and sites that put data into the hands of the people who use it.',
-    icon: 'code',
     looksLike: [
       'Internal tools for non-technical staff (CRUD, lookup)',
       'R Shiny dashboards and interactive data products',
@@ -36,7 +35,6 @@ const engagements = [
   {
     title: 'Data infrastructure & stack',
     lead: 'I help orgs build data infrastructure they can grow into.',
-    icon: 'database',
     looksLike: [
       'Databricks (or similar) setup and migration',
       'Pipeline architecture and ETL design',
@@ -75,144 +73,71 @@ const howIWork = [
   description="Occasional small projects alongside my full-time role at the Child Poverty Action Lab: data strategy, data-forward tools, and data infrastructure for nonprofits."
   noindex
 >
-  <div class="border-t-4 border-cool">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24 flex flex-col gap-16 sm:gap-24">
+    <LabeledSection label="Work with me" labelAs="p" class="pt-10 sm:pt-14">
+      <h1 class="m-0 font-display font-extrabold text-[clamp(2.6rem,7vw,5.5rem)] leading-[0.95] tracking-[-0.03em]">
+        Work <span class="font-serif italic font-normal text-wine tracking-[-0.01em]">with me</span>
+      </h1>
+      <div class="prose-flow mt-6">
+        <p>
+          Alongside my full-time role at the Child Poverty Action Lab, I'm open to the occasional
+          small project. Low-to-medium scale, small enough that
+          one person can do the whole thing well.
+        </p>
+        <p class="font-serif text-[1.25rem]">Open to a project or two. Let's see if we're a fit.</p>
+      </div>
+    </LabeledSection>
 
-      <!-- Hero -->
-      <ScrollReveal>
-        <div class="mb-14 lg:mb-16 max-w-2xl">
-          <h1 class="text-3xl lg:text-4xl font-bold tracking-tight mb-4">Work with me</h1>
-          <p class="text-base leading-relaxed mb-3">
-            Alongside my full-time role at the Child Poverty Action Lab, I'm open to the occasional
-            small project. Low-to-medium scale, small enough that
-            one person can do the whole thing well.
-          </p>
-          <p class="flex items-center gap-2 text-sm font-medium text-neutral dark:text-dark-text">
-            <span class="relative flex w-2 h-2" aria-hidden="true">
-              <span class="absolute inset-0 rounded-full bg-secondary opacity-60 motion-safe:animate-ping"></span>
-              <span class="relative w-2 h-2 rounded-full bg-secondary"></span>
-            </span>
-            Open to a project or two. Let's see if we're a fit.
-          </p>
-        </div>
-      </ScrollReveal>
-
-      <!-- Engagement types -->
-      <ScrollReveal>
-        <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-3">
-          <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
-          What I help with
-        </h2>
-      </ScrollReveal>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-20">
-        {engagements.map((e, i) => (
-          <ScrollReveal delay={i * 100}>
-            <div class="rounded-xl bg-surface dark:bg-dark-surface shadow-sm ring-1 ring-accent/30 dark:ring-canyon/25 p-6 h-full flex flex-col">
-              <div class="flex items-start justify-between mb-5">
-                <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-canyon/15 dark:bg-canyon/25" aria-hidden="true">
-                  <svg class="w-7 h-7 text-canyon dark:text-secondary" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                    {e.icon === 'users' && (
-                      <>
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                        <circle cx="9" cy="7" r="4"/>
-                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                      </>
-                    )}
-                    {e.icon === 'database' && (
-                      <>
-                        <ellipse cx="12" cy="5" rx="9" ry="3"/>
-                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
-                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
-                      </>
-                    )}
-                    {e.icon === 'code' && (
-                      <>
-                        <polyline points="16 18 22 12 16 6"/>
-                        <polyline points="8 6 2 12 8 18"/>
-                      </>
-                    )}
-                  </svg>
-                </div>
-                <span class="text-canyon/60 dark:text-canyon font-light text-3xl tabular-nums leading-none mt-1" aria-hidden="true">
-                  0{i + 1}
-                </span>
+    <LabeledSection label="What I help with">
+      <div class="flex flex-col border-t border-line">
+        {engagements.map((e) => (
+          <article class="border-b border-line py-8 first:pt-6">
+            <h3 class="m-0 font-display font-bold text-[clamp(1.35rem,2.4vw,1.9rem)] tracking-[-0.02em]">{e.title}</h3>
+            <p class="m-0 mt-2 font-serif text-[1.2rem] leading-snug max-w-[48ch]">{e.lead}</p>
+            <div class="mt-5 grid sm:grid-cols-2 gap-6 text-[0.95rem]">
+              <div>
+                <p class="eyebrow m-0 mb-2">What this looks like</p>
+                <ul class="m-0 pl-5 list-disc marker:text-muted flex flex-col gap-1">
+                  {e.looksLike.map((item) => <li>{item}</li>)}
+                </ul>
               </div>
-              <h3 class="text-lg font-semibold mb-2 dark:text-dark-text">{e.title}</h3>
-              <p class="text-sm leading-relaxed opacity-80 mb-5">{e.lead}</p>
-              <div class="text-xs space-y-4 mt-auto">
-                <div>
-                  <p class="font-semibold uppercase tracking-[0.14em] text-cool dark:text-secondary mb-2">What this looks like</p>
-                  <ul class="space-y-1.5">
-                    {e.looksLike.map((item) => (
-                      <li class="flex items-baseline gap-2">
-                        <span class="w-1.5 h-1.5 bg-canyon shrink-0 mt-1" aria-hidden="true"></span>
-                        <span class="opacity-85">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <p class="font-semibold uppercase tracking-[0.14em] text-cool dark:text-secondary mb-2">Good fit if</p>
-                  <ul class="space-y-1.5">
-                    {e.goodFit.map((item) => (
-                      <li class="flex items-baseline gap-2">
-                        <span class="w-1.5 h-1.5 bg-canyon shrink-0 mt-1" aria-hidden="true"></span>
-                        <span class="opacity-85">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <div>
+                <p class="eyebrow m-0 mb-2">Good fit if</p>
+                <ul class="m-0 pl-5 list-disc marker:text-muted flex flex-col gap-1">
+                  {e.goodFit.map((item) => <li>{item}</li>)}
+                </ul>
               </div>
             </div>
-          </ScrollReveal>
+          </article>
         ))}
       </div>
+    </LabeledSection>
 
-      <!-- How I work (visually heavier than engagement cards — this is the differentiator) -->
-      <ScrollReveal>
-        <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-3">
-          <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
-          How I work
-        </h2>
-      </ScrollReveal>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-20">
-        {howIWork.map((item, i) => (
-          <ScrollReveal delay={i * 80}>
-            <div class="rounded-xl bg-surface dark:bg-dark-surface ring-1 ring-accent/40 dark:ring-canyon/30 border-t-2 border-canyon p-7 lg:p-8 h-full">
-              <h3 class="text-xl lg:text-2xl font-semibold text-primary dark:text-dark-text mb-3 leading-tight">{item.title}</h3>
-              <p class="text-sm lg:text-base leading-relaxed opacity-85">{item.body}</p>
-            </div>
-          </ScrollReveal>
-        ))}
-      </div>
-
-      <!-- Contact CTA -->
-      <ScrollReveal>
-        <section class="rounded-xl bg-accent/10 dark:bg-accent/5 ring-1 ring-accent/30 dark:ring-canyon/30 p-8 sm:p-10 text-center">
-          <h2 class="text-xl lg:text-2xl font-semibold text-primary dark:text-dark-text mb-3">Have a project in mind?</h2>
-          <p class="text-sm leading-relaxed max-w-xl mx-auto mb-6 opacity-85">
-            The fastest way to start is to email me with a brief description of the project,
-            your timeline, and your budget range (if you have one). I usually respond within
-            a couple of days.
-          </p>
-          <div class="flex flex-wrap items-center justify-center gap-3 mb-5">
-            <a href="mailto:michael@lopezstudio.dev?subject=Project%20inquiry" class="inline-flex items-center gap-1.5 px-5 py-2.5 bg-primary dark:bg-secondary text-white rounded-lg hover:bg-secondary dark:hover:bg-canyon transition-colors no-underline text-sm font-medium">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-              michael@lopezstudio.dev
-            </a>
-            <a href="https://linkedin.com/in/michael-d-lopez" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-5 py-2.5 border-2 border-primary text-primary dark:border-dark-text dark:text-dark-text rounded-lg hover:bg-primary hover:text-white dark:hover:bg-dark-text dark:hover:text-dark-bg transition-colors no-underline text-sm font-medium">
-              LinkedIn
-            </a>
+    <LabeledSection label="How I work">
+      <dl class="m-0 grid sm:grid-cols-2 gap-x-10 border-t border-line">
+        {howIWork.map((item) => (
+          <div class="border-b border-line py-6">
+            <dt class="font-display font-bold text-[1.25rem] tracking-[-0.01em]">{item.title}</dt>
+            <dd class="m-0 mt-2 leading-relaxed">{item.body}</dd>
           </div>
-          <p class="text-xs opacity-60 max-w-xl mx-auto mb-2">
-            Lopez Studio is the name I use for independent work, so <span class="whitespace-nowrap">michael@lopezstudio.dev</span> is the right address for project inquiries.
-          </p>
-        </section>
-      </ScrollReveal>
+        ))}
+      </dl>
+    </LabeledSection>
 
-    </div>
+    <LabeledSection label="Get in touch" labelAs="p">
+      <h2 class="m-0 font-serif font-normal text-[clamp(1.8rem,3.6vw,2.8rem)] leading-tight">Have a project in mind?</h2>
+      <p class="m-0 mt-4 leading-relaxed max-w-[60ch]">
+        The fastest way to start is to email me with a brief description of the project,
+        your timeline, and your budget range (if you have one). I usually respond within
+        a couple of days.
+      </p>
+      <div class="mt-6 flex flex-wrap items-center gap-3">
+        <a href={`mailto:${contact.email}?subject=Project%20inquiry`} class="btn-primary px-5 py-2.5">{contact.email}</a>
+        <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" class="btn-outline px-5 py-2.5">LinkedIn</a>
+      </div>
+      <p class="m-0 mt-5 text-xs text-muted max-w-[60ch]">
+        Lopez Studio is the name I use for independent work, so <span class="whitespace-nowrap">{contact.email}</span> is the right address for project inquiries.
+      </p>
+    </LabeledSection>
   </div>
 </BaseLayout>

@@ -1,7 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ScrollReveal from './ScrollReveal.astro';
-import type { Project } from '../data/projects';
+import ProjectHeader from './ProjectHeader.astro';
+import LabeledSection from './LabeledSection.astro';
+import NextProject from './NextProject.astro';
+import ProjectFigure from './ProjectFigure.astro';
+import { projectSeo, type Project } from '../data/projects';
 
 interface Props {
   project: Project;
@@ -11,195 +14,72 @@ interface Props {
 }
 
 const { project, metaDescription, techStack, metrics } = Astro.props;
-const isExternal = project.href.startsWith('http') && !project.restricted;
-const hasReflection = Astro.slots.has('reflection');
-const hasPullquote = Astro.slots.has('pullquote');
+
+// Problem / Approach / Outcome / Reflection are sections, not a sequence, so they get labels
+// rather than numerals (docs/design-principles.md, principle 7).
+const sections = [
+  { slot: 'problem', label: 'Problem' },
+  { slot: 'approach', label: 'Approach' },
+  { slot: 'outcome', label: 'Outcome' },
+  { slot: 'reflection', label: 'Reflection' },
+].filter((s) => Astro.slots.has(s.slot));
+// The pull quote sits just before Outcome (or after the last section if there is no Outcome).
+const pullquote = Astro.slots.has('pullquote') ? await Astro.slots.render('pullquote') : null;
+const rendered = await Promise.all(sections.map((s) => Astro.slots.render(s.slot)));
+// A case study's interactive chart goes in the "figure" slot; until it has one, the screenshot shows.
+const hasFigure = Astro.slots.has('figure');
+const seo = projectSeo(project, Astro.site!, metaDescription);
+
+const outcomeAt = sections.findIndex((s) => s.slot === 'outcome');
+const pullquoteIndex = outcomeAt >= 0 ? outcomeAt : sections.length;
 ---
 
-<BaseLayout title={project.title} description={metaDescription || project.description}>
-  <div class="border-t-4 border-canyon">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-12 lg:py-16">
+<BaseLayout {...seo}>
+  <article class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <ProjectHeader project={project} kind="Case study" />
 
-      <!-- Back link -->
-      <ScrollReveal>
-        <a href="/projects/" class="inline-flex items-center gap-1 text-sm text-cool dark:text-secondary hover:text-secondary mb-8 no-underline">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-          All projects
-        </a>
-      </ScrollReveal>
-
-      <!-- Hero (with canyon contour SVG behind) -->
-      <ScrollReveal>
-        <header class="relative pb-2 mb-10">
-          <svg
-            class="absolute inset-0 w-full h-full text-canyon opacity-[0.07] dark:opacity-[0.14] pointer-events-none"
-            viewBox="0 0 800 320"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path d="M0 60 Q120 40 220 55 T420 50 T620 65 T800 55" fill="none" stroke="currentColor" stroke-width="1" />
-            <path d="M0 110 Q140 85 280 100 T540 92 T780 108 L800 105" fill="none" stroke="currentColor" stroke-width="1" />
-            <path d="M0 170 Q100 145 220 162 T440 155 T660 172 T800 162" fill="none" stroke="currentColor" stroke-width="1" />
-            <path d="M0 230 Q150 205 320 220 T620 210 T800 225" fill="none" stroke="currentColor" stroke-width="1" />
-            <path d="M0 290 Q180 270 360 285 T720 275 L800 282" fill="none" stroke="currentColor" stroke-width="1" />
-          </svg>
-          <div class="relative">
-            <p class="text-[11px] uppercase tracking-[0.16em] text-cool dark:text-secondary font-semibold mb-3">Case study</p>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight mb-5">{project.title}</h1>
-            <p class="text-base sm:text-lg leading-relaxed opacity-80 max-w-2xl mb-6">{project.description}</p>
-            <div class="flex flex-wrap gap-2 mb-6">
-              {project.tags.map((tag) => (
-                <span class="text-xs px-2.5 py-1 rounded-full bg-accent/20 text-primary dark:bg-accent/15 dark:text-accent font-medium">
-                  {tag}
-                </span>
-              ))}
-            </div>
-            {isExternal && (
-              <a
-                href={project.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary dark:bg-secondary text-white rounded-lg hover:bg-secondary dark:hover:bg-canyon transition-colors no-underline text-sm font-medium"
-              >
-                Visit live
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
-                </svg>
-              </a>
-            )}
+    {metrics && metrics.length > 0 && (
+      <dl class="m-0 grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-8 pb-12">
+        {metrics.map((m) => (
+          <div class="flex flex-col-reverse border-t border-line pt-4">
+            <dt class="eyebrow mt-3">{m.label}</dt>
+            <dd class="m-0 font-display font-bold text-[clamp(2.25rem,4.5vw,3.5rem)] leading-none tracking-[-0.02em] tabular-nums">{m.value}</dd>
           </div>
-        </header>
-      </ScrollReveal>
+        ))}
+      </dl>
+    )}
 
-      <!-- Metrics (lifted above screenshot, hero-scale) -->
-      {metrics && metrics.length > 0 && (
-        <ScrollReveal>
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-8 my-10">
-            {metrics.map((m) => (
-              <div class="border-t-2 border-canyon pt-4">
-                <p class="text-4xl sm:text-5xl font-bold text-primary dark:text-dark-text leading-none tabular-nums">{m.value}</p>
-                <p class="text-[11px] uppercase tracking-[0.14em] opacity-70 mt-3">{m.label}</p>
-              </div>
-            ))}
-          </div>
-        </ScrollReveal>
-      )}
+    {hasFigure ? <figure class="m-0 pb-16 sm:pb-20"><slot name="figure" /></figure> : <ProjectFigure project={project} />}
 
-      <!-- Screenshot -->
-      {project.image && (
-        <ScrollReveal>
-          <div class="my-10 rounded-xl overflow-hidden shadow-md">
-            <img src={project.image} alt={`Screenshot of ${project.title}`} width="1280" height="720" class="w-full h-auto" loading="lazy" />
-          </div>
-        </ScrollReveal>
-      )}
+    <div class="flex flex-col gap-14 sm:gap-20">
+      {[...sections, null].map((s, i) => (
+        <>
+          {pullquote && i === pullquoteIndex && (
+            <LabeledSection>
+              <blockquote class="m-0 font-serif text-[clamp(1.6rem,3.4vw,2.6rem)] leading-[1.15] tracking-[-0.01em] max-w-[28ch] text-balance">
+                <Fragment set:html={pullquote} />
+              </blockquote>
+            </LabeledSection>
+          )}
+          {s && (
+            <LabeledSection label={s.label}>
+              <div class="prose-flow"><Fragment set:html={rendered[i]} /></div>
+            </LabeledSection>
+          )}
+        </>
+      ))}
 
-      <!-- 01 Problem -->
-      <section class="my-16">
-        <ScrollReveal>
-          <header class="flex items-baseline gap-4 md:gap-5 mb-6">
-            <span class="text-4xl md:text-5xl lg:text-6xl font-light text-canyon/40 dark:text-canyon/55 leading-none tabular-nums shrink-0">01</span>
-            <h2 class="text-2xl md:text-3xl font-semibold text-primary dark:text-dark-text">Problem</h2>
-          </header>
-          <div class="prose-content space-y-4 text-base leading-relaxed">
-            <slot name="problem" />
-          </div>
-        </ScrollReveal>
-      </section>
-
-      <!-- 02 Approach -->
-      <section class="my-16">
-        <ScrollReveal>
-          <header class="flex items-baseline gap-4 md:gap-5 mb-6">
-            <span class="text-4xl md:text-5xl lg:text-6xl font-light text-canyon/40 dark:text-canyon/55 leading-none tabular-nums shrink-0">02</span>
-            <h2 class="text-2xl md:text-3xl font-semibold text-primary dark:text-dark-text">Approach</h2>
-          </header>
-          <div class="prose-content space-y-4 text-base leading-relaxed">
-            <slot name="approach" />
-          </div>
-        </ScrollReveal>
-      </section>
-
-      <!-- Pullquote (optional, breaks out of prose width) -->
-      {hasPullquote && (
-        <ScrollReveal>
-          <blockquote class="my-16 sm:-mx-4 lg:-mx-12 border-l-4 border-canyon pl-6 sm:pl-8 italic font-light text-xl sm:text-2xl lg:text-[1.65rem] leading-snug text-primary dark:text-dark-text opacity-95">
-            <slot name="pullquote" />
-          </blockquote>
-        </ScrollReveal>
-      )}
-
-      <!-- 03 Outcome -->
-      <section class="my-16">
-        <ScrollReveal>
-          <header class="flex items-baseline gap-4 md:gap-5 mb-6">
-            <span class="text-4xl md:text-5xl lg:text-6xl font-light text-canyon/40 dark:text-canyon/55 leading-none tabular-nums shrink-0">03</span>
-            <h2 class="text-2xl md:text-3xl font-semibold text-primary dark:text-dark-text">Outcome</h2>
-          </header>
-          <div class="prose-content space-y-4 text-base leading-relaxed">
-            <slot name="outcome" />
-          </div>
-        </ScrollReveal>
-      </section>
-
-      <!-- 04 Reflection (optional) -->
-      {hasReflection && (
-        <section class="my-16">
-          <ScrollReveal>
-            <header class="flex items-baseline gap-4 md:gap-5 mb-6">
-              <span class="text-4xl md:text-5xl lg:text-6xl font-light text-canyon/40 dark:text-canyon/55 leading-none tabular-nums shrink-0">04</span>
-              <h2 class="text-2xl md:text-3xl font-semibold text-primary dark:text-dark-text">Reflection</h2>
-            </header>
-            <div class="prose-content space-y-4 text-base leading-relaxed">
-              <slot name="reflection" />
-            </div>
-          </ScrollReveal>
-        </section>
-      )}
-
-      <!-- Tech stack (aside, not numbered) -->
       {techStack && techStack.length > 0 && (
-        <section class="my-16">
-          <ScrollReveal>
-            <h2 class="text-xl font-semibold text-primary dark:text-dark-text mb-4 flex items-center gap-3">
-              <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
-              Tech stack
-            </h2>
-            <div class="flex flex-wrap gap-2">
-              {techStack.map((t) => (
-                <span class="text-sm px-3 py-1.5 rounded-full bg-accent/15 dark:bg-accent/10 text-primary dark:text-accent font-medium">{t}</span>
-              ))}
-            </div>
-          </ScrollReveal>
-        </section>
+        <LabeledSection label="Built with">
+          <ul class="list-none m-0 p-0 grid sm:grid-cols-2 gap-x-8 gap-y-2 text-[0.95rem] max-w-[65ch]">
+            {techStack.map((t) => <li class="border-b border-line pb-2">{t}</li>)}
+          </ul>
+        </LabeledSection>
       )}
-
-      <!-- Footer nav -->
-      <ScrollReveal>
-        <div class="mt-16 pt-8 border-t border-accent/30">
-          <a href="/projects/" class="inline-flex items-center gap-1 text-sm text-cool dark:text-secondary hover:text-secondary no-underline">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-            All projects
-          </a>
-        </div>
-      </ScrollReveal>
-
     </div>
-  </div>
-</BaseLayout>
 
-<style>
-  .prose-content :global(p) {
-    margin: 0;
-  }
-  .prose-content :global(ul) {
-    list-style: disc;
-    padding-left: 1.5rem;
-  }
-  .prose-content :global(ul li) {
-    margin-bottom: 0.4rem;
-  }
-  .prose-content :global(strong) {
-    font-weight: 600;
-  }
-</style>
+    <div class="mt-20 sm:mt-28">
+      <NextProject current={project.slug} />
+    </div>
+  </article>
+</BaseLayout>

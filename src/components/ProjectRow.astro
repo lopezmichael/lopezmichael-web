@@ -1,0 +1,116 @@
+---
+import { cardShot, thumbFor, type Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const shot = cardShot(project);
+const tags = project.tags.slice(0, 2).join(' · ');
+---
+
+<a
+  href={`/projects/${project.slug}/`}
+  class="project-row group relative grid grid-cols-[minmax(0,1fr)_24px] md:grid-cols-[minmax(0,1.25fr)_minmax(0,1.2fr)_minmax(0,0.7fr)_28px] gap-x-5 gap-y-1.5 items-baseline py-5 px-3 -mx-3 rounded-md text-ink no-underline transition-colors duration-200 hover:bg-wine-deep hover:text-on-wine focus-visible:bg-wine-deep focus-visible:text-on-wine"
+>
+  <h3 class="m-0 text-inherit font-display font-bold text-[clamp(1.25rem,2.3vw,1.9rem)] tracking-[-0.02em] leading-[1.05]">
+    {project.title}
+  </h3>
+  <span class="col-start-1 md:col-start-auto font-serif italic text-[clamp(1.05rem,1.6vw,1.3rem)] leading-tight">
+    {project.hook ?? project.description}
+  </span>
+  <span class="col-start-1 md:col-start-auto text-xs uppercase tracking-[0.08em] text-muted group-hover:text-inherit group-hover:opacity-80 group-focus-visible:text-inherit">
+    {tags}
+  </span>
+  <span
+    class="col-start-2 row-start-1 md:col-start-auto md:row-start-auto font-display text-[22px] transition-transform duration-200 group-hover:translate-x-1 group-hover:-rotate-45 group-focus-visible:-rotate-45 motion-reduce:transition-none"
+    aria-hidden="true"
+  >→</span>
+  {shot && (
+    <!-- No src until first hover: most visitors never see it, so it shouldn't download. -->
+    <img
+      data-src={thumbFor(shot)}
+      alt=""
+      decoding="async"
+      class="row-shot pointer-events-none absolute left-0 top-0 z-10 aspect-video object-cover rounded-md shadow-2xl"
+    />
+  )}
+</a>
+
+<style>
+  /* The trailing screenshot is a pointer-only extra (principle 6): hidden on touch and for
+     keyboard users, who get the same content from the row text. */
+  .row-shot {
+    display: none;
+    width: 260px;
+    opacity: 0;
+    transition: opacity 150ms ease;
+    will-change: transform;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .row-shot { display: block; }
+  }
+  .project-row.is-live .row-shot { opacity: 1; }
+</style>
+
+<script>
+  // Trailing, tilting screenshot (docs/design-principles.md → Interaction catalogue). Astro bundles
+  // this once per page however many rows render. Layout is read on pointer events only; each
+  // animation frame is arithmetic plus one transform write, and the loop stops once it settles.
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (finePointer) {
+    const header = document.querySelector('[data-site-header]');
+    let headerBottom = header?.getBoundingClientRect().bottom ?? 0;
+    window.addEventListener('resize', () => {
+      headerBottom = header?.getBoundingClientRect().bottom ?? 0;
+    });
+
+    document.querySelectorAll<HTMLElement>('.project-row').forEach((row) => {
+      const img = row.querySelector<HTMLImageElement>('.row-shot');
+      if (!img) return;
+
+      const s = { x: 0, y: 0, tx: 0, ty: 0, rot: -2, rowTop: 0, w: 0, h: 0, raf: 0 };
+      const ease = reduce ? 1 : 0.16;
+
+      const frame = () => {
+        const prevX = s.x;
+        s.x += (s.tx - s.x) * ease;
+        s.y += (s.ty - s.y) * ease;
+        const tilt = reduce ? 0 : Math.max(-9, Math.min(9, (s.x - prevX) * 0.6)) - 2;
+        s.rot += (tilt - s.rot) * 0.15;
+
+        // Above the cursor so the row text stays readable, unless that would tuck the image
+        // under the sticky header; then below it.
+        const up = s.y - s.h - 24;
+        const dy = s.rowTop + up > headerBottom + 8 ? up : s.y + 28;
+        img.style.transform = `translate(${s.x - s.w / 2}px, ${dy}px) rotate(${s.rot}deg)`;
+
+        const settled = Math.abs(s.tx - s.x) < 0.1 && Math.abs(s.ty - s.y) < 0.1 && Math.abs(tilt - s.rot) < 0.05;
+        s.raf = row.classList.contains('is-live') && !settled ? requestAnimationFrame(frame) : 0;
+      };
+
+      const track = (e: PointerEvent) => {
+        const r = row.getBoundingClientRect();
+        s.rowTop = r.top;
+        s.tx = e.clientX - r.left;
+        s.ty = e.clientY - r.top;
+        if (!s.raf) s.raf = requestAnimationFrame(frame);
+      };
+
+      row.addEventListener('pointerenter', (e) => {
+        if (!img.src && img.dataset.src) img.src = img.dataset.src;
+        row.classList.add('is-live');
+        s.w = img.offsetWidth;
+        s.h = img.offsetHeight;
+        track(e);
+        s.x = s.tx;
+        s.y = s.ty;
+      });
+      row.addEventListener('pointermove', track);
+      row.addEventListener('pointerleave', () => row.classList.remove('is-live'));
+    });
+  }
+</script>

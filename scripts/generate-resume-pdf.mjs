@@ -303,7 +303,8 @@ li::marker{color:#A04428;}
 const AVAIL = (11 - 0.5 - 0.45) * 96; // Letter height minus vertical margins
 const PRINT_W = Math.round((8.5 - 1.2) * 96); // Letter width minus horizontal margins
 
-const browser = await chromium.launch();
+// PW_CHROMIUM_PATH lets a machine with a different preinstalled Chromium run this without `npx playwright install`.
+const browser = await chromium.launch(process.env.PW_CHROMIUM_PATH ? { executablePath: process.env.PW_CHROMIUM_PATH } : {});
 const MAX_PAGES = 2;
 const BUDGET = MAX_PAGES * AVAIL;
 const pdfOpts = {

@@ -1,0 +1,25 @@
+---
+import { figureSrcset, type Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const srcset = project.image ? figureSrcset(project.image) : undefined;
+---
+
+{project.image && (
+  <figure class="m-0 pb-16 sm:pb-20">
+    <img
+      src={project.image}
+      srcset={srcset}
+      sizes="(min-width: 1280px) 1216px, calc(100vw - 2rem)"
+      alt={`Screenshot of ${project.title}`}
+      width="1280"
+      height="720"
+      class="w-full h-auto rounded-md border border-line"
+      loading="lazy"
+    />
+  </figure>
+)}

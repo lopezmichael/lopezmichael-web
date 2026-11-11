@@ -1,5 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+// The OG/favicon artwork on this internal page is drawn in Inter (the pre-redesign face).
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-500.css';
+import '@fontsource/inter/latin-600.css';
+import '@fontsource/inter/latin-700.css';
 ---
 
 <BaseLayout
@@ -7,11 +12,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   description="Internal preview of OG image and favicon candidates."
   noindex={true}
 >
-  <div class="border-t-4 border-canyon">
+  <div class="border-t-4 border-wine">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
 
       <header class="mb-12">
-        <p class="text-[11px] uppercase tracking-[0.16em] text-cool dark:text-secondary font-semibold mb-3">Internal preview</p>
+        <p class="text-[11px] uppercase tracking-[0.16em] text-wine font-semibold mb-3">Internal preview</p>
         <h1 class="text-3xl lg:text-4xl font-bold tracking-tight mb-3">Branding candidates</h1>
         <p class="text-base opacity-80 max-w-2xl">
           Three OG image candidates in the canyon + wireframe direction (OG-1) and three favicon
@@ -23,7 +28,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <!-- OG IMAGES -->
       <section class="mb-20">
         <h2 class="text-xl font-semibold mb-2 flex items-center gap-3">
-          <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
+          <span class="w-8 h-0.5 bg-wine-deep" aria-hidden="true"></span>
           OG image candidates
         </h2>
         <p class="text-sm opacity-70 mb-8 max-w-prose">Rendered at native 1200&times;630, scaled to fit. This is what shows in LinkedIn / iMessage / X previews.</p>
@@ -33,10 +38,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <!-- OG-A: Editorial top-left text + bottom terrain -->
           <figure>
             <figcaption class="text-sm font-semibold mb-3 flex items-center gap-3">
-              <span class="text-canyon dark:text-secondary">OG-A</span> · Editorial top-left + bottom canyon terrain
-              <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-canyon text-light text-[10px] uppercase tracking-[0.14em] font-bold">Picked</span>
+              <span class="text-wine">OG-A</span> · Editorial top-left + bottom canyon terrain
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-wine-deep text-on-wine text-[10px] uppercase tracking-[0.14em] font-bold">Picked</span>
             </figcaption>
-            <div class="rounded-xl overflow-hidden ring-1 ring-accent/40 dark:ring-canyon/40 shadow-lg">
+            <div class="rounded-xl overflow-hidden ring-1 ring-line shadow-lg">
               <svg viewBox="0 0 1200 630" preserveAspectRatio="xMidYMid meet" class="block w-full h-auto" role="img" aria-label="OG-A">
                 <defs>
                   <linearGradient id="bg-a" x1="0" y1="0" x2="0" y2="1">
@@ -70,9 +75,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <!-- OG-B: Centered with full-width wireframe behind -->
           <figure>
             <figcaption class="text-sm font-semibold mb-3">
-              <span class="text-canyon dark:text-secondary">OG-B</span> · Centered, full-width terrain behind
+              <span class="text-wine">OG-B</span> · Centered, full-width terrain behind
             </figcaption>
-            <div class="rounded-xl overflow-hidden ring-1 ring-accent/40 dark:ring-canyon/40 shadow-lg">
+            <div class="rounded-xl overflow-hidden ring-1 ring-line shadow-lg">
               <svg viewBox="0 0 1200 630" preserveAspectRatio="xMidYMid meet" class="block w-full h-auto" role="img" aria-label="OG-B">
                 <defs>
                   <linearGradient id="bg-b" x1="0" y1="0" x2="0" y2="1">
@@ -103,9 +108,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <!-- OG-C: Split layout -->
           <figure>
             <figcaption class="text-sm font-semibold mb-3">
-              <span class="text-canyon dark:text-secondary">OG-C</span> · Split: text left, dramatic terrain right
+              <span class="text-wine">OG-C</span> · Split: text left, dramatic terrain right
             </figcaption>
-            <div class="rounded-xl overflow-hidden ring-1 ring-accent/40 dark:ring-canyon/40 shadow-lg">
+            <div class="rounded-xl overflow-hidden ring-1 ring-line shadow-lg">
               <svg viewBox="0 0 1200 630" preserveAspectRatio="xMidYMid meet" class="block w-full h-auto" role="img" aria-label="OG-C">
                 <defs>
                   <linearGradient id="bg-c" x1="0" y1="0" x2="0" y2="1">
@@ -161,7 +166,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <!-- FAVICONS -->
       <section>
         <h2 class="text-xl font-semibold mb-2 flex items-center gap-3">
-          <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
+          <span class="w-8 h-0.5 bg-wine-deep" aria-hidden="true"></span>
           Favicon candidates
         </h2>
         <p class="text-sm opacity-70 mb-3 max-w-prose">Each shown at 16, 32, 64, and 180 (apple-touch). The 16px column is the realistic browser-tab test.</p>
@@ -170,9 +175,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
           <!-- FAV-D: ML monogram -->
-          <figure class="rounded-xl bg-surface dark:bg-dark-surface ring-1 ring-accent/40 dark:ring-canyon/40 p-6 shadow-sm">
+          <figure class="rounded-xl bg-raised ring-1 ring-line p-6 shadow-sm">
             <figcaption class="text-sm font-semibold mb-4">
-              <span class="text-canyon dark:text-secondary">FAV-D</span> · ML monogram
+              <span class="text-wine">FAV-D</span> · ML monogram
             </figcaption>
             <div class="grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-4">
               <span class="text-xs uppercase tracking-wider opacity-60">16 px (tab)</span>
@@ -187,9 +192,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           </figure>
 
           <!-- FAV-E: Canyon ridge silhouette -->
-          <figure class="rounded-xl bg-surface dark:bg-dark-surface ring-1 ring-accent/40 dark:ring-canyon/40 p-6 shadow-sm">
+          <figure class="rounded-xl bg-raised ring-1 ring-line p-6 shadow-sm">
             <figcaption class="text-sm font-semibold mb-4">
-              <span class="text-canyon dark:text-secondary">FAV-E</span> · Canyon ridge silhouette
+              <span class="text-wine">FAV-E</span> · Canyon ridge silhouette
             </figcaption>
             <div class="grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-4">
               <span class="text-xs uppercase tracking-wider opacity-60">16 px (tab)</span>
@@ -204,9 +209,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           </figure>
 
           <!-- FAV-F: Topographic contour ring -->
-          <figure class="rounded-xl bg-surface dark:bg-dark-surface ring-1 ring-accent/40 dark:ring-canyon/40 p-6 shadow-sm">
+          <figure class="rounded-xl bg-raised ring-1 ring-line p-6 shadow-sm">
             <figcaption class="text-sm font-semibold mb-4">
-              <span class="text-canyon dark:text-secondary">FAV-F</span> · Topographic contour
+              <span class="text-wine">FAV-F</span> · Topographic contour
             </figcaption>
             <div class="grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-4">
               <span class="text-xs uppercase tracking-wider opacity-60">16 px (tab)</span>

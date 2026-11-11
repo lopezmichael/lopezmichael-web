@@ -1,0 +1,31 @@
+---
+import type { Project } from '../data/projects';
+import ProjectRow from './ProjectRow.astro';
+
+interface Props {
+  projects: Project[];
+  /** Small label on the left of the header rule. */
+  label: string;
+  /** Optional link on the right of the header rule (e.g. to the full projects page). */
+  more?: { label: string; href: string };
+}
+
+const { projects, label, more } = Astro.props;
+---
+
+<div>
+  <div class="flex items-baseline justify-between gap-4 border-t border-line pt-2.5">
+    <h2 class="eyebrow m-0">{label}</h2>
+    {more && (
+      <a href={more.href} class="eyebrow hover:text-ink">
+        {more.label} <span aria-hidden="true">→</span>
+      </a>
+    )}
+  </div>
+  <ul class="list-none m-0 mt-4 p-0">
+    {projects.map((project) => (
+      <li class="border-b border-line"><ProjectRow project={project} /></li>
+    ))}
+  </ul>
+</div>
+
