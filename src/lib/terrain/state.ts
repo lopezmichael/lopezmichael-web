@@ -65,6 +65,8 @@ interface ModeRanges {
   height: readonly [Range, Range, Range];
   waveIntensity: Range;
   cameraLift: number;
+  /** Divisor of PI for the mesh tilt; nearer 2 is flatter ground with upright features. */
+  tiltDivisor: Range;
 }
 
 // Canyon keeps the original hero's ranges; city and prairie are calmer underneath their features.
@@ -74,19 +76,23 @@ const RANGES: Record<TerrainMode, ModeRanges> = {
     height: [[6, 12], [3, 6], [1, 3]],
     waveIntensity: [1, 2.5],
     cameraLift: 0,
+    tiltDivisor: [2.2, 2.8],
   },
   // City sits lower so the skyline reads as a silhouette on the horizon.
   city: {
     scale: [[0.02, 0.035], [0.05, 0.08], [0.1, 0.16]],
     height: [[2, 4], [1, 2], [0.3, 0.8]],
     waveIntensity: [0.3, 0.6],
-    cameraLift: -8,
+    cameraLift: -14,
+    // Towers rise along the mesh's up axis, so a steep tilt makes them lean away; keep it flat.
+    tiltDivisor: [2.05, 2.2],
   },
   prairie: {
     scale: [[0.015, 0.03], [0.035, 0.06], [0.07, 0.12]],
     height: [[4, 7], [2, 3.5], [0.6, 1.2]],
     waveIntensity: [0.6, 1.2],
     cameraLift: 0,
+    tiltDivisor: [2.2, 2.8],
   },
 };
 
@@ -104,7 +110,7 @@ export function paramsFor(mode: TerrainMode, seed: number): { terrain: TerrainPa
       timeScale: pick([0.003, 0.007]),
       rotationSpeed: pick([0.15, 0.3]),
       rotationAmount: pick([0.03, 0.07]),
-      tilt: -Math.PI / pick([2.2, 2.8]),
+      tilt: -Math.PI / pick(r.tiltDivisor),
     },
     camera: {
       x: pick([-10, 10]),

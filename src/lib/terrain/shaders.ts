@@ -99,18 +99,20 @@ float cityHeight(vec2 p, vec3 sc, vec3 ht, float seed) {
   h += exp(-pow((dr - 8.0) / 1.3, 2.0)) * 1.8;
 
   // The skyline: tapered towers in a cluster near the far edge (+y is away from the camera).
-  vec2 downtown = vec2(sin(seed) * 10.0, 20.0);
-  vec2 rel = (p - downtown) / vec2(18.0, 7.0);
+  // Lots are ~6 vertices wide so each tower gets a flat top and sloped sides; narrower lots
+  // collapse into needles. Most lots stay low; a cubic height curve leaves a few tall landmarks.
+  vec2 downtown = vec2(sin(seed) * 14.0, 19.0);
+  vec2 rel = (p - downtown) / vec2(34.0, 9.0);
   float cluster = exp(-dot(rel, rel) * 1.6);
   if (cluster > 0.02) {
-    float lot = 3.8;
+    float lot = 5.0;
     // Small offsets: large values lose float precision on mobile GPUs.
     vec2 off = vec2(fract(seed * 0.618034), fract(seed * 0.414214)) * 40.0;
     vec2 q = (p + off) / lot;
     vec2 cell = floor(q);
     float r = hash21(cell + off);
-    float tower = step(0.2, r) * pow(softBox(fract(q), vec2(0.12), 0.32), 1.1);
-    h += cluster * (2.5 + tower * (6.0 + r * r * 20.0));
+    float tower = step(0.3, r) * softBox(fract(q), vec2(0.1), 0.2);
+    h += cluster * (2.0 + tower * (4.0 + r * r * r * 36.0));
   }
   return h;
 }
@@ -190,8 +192,9 @@ void main() {
   // Time-of-day tint (the visitor's local clock; see state.ts).
   color *= uTint;
 
-  // Edge fade-out based on UV distance to boundaries
-  float edgeFade = smoothstep(0.0, 0.15, vUv.x) * smoothstep(1.0, 0.85, vUv.x) *
+  // Edge fade-out based on UV distance to boundaries. The strip is wide (GRID_WIDTH in config.ts),
+  // so the side fade is a smaller fraction of it; the sides mostly sit past the frame anyway.
+  float edgeFade = smoothstep(0.0, 0.06, vUv.x) * smoothstep(1.0, 0.94, vUv.x) *
                    smoothstep(0.0, 0.15, vUv.y) * smoothstep(1.0, 0.85, vUv.y);
 
   gl_FragColor = vec4(color, edgeFade);

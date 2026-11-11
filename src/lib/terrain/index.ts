@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { GRID_SIZE, GRID_SEGMENTS, GRID_SEGMENTS_SMALL } from './config';
+import { GRID_WIDTH, GRID_DEPTH, GRID_SEGMENTS, GRID_SEGMENTS_SMALL } from './config';
 import { terrainVertexShader, terrainFragmentShader } from './shaders';
 import { createPostProcessing, type PostProcessing } from './postprocessing';
 import { getTerrainPalette } from './theme';
@@ -53,7 +53,7 @@ export function createTerrain(container: HTMLElement, initial: TerrainState): Te
   // Lighter mesh on small screens; swapped if the container crosses the breakpoint.
   const makeGeometry = () => {
     const n = small ? GRID_SEGMENTS_SMALL : GRID_SEGMENTS;
-    return new THREE.PlaneGeometry(GRID_SIZE, GRID_SIZE, n, n);
+    return new THREE.PlaneGeometry(GRID_WIDTH, GRID_DEPTH, Math.round((n * GRID_WIDTH) / GRID_DEPTH), n);
   };
 
   const modeId = (state: TerrainState) => TERRAIN_MODES.indexOf(state.mode);
