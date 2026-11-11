@@ -11,19 +11,12 @@ const shown = only
   : skills;
 ---
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-10">
   {shown.map((cat) => (
     <div>
-      <h3 class="text-[11px] uppercase tracking-[0.14em] font-semibold text-cool dark:text-secondary mb-3 pb-2 border-b border-accent/60 dark:border-canyon/40">
-        {cat.label}
-      </h3>
-      <ul class="space-y-1.5">
-        {cat.items.map((item) => (
-          <li class="text-sm flex items-baseline gap-2.5 leading-relaxed">
-            <span class="w-1.5 h-1.5 bg-canyon shrink-0 mt-1.5" aria-hidden="true"></span>
-            <span>{item}</span>
-          </li>
-        ))}
+      <h3 class="eyebrow m-0 pb-2 border-b border-line">{cat.label}</h3>
+      <ul class="list-none m-0 p-0">
+        {cat.items.map((item) => <li class="border-b border-line py-2 text-[0.95rem]">{item}</li>)}
       </ul>
     </div>
   ))}

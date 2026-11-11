@@ -53,11 +53,11 @@ const pullquoteIndex = outcomeAt >= 0 ? outcomeAt : sections.length;
       {[...sections, null].map((s, i) => (
         <>
           {pullquote && i === pullquoteIndex && (
-            <div class="grid md:grid-cols-[1fr_3fr] md:gap-10">
-              <blockquote class="md:col-start-2 m-0 font-serif text-[clamp(1.6rem,3.4vw,2.6rem)] leading-[1.15] tracking-[-0.01em] max-w-[28ch] text-balance">
+            <LabeledSection>
+              <blockquote class="m-0 font-serif text-[clamp(1.6rem,3.4vw,2.6rem)] leading-[1.15] tracking-[-0.01em] max-w-[28ch] text-balance">
                 <Fragment set:html={pullquote} />
               </blockquote>
-            </div>
+            </LabeledSection>
           )}
           {s && (
             <LabeledSection label={s.label}>

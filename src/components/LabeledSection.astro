@@ -2,18 +2,23 @@
 // The editorial grid (docs/design-principles.md, principle 8): a narrow label column on the left,
 // content on the right. The label sticks while its section scrolls on wider screens.
 interface Props {
-  label: string;
+  /** Omit to leave the label column empty (e.g. a pull quote aligned with the content column). */
+  label?: string;
   /** Render the label as a heading (default) or as plain text when the content has its own heading. */
   labelAs?: 'h2' | 'p';
   class?: string;
 }
 
 const { label, labelAs: Label = 'h2', class: className } = Astro.props;
+// Without a label there is no heading, so it isn't a section in the document outline.
+const Wrapper = label ? 'section' : 'div';
 ---
 
-<section class:list={['grid md:grid-cols-[1fr_3fr] gap-4 md:gap-10', className]}>
-  <Label class="eyebrow m-0 border-t border-line pt-2.5 self-start md:sticky md:top-24">{label}</Label>
+<Wrapper class:list={['grid md:grid-cols-[1fr_3fr] gap-4 md:gap-10', className]}>
+  {label
+    ? <Label class="eyebrow m-0 border-t border-line pt-2.5 self-start md:sticky md:top-24">{label}</Label>
+    : <div class="hidden md:block" aria-hidden="true"></div>}
   <div class="min-w-0">
     <slot />
   </div>
-</section>
+</Wrapper>

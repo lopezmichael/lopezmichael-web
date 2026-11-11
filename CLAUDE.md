@@ -10,7 +10,7 @@ A full visual redesign is planned. **Read `docs/design-principles.md` before any
 
 ## Redesign status
 
-Phases 0–4 done (tokens, shell, home, terrain v2, projects + case studies). Header = name + Work/About/Resume + Dallas clock; footer = "Say hello" + copy-email (no consulting CTA anywhere). Legacy color classes are aliased onto the new tokens until Phase 5, so un-rebuilt pages already render in Canyon Blush. Buttons use the `btn-primary` / `btn-outline` utilities (padding at the call site); contact details live in `contact` in `src/data/resume.ts`; card/row images go through `cardShot()` in `src/data/projects.ts`.
+Phases 0–5 done (tokens, shell, home, terrain v2, projects + case studies, About / Resume / Work with me / 404). Every page is on the new components; the legacy color aliases and `ScrollReveal` are gone. Header = name + Work/About/Resume + Dallas clock; footer = "Say hello" + copy-email (no consulting CTA anywhere). Buttons use the `btn-primary` / `btn-outline` utilities (padding at the call site); contact details live in `contact` in `src/data/resume.ts`; card/row images go through `cardShot()` in `src/data/projects.ts`.
 
 ## Stack
 
@@ -47,24 +47,24 @@ scripts/
 - **Theme toggle:** `data-theme="dark"` attribute on `<html>`. Flash prevention via inline `<script is:inline>` in `<head>`. Validated localStorage read (allowlist for 'dark'/'light').
 - **Terrain always dark:** Three.js hero renders in dark mode regardless of site theme. Canyon wireframe on near-black background for maximum visual impact. No theme transition code — simple and clean.
 - **Terrain isolation:** Three.js only loads on the home page via `TerrainBand.astro` (a dark band below the hero). `createTerrain(container, state)` in `src/lib/terrain/index.ts` returns a handle (`set`, `dispose`) or null without WebGL. Pure state (modes, places, seeded params, time-of-day defaults, `?terrain=mode-seed`) lives in `src/lib/terrain/state.ts`. Modes: Canyon (Palo Duro), City (Dallas skyline across the Trinity), Prairie (Blackland Prairie).
-- **Palette (Canyon Blush):** tokens in `src/styles/global.css`, documented in `docs/design-principles.md` → Tokens: blush `page`, oxblood `ink`, `muted`, `line`, `wine` (the only highlight: italics, links, focus), `wine-deep` (fills, primary buttons) with `on-wine` text, and the always-dark terrain `band`. Each flips with the theme, so no `dark:` twins. The legacy names (`primary`, `secondary`, `accent`, `cool`, `canyon`, `light`, `dark-*`, `surface`) are aliases onto these until Phase 5. The terrain has its own canyon-to-sand ramp (`src/lib/terrain/config.ts`). Avoid teal — collides with CPAL brand.
+- **Palette (Canyon Blush):** tokens in `src/styles/global.css`, documented in `docs/design-principles.md` → Tokens: blush `page`, oxblood `ink`, `muted`, `line`, `wine` (the only highlight: italics, links, focus), `wine-deep` (fills, primary buttons) with `on-wine` text, and the always-dark terrain `band`. Each flips with the theme, so no `dark:` twins. The old names (`primary`, `secondary`, `accent`, `cool`, `canyon`, `light`, `dark-*`, `surface`) no longer exist: Tailwind emits nothing for them, so they fail silently. Use the tokens. The terrain has its own canyon-to-sand ramp (`src/lib/terrain/config.ts`). Avoid teal — collides with CPAL brand.
 - **Skills source of truth:** `src/data/resume.ts` — `<SkillsGrid />` (About page) and the Resume page both render from this single export.
 - **Project screenshots:** `npm run screenshots` uses Playwright to capture 1280x720 @2x screenshots. Script uses `waitUntil: 'load'` (not `networkidle`) because Shiny apps keep WebSockets open. NTE auto-dismisses its welcome modal before capture. Index rows show a small WebP of the screenshot as a hover preview (`npm run thumbs`).
 - **`cardImage` vs `image`:** `Project.image` renders as the hover preview on index rows AND on the detail page (`ProjectFigure`). `Project.cardImage` (optional) is row-only: `cardShot()` prefers it, detail pages ignore it. (Currently no project uses `cardImage`.)
 - **Data-infra case-study images:** two case studies have no product UI to screenshot. The eviction workstream shows the **North Texas Evictions** dashboard (`north-texas-evictions.png`) and links to northtexasevictions.org — the standalone `north-texas-evictions` project was removed and folded into this workstream (the eviction card/case study now carries the visit link + screenshot). **Building CPAL's Data Function** uses an editorial **canyon-terrain illustration** (`cpal-data-function.png`, 1280×720, generated via Playwright from an inline SVG topo field — matches the site's terrain/OG aesthetic).
 - **`restricted` flag:** `Project.restricted` suppresses the "Visit live" button, which lives only in `ProjectHeader` (shared by case studies and generic project pages) and gates on `href.startsWith('http') && !project.restricted`. Index rows link to the detail page only. Used for the access-gated Block Walking tool; projects with no public URL (eviction workstream, Building CPAL's Data Function) use `href: ''`, which fails the `http` check and suppresses the button too.
 - **`noindex` prop:** `BaseLayout` accepts `noindex?: boolean` → renders `<meta name="robots" content="noindex, nofollow">`. Used by the internal `/preview/branding/` page, which is ALSO excluded from the sitemap via the `filter` in `astro.config.mjs`.
-- **ScrollReveal:** IntersectionObserver-based fade-in-up animations, respects `prefers-reduced-motion`.
+- **Shared layout pieces:** `LabeledSection` (label column + content; omit `label` for an aligned pull quote; `labelAs="p"` when the content has its own heading), `ProjectIndex` / `ProjectRow`, `ProjectHeader`, `ProjectFigure`, `NextProject`, `ResumeEntry`, `SkillsGrid`. No scroll-triggered reveals: content is visible in the first frame.
 - **Analytics:** Vercel Analytics via `@vercel/analytics/astro` `<Analytics />` in BaseLayout. Loads same-origin (`/_vercel/insights/script.js`) in production, so no CSP changes needed. Inert until enabled in the Vercel project dashboard.
 
 ## Pages
 
 - **Home** — `MICHAEL` / *Lopez* wordmark hero, terrain band, "Now" statement, 3 featured projects as index rows (`ProjectIndex` / `ProjectRow`, using `Project.hook`)
-- **About** — Bio (opens in present, then origin story), pullquote, "What we've built at CPAL" numbered list, skills grid, Selected Media section (renders only if `selectedMedia` in `resume.ts` is populated), contact CTA. Headshot is currently an ML monogram placeholder on canyon-orange.
+- **About** — "Hi, I'm *Michael*" header; bio beside an aside (monogram placeholder in wine, role, Dallas, LinkedIn/GitHub); pull quote; "What we've built at CPAL" as a ruled list; Selected media (renders only if `selectedMedia` in `resume.ts` is populated); skills grid. Contact is the footer's "Say hello" (no separate CTA box).
 - **Projects** — All projects grouped by category as index rows (`ProjectIndex` / `ProjectRow`: title · hook · first two tags). Each row links to `/projects/[slug]/`.
 - **Project detail (`/projects/[slug]/`)** — Dynamic route. `pages/projects/[slug].astro` resolves the slug to either a custom case-study component (Building CPAL's Data Function / Dallas County Eviction Data / Homestead Map / DigiLab) or the generic `ProjectDetail` view. Case studies use `CaseStudyLayout`: `ProjectHeader`, a metrics row, a `figure` slot (for the case study's interactive chart; falls back to `ProjectFigure`), labeled Problem/Approach/Outcome/Reflection sections via `LabeledSection` (no numerals), an optional pull quote placed before Outcome, "Built with", and a `NextProject` row. Generic projects (`ProjectDetail`) share the header, figure, sections and next row.
-- **Resume** — Sticky 2-col at `lg+`: sidebar with skills/contact/status, main column with CPAL spine timeline + earlier roles disclosure.
-- **Work with me** — Hero with status pulse, three numbered engagement-type cards, four "How I work" cards, contact CTA.
+- **Resume** — 2-col at `lg+`: left column with contact, PDF download and skills (plain text per category, not sticky); main column with the CPAL timeline (`ResumeEntry`, wine dots), an "Earlier experience" disclosure, education and selected projects.
+- **Work with me** (hidden: off nav, noindexed, out of the sitemap) — header, three engagement types as ruled entries (two lists each), "How I work" as a ruled grid, and its own contact block (inquiries are the page's purpose).
 - **Branding preview** (`/preview/branding/`) — Internal-only swatch page used while iterating on the OG image and favicon. Kept around for future iteration; `noindex` + excluded from the sitemap so recruiters/crawlers don't surface it.
 
 ## Commands
@@ -80,7 +80,7 @@ npm run thumbs        # 520px WebP previews of those screenshots for the project
 
 ## Dark Mode
 
-Custom variant `@custom-variant dark` in global.css targets `[data-theme="dark"]`. All components use `dark:` Tailwind utilities. The `ThemeToggle` component dispatches a `themechange` CustomEvent (currently unused by terrain since it's always dark).
+Tokens flip under `[data-theme="dark"]` in `global.css`, so components use one class per color (`text-ink`, `bg-page`) and need no `dark:` twins. The `dark` custom variant still exists for the rare one-off. The `ThemeToggle` component dispatches a `themechange` CustomEvent (currently unused by terrain since it's always dark).
 
 ## Security Headers (vercel.json)
 

@@ -151,3 +151,55 @@ generative parameters and always-dark rendering all kept.
 | DigiLab | Tournaments logged per week since launch, scrubbable, with a running count of cities and players | Weekly counts from DigiLab's own database/API | Third |
 | Building CPAL's Data Function | Three lanes on one timeline (people, platform, products): team size, the stack moving from scripts to Databricks, decision tools going from 0 to 30+ | Michael's dates for each milestone; app count by year if known | Fourth (needs the most input) |
 
+### Phase 5: Remaining pages (M) · DONE 2026-11-11
+
+- [x] **About:** editorial header, bio beside an aside (wine monogram placeholder, role, Dallas,
+      LinkedIn/GitHub), pull quote, "What we've built" as a ruled list without numerals (structured
+      items, no HTML in data strings), media and skills as labeled sections. The "Let's connect" box is
+      gone; the footer's "Say hello" is the one contact moment. Copy unchanged.
+- [x] **Resume:** left column (contact, PDF, skills as plain text; not sticky, since it can outgrow the
+      screen), CPAL timeline on `ResumeEntry` (shared with earlier roles), "Earlier experience" with its
+      own heading, education and projects as ruled lists. Fixed a nested `<main>`.
+- [x] **Work with me:** restyled (still hidden). Engagements as ruled entries, "How I work" as a ruled
+      grid, own contact block. Icons, numerals, cards and the pulsing status dot removed.
+- [x] **404:** large display "404", "This ground hasn't been *mapped* yet.", contour lines, links home
+      and to the work.
+- [x] Legacy color aliases deleted from `global.css`; the branding preview migrated to tokens. The built
+      HTML was scanned to confirm no legacy class remains (Tailwind would silently emit nothing for one).
+- [x] `ScrollReveal`, `ProjectCard`, `ProjectCardWide` and the wave divider are gone. `LabeledSection`
+      takes an optional label so pull quotes align without copying the grid.
+
+### Phase 6: SEO and sharing (S)
+
+- [ ] Regenerate `/images/og-image.png` and the favicon set in the new palette and type.
+- [ ] Per-case-study OG images: extend `scripts/` with a Playwright generator (title + terrain strip
+      per project), and pass `image` through `CaseStudyLayout` → `BaseLayout`.
+- [ ] JSON-LD: refresh `knowsAbout` to lead with leadership, domain, and analysis (it currently
+      leads with infrastructure terms); add `CreativeWork` markup on case studies.
+- [ ] Off-site setup (Michael): verify the domain in Google Search Console and submit the sitemap;
+      enable Web Analytics in the Vercel dashboard.
+
+### Phase 7: Copy pass and QA (M)
+
+- [ ] Run all changed prose through the `voice-professional` agent (new hooks, labels, terrain copy,
+      404, footer).
+- [ ] Accessibility audit against the principles' baseline (keyboard pass, screen reader spot
+      check, contrast in both themes, reduced motion).
+- [ ] Lighthouse on Home and one case study (performance budget: terrain must not push LCP past
+      2.5s on mobile).
+- [ ] Update `CLAUDE.md` (palette, fonts, components, terrain modes) and `ROADMAP.md`.
+
+---
+
+## Suggested order
+
+`0 → 1 → 2` first (the visible redesign lands quickly). `3` can start in parallel after `0`, since
+the terrain is self-contained. Then `4 → 5 → 6 → 7`. Phase 3c layers 2 and 3 are optional and can
+ship after everything else.
+
+## Inputs needed from Michael
+
+- Answers to the open decisions above
+- Real data for the first case-study chart
+- Short hooks per project (drafts exist in the mockup; they'll go through the copy pass)
+- Real headshot (still pending from the old roadmap)

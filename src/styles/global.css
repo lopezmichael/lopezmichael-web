@@ -63,25 +63,6 @@
   --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
 }
 
-/* Legacy palette names (pre-redesign), now ALIASED onto the Canyon Blush tokens so pages that
-   haven't been rebuilt yet still render in the new palette, in both themes (each pair such as
-   bg-light / dark:bg-dark-bg resolves to the same theme-aware token). The old orange and sand are
-   gone: secondary, accent, canyon and cool all point at wine. Components migrate off these names
-   phase by phase; the block is deleted in Phase 5 of docs/plans/2026-11-11-canyon-blush-redesign.md. */
-@theme inline {
-  --color-primary: var(--ink);
-  --color-neutral: var(--ink);
-  --color-secondary: var(--wine);
-  --color-accent: var(--wine);
-  --color-cool: var(--wine);
-  --color-canyon: var(--wine);
-  --color-light: var(--page);
-  --color-surface: var(--raised);
-  --color-dark-bg: var(--page);
-  --color-dark-surface: var(--raised);
-  --color-dark-text: var(--ink);
-}
-
 /* Buttons. Geometry (padding) stays at the call site; these carry color, shape and type. */
 @utility btn-primary {
   display: inline-flex;

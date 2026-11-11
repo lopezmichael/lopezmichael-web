@@ -1,7 +1,8 @@
 ---
 interface Props {
   title: string;
-  company: string;
+  /** Omitted inside the CPAL timeline, where the employer heads the group. */
+  company?: string;
   dates: string;
   summary?: string;
   bullets: string[];
@@ -10,19 +11,12 @@ interface Props {
 const { title, company, dates, summary, bullets } = Astro.props;
 ---
 
-<article class="mb-8 last:mb-0">
-  <p class="text-[11px] uppercase tracking-[0.14em] text-canyon font-semibold">{dates}</p>
-  <h4 class="text-lg font-semibold mt-1 text-neutral dark:text-dark-text">{title}</h4>
-  <p class="flex items-center gap-2 text-sm text-cool dark:text-secondary font-medium mt-1">
-    <span class="w-1.5 h-1.5 rounded-full bg-canyon shrink-0" aria-hidden="true"></span>
-    {company}
-  </p>
-  {summary && (
-    <p class="text-sm italic mt-3 opacity-80 leading-relaxed">{summary}</p>
-  )}
-  <ul class="mt-3 space-y-1.5 list-disc list-outside ml-5">
-    {bullets.map((bullet) => (
-      <li class="text-sm leading-relaxed">{bullet}</li>
-    ))}
+<article>
+  <p class="eyebrow m-0">{dates}</p>
+  <h4 class="m-0 mt-1.5 font-display font-bold text-[1.2rem] tracking-[-0.01em]">{title}</h4>
+  {company && <p class="m-0 mt-0.5 text-wine text-sm">{company}</p>}
+  {summary && <p class="m-0 mt-3 font-serif italic text-[1.1rem] leading-snug max-w-[60ch]">{summary}</p>}
+  <ul class="mt-3 mb-0 pl-5 list-disc marker:text-muted flex flex-col gap-1.5 max-w-[65ch] text-[0.95rem] leading-relaxed">
+    {bullets.map((bullet) => <li>{bullet}</li>)}
   </ul>
 </article>
