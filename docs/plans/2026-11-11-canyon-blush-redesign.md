@@ -217,18 +217,25 @@ Phases 0–6 and the Phase 7 QA checks are done on `claude/quirky-shannon-hpcwls
 Needs a real GPU: the cloud sandbox renders WebGL in software, so judge only on a laptop/phone.
 - **Files:** `src/lib/terrain/shaders.ts` (per-mode height functions: `canyonHeight`, `cityHeight`,
   `prairieHeight`, plus color ramp/tint in the fragment shader), `src/lib/terrain/state.ts` (per-mode
-  parameter ranges in `RANGES`, camera ranges in `paramsFor`, `MODE_INFO` labels, time-of-day
-  defaults), `src/lib/terrain/config.ts` (`TERRAIN_RAMP`, grid density), `src/lib/terrain/index.ts`
+  parameter ranges in `RANGES`, camera ranges in `paramsFor`, `MODE_LABEL`, random draw, time-of-day
+  tint), `src/lib/terrain/config.ts` (`TERRAIN_RAMP`, grid density), `src/lib/terrain/index.ts`
   (renderer, morph, pointer lift, frame loop), `src/components/TerrainBand.astro` (band size, label,
   controls, start timing).
 - **Fast loop:** `npm run dev`, open `/?terrain=canyon-0421` (or `city-0042`, `prairie-0007`) to pin a
-  mode + seed; Regrow and the mode buttons update the URL, so a view worth keeping can be bookmarked.
+  mode + seed; Regrow updates the URL, so a view worth keeping can be bookmarked.
 - **Known state:** Canyon is the strongest. City went through literal blocks → soft density map →
   current "skyline across the Trinity" (smooth floodplain + levees + a seeded cluster of soft
   towers, lower camera); never reviewed on a real GPU. Prairie has an escarpment + creek.
-- **Open questions:** City and Prairie look; whether night visitors should default to City
-  (`defaultModeFor` in `state.ts`) or everyone starts on Canyon; band height
-  (`h-[clamp(260px,32vw,420px)]`); pointer-lift strength (`uLift * 7.0`, sigma 8 in the shader).
+- **Done 2026-11-11 (real-GPU session):** ground widened to a 280×100 strip so it spans the band;
+  City towers flat-topped with a larger downtown, lower camera and a flatter per-mode tilt
+  (`tiltDivisor`) so towers stand upright; first screen fits name + tagline + band (band fills what
+  the hero leaves, 240px to 62svh; wordmark capped by `svh`); **mode buttons removed**: each load
+  draws a random mode + seed, Regrow rerolls both, label is "Canyon · seed 0421" (no place names or
+  coordinates). Night-default question closed: no per-time default mode any more (tint stays).
+- **Next, in order:** per-mode color range (City/Prairie only use the middle of the ramp); Prairie
+  rebuild (long rolling hills + fine ripple + a travelling wind wave); City variety (1-2 clusters,
+  river that reads or no levees); Canyon variety (terrace step, river sometimes absent); seeded camera
+  composition per mode. Still open: pointer-lift strength (`uLift * 7.0`, sigma 8 in the shader).
 - **Guardrails:** keep the canyon-to-sand ramp (no teal: CPAL brand); keep it generative and seeded
   (`paramsFor` must stay deterministic); keep the cheap-rendering behavior (off-screen pause, idle
   start, 30 fps + 1.5x pixel ratio on small screens, reduced motion = one frame).

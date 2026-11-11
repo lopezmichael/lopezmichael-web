@@ -2,7 +2,7 @@
 // The generative terrain, as a dark band between blush sections (docs/design-principles.md →
 // Terrain principles). Modes, seeds and defaults live in src/lib/terrain/state.ts; the renderer in
 // src/lib/terrain/index.ts.
-import { TERRAIN_MODES, MODE_INFO } from '../lib/terrain/state';
+import { MODE_LABEL } from '../lib/terrain/state';
 ---
 
 <!-- Height comes from the first-screen wrapper in HomePage.astro: it fills what the hero leaves. -->
@@ -16,23 +16,12 @@ import { TERRAIN_MODES, MODE_INFO } from '../lib/terrain/state';
     class="absolute left-4 sm:left-6 lg:left-8 top-3 sm:top-auto sm:bottom-3 m-0 font-mono text-[11px] tracking-[0.04em] text-on-band/85 pointer-events-none"
     data-terrain-label
   >
-    <!-- Coordinates drop on phones so the label stays on one line. -->
-    <span class="hidden sm:inline"><span data-terrain-coords>{MODE_INFO.canyon.coords}</span> · </span><span data-terrain-place>{MODE_INFO.canyon.place}</span><span data-terrain-seed></span>
+    <!-- Filled in by the script with the drawn mode and seed. -->
+    <span data-terrain-mode-label>{MODE_LABEL.canyon}</span><span data-terrain-seed></span>
   </p>
 
   <div class="absolute right-4 sm:right-6 lg:right-8 bottom-2.5 flex items-center gap-1.5 font-mono text-[11px] tracking-[0.04em]" data-terrain-controls hidden>
-    <div class="flex items-center gap-1" role="group" aria-label="Terrain">
-      {TERRAIN_MODES.map((mode) => (
-        <button
-          type="button"
-          data-terrain-mode={mode}
-          aria-pressed="false"
-          class="terrain-btn"
-        >
-          {MODE_INFO[mode].label}
-        </button>
-      ))}
-    </div>
+    <!-- One control: Regrow draws a new mode and seed. -->
     <button type="button" data-terrain-regrow class="terrain-btn">
       Regrow <span aria-hidden="true">↻</span>
     </button>
@@ -52,52 +41,25 @@ import { TERRAIN_MODES, MODE_INFO } from '../lib/terrain/state';
   .terrain-btn:hover {
     background: color-mix(in srgb, var(--on-band) 15%, transparent);
   }
-  .terrain-btn[aria-pressed='true'] {
-    background: var(--on-band);
-    color: var(--band);
-    border-color: var(--on-band);
-  }
 </style>
 
 <script>
   import { createTerrain, type TerrainHandle } from '../lib/terrain/index';
   import {
-    MODE_INFO,
-    defaultModeFor,
+    MODE_LABEL,
     formatTerrainParam,
-    isTerrainMode,
     parseTerrainParam,
-    randomSeed,
+    randomState,
     tintForHour,
-    type TerrainMode,
     type TerrainState,
   } from '../lib/terrain/state';
 
-  const STORAGE_KEY = 'terrain-mode';
-
-  function readStoredMode(): TerrainMode | null {
-    try {
-      const v = localStorage.getItem(STORAGE_KEY);
-      return isTerrainMode(v) ? v : null;
-    } catch {
-      return null;
-    }
-  }
-  function storeMode(mode: TerrainMode) {
-    try {
-      localStorage.setItem(STORAGE_KEY, mode);
-    } catch {
-      // Private mode or blocked storage: remembering the mode is only a convenience.
-    }
-  }
-
-  // Starting state: a shared link wins, then the visitor's last mode, then their local time of day.
-  // The time comes from the device clock and never leaves the browser.
+  // Starting state: a shared ?terrain= link wins; otherwise a random mode and seed on every load.
+  // The tint follows the device clock, which never leaves the browser.
   function initialState(): TerrainState {
     const tint = tintForHour(new Date().getHours());
     const shared = parseTerrainParam(new URLSearchParams(location.search).get('terrain'));
-    if (shared) return { ...shared, tint };
-    return { mode: readStoredMode() ?? defaultModeFor(tint), seed: randomSeed(), tint };
+    return shared ? { ...shared, tint } : randomState(tint);
   }
 
   function start() {
@@ -108,16 +70,11 @@ import { TERRAIN_MODES, MODE_INFO } from '../lib/terrain/state';
 
     // The state (and so the label) is known right away; only the renderer waits for an idle moment.
     let state = initialState();
-    const modeButtons = controls.querySelectorAll<HTMLButtonElement>('[data-terrain-mode]');
-    const coords = label.querySelector('[data-terrain-coords]');
-    const place = label.querySelector('[data-terrain-place]');
+    const modeLabel = label.querySelector('[data-terrain-mode-label]');
     const seed = label.querySelector('[data-terrain-seed]');
     const show = () => {
-      const info = MODE_INFO[state.mode];
-      if (coords) coords.textContent = info.coords;
-      if (place) place.textContent = info.place;
+      if (modeLabel) modeLabel.textContent = MODE_LABEL[state.mode];
       if (seed) seed.textContent = ` · seed ${String(state.seed).padStart(4, '0')}`;
-      modeButtons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.terrainMode === state.mode)));
     };
     show();
 
@@ -125,7 +82,7 @@ import { TERRAIN_MODES, MODE_INFO } from '../lib/terrain/state';
     // first paint. Until then the band shows its dark ground and the label.
     whenLoadedAndIdle(() => {
       const terrain: TerrainHandle | null = createTerrain(container, state);
-      // No WebGL: keep the plain dark band with its place label, and no controls that can't work.
+      // No WebGL: keep the plain dark band with its label, and no control that can't work.
       if (!terrain) return;
       controls.hidden = false;
       wire(terrain);
@@ -142,15 +99,7 @@ import { TERRAIN_MODES, MODE_INFO } from '../lib/terrain/state';
         history.replaceState(history.state, '', url);
       };
 
-      modeButtons.forEach((b) =>
-        b.addEventListener('click', () => {
-          const mode = b.dataset.terrainMode;
-          if (!isTerrainMode(mode) || mode === state.mode) return;
-          storeMode(mode);
-          apply({ ...state, mode, seed: randomSeed() });
-        }),
-      );
-      controls.querySelector('[data-terrain-regrow]')?.addEventListener('click', () => apply({ ...state, seed: randomSeed() }));
+      controls.querySelector('[data-terrain-regrow]')?.addEventListener('click', () => apply(randomState(state.tint)));
       document.addEventListener('astro:before-swap', () => terrain.dispose(), { once: true });
     }
   }

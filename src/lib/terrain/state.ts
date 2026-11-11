@@ -14,12 +14,10 @@ export interface TerrainState {
   tint: TerrainTint;
 }
 
-/** Each mode is modeled on a real Texas landform; the label names that place, never the visitor's. */
-export const MODE_INFO: Record<TerrainMode, { label: string; place: string; coords: string }> = {
-  canyon: { label: 'Canyon', place: 'Palo Duro Canyon', coords: '34.94° N, 101.66° W' },
-  city: { label: 'City', place: 'Trinity River, Dallas', coords: '32.77° N, 96.81° W' },
-  prairie: { label: 'Prairie', place: 'Blackland Prairie', coords: '33.02° N, 96.70° W' },
-};
+/** The band's label names the landform and seed, e.g. "Canyon · seed 0421". The modes are loosely
+ *  inspired by Texas (Palo Duro, the Dallas skyline, the Blackland Prairie) but tuned to look good
+ *  rather than to match a real place, so the label no longer names one. */
+export const MODE_LABEL: Record<TerrainMode, string> = { canyon: 'Canyon', city: 'City', prairie: 'Prairie' };
 
 /** Each mode's ground level in mesh units, used to place the pointer lift on the surface
  *  rather than on the flat base plane (matches the offsets in shaders.ts). */
@@ -124,21 +122,17 @@ export function paramsFor(mode: TerrainMode, seed: number): { terrain: TerrainPa
 
 export const randomSeed = (): number => Math.floor(Math.random() * 10000);
 
+/** Every load (and every Regrow) draws a mode at random; there are no mode buttons. */
+export const randomMode = (): TerrainMode => TERRAIN_MODES[Math.floor(Math.random() * TERRAIN_MODES.length)];
+
+export const randomState = (tint: TerrainTint): TerrainState => ({ mode: randomMode(), seed: randomSeed(), tint });
+
 /** Visitor's local time of day → tint. Read from the device clock; nothing leaves the browser. */
 export function tintForHour(hour: number): TerrainTint {
   if (hour >= 5 && hour < 8) return 'dawn';
   if (hour >= 8 && hour < 17) return 'day';
   if (hour >= 17 && hour < 20) return 'dusk';
   return 'night';
-}
-
-/** Default mode by time of day: the city grid after dark, prairie at dawn, canyon otherwise.
- *  (Deliberate change from the plan's time-zone idea: local time is a richer and equally private
- *  signal. Recorded in docs/plans/2026-11-11-canyon-blush-redesign.md, Phase 3.) */
-export function defaultModeFor(tint: TerrainTint): TerrainMode {
-  if (tint === 'night') return 'city';
-  if (tint === 'dawn') return 'prairie';
-  return 'canyon';
 }
 
 /** RGB multipliers applied to the terrain's height colors. */

@@ -159,11 +159,12 @@ Running text stays under ~65 characters per line.
 1. **Generative.** Built from layered simplex noise with randomized parameters, so every visit
    is different. Keep the existing Three.js pipeline (`src/lib/terrain/`) as the base and extend it;
    don't replace it.
-2. **Feels like a place.** Terrain modes are modeled on real landforms and places (canyon
-   terraces and river channels, a city street grid, North Texas prairie). The label names the place
-   and the seed, in mono.
+2. **Looks good first, place second.** The three modes (Canyon, City, Prairie) are loosely inspired
+   by Texas landforms, but each is tuned to look good, not to match a real place. Every load draws
+   a mode and seed at random. The label names the mode and seed, in mono ("Canyon · seed 0421").
 3. **Reacts to the visitor.** The ground rises gently toward the cursor or finger and settles
-   when they leave. A small control lets the visitor regrow or switch modes.
+   when they leave. One small control, Regrow, draws a new mode and seed. No mode picker: the
+   surprise on each load is the point. `?terrain=mode-seed` pins a view for sharing.
 4. **Respects the visitor.** Location input is coarse and never stored (see the plan). No
    browser geolocation prompt. Reduced motion means a still frame plus pointer response
    only.
@@ -176,7 +177,7 @@ Running text stays under ~65 characters per line.
 ## Interaction catalogue
 
 **Approved**
-- Terrain cursor lift, regrow, and mode switch
+- Terrain cursor lift and Regrow (random mode + seed)
 - Project rows: wine fill on hover/focus; screenshot trails the cursor and tilts with velocity
 - One interactive chart per case study (scrub or slider; keyboard-operable range input)
 - Copy-to-clipboard email with a "Copied" state and the "hello!" pop
