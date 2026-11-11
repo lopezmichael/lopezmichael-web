@@ -1,79 +1,36 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProjectCardWide from '../components/ProjectCardWide.astro';
-import ScrollReveal from '../components/ScrollReveal.astro';
-import { projects } from '../data/projects';
+import ProjectIndex from '../components/ProjectIndex.astro';
+import LabeledSection from '../components/LabeledSection.astro';
+import { projects, type Project } from '../data/projects';
 
-const civicProjects = projects.filter((p) => p.category === 'civic');
-const communityProjects = projects.filter((p) => p.category === 'community');
-const otherProjects = projects.filter((p) => p.category === 'other');
+const groups: { label: string; category: Project['category'] }[] = [
+  { label: 'Civic data & infrastructure', category: 'civic' },
+  { label: 'Community data', category: 'community' },
+  { label: 'Other work', category: 'other' },
+];
 ---
 
 <BaseLayout
   title="Projects"
   description="Selected work by Michael Lopez: building a nonprofit data function, civic data systems, and community-driven data products."
 >
-  <div class="border-t-4 border-canyon">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-      <ScrollReveal>
-        <h1 class="text-3xl lg:text-4xl font-bold tracking-tight mb-4">Projects</h1>
-        <p class="text-base leading-relaxed opacity-80 max-w-2xl">
-          Selected work: leading a nonprofit data function and the systems it runs on, plus a
-          community data platform I built and run on my own.
-        </p>
-      </ScrollReveal>
-    </div>
-  </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <LabeledSection label="Work" labelAs="p" class="pt-10 sm:pt-14 pb-12 sm:pb-16">
+      <h1 class="m-0 font-display font-extrabold text-[clamp(2.6rem,7vw,5.5rem)] leading-[0.95] tracking-[-0.03em]">
+        Selected <span class="font-serif italic font-normal text-wine tracking-[-0.01em]">work</span>
+      </h1>
+      <p class="m-0 mt-6 text-[1.05rem] leading-relaxed max-w-[62ch]">
+        Leading a nonprofit data function and the systems it runs on, plus a community data platform
+        I built and run on my own.
+      </p>
+    </LabeledSection>
 
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-
-    <!-- Civic Data & Infrastructure -->
-    <ScrollReveal>
-      <h2 class="text-lg font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-3">
-        <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
-        Civic Data & Infrastructure
-      </h2>
-    </ScrollReveal>
-    <div class="space-y-6 mb-16">
-      {civicProjects.map((project, i) => (
-        <ScrollReveal delay={i * 80}>
-          <ProjectCardWide project={project} />
-        </ScrollReveal>
-      ))}
-    </div>
-
-    <!-- Personal Projects -->
-    {communityProjects.length > 0 && (
-      <>
-        <ScrollReveal>
-          <h2 class="text-lg font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-3">
-            <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
-            Community Data
-          </h2>
-        </ScrollReveal>
-        <div class="space-y-6 mb-16">
-          {communityProjects.map((project, i) => (
-            <ScrollReveal delay={i * 80}>
-              <ProjectCardWide project={project} />
-            </ScrollReveal>
-          ))}
-        </div>
-      </>
-    )}
-
-    <!-- Open Source -->
-    <ScrollReveal>
-      <h2 class="text-lg font-semibold text-primary dark:text-dark-text mb-6 flex items-center gap-3">
-        <span class="w-8 h-0.5 bg-canyon" aria-hidden="true"></span>
-        Other Work
-      </h2>
-    </ScrollReveal>
-    <div class="space-y-6">
-      {otherProjects.map((project, i) => (
-        <ScrollReveal delay={i * 80}>
-          <ProjectCardWide project={project} />
-        </ScrollReveal>
-      ))}
+    <div class="flex flex-col gap-14 sm:gap-20 pb-16 sm:pb-24">
+      {groups.map(({ label, category }) => {
+        const items = projects.filter((p) => p.category === category);
+        return items.length > 0 && <ProjectIndex projects={items} label={label} />;
+      })}
     </div>
   </div>
 </BaseLayout>

@@ -7,7 +7,6 @@ export interface Project {
   longDescription: string;
   tags: string[];
   href: string;
-  gradient: string;
   category: 'civic' | 'community' | 'other';
   highlights?: string[];
   image?: string;
@@ -36,7 +35,6 @@ export const projects: Project[] = [
       "The six-year story of helping grow the Child Poverty Action Lab's data function: hiring the org's first data engineer, pairing vendor engineers with an in-house team to build the platform, selecting and migrating to Databricks, leading the data org through a CDO transition, and rolling out AI-enabled workflows across the team. A leadership case study, not a pipeline write-up.",
     tags: ['Data Leadership', 'Team Building', 'Data Strategy', 'Databricks'],
     href: '',
-    gradient: 'from-canyon to-cool',
     category: 'civic',
     image: '/images/projects/cpal-data-function.png',
     highlights: [
@@ -55,7 +53,6 @@ export const projects: Project[] = [
       "The eviction data workstream behind the Child Poverty Action Lab's housing work: turning messy county court records into a daily feed that 12+ partners (the Dallas Eviction Advocacy Center, the Princeton Eviction Lab, Dallas HHS) use to reach tenants facing displacement, and into the public transparency of North Texas Evictions. Built in R in 2020, then rebuilt on Databricks by our data engineering team as it scaled to four North Texas counties. What mattered was always who the data reaches.",
     tags: ['Housing & Eviction', 'Public Records', 'Partner Data', 'Data for Outreach'],
     href: 'https://northtexasevictions.org',
-    gradient: 'from-canyon to-secondary',
     category: 'civic',
     image: '/images/projects/north-texas-evictions.png',
     highlights: [
@@ -74,7 +71,6 @@ export const projects: Project[] = [
       'Interactive R Shiny application mapping homestead exemption take-up rates across Dallas by census tract, zip code, and neighborhood. Filters by race/ethnicity and income level to surface disparities in who is claiming property tax savings. Built with Mapbox GL, sourcing data from the Dallas Central Appraisal District and American Community Survey.',
     tags: ['R Shiny', 'Mapbox', 'Housing', 'GIS'],
     href: 'https://dallashomesteads.tools.cpal.org',
-    gradient: 'from-primary to-cool',
     category: 'civic',
     image: '/images/projects/dallas-homesteads.png',
     highlights: [
@@ -86,6 +82,7 @@ export const projects: Project[] = [
   {
     slug: 'block-walking',
     title: 'Dallas Block Walking Tool',
+    hook: 'Which doors to knock for an unclaimed homestead exemption.',
     description:
       'Field-outreach tool that maps which nearby homes are likely missing a homestead exemption, so canvassers know which doors to knock.',
     longDescription:
@@ -93,7 +90,6 @@ export const projects: Project[] = [
     tags: ['R Shiny', 'Mapbox', 'Housing', 'Field Outreach'],
     href: 'https://blockwalking.tools.cpal.org',
     restricted: true,
-    gradient: 'from-cool to-secondary',
     category: 'civic',
     image: '/images/projects/blockwalking.png',
     highlights: [
@@ -105,13 +101,13 @@ export const projects: Project[] = [
   {
     slug: 'rodriguez-wellbeing',
     title: 'Rodriguez Wellbeing & Counseling',
+    hook: 'A bilingual site for a counseling practice.',
     description:
       'Bilingual therapy practice website built with Astro and Tailwind CSS.',
     longDescription:
       'Professional practice website for a licensed counselor and professor, offering counseling, clinical supervision, trauma-informed yoga, and speaking services. Fully bilingual (English/Spanish) with i18n routing, JSON-LD structured data, scroll-reveal animations, and a warm earthy design system.',
     tags: ['Astro', 'Tailwind CSS', 'i18n', 'Web Development'],
     href: 'https://www.rodriguezwellbeing.com',
-    gradient: 'from-secondary to-accent',
     category: 'other',
     image: '/images/projects/rodriguez-wellbeing.png',
     highlights: [
@@ -130,7 +126,6 @@ export const projects: Project[] = [
       'A community-sourced tournament data platform for the Digimon and Gundam card game scenes. A 600-member Discord and a network of volunteer organizers keep the data flowing; the platform turns it into regional meta analysis, scene-aware leaderboards, and blog deep-dives players use to prep for events. So far: 10,800+ tournaments logged, 19,100+ players tracked, and around 2,000 daily active users. A public API powers external community tools. Built on Astro, Preact, and Neon Postgres.',
     tags: ['Community Data', 'Meta Analysis', 'Data Insights', 'Astro', 'Neon', 'Public API'],
     href: 'https://digilab.cards',
-    gradient: 'from-cool to-primary',
     category: 'community',
     image: '/images/projects/digilab.png',
     highlights: [
@@ -142,13 +137,13 @@ export const projects: Project[] = [
   {
     slug: 'atomtemplates',
     title: 'atomtemplates',
+    hook: 'One standard way to start an R project.',
     description:
       'R package for standardized project creation and handling.',
     longDescription:
       'Open-source R package that standardizes project creation and handling. Streamlines setup of new data projects with consistent directory structure, documentation templates, and tooling. Used internally at CPAL to maintain consistency across the data team.',
     tags: ['R Package', 'Open Source', 'DevTools'],
     href: 'https://github.com/lopezmichael/atomtemplates',
-    gradient: 'from-secondary to-accent',
     category: 'other',
     image: '/images/projects/atomtemplates.png',
     highlights: [

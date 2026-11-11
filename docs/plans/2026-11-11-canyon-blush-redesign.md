@@ -115,6 +115,8 @@ generative parameters and always-dark rendering all kept.
 - [x] **Decision (changed from the plan):** defaults come from the visitor's *local time*, not time
       zone: night → City, dawn → Prairie, day/dusk → Canyon, plus a matching tint. Same privacy (device
       clock, nothing leaves the browser), richer signal.
+- [ ] **Revisit the terrain look** (Michael, 2026-11-11: "not super happy with it, iterate later").
+      Review on a real GPU via the preview and tune Canyon / City / Prairie together.
 - [x] **City look:** literal blocks (zoning, avenues, freeway loop) and a soft density map both read as
       busy or flat next to the canyon. Michael chose **skyline on the horizon**: Dallas seen across the
       Trinity, with a smooth floodplain foreground (river + a levee on each bank), a lower camera, and a
@@ -123,21 +125,22 @@ generative parameters and always-dark rendering all kept.
 - [ ] Layer 2 (Vercel IP-region seed via middleware) and Layer 3 (real Dallas elevation) not started;
       both optional. Layer 2 needs a security review when built.
 
-### Phase 4: Projects and case studies (L)
+### Phase 4: Projects and case studies (L) · DONE 2026-11-11 (charts pending data)
 
-- [ ] `ProjectsPage.astro`: category groups as index rows (same components as Home), not cards.
-- [ ] `CaseStudyLayout.astro` rework:
-  - Editorial grid: label column ("Problem", "Approach", "Outcome", "Reflection") and content
-    column. Drop the faded numerals: these are sections, not a sequence.
-  - Fix the paragraph-spacing bug (case-study paragraphs currently run together).
-  - Metrics: hairline-ruled row with tabular numbers in the display face.
-  - Pull quote: large serif, no colored left bar.
-  - Hero image replaced by a slot for the case study's interactive chart (static screenshot as
-    the fallback).
-- [ ] `ProjectDetail.astro` (generic projects): same grid and type, lighter.
-- [ ] Charts: build one shared `<ScrubChart>` component (SVG, range-input scrubber, `aria-live`
-      caption, theme tokens). Ship the first chart on one case study once real data is confirmed;
-      the others follow as data arrives.
+- [x] `ProjectsPage.astro`: category groups as index rows (same `ProjectIndex` / `ProjectRow` as Home).
+      Hooks added for every project. `ProjectCardWide` and the `gradient` field are gone.
+- [x] Shared pieces: `ProjectHeader` (back link, eyebrow, display title, serif lede, tags, Visit live),
+      `LabeledSection` (the label/content grid, also used by Home's "Now" and the Projects header),
+      `ProjectFigure` (screenshot), `NextProject` (a "Next" row at the end of every project page).
+- [x] `CaseStudyLayout.astro` rework: labeled sections without numerals (rendered from one slot list),
+      the paragraph-spacing bug fixed (`prose-flow` utility owns block spacing), metrics as a ruled
+      `dl`, pull quote in large serif before Outcome with no colored bar, "Built with" as a plain ruled
+      list, and a `figure` slot for the interactive chart (screenshot fallback).
+- [x] `ProjectDetail.astro` (generic projects): same header, figure, sections and next row.
+- [x] Scroll-reveal fades removed from these pages (content is visible in the first frame).
+- [ ] **Charts:** the shared scrub-chart component is held until real data arrives (no placeholder
+      numbers ship). First: eviction (monthly Dallas County filings since 2020 + one year's
+      filings → outreach → representation funnel).
 
 **Case-study charts (proposed, one each)**
 
@@ -148,48 +151,3 @@ generative parameters and always-dark rendering all kept.
 | DigiLab | Tournaments logged per week since launch, scrubbable, with a running count of cities and players | Weekly counts from DigiLab's own database/API | Third |
 | Building CPAL's Data Function | Three lanes on one timeline (people, platform, products): team size, the stack moving from scripts to Databricks, decision tools going from 0 to 30+ | Michael's dates for each milestone; app count by year if known | Fourth (needs the most input) |
 
-### Phase 5: Remaining pages (M)
-
-- [ ] **About:** editorial grid, a single contact moment (remove the duplicate CTA), "What we've
-      built" as a ruled list without the decorative numerals, skills as plain columns, media list
-      kept. Keep the monogram until the real photo arrives, restyled in wine/blush.
-- [ ] **Resume:** sidebar and timeline restyled to tokens and type.
-- [ ] **Work with me:** restyle to match (stays hidden and noindexed).
-- [ ] **404:** a small terrain moment ("This ground hasn't been mapped yet") plus links home.
-- [ ] Remove the temporary old-token aliases from Phase 0, and delete unused components
-      (`ProjectCard.astro`, card variants, wave divider).
-
-### Phase 6: SEO and sharing (S)
-
-- [ ] Regenerate `/images/og-image.png` and the favicon set in the new palette and type.
-- [ ] Per-case-study OG images: extend `scripts/` with a Playwright generator (title + terrain strip
-      per project), and pass `image` through `CaseStudyLayout` → `BaseLayout`.
-- [ ] JSON-LD: refresh `knowsAbout` to lead with leadership, domain, and analysis (it currently
-      leads with infrastructure terms); add `CreativeWork` markup on case studies.
-- [ ] Off-site setup (Michael): verify the domain in Google Search Console and submit the sitemap;
-      enable Web Analytics in the Vercel dashboard.
-
-### Phase 7: Copy pass and QA (M)
-
-- [ ] Run all changed prose through the `voice-professional` agent (new hooks, labels, terrain copy,
-      404, footer).
-- [ ] Accessibility audit against the principles' baseline (keyboard pass, screen reader spot
-      check, contrast in both themes, reduced motion).
-- [ ] Lighthouse on Home and one case study (performance budget: terrain must not push LCP past
-      2.5s on mobile).
-- [ ] Update `CLAUDE.md` (palette, fonts, components, terrain modes) and `ROADMAP.md`.
-
----
-
-## Suggested order
-
-`0 → 1 → 2` first (the visible redesign lands quickly). `3` can start in parallel after `0`, since
-the terrain is self-contained. Then `4 → 5 → 6 → 7`. Phase 3c layers 2 and 3 are optional and can
-ship after everything else.
-
-## Inputs needed from Michael
-
-- Answers to the open decisions above
-- Real data for the first case-study chart
-- Short hooks per project (drafts exist in the mockup; they'll go through the copy pass)
-- Real headshot (still pending from the old roadmap)

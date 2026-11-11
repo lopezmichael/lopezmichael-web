@@ -1,0 +1,17 @@
+---
+import { projects } from '../data/projects';
+import ProjectIndex from './ProjectIndex.astro';
+
+interface Props {
+  /** Slug of the page this sits on; the next project in the list follows it (wrapping to the first). */
+  current: string;
+}
+
+const { current } = Astro.props;
+const i = projects.findIndex((p) => p.slug === current);
+const next = projects[(i + 1) % projects.length];
+---
+
+<div class="pt-8 pb-16 sm:pb-24">
+  <ProjectIndex projects={[next]} label="Next" more={{ label: 'All work', href: '/projects/' }} />
+</div>

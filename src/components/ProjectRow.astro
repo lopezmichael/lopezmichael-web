@@ -62,7 +62,7 @@ const tags = project.tags.slice(0, 2).join(' · ');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (finePointer) {
-    const header = document.querySelector('header');
+    const header = document.querySelector('[data-site-header]');
     let headerBottom = header?.getBoundingClientRect().bottom ?? 0;
     window.addEventListener('resize', () => {
       headerBottom = header?.getBoundingClientRect().bottom ?? 0;

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import TerrainBand from '../components/TerrainBand.astro';
 import ProjectIndex from '../components/ProjectIndex.astro';
+import LabeledSection from '../components/LabeledSection.astro';
 import { featuredProjects, projects } from '../data/projects';
 // The hero wordmark is the page's largest paint; preload its two faces so they don't wait for the CSS.
 import wordmarkSans from '@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-800-normal.woff2?url';
@@ -36,21 +37,18 @@ import wordmarkSerif from '@fontsource/instrument-serif/files/instrument-serif-l
   <TerrainBand />
 
   <!-- Now -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 grid md:grid-cols-[1fr_3fr] gap-6 md:gap-10">
-    <p class="eyebrow m-0 border-t border-line pt-2.5 self-start">Now</p>
-    <div>
-      <h2 class="m-0 mb-6 font-serif font-normal text-[clamp(2rem,4.6vw,3.8rem)] leading-[1.02] tracking-[-0.015em] max-w-[18ch] text-balance">
-        Data should reach the people <em class="text-wine">closest to the problem.</em>
-      </h2>
-      <p class="m-0 text-[1.05rem] leading-relaxed max-w-[62ch]">
-        I lead the data function at the Child Poverty Action Lab, a backbone organization working on
-        child poverty across North Texas. That means the team, the roadmap, the platform
-        underneath, and the tools that get data in front of people who can act on it. The stubborn
-        idea pulling it together: most of the data that could help families is sitting somewhere it
-        can't reach them. Most of the job is closing that gap.
-      </p>
-    </div>
-  </section>
+  <LabeledSection label="Now" labelAs="p" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h2 class="m-0 mb-6 font-serif font-normal text-[clamp(2rem,4.6vw,3.8rem)] leading-[1.02] tracking-[-0.015em] max-w-[18ch] text-balance">
+      Data should reach the people <em class="text-wine">closest to the problem.</em>
+    </h2>
+    <p class="m-0 text-[1.05rem] leading-relaxed max-w-[62ch]">
+      I lead the data function at the Child Poverty Action Lab, a backbone organization working on
+      child poverty across North Texas. That means the team, the roadmap, the platform
+      underneath, and the tools that get data in front of people who can act on it. The stubborn
+      idea pulling it together: most of the data that could help families is sitting somewhere it
+      can't reach them. Most of the job is closing that gap.
+    </p>
+  </LabeledSection>
 
   <!-- Selected work -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">

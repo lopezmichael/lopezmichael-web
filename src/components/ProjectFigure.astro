@@ -1,0 +1,22 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+{project.image && (
+  <figure class="m-0 pb-16 sm:pb-20">
+    <img
+      src={project.image}
+      alt={`Screenshot of ${project.title}`}
+      width="1280"
+      height="720"
+      class="w-full h-auto rounded-md border border-line"
+      loading="lazy"
+    />
+  </figure>
+)}
