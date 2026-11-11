@@ -117,14 +117,35 @@ float cityHeight(vec2 p, vec3 sc, vec3 ht, float seed) {
   return h;
 }
 
-// Prairie: gentle rolling plains, one escarpment ridge, and a creek line below it.
+// Prairie: long rolling swells that rise toward the horizon, a shallow creek, and wind moving
+// across the grass in gusts. The wind rides uTime, so reduced motion (one frame) shows it still.
 float prairieHeight(vec2 p, vec3 sc, vec3 ht, float seed) {
-  float h = fbm(p, sc, ht, seed) * 0.35;
-  float ex = -10.0 + sin(p.y * 0.05 + seed) * 8.0;
-  h += 7.0 * smoothstep(-3.0, 3.0, p.x - ex);
-  float cx = ex + 14.0 + sin(p.y * 0.12 + seed * 2.0) * 5.0;
-  h -= 2.5 * (1.0 - smoothstep(0.8, 3.5, abs(p.x - cx)));
-  return h - 4.0;
+  // Small offset: large values lose float precision on mobile GPUs.
+  float so = fract(seed * 0.618034) * 100.0;
+
+  // Swells: low-frequency noise, domain-warped so the hills run in long irregular ridges.
+  vec2 warp = vec2(snoise(p * 0.012 + so), snoise(p * 0.012 - so * 1.7)) * 12.0;
+  vec2 q = p + warp;
+  float h = snoise(q * sc.x * 0.8 + so * 0.5) * ht.x * 0.9;
+  h += snoise(q * sc.y + so * 1.3) * ht.y * 0.35;
+
+  // A gentle rise toward the far edge, so the horizon reads as a line of hills.
+  h += smoothstep(-10.0, 45.0, p.y) * 4.0;
+
+  // A shallow creek winding toward the viewer.
+  float cx = sin(p.y * 0.05 + so) * 18.0 + sin(p.y * 0.13 + so * 2.0) * 5.0;
+  h -= 2.2 * (1.0 - smoothstep(0.5, 4.0, abs(p.x - cx)));
+
+  // Wind: a ripple travelling mostly across the view, strongest where a gust passes. The gust mask
+  // and the ripple move at about the same ground speed, so gusts carry their waves with them.
+  vec2 wind = normalize(vec2(1.0, 0.4 * sin(so)));
+  float along = dot(p, wind);
+  float across = dot(p, vec2(-wind.y, wind.x));
+  float gust = smoothstep(-0.2, 0.6, snoise(vec2(along * 0.02 - uTime * 0.6, across * 0.03 + so)));
+  float ripple = sin(along * 0.9 - uTime * 30.0) * 0.25 + sin(along * 0.35 - uTime * 12.0) * 0.6;
+  h += gust * ripple;
+
+  return h - 3.0;
 }
 
 float modeHeight(float mode, vec2 p, vec3 sc, vec3 ht, float seed) {
