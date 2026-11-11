@@ -58,11 +58,14 @@ function mulberry32(seed: number): () => number {
 }
 
 type Range = readonly [number, number];
+/** A camera framing: height, distance, aim height and field of view. */
+type Shot = readonly [y: number, z: number, lookAtY: number, fov: number];
 interface ModeRanges {
   scale: readonly [Range, Range, Range];
   height: readonly [Range, Range, Range];
   waveIntensity: Range;
-  cameraLift: number;
+  /** Hand-picked camera framings; each seed picks one and jitters it slightly (see paramsFor). */
+  shots: readonly Shot[];
   /** Divisor of PI for the mesh tilt; nearer 2 is flatter ground with upright features. */
   tiltDivisor: Range;
 }
@@ -73,15 +76,17 @@ const RANGES: Record<TerrainMode, ModeRanges> = {
     scale: [[0.02, 0.04], [0.04, 0.08], [0.08, 0.16]],
     height: [[6, 12], [3, 6], [1, 3]],
     waveIntensity: [1, 2.5],
-    cameraLift: 0,
+    // Standard; from the rim, looking down into the canyon; low, with mesas against the sky.
+    shots: [[32, 50, -5, 62], [44, 42, -8, 58], [22, 56, -2, 66]],
     tiltDivisor: [2.2, 2.8],
   },
-  // City sits lower so the skyline reads as a silhouette on the horizon.
+  // City's camera sits low so the skyline reads as a silhouette on the horizon.
   city: {
     scale: [[0.02, 0.035], [0.05, 0.08], [0.1, 0.16]],
     height: [[2, 4], [1, 2], [0.3, 0.8]],
     waveIntensity: [0.3, 0.6],
-    cameraLift: -14,
+    // Across the river; closer, skyline larger; wide.
+    shots: [[18, 50, -5, 62], [15, 45, -0.5, 60], [20, 58, -5, 68]],
     // Towers rise along the mesh's up axis, so a steep tilt makes them lean away; keep it flat.
     tiltDivisor: [2.05, 2.2],
   },
@@ -89,7 +94,8 @@ const RANGES: Record<TerrainMode, ModeRanges> = {
     scale: [[0.015, 0.03], [0.035, 0.06], [0.07, 0.12]],
     height: [[4, 7], [2, 3.5], [0.6, 1.2]],
     waveIntensity: [0.6, 1.2],
-    cameraLift: 0,
+    // Standard; low, a long view to the horizon; higher, looking across the swells.
+    shots: [[30, 50, -5, 62], [20, 55, -2, 64], [38, 45, -7, 60]],
     tiltDivisor: [2.2, 2.8],
   },
 };
@@ -110,14 +116,16 @@ export function paramsFor(mode: TerrainMode, seed: number): { terrain: TerrainPa
       rotationAmount: pick([0.03, 0.07]),
       tilt: -Math.PI / pick(r.tiltDivisor),
     },
-    camera: {
-      x: pick([-10, 10]),
-      y: pick([25, 40]) + r.cameraLift,
-      z: pick([40, 60]),
-      lookAtY: pick([-8, -2]),
-      fov: pick([55, 70]),
-    },
+    camera: cameraFor(r.shots, pick),
   };
+}
+
+/** One of the mode's framings plus a small jitter. Drawing the five numbers independently (as the
+ *  old hero did) could pair a high camera with a close one and stare straight down. */
+function cameraFor(shots: readonly Shot[], pick: (r: Range) => number): CameraParams {
+  const [y, z, lookAtY, fov] = shots[Math.min(shots.length - 1, Math.floor(pick([0, shots.length])))];
+  const jitter = (v: number, d: number) => v + pick([-d, d]);
+  return { x: pick([-8, 8]), y: jitter(y, 2.5), z: jitter(z, 4), lookAtY: jitter(lookAtY, 1), fov: jitter(fov, 3) };
 }
 
 export const randomSeed = (): number => Math.floor(Math.random() * 10000);

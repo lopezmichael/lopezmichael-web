@@ -143,7 +143,7 @@ float cityHeight(vec2 p, vec3 sc, vec3 ht, float seed) {
     float side = pickSide < 0.5 ? -1.0 : 1.0;
     vec2 rel2 = (p - vec2(core.x + side * 48.0, 21.0)) / vec2(16.0, 6.5);
     built = max(built, step(0.5, pickSecond) * 0.85 * exp(-dot(rel2, rel2) * 1.6));
-    peak = 36.0;
+    peak = 30.0;
     low = 0.3;
   } else {
     // A long mid-rise band along the horizon, thinning toward the sides.
