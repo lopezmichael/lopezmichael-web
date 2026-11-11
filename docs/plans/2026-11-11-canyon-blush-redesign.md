@@ -58,25 +58,35 @@ Shipped with no visible change: the four affected pages were pixel-identical to 
       run it too) fails on hex/rgb/hsl color literals in `src/` outside `global.css`,
       `src/lib/terrain/config.ts`, and `src/pages/preview/`.
 
-### Phase 1: Site shell (S)
+### Phase 1: Site shell (S) · DONE 2026-11-11
 
-- [ ] `Header.astro`: name in display face, nav (Work · About · Resume), wine underline for the
-      current page, live "Dallas · time CT" clock (client-side `Intl`, no network).
-- [ ] `Footer.astro`: "Say *hello.*" + copy-email button with "Copied" state; remove the wavy
-      divider and the "Built with Astro and Three.js" credit; keep GitHub/LinkedIn as text links.
-- [ ] `BaseLayout.astro`: body ground and theme color meta updated to blush/oxblood.
+- [x] `Header.astro`: name in the display face (links home), nav **Work · About · Resume** (Work =
+      `/projects/`, stays lit on case studies), wine underline + `aria-current` on the current page,
+      live "Dallas · time CT" clock (client-side `Intl`; server-renders "Dallas, Texas" so no-JS never
+      shows a stale time). The mobile drawer is gone: three short links wrap onto a second row.
+      GitHub/LinkedIn icons moved to the footer as text links.
+- [x] `Footer.astro`: "Say *hello.*" + copy-email button ("Copied" state announced via `aria-live`,
+      the word pops to "hello!", falls back to selecting the address). The consulting CTA band, the
+      wavy divider and the "Built with" credit are gone sitewide.
+- [x] Body ground, text, links (wine, underline on hover) and selection color now come from the new
+      tokens. The skip link uses wine-deep.
+- [x] **In-between state:** the legacy color names (`primary`, `secondary`, `accent`, `cool`,
+      `canyon`, `light`, `dark-*`, `surface`) are aliased onto the new theme-aware tokens, so pages not
+      yet rebuilt render in Canyon Blush in both themes. Solid and outline buttons on those pages were
+      switched to `bg-wine-deep text-on-wine` / `hover:bg-ink hover:text-page`.
 
-### Phase 2: Home (M)
+### Phase 2: Home (M) · DONE 2026-11-11
 
-- [ ] Hero: `MICHAEL` / *Lopez* wordmark, tagline and supporting line beneath (fixes the
-      unreadable white tagline over the terrain).
-- [ ] Terrain becomes a band below the hero (~32vw tall), with the coordinates/seed label and the
-      Regrow control. The full-viewport hero and the bouncing scroll arrow go.
-- [ ] "Now" statement block in the label/content grid.
-- [ ] New `ProjectIndex.astro` + `ProjectRow.astro` (title · hook · tags · arrow) with wine hover
-      fill and the trailing, tilting screenshot (pointer only; hidden on touch). Needs a short `hook`
-      field per project in `src/data/projects.ts`.
-- [ ] Remove the consulting CTA band.
+- [x] Hero: `MICHAEL` / *Lopez* wordmark with the tagline and supporting line beneath.
+- [x] `TerrainBand.astro` replaces `TerrainHero.astro`: same Three.js engine in a ~32vw dark band,
+      with the coordinates + seed label and a Regrow button. `initTerrain()` now takes `{ seed }`.
+      The full-viewport hero, the text-over-terrain and the bouncing arrow are gone.
+- [x] "Now" statement in the label/content grid (existing intro copy).
+- [x] `ProjectIndex.astro` + `ProjectRow.astro`: index rows with wine fill on hover/focus and the
+      trailing, tilting screenshot (fine pointers only; no tilt with reduced motion). New optional
+      `hook` field on `Project` (filled for CPAL, Eviction, Homestead, DigiLab; others fall back to
+      `description`). Home still shows the three featured projects, plus an "All 7 projects" link.
+- [x] Consulting CTA band removed (it lived in the footer, so it's gone everywhere).
 
 ### Phase 3: Terrain v2 (L)
 

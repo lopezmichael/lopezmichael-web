@@ -1,0 +1,51 @@
+---
+// The generative terrain, as a dark band between blush sections (docs/design-principles.md →
+// Terrain principles). Same Three.js engine as before (src/lib/terrain); Phase 3 adds modes,
+// pointer lift and location-aware defaults.
+---
+
+<section class="relative w-full h-[clamp(240px,32vw,420px)] overflow-hidden bg-band" aria-label="Generative terrain">
+  <div id="terrain-canvas" class="absolute inset-0" aria-hidden="true"></div>
+  <!-- Keeps the label and button legible when bright terrain sits behind them. -->
+  <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-band to-transparent pointer-events-none" aria-hidden="true"></div>
+
+  <p class="absolute left-4 sm:left-6 lg:left-8 bottom-3 m-0 font-mono text-[11px] tracking-[0.04em] text-on-band/85 pointer-events-none">
+    32.78° N, 96.80° W · North Texas<span data-terrain-seed></span>
+  </p>
+  <button
+    type="button"
+    data-terrain-regrow
+    class="absolute right-4 sm:right-6 lg:right-8 bottom-2 font-mono text-[11px] tracking-[0.04em] text-on-band bg-transparent border border-on-band/45 rounded-full px-3 py-1 cursor-pointer transition-colors hover:bg-on-band/15"
+  >
+    Regrow <span aria-hidden="true">↻</span>
+  </button>
+</section>
+
+<script>
+  import { initTerrain } from '../lib/terrain/index';
+
+  let cleanup: (() => void) | null = null;
+
+  function startTerrain() {
+    cleanup?.();
+    cleanup = null;
+
+    const container = document.getElementById('terrain-canvas');
+    if (!container) return;
+
+    const seed = Math.floor(Math.random() * 10000);
+    cleanup = initTerrain(container, { seed }) ?? null;
+
+    const label = document.querySelector('[data-terrain-seed]');
+    if (label) label.textContent = ` · seed ${String(seed).padStart(4, '0')}`;
+  }
+
+  startTerrain();
+  document.querySelector('[data-terrain-regrow]')?.addEventListener('click', startTerrain);
+
+  // Clean up on page swap (if View Transitions are ever added)
+  document.addEventListener('astro:before-swap', () => {
+    cleanup?.();
+    cleanup = null;
+  });
+</script>

@@ -20,14 +20,19 @@ export function disposeTerrain() {
   }
 }
 
-export function initTerrain(container: HTMLElement) {
+export interface TerrainOptions {
+  /** Noise seed. Pass one to show it in the UI or to reproduce a terrain; random when omitted. */
+  seed?: number;
+}
+
+export function initTerrain(container: HTMLElement, options: TerrainOptions = {}) {
   disposed = false;
 
   // Guard against zero-size container
   const width = container.clientWidth || window.innerWidth;
   const height = container.clientHeight || window.innerHeight;
 
-  const seed = Math.random() * 10000;
+  const seed = options.seed ?? Math.random() * 10000;
   const terrainParams = randomizeTerrainParams();
   const cameraParams = randomizeCameraParams();
 

@@ -1,0 +1,80 @@
+---
+import type { Project } from '../data/projects';
+import ProjectRow from './ProjectRow.astro';
+
+interface Props {
+  projects: Project[];
+  /** Small label on the left of the header rule. */
+  label: string;
+  /** Optional link on the right of the header rule (e.g. to the full projects page). */
+  more?: { label: string; href: string };
+}
+
+const { projects, label, more } = Astro.props;
+---
+
+<div>
+  <div class="eyebrow flex justify-between gap-4 border-t border-line pt-2.5">
+    <span>{label}</span>
+    {more && (
+      <a href={more.href} class="text-muted hover:text-ink">
+        {more.label} <span aria-hidden="true">→</span>
+      </a>
+    )}
+  </div>
+  <ul class="list-none m-0 mt-4 p-0">
+    {projects.map((project) => (
+      <li class="border-b border-line"><ProjectRow project={project} /></li>
+    ))}
+  </ul>
+</div>
+
+<script>
+  // Trailing, tilting screenshots on the project rows (docs/design-principles.md → Interaction
+  // catalogue). Fine pointers only; with reduced motion the image follows without easing or tilt.
+  function setupRowShots() {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const W = 260;
+    const H = (W * 9) / 16;
+
+    document.querySelectorAll<HTMLElement>('.project-row').forEach((row) => {
+      if (row.dataset.shotsReady) return;
+      row.dataset.shotsReady = '1';
+      const img = row.querySelector<HTMLImageElement>('.row-shot');
+      if (!img) return;
+
+      const s = { x: 0, y: 0, tx: 0, ty: 0, rot: -2, raf: 0 };
+      const ease = reduce ? 1 : 0.16;
+
+      const frame = () => {
+        const prevX = s.x;
+        s.x += (s.tx - s.x) * ease;
+        s.y += (s.ty - s.y) * ease;
+        const tilt = reduce ? 0 : Math.max(-9, Math.min(9, (s.x - prevX) * 0.6));
+        s.rot += (tilt - 2 - s.rot) * 0.15;
+        // Sit above and centred on the cursor so the row text stays readable.
+        img.style.transform = `translate(${s.x - W / 2}px, ${s.y - H - 24}px) rotate(${s.rot}deg)`;
+        if (row.classList.contains('is-live')) s.raf = requestAnimationFrame(frame);
+      };
+
+      const setTarget = (e: PointerEvent) => {
+        const r = row.getBoundingClientRect();
+        s.tx = e.clientX - r.left;
+        s.ty = e.clientY - r.top;
+      };
+
+      row.addEventListener('pointerenter', (e) => {
+        setTarget(e);
+        s.x = s.tx;
+        s.y = s.ty;
+        row.classList.add('is-live');
+        cancelAnimationFrame(s.raf);
+        s.raf = requestAnimationFrame(frame);
+      });
+      row.addEventListener('pointermove', setTarget);
+      row.addEventListener('pointerleave', () => row.classList.remove('is-live'));
+    });
+  }
+  setupRowShots();
+</script>

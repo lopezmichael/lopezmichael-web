@@ -33,6 +33,7 @@
   --wine-deep: #7E2836; /* hover fills, chart bars, primary buttons */
   --on-wine: #F8E8DE;   /* text on wine-deep */
   --band: #1F100E;      /* terrain band ground (always dark) */
+  --on-band: #E9B49A;   /* labels and controls on the terrain band */
   --line: color-mix(in srgb, var(--ink) 22%, transparent);
 }
 
@@ -45,6 +46,7 @@
   --wine-deep: #6E2430;
   --on-wine: #F8E1D6;
   --band: #130A09;
+  --on-band: #E9A68C;
   --line: color-mix(in srgb, var(--ink) 18%, transparent);
 }
 
@@ -57,6 +59,7 @@
   --color-wine-deep: var(--wine-deep);
   --color-on-wine: var(--on-wine);
   --color-band: var(--band);
+  --color-on-band: var(--on-band);
   --color-line: var(--line);
 }
 
@@ -67,23 +70,35 @@
   --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
 }
 
-/* Legacy palette (pre-redesign). Components migrate off these phase by phase;
-   the block is deleted in Phase 5 of docs/plans/2026-11-11-canyon-blush-redesign.md. */
-@theme {
-  --color-primary: #2A2520;
-  --color-secondary: #D86B3A;
-  --color-accent: #F2C685;
-  /* Despite the legacy "cool" name, this token is the warm interactive accent (links, nav active, inline emphasis). */
-  --color-cool: #8B2D3D;
-  --color-canyon: #A04428;
-  --color-neutral: #2A2520;
-  --color-light: #FBF6EE;
-  --color-surface: #FFFFFF;
-  --color-dark-bg: #1d1411;
-  --color-dark-surface: #2a2420;
-  --color-dark-text: #E8E0D8;
-  --font-body: "Inter", system-ui, sans-serif;
-  --font-heading: "Inter", system-ui, sans-serif;
+/* Legacy palette names (pre-redesign), now ALIASED onto the Canyon Blush tokens so pages that
+   haven't been rebuilt yet still render in the new palette, in both themes (each pair such as
+   bg-light / dark:bg-dark-bg resolves to the same theme-aware token). The old orange and sand are
+   gone: secondary, accent, canyon and cool all point at wine. Components migrate off these names
+   phase by phase; the block is deleted in Phase 5 of docs/plans/2026-11-11-canyon-blush-redesign.md. */
+@theme inline {
+  --color-primary: var(--ink);
+  --color-neutral: var(--ink);
+  --color-secondary: var(--wine);
+  --color-accent: var(--wine);
+  --color-cool: var(--wine);
+  --color-canyon: var(--wine);
+  --color-light: var(--page);
+  --color-surface: var(--raised);
+  --color-dark-bg: var(--page);
+  --color-dark-surface: var(--raised);
+  --color-dark-text: var(--ink);
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+}
+
+/* Small uppercase section label ("Now", "Selected work"). */
+@utility eyebrow {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 @layer base {
@@ -98,41 +113,31 @@
   }
 
   body {
-    font-family: var(--font-body);
-    background-color: var(--color-light);
-    color: var(--color-neutral);
+    font-family: var(--font-sans);
+    background-color: var(--page);
+    color: var(--ink);
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  [data-theme="dark"] body {
-    background-color: var(--color-dark-bg);
-    color: var(--color-dark-text);
-  }
-
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-    color: var(--color-neutral);
+    font-family: var(--font-sans);
+    color: var(--ink);
   }
 
-  [data-theme="dark"] :is(h1, h2, h3, h4, h5, h6) {
-    color: var(--color-dark-text);
-  }
-
+  /* Wine is the only highlight; hover adds an underline rather than a second color. */
   a {
-    color: var(--color-cool);
+    color: var(--wine);
+    text-underline-offset: 0.2em;
     transition: color 0.2s ease;
   }
 
   a:hover {
-    color: var(--color-secondary);
+    text-decoration-line: underline;
   }
 
-  [data-theme="dark"] a {
-    color: var(--color-secondary);
-  }
-
-  [data-theme="dark"] a:hover {
-    color: var(--color-accent);
+  ::selection {
+    background-color: var(--wine-deep);
+    color: var(--on-wine);
   }
 
   /* Visible keyboard focus on every interactive element (accessibility baseline). */

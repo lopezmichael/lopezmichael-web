@@ -1,0 +1,55 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+// Rows follow the card rule: prefer the card-only image, else the main one.
+const shot = project.cardImage ?? project.image;
+const tags = project.tags.slice(0, 2).join(' · ');
+---
+
+<a
+  href={`/projects/${project.slug}/`}
+  class="project-row group relative grid grid-cols-[minmax(0,1fr)_24px] md:grid-cols-[minmax(0,1.25fr)_minmax(0,1.2fr)_minmax(0,0.7fr)_28px] gap-x-5 gap-y-1.5 items-baseline py-5 px-3 -mx-3 rounded-md text-ink no-underline transition-colors duration-200 hover:no-underline hover:bg-wine-deep hover:text-on-wine focus-visible:bg-wine-deep focus-visible:text-on-wine"
+>
+  <h3 class="m-0 text-inherit font-display font-bold text-[clamp(1.25rem,2.3vw,1.9rem)] tracking-[-0.02em] leading-[1.05]">
+    {project.title}
+  </h3>
+  <span class="col-start-1 md:col-start-auto font-serif italic text-[clamp(1.05rem,1.6vw,1.3rem)] leading-tight">
+    {project.hook ?? project.description}
+  </span>
+  <span class="col-start-1 md:col-start-auto text-xs uppercase tracking-[0.08em] text-muted group-hover:text-inherit group-hover:opacity-80 group-focus-visible:text-inherit">
+    {tags}
+  </span>
+  <span
+    class="col-start-2 row-start-1 md:col-start-auto md:row-start-auto font-display text-[22px] transition-transform duration-200 group-hover:translate-x-1 group-hover:-rotate-45 group-focus-visible:-rotate-45 motion-reduce:transition-none"
+    aria-hidden="true"
+  >→</span>
+  {shot && (
+    <img
+      src={shot}
+      alt=""
+      loading="lazy"
+      decoding="async"
+      class="row-shot pointer-events-none absolute left-0 top-0 z-10 w-[260px] aspect-video object-cover rounded-md shadow-2xl"
+    />
+  )}
+</a>
+
+<style>
+  /* The trailing screenshot is a pointer-only extra (principle 6): hidden on touch and for
+     keyboard users, who get the same content from the row text. ProjectIndex drives its motion. */
+  .row-shot {
+    display: none;
+    opacity: 0;
+    transition: opacity 150ms ease;
+    will-change: transform;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .row-shot { display: block; }
+  }
+  .project-row.is-live .row-shot { opacity: 1; }
+</style>

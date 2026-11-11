@@ -2,6 +2,8 @@ export interface Project {
   slug: string;
   title: string;
   description: string;
+  /** One short line for the project index rows (Home, Projects). Falls back to `description`. */
+  hook?: string;
   longDescription: string;
   tags: string[];
   href: string;
@@ -19,6 +21,7 @@ export const projects: Project[] = [
   {
     slug: 'building-cpal-data-function',
     title: "Building CPAL's Data Function",
+    hook: 'One analyst to an in-house engineering team in six years.',
     description:
       'Helping grow a nonprofit data function from one analyst into an in-house engineering team, with a cloud platform and a 30+ app decision-support suite.',
     longDescription:
@@ -37,6 +40,7 @@ export const projects: Project[] = [
   {
     slug: 'eviction-pipeline',
     title: 'Dallas County Eviction Data',
+    hook: 'County court records to tenant outreach, every day.',
     description:
       'The data workstream that gets eviction filings across four North Texas counties to the legal-aid and outreach teams reaching tenants facing displacement.',
     longDescription:
@@ -55,6 +59,7 @@ export const projects: Project[] = [
   {
     slug: 'homestead-map',
     title: 'Dallas Homestead Exemption Map',
+    hook: 'Who claims property tax savings in Dallas, tract by tract.',
     description:
       'Interactive map visualizing homestead exemption take-up rates across Dallas.',
     longDescription:
@@ -110,6 +115,7 @@ export const projects: Project[] = [
   {
     slug: 'digilab',
     title: 'DigiLab',
+    hook: 'A community-run data platform with about 2,000 daily users.',
     description:
       'Production tournament tracking and meta analysis platform for the Digimon and Gundam card game communities.',
     longDescription:

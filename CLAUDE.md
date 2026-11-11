@@ -8,6 +8,10 @@ Personal portfolio for Michael Lopez — a data leader in civic tech and social 
 
 A full visual redesign is planned. **Read `docs/design-principles.md` before any UI work**; it supersedes the palette, type, and layout notes below once each phase lands. The phased plan is `docs/plans/2026-11-11-canyon-blush-redesign.md` and the reference mockup is `docs/mockups/canyon-blush.html`.
 
+## Redesign status
+
+Phases 0–2 done (tokens, shell, home). Header = name + Work/About/Resume + Dallas clock; footer = "Say hello" + copy-email (no consulting CTA anywhere). Legacy color classes are aliased onto the new tokens until Phase 5, so un-rebuilt pages already render in Canyon Blush.
+
 ## Stack
 
 - **Framework:** Astro 5 (static output)
@@ -42,7 +46,7 @@ scripts/
 - **Thin page shells:** `src/pages/index.astro` just renders `<HomePage />`. All logic lives in `src/page-views/`.
 - **Theme toggle:** `data-theme="dark"` attribute on `<html>`. Flash prevention via inline `<script is:inline>` in `<head>`. Validated localStorage read (allowlist for 'dark'/'light').
 - **Terrain always dark:** Three.js hero renders in dark mode regardless of site theme. Canyon wireframe on near-black background for maximum visual impact. No theme transition code — simple and clean.
-- **Terrain isolation:** Three.js only loads on the home page via dynamic import in `TerrainHero.astro`.
+- **Terrain isolation:** Three.js only loads on the home page via dynamic import in `TerrainBand.astro` (a dark band below the hero, with seed label + Regrow; `initTerrain(container, { seed })`).
 - **Palette (editorial canyon):** Primary `#2A2520` (charcoal — body, headings, primary buttons), Secondary `#D86B3A` (warm orange — hover states, gradients), Accent `#F2C685` (sand — pill backgrounds), Cool `#8B2D3D` (wine — links, nav active, inline emphasis; despite the "cool" token name it's a warm interactive accent), Canyon `#A04428` (decorative — section dividers, gradient fallbacks, terrain), Neutral `#2A2520` (same as primary). Light bg `#FBF6EE`, dark bg `#1d1411`. Headings stay `text-primary` (charcoal weight does the work); inline emphasis like company/school/tagline uses `text-cool` for visual distinction since primary == neutral. Terrain hero keeps its own canyon-warm palette (see `src/lib/terrain/config.ts`). Avoid teal — collides with CPAL brand.
 - **Skills source of truth:** `src/data/resume.ts` — `<SkillsGrid />` (About page) and the Resume page both render from this single export.
 - **Project screenshots:** `npm run screenshots` uses Playwright to capture 1280x720 @2x screenshots. Script uses `waitUntil: 'load'` (not `networkidle`) because Shiny apps keep WebSockets open. NTE auto-dismisses its welcome modal before capture. Cards show screenshot when available, gradient fallback otherwise.
@@ -55,7 +59,7 @@ scripts/
 
 ## Pages
 
-- **Home** — Terrain hero, intro paragraph, 3 featured project cards
+- **Home** — `MICHAEL` / *Lopez* wordmark hero, terrain band, "Now" statement, 3 featured projects as index rows (`ProjectIndex` / `ProjectRow`, using `Project.hook`)
 - **About** — Bio (opens in present, then origin story), pullquote, "What we've built at CPAL" numbered list, skills grid, Selected Media section (renders only if `selectedMedia` in `resume.ts` is populated), contact CTA. Headshot is currently an ML monogram placeholder on canyon-orange.
 - **Projects** — All projects grouped by category. Uniform `ProjectCardWide` (image column + content side); no separate case-study card variant. Each card title links to `/projects/[slug]/`; "Visit" external link is separate.
 - **Project detail (`/projects/[slug]/`)** — Dynamic route. `pages/projects/[slug].astro` resolves the slug to either a custom case-study component (Building CPAL's Data Function / Dallas County Eviction Data / Homestead Map / DigiLab) or the generic `ProjectDetail` view. Case studies use the shared `CaseStudyLayout` component which provides hero + numbered Problem/Approach/Outcome/Reflection slots + lifted metrics + optional pullquote slot + tech stack.
